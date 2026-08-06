@@ -62,7 +62,11 @@ jobs:
         run: |
           git config user.name "stock-scanner-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add universe.csv pending_ipos.json delisting_risk.json eligible.csv fundamentals_signals.json alert_log.json
+          for f in universe.csv pending_ipos.json delisting_risk.json eligible.csv fundamentals_signals.json alert_log.json; do
+            if [ -f "$f" ]; then
+              git add "$f"
+            fi
+          done
           git diff --staged --quiet && echo "No changes to commit" && exit 0
           git commit -m "Daily scan update [automated]"
           git pull --rebase origin main
