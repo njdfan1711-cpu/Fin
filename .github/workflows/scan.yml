@@ -36,6 +36,8 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Build universe (Nasdaq + NYSE/AMEX)
+        env:
+          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
         run: python universe_builder.py
 
       - name: Check for newly-live IPOs
@@ -54,14 +56,14 @@ jobs:
         run: python fundamentals_scan.py
 
       - name: Run short interest scan
-        run: python short_interest_scan.py
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python short_interest_scan.py
 
       - name: Commit updated state files
         run: |
           git config user.name "stock-scanner-bot"
-          git config user.email "actions@users.noreply.github.com"
+          git config user.email "actions@://github.com"
           for f in universe.csv pending_ipos.json delisting_risk.json eligible.csv fundamentals_signals.json alert_log.json; do
             if [ -f "$f" ]; then
               git add "$f"
