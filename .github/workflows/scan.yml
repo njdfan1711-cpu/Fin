@@ -1,18 +1,31 @@
-name: Daily Stock Scan
+name: Daily Foundation Scan
+
 on:
   schedule:
-    - cron: "0 12 * * 1-5" # Mon-Fri only
+    # 11:00 UTC = 6-7am ET, well before market open -- gives the heavy
+    # eligible-universe filter + fundamentals scan time to finish before
+    # the intraday workflow starts needing eligible.csv.
+    - cron: "0 11 * * 1-5"
   workflow_dispatch: {}
 
 permissions:
   contents: write
 
+# Prevent two runs of this workflow from overlapping and racing each
+# other's git push -- if a new run starts while one's still going, the
+# old one is cancelled rather than both trying to push at once.
+concurrency:
+  group: daily-foundation-scan
+  cancel-in-progress: false
+
 jobs:
-  scan:
+  daily-scan:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -28,10 +41,29 @@ jobs:
       - name: Check for newly-live IPOs
         run: python ipo_watch.py
 
+      - name: Scan for delisting-risk notices
+        run: python delisting_risk_scan.py
+
+      - name: Build eligible (liquidity/quality-filtered) universe
+        run: python filters.py
+
+      - name: Run fundamentals scan
+        env:
+          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python fundamentals_scan.py
+
+      - name: Run short interest scan
+        run: python short_interest_scan.py
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+
       - name: Commit updated state files
         run: |
           git config user.name "stock-scanner-bot"
-          git config user.email "actions@://github.com"
-          git add universe.csv pending_ipos.json
-          git diff --staged --quiet || git commit -m "Update universe/pending IPOs [automated]"
+          git config user.email "actions@users.noreply.github.com"
+          git add universe.csv pending_ipos.json delisting_risk.json eligible.csv fundamentals_signals.json alert_log.json
+          git diff --staged --quiet && echo "No changes to commit" && exit 0
+          git commit -m "Daily scan update [automated]"
+          git pull --rebase origin main
           git push
