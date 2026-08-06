@@ -38,7 +38,22 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      # Keep an eye on this section -- we need to make sure eligible.csv exists here
+      # 1. Run universe builder with the required Finnhub API Key
+      - name: Run universe builder filter
+        env:
+          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+        run: python universe_builder.py
+
+      # 2. Bridge the files: copy universe.csv to eligible.csv so fundamentals_scan.py finds it
+      - name: Bridge universe data to eligible data
+        run: |
+          if [ -f universe.csv ]; then
+            cp universe.csv eligible.csv
+            echo "Successfully bridged universe.csv to eligible.csv"
+          else
+            echo "Warning: universe.csv was not found!"
+          fi
+
       - name: Run fundamentals scan
         env:
           FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
@@ -55,13 +70,10 @@ jobs:
           git config --local user.name "stock-scanner-bot"
           git config --local user.email "action@github.com"
           
-          if [ -f eligible.csv ]; then
-            git add eligible.csv
-          fi
-          
-          if [ -f fundamentals_signals.json ]; then
-            git add fundamentals_signals.json
-          fi
+          # Stage tracking assets securely
+          if [ -f eligible.csv ]; then git add eligible.csv; fi
+          if [ -f universe.csv ]; then git add universe.csv; fi
+          if [ -f fundamentals_signals.json ]; then git add fundamentals_signals.json; fi
           
           if ! git diff --cached --quiet; then
             git commit -m "Automated daily foundation scan data update [skip ci]"
