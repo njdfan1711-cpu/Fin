@@ -30,44 +30,41 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: '3.10'
+          cache: 'pip'
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      - name: Build universe (Nasdaq + NYSE/AMEX)
-        run: python universe_builder.py
-
-      - name: Check for newly-live IPOs
-        run: python ipo_watch.py
-
-      - name: Scan for delisting-risk notices
-        run: python delisting_risk_scan.py
-
-      - name: Build eligible (liquidity/quality-filtered) universe
-        run: python filters.py
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Run fundamentals scan
         env:
           FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
-          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
-        run: python fundamentals_scan.py
+        run: python src/fundamentals_scan.py
 
       - name: Run short interest scan
-        run: python short_interest_scan.py
         env:
-          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          FINRA_API_KEY: ${{ secrets.FINRA_API_KEY }}
+        run: python src/short_interest_scan.py
 
-      - name: Commit updated state files
+      - name: Commit and push changes
         run: |
-          git config user.name "stock-scanner-bot"
-          git config user.email "actions@users.noreply.github.com"
-          for f in universe.csv pending_ipos.json delisting_risk.json eligible.csv fundamentals_signals.json alert_log.json; do
-            if [ -f "$f" ]; then
-              git add "$f"
-            fi
-          done
-          git diff --staged --quiet && echo "No changes to commit" && exit 0
-          git commit -m "Daily scan update [automated]"
-          git pull --rebase origin main
-          git push
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # Stage files safely. Use the -f flag or check existence to avoid errors.
+          git add eligible.csv || true
+          
+          # Only stage the optional JSON file if it actually exists
+          if [ -f fundamentals_signals.json ]; then
+            git add fundamentals_signals.json
+          fi
+          
+          # Only commit and push if there are changes staged to prevent workflow crashes
+          if ! git diff --cached --quiet; then
+            git commit -m "Automated daily foundation scan data update [skip ci]"
+            git push origin main
+          else
+            echo "No changes detected. Skipping commit."
+          fi
