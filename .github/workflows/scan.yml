@@ -1,5 +1,71 @@
-      - name: Generate eligible universe
-        run: python generate_eligible.py  # Replace with your actual script name
+name: Daily Foundation Scan
 
+on:
+  schedule:
+    # 11:00 UTC = 6-7am ET, well before market open -- gives the heavy
+    # eligible-universe filter + fundamentals scan time to finish before
+    # the intraday workflow starts needing eligible.csv.
+    - cron: "0 11 * * 1-5"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+# Prevent two runs of this workflow from overlapping and racing each
+# other's git push -- if a new run starts while one's still going, the
+# old one is cancelled rather than both trying to push at once.
+concurrency:
+  group: daily-foundation-scan
+  cancel-in-progress: false
+
+jobs:
+  daily-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      # Keep an eye on this section -- we need to make sure eligible.csv exists here
       - name: Run fundamentals scan
-...
+        env:
+          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python fundamentals_scan.py
+
+      - name: Run short interest scan
+        env:
+          FINRA_API_KEY: ${{ secrets.FINRA_API_KEY }}
+        run: python short_interest_scan.py
+
+      - name: Commit updated state files
+        run: |
+          git config --local user.name "stock-scanner-bot"
+          git config --local user.email "action@github.com"
+          
+          if [ -f eligible.csv ]; then
+            git add eligible.csv
+          fi
+          
+          if [ -f fundamentals_signals.json ]; then
+            git add fundamentals_signals.json
+          fi
+          
+          if ! git diff --cached --quiet; then
+            git commit -m "Automated daily foundation scan data update [skip ci]"
+            git push origin main
+          else
+            echo "No changes to commit."
+          fi
