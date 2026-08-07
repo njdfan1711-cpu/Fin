@@ -96,6 +96,18 @@ def build_universe(include_etfs: bool = False) -> list[dict]:
     # Drop test issues always -- they're not real tradeable securities.
     combined = [r for r in combined if r["test_issue"] != "Y"]
 
+    # Drop preferred shares, warrants, rights, units, and when-issued
+    # securities -- Nasdaq's symbol file encodes these with a '$' in the
+    # symbol (e.g. "ALL$I"), and SPAC units/warrants/dual-class notations
+    # often use a '.' suffix (e.g. "ALUB.U", "AKO.A"). Yahoo Finance uses
+    # different conventions for some of these (hyphens instead of dots),
+    # which caused a wall of "no price data found" noise. More importantly,
+    # these instruments don't have their own fundamentals in the way this
+    # strategy needs -- they derive from the underlying common stock -- so
+    # treating all of them as out of scope keeps things simple and avoids
+    # naming-convention mismatches across Yahoo/FINRA/Finnhub.
+    combined = [r for r in combined if "$" not in r["symbol"] and "." not in r["symbol"]]
+
     if not include_etfs:
         combined = [r for r in combined if r["etf"] != "Y"]
 
