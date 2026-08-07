@@ -24,8 +24,7 @@ import sys
 import urllib.request
 
 from config import ELIGIBLE_FILE, SHORT_INTEREST_SPIKE_PCT
-from alert_log import filter_new
-from notify import send_batch_alert
+from signals_store import record_signal
 
 API_URL = "https://api.finra.org/data/group/otcMarket/name/EquityShortInterest"
 
@@ -78,7 +77,7 @@ def main():
     latest_rows = [r for r in rows if r.get("settlementDate") == latest_date]
     print(f"  {len(latest_rows)} row(s) for settlement date {latest_date}", file=sys.stderr)
 
-    all_matches = []
+    total_signals = 0
     for r in latest_rows:
         symbol = r.get("issueSymbolIdentifier", "")
         if symbol not in eligible:
@@ -93,13 +92,12 @@ def main():
             continue
 
         if change_pct >= SHORT_INTEREST_SPIKE_PCT:
-            reason = [f"Short interest up {change_pct:.1f}% since last report"]
-            fresh = filter_new(symbol, reason)
-            if fresh:
-                all_matches.append({"symbol": symbol, "reasons": fresh})
+            detail = f"Short interest up {change_pct:.1f}% since last report"
+            strength = min(change_pct / 50, 1.0)
+            record_signal(symbol, "short_interest", detail, strength=strength)
+            total_signals += 1
 
-    print(f"\n{len(all_matches)} ticker(s) matched short interest spike.", file=sys.stderr)
-    send_batch_alert(all_matches)
+    print(f"\n{total_signals} short interest signal(s) recorded.", file=sys.stderr)
 
 
 if __name__ == "__main__":

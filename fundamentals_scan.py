@@ -2,20 +2,25 @@
 fundamentals_scan.py
 
 Runs once daily. Checks eligible.csv against Finnhub's earnings-surprise
-and basic-financials endpoints. Fundamentals move slowly (quarterly), so
-daily is the right cadence -- no benefit to checking more often.
+and basic-financials endpoints.
 
-Uses ONE metric call per ticker (not separate earnings + financials calls)
-to stay within a reasonable Actions-minutes budget across ~2,000-3,000
-eligible tickers on Finnhub's free 60-calls/min tier.
+IMPORTANT FIX (post-launch): the original version matched on "the most
+recent known earnings beat" with no regard for how long ago that was --
+which meant a beat from months earlier still matched every single day,
+forever. That's what caused the 329-ticker alert. This version only
+counts an earnings beat if it was actually reported within the last
+EARNINGS_RECENCY_DAYS (see config.py) -- i.e. it has to be genuinely
+recent news, not old news still sitting in the data.
+
+Signals are RECORDED via signals_store.py, not pushed directly --
+compose_alerts.py decides what's push-worthy based on confluence across
+multiple signal categories.
 
 IMPORTANT: The 'metric' endpoint's exact field names (e.g. for YoY revenue
 growth) can vary/evolve on Finnhub's side. This script defensively checks
 a couple of plausible field name variants and skips gracefully if none are
-present, but the first time you run this for real, print one full raw
-response for a ticker you know well and confirm the field names match
-what's used below (search FINNHUB_KEY_CHECK in this file) -- adjust if
-Finnhub's docs show something different by the time you set this up.
+present -- search FINNHUB_KEY_CHECK below if you need to adjust these
+against a real response.
 """
 
 import csv
@@ -23,10 +28,17 @@ import json
 import sys
 import time
 import urllib.request
+from datetime import date, datetime
 
-from config import ELIGIBLE_FILE, FINNHUB_API_KEY, EARNINGS_SURPRISE_PCT, REVENUE_GROWTH_YOY_PCT, FUNDAMENTALS_SIGNALS_FILE
-from alert_log import filter_new
-from notify import send_batch_alert
+from config import (
+    ELIGIBLE_FILE,
+    FINNHUB_API_KEY,
+    EARNINGS_SURPRISE_PCT,
+    EARNINGS_RECENCY_DAYS,
+    REVENUE_GROWTH_YOY_PCT,
+    FUNDAMENTALS_SIGNALS_FILE,
+)
+from signals_store import record_signal
 
 BASE_URL = "https://finnhub.io/api/v1"
 CALLS_PER_MINUTE = 55  # stay a little under Finnhub's 60/min free cap
@@ -44,7 +56,8 @@ def _get(url: str) -> dict:
         return json.loads(resp.read().decode("utf-8"))
 
 
-def check_earnings_surprise(symbol: str) -> str | None:
+def check_earnings_surprise(symbol: str):
+    """Returns (detail_str, strength) or None. Only counts RECENT beats."""
     url = f"{BASE_URL}/stock/earnings?symbol={symbol}&token={FINNHUB_API_KEY}"
     try:
         data = _get(url)
@@ -52,18 +65,37 @@ def check_earnings_surprise(symbol: str) -> str | None:
         return None
     if not data:
         return None
+
     latest = data[0]  # most recent quarter first
+
+    # Recency check -- this is the actual bug fix. 'period' is the
+    # reporting period date, formatted YYYY-MM-DD in Finnhub's docs.
+    period_str = latest.get("period")
+    if not period_str:
+        return None
+    try:
+        period_date = datetime.strptime(period_str, "%Y-%m-%d").date()
+    except ValueError:
+        return None
+
+    days_ago = (date.today() - period_date).days
+    if days_ago < 0 or days_ago > EARNINGS_RECENCY_DAYS:
+        return None  # too old (or oddly in the future) -- not "news" anymore
+
     actual = latest.get("actual")
     estimate = latest.get("estimate")
     if actual is None or estimate in (None, 0):
         return None
     surprise_pct = ((actual - estimate) / abs(estimate)) * 100
+
     if surprise_pct >= EARNINGS_SURPRISE_PCT:
-        return f"Earnings beat by {surprise_pct:.1f}%"
+        detail = f"Earnings beat by {surprise_pct:.1f}% ({days_ago}d ago)"
+        strength = min(surprise_pct / 20, 1.0)  # bigger beats rank higher
+        return (detail, strength)
     return None
 
 
-def check_revenue_growth(symbol: str) -> str | None:
+def check_revenue_growth(symbol: str):
     url = f"{BASE_URL}/stock/metric?symbol={symbol}&metric=all&token={FINNHUB_API_KEY}"
     try:
         data = _get(url)
@@ -72,14 +104,16 @@ def check_revenue_growth(symbol: str) -> str | None:
     metric = data.get("metric", {})
 
     # FINNHUB_KEY_CHECK -- confirm this field name against a real response
-    # before relying on it; trying the most commonly documented variants.
+    # before relying on it long-term.
     growth = (
         metric.get("revenueGrowthTTMYoy")
         or metric.get("revenueGrowthQuarterlyYoy")
         or metric.get("revenueGrowth3Y")
     )
     if growth is not None and growth >= REVENUE_GROWTH_YOY_PCT:
-        return f"Revenue growth {growth:.1f}% YoY"
+        detail = f"Revenue growth {growth:.1f}% YoY"
+        strength = min(growth / 30, 1.0)
+        return (detail, strength)
     return None
 
 
@@ -92,27 +126,33 @@ def main():
     print(f"Running fundamentals scan on {len(symbols)} eligible tickers "
           f"(~{len(symbols) * 2 / CALLS_PER_MINUTE:.0f} min expected)...", file=sys.stderr)
 
-    all_matches = []
     signals = {}
+    total_signals = 0
 
     for i, symbol in enumerate(symbols, start=1):
-        reasons = []
+        details = []
+        strengths = []
 
         r1 = check_earnings_surprise(symbol)
         time.sleep(SLEEP_BETWEEN_CALLS)
         if r1:
-            reasons.append(r1)
+            details.append(r1[0])
+            strengths.append(r1[1])
 
         r2 = check_revenue_growth(symbol)
         time.sleep(SLEEP_BETWEEN_CALLS)
         if r2:
-            reasons.append(r2)
+            details.append(r2[0])
+            strengths.append(r2[1])
 
-        if reasons:
-            signals[symbol] = reasons
-            fresh = filter_new(symbol, reasons)
-            if fresh:
-                all_matches.append({"symbol": symbol, "reasons": fresh})
+        if details:
+            # Combine into ONE fundamentals-category signal so a second
+            # finding doesn't silently overwrite the first in the store.
+            combined_detail = "; ".join(details)
+            combined_strength = max(strengths)
+            record_signal(symbol, "fundamentals", combined_detail, strength=combined_strength)
+            signals[symbol] = details
+            total_signals += len(details)
 
         if i % 100 == 0:
             print(f"  ...{i}/{len(symbols)} checked", file=sys.stderr)
@@ -120,8 +160,9 @@ def main():
     with open(FUNDAMENTALS_SIGNALS_FILE, "w") as f:
         json.dump(signals, f, indent=2)
 
-    print(f"\n{len(all_matches)} ticker(s) matched fundamentals (after de-dup).", file=sys.stderr)
-    send_batch_alert(all_matches)
+    print(f"\n{total_signals} fundamentals signal(s) recorded "
+          f"(only earnings beats within the last {EARNINGS_RECENCY_DAYS} days count).",
+          file=sys.stderr)
 
 
 if __name__ == "__main__":

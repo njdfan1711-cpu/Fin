@@ -8,9 +8,9 @@ liquidity/quality-filtered subset) for:
   - Relative volume spikes (today's volume vs 20-day average -- often the
     earliest sign something is happening, good swing-entry catalyst)
 
-Any ONE condition matching is enough to alert (your OR-logic preference).
-Alerts are de-duplicated via alert_log.py so a condition staying true
-doesn't re-ping you every single cycle.
+Signals are RECORDED via signals_store.py, not pushed directly -- a
+separate compose_alerts.py step decides what's actually push-worthy by
+requiring agreement across multiple signal categories.
 
 NOTE: needs yfinance and outbound network access. Test in your actual
 deployment, not in a network-restricted sandbox.
@@ -31,8 +31,7 @@ from config import (
     MA_LONG,
     RELATIVE_VOLUME_TRIGGER,
 )
-from alert_log import filter_new
-from notify import send_batch_alert
+from signals_store import record_signal
 
 BATCH_SIZE = 150
 
@@ -58,21 +57,25 @@ def compute_rsi(closes: pd.Series, period: int = RSI_PERIOD) -> float:
     return float(rsi.iloc[-1])
 
 
-def evaluate_symbol(df: pd.DataFrame) -> list[str]:
-    reasons = []
+def evaluate_symbol(symbol: str, df: pd.DataFrame):
+    """Records any matching signals directly; returns count of signals found."""
     df = df.dropna()
     if len(df) < MA_LONG + 1:
-        return reasons  # not enough history to evaluate MA_LONG yet
+        return 0
 
     closes = df["Close"]
     volumes = df["Volume"]
+    found = 0
 
-    # RSI (low priority per your preference, but still included)
+    # RSI -- low priority per your preference (low strength weight), but
+    # still recorded so it can contribute to confluence with other signals
     rsi = compute_rsi(closes)
     if rsi <= RSI_OVERSOLD:
-        reasons.append(f"RSI oversold ({rsi:.1f})")
+        record_signal(symbol, "technical", f"RSI oversold ({rsi:.1f})", strength=0.4)
+        found += 1
     elif rsi >= RSI_OVERBOUGHT:
-        reasons.append(f"RSI overbought ({rsi:.1f})")
+        record_signal(symbol, "technical", f"RSI overbought ({rsi:.1f})", strength=0.4)
+        found += 1
 
     # Moving average crossover (20 over 50 = bullish momentum)
     ma_short = closes.rolling(MA_SHORT).mean()
@@ -81,23 +84,27 @@ def evaluate_symbol(df: pd.DataFrame) -> list[str]:
         prev_short, prev_long = ma_short.iloc[-2], ma_long.iloc[-2]
         cur_short, cur_long = ma_short.iloc[-1], ma_long.iloc[-1]
         if prev_short <= prev_long and cur_short > cur_long:
-            reasons.append(f"{MA_SHORT}/{MA_LONG}-day MA bullish crossover")
+            record_signal(symbol, "technical",
+                          f"{MA_SHORT}/{MA_LONG}-day MA bullish crossover", strength=0.8)
+            found += 1
 
-    # Relative volume spike
-    avg_volume = volumes.iloc[:-1].tail(20).mean()  # baseline excludes today
+    # Relative volume spike -- often the earliest tell of a real catalyst
+    avg_volume = volumes.iloc[:-1].tail(20).mean()
     today_volume = volumes.iloc[-1]
     if avg_volume > 0 and today_volume / avg_volume >= RELATIVE_VOLUME_TRIGGER:
         ratio = today_volume / avg_volume
-        reasons.append(f"Volume spike ({ratio:.1f}x average)")
+        record_signal(symbol, "technical", f"Volume spike ({ratio:.1f}x average)",
+                      strength=min(ratio / 5, 1.0))
+        found += 1
 
-    return reasons
+    return found
 
 
 def main():
     symbols = load_eligible()
     print(f"Running technical scan on {len(symbols)} eligible tickers...", file=sys.stderr)
 
-    all_matches = []
+    total_signals = 0
 
     for i, batch in enumerate(chunk(symbols, BATCH_SIZE), start=1):
         print(f"  Batch {i}...", file=sys.stderr)
@@ -117,18 +124,14 @@ def main():
         for sym in batch:
             try:
                 df = data if len(batch) == 1 else data[sym]
-                reasons = evaluate_symbol(df)
+                total_signals += evaluate_symbol(sym, df)
             except Exception:
                 continue
 
-            if reasons:
-                fresh = filter_new(sym, reasons)
-                if fresh:
-                    all_matches.append({"symbol": sym, "reasons": fresh})
-
-    print(f"\n{len(all_matches)} ticker(s) matched (after de-dup).", file=sys.stderr)
-    send_batch_alert(all_matches)
+    print(f"\n{total_signals} technical signal(s) recorded. "
+          f"Run compose_alerts.py to send any push-worthy results.", file=sys.stderr)
 
 
 if __name__ == "__main__":
     main()
+

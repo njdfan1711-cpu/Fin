@@ -23,11 +23,11 @@ import csv
 import json
 import re
 import sys
+import time
 import urllib.request
 
 from config import ELIGIBLE_FILE, FINNHUB_API_KEY
-from alert_log import filter_new
-from notify import send_batch_alert
+from signals_store import record_signal
 
 NEWS_URL = f"https://finnhub.io/api/v1/news?category=general&token={FINNHUB_API_KEY}"
 
@@ -61,8 +61,6 @@ def build_matchers(eligible: list[dict]) -> dict:
     for row in eligible:
         symbol = row["symbol"]
         name = row["name"]
-        # Take the first word of the company name that's actually
-        # distinctive (skip generic leading words if present)
         first_word = name.split()[0] if name else symbol
         pattern = rf"\b({re.escape(first_word)}|{re.escape(symbol)})\b"
         try:
@@ -82,34 +80,28 @@ def main():
         print("No articles returned, nothing to scan.", file=sys.stderr)
         return
 
-    import time
     cutoff_ts = time.time() - (LOOKBACK_MINUTES * 60)
     recent_articles = [a for a in articles if a.get("datetime", 0) >= cutoff_ts]
     print(f"  {len(recent_articles)} article(s) within the last {LOOKBACK_MINUTES} min", file=sys.stderr)
 
     matchers = build_matchers(eligible)
 
-    all_matches = []
+    total_signals = 0
     for row in eligible:
         symbol = row["symbol"]
         pattern = matchers.get(symbol)
         if not pattern:
             continue
 
-        hits = []
         for a in recent_articles:
             text = f"{a.get('headline', '')} {a.get('summary', '')}"
             if pattern.search(text):
-                hits.append(a.get("headline", "")[:120])
+                headline = a.get("headline", "")[:140]
+                record_signal(symbol, "news", f"News: {headline}", strength=0.7)
+                total_signals += 1
+                break  # one match is enough to record for this cycle
 
-        if hits:
-            reason = [f"News mention: {hits[0]}"]
-            fresh = filter_new(symbol, reason)
-            if fresh:
-                all_matches.append({"symbol": symbol, "reasons": fresh})
-
-    print(f"\n{len(all_matches)} ticker(s) matched news (after de-dup).", file=sys.stderr)
-    send_batch_alert(all_matches)
+    print(f"\n{total_signals} news signal(s) recorded.", file=sys.stderr)
 
 
 if __name__ == "__main__":
