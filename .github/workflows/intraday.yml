@@ -2,6 +2,8 @@ name: Intraday Technical + News Scan
 
 on:
   schedule:
+    # Every 30 min, 13:00-21:59 UTC, weekdays -- covers NYSE hours across
+    # both EST and EDT since GitHub cron is fixed UTC.
     - cron: "0,30 13-21 * * 1-5"
   workflow_dispatch: {}
 
@@ -29,22 +31,29 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run technical scan (RSI, MA crossover, relative volume)
+      - name: Run technical scan (records signals only, no push)
         run: python technicals_scan.py
-        env:
-          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
 
-      - name: Run news/catalyst scan
+      - name: Run news/catalyst scan (records signals only, no push)
+        env:
+          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
         run: python news_scan.py
+
+      - name: Compose and send alerts (requires 2+ signal confluence)
         env:
           FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python compose_alerts.py
 
-      - name: Commit updated alert log
+      - name: Commit updated signal/alert state
         run: |
           git config user.name "stock-scanner-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add alert_log.json
+          for f in signals_state.json alert_log.json latest_alerts.md; do
+            if [ -f "$f" ]; then
+              git add "$f"
+            fi
+          done
           git diff --staged --quiet && echo "No changes to commit" && exit 0
           git commit -m "Intraday scan update [automated]"
           git pull --rebase origin main
