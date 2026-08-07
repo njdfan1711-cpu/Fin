@@ -36,6 +36,12 @@ from config import (
     EARNINGS_SURPRISE_PCT,
     EARNINGS_RECENCY_DAYS,
     REVENUE_GROWTH_YOY_PCT,
+    EPS_GROWTH_YOY_PCT,
+    MAX_DEBT_TO_EQUITY,
+    MIN_CURRENT_RATIO,
+    MIN_ROE_PCT,
+    MIN_NET_MARGIN_PCT,
+    MIN_QUALITY_CHECKS_PASSED,
     FUNDAMENTALS_SIGNALS_FILE,
 )
 from signals_store import record_signal
@@ -100,21 +106,58 @@ def check_revenue_growth(symbol: str):
     try:
         data = _get(url)
     except Exception:
-        return None
+        return []
     metric = data.get("metric", {})
+    findings = []
 
-    # FINNHUB_KEY_CHECK -- confirm this field name against a real response
-    # before relying on it long-term.
-    growth = (
+    # FINNHUB_KEY_CHECK -- confirm these field names against a real response
+    # before relying on them long-term; trying the most commonly documented
+    # variants for each. All of this comes from the ONE call above, so
+    # adding these checks costs nothing extra in API calls.
+
+    revenue_growth = (
         metric.get("revenueGrowthTTMYoy")
         or metric.get("revenueGrowthQuarterlyYoy")
         or metric.get("revenueGrowth3Y")
     )
-    if growth is not None and growth >= REVENUE_GROWTH_YOY_PCT:
-        detail = f"Revenue growth {growth:.1f}% YoY"
-        strength = min(growth / 30, 1.0)
-        return (detail, strength)
-    return None
+    if revenue_growth is not None and revenue_growth >= REVENUE_GROWTH_YOY_PCT:
+        findings.append((f"Revenue growth {revenue_growth:.1f}% YoY", min(revenue_growth / 30, 1.0)))
+
+    eps_growth = (
+        metric.get("epsGrowthTTMYoy")
+        or metric.get("epsGrowthQuarterlyYoy")
+        or metric.get("epsGrowth3Y")
+    )
+    if eps_growth is not None and eps_growth >= EPS_GROWTH_YOY_PCT:
+        findings.append((f"EPS growth {eps_growth:.1f}% YoY", min(eps_growth / 30, 1.0)))
+
+    # Quality checklist -- require most (not all) of these to pass, since
+    # requiring every single one is too strict and would exclude solid
+    # companies on one weak metric.
+    checks_passed = []
+
+    debt_to_equity = metric.get("totalDebt/totalEquityAnnual") or metric.get("totalDebt/totalEquityQuarterly")
+    if debt_to_equity is not None and debt_to_equity < MAX_DEBT_TO_EQUITY:
+        checks_passed.append(f"D/E {debt_to_equity:.2f}")
+
+    current_ratio = metric.get("currentRatioAnnual") or metric.get("currentRatioQuarterly")
+    if current_ratio is not None and current_ratio > MIN_CURRENT_RATIO:
+        checks_passed.append(f"Current ratio {current_ratio:.2f}")
+
+    roe = metric.get("roeTTM") or metric.get("roeAnnual")
+    if roe is not None and roe > MIN_ROE_PCT:
+        checks_passed.append(f"ROE {roe:.1f}%")
+
+    net_margin = metric.get("netProfitMarginTTM") or metric.get("netProfitMarginAnnual")
+    if net_margin is not None and net_margin > MIN_NET_MARGIN_PCT:
+        checks_passed.append(f"Net margin {net_margin:.1f}%")
+
+    if len(checks_passed) >= MIN_QUALITY_CHECKS_PASSED:
+        detail = "Quality checklist passed (" + ", ".join(checks_passed) + ")"
+        strength = len(checks_passed) / 4.0
+        findings.append((detail, strength))
+
+    return findings
 
 
 def main():
@@ -141,9 +184,9 @@ def main():
 
         r2 = check_revenue_growth(symbol)
         time.sleep(SLEEP_BETWEEN_CALLS)
-        if r2:
-            details.append(r2[0])
-            strengths.append(r2[1])
+        for detail, strength in r2:
+            details.append(detail)
+            strengths.append(strength)
 
         if details:
             # Combine into ONE fundamentals-category signal so a second

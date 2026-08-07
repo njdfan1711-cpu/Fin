@@ -21,9 +21,19 @@ RELATIVE_VOLUME_TRIGGER = 2.5     # today's volume >= 2.5x the 20-day average
 # --- Fundamentals trigger thresholds ---
 EARNINGS_SURPRISE_PCT = 5.0       # actual EPS beat estimate by this % or more
 EARNINGS_RECENCY_DAYS = 5         # only count an earnings beat if reported this recently
-                                   # -- without this, a beat from months ago would
-                                   # match forever, which is what caused the 329-ticker alert
 REVENUE_GROWTH_YOY_PCT = 10.0     # YoY revenue growth at or above this
+EPS_GROWTH_YOY_PCT = 10.0         # YoY EPS growth at or above this
+
+# --- Fundamental quality checklist (all from the same Finnhub 'metric'
+# call already made for revenue/EPS growth -- zero extra API cost) ---
+MAX_DEBT_TO_EQUITY = 1.0          # below this = low leverage
+MIN_CURRENT_RATIO = 1.5           # above this = can cover short-term liabilities
+MIN_ROE_PCT = 15.0                # above this = efficient use of capital
+MIN_NET_MARGIN_PCT = 10.0         # simple stand-in for "healthy margins"
+                                   # (true peer-relative margin comparison would need
+                                   # industry-average data we don't have a free source for)
+MIN_QUALITY_CHECKS_PASSED = 3     # out of 4 (D/E, current ratio, ROE, margin) --
+                                   # require most, not all, to be lenient on edge cases
 
 # --- Short interest ---
 SHORT_INTEREST_SPIKE_PCT = 20.0   # % increase in short interest since last report
