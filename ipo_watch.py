@@ -6,15 +6,15 @@ Keeps your scan universe from going stale by automatically catching new IPOs.
 How it works (all free, official SEC sources, no API key):
 
 1. NEW REGISTRATIONS
-   Search SEC EDGAR Full-Text Search for recently filed Form S-1 (the form
-   companies file to register for an IPO). Any CIK (SEC's company ID) that
-   files an S-1 and isn't already in our universe gets added to a local
-   "pending_ipos.json" watch list.
+   Uses SEC EDGAR's "current filings" feed, filtered to Form S-1 (the form
+   companies file to register for an IPO). This is an Atom/RSS feed
+   purpose-built for "show me recent filings of this type" -- unlike
+   EDGAR's full-text SEARCH API, it doesn't require a keyword/query term,
+   which is what caused an HTTP 500 in the original version (that endpoint
+   expects an actual search query, and we were only passing form+date
+   filters with nothing to search for).
 
-   Endpoint: https://efts.sec.gov/LATEST/search-index?forms=S-1&dateRange=custom...
-   This is the SEC's own full-text search API. It's free but they DO require
-   a descriptive User-Agent identifying you/your app, and a max of 10
-   requests/second -- this script stays well under that.
+   Endpoint: https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=S-1&...&output=atom
 
 2. GOING LIVE
    An S-1 filing alone doesn't mean the company will actually IPO, or when.
@@ -29,33 +29,45 @@ How it works (all free, official SEC sources, no API key):
 
 Run this once a day, before your main scan job, right after universe_builder.py.
 
-NOTE: Needs outbound access to efts.sec.gov and www.sec.gov. If running in a
-network-restricted sandbox, allow those domains or run this step elsewhere.
+NOTE: Needs outbound access to sec.gov. If running in a network-restricted
+sandbox, allow that domain or run this step elsewhere.
 """
 
 import json
 import os
+import re
 import sys
 import time
-import urllib.parse
 import urllib.request
-from datetime import date, timedelta
+import xml.etree.ElementTree as ET
 
 # SEC requires a real identifying User-Agent for automated access -- put your
 # own name/email here per SEC's fair-access rules (https://www.sec.gov/os/webmaster-faq#developers)
 USER_AGENT = "personal-stock-scanner contact: your-email@example.com"
 
-FULLTEXT_SEARCH_URL = "https://efts.sec.gov/LATEST/search-index"
+CURRENT_FILINGS_URL = (
+    "https://www.sec.gov/cgi-bin/browse-edgar"
+    "?action=getcurrent&type=S-1&company=&dateb=&owner=include&count=100&output=atom"
+)
 TICKER_MAP_URL = "https://www.sec.gov/files/company_tickers.json"
+
+ATOM_NS = {"a": "http://www.w3.org/2005/Atom"}
+# Matches "S-1 - COMPANY NAME (0001234567) (Filer)" style titles, pulling
+# out the CIK from the parentheses.
+CIK_PATTERN = re.compile(r"\((\d{7,10})\)")
 
 PENDING_FILE = "pending_ipos.json"
 UNIVERSE_FILE = "universe.csv"
 
 
-def _get(url: str) -> dict:
+def _get_bytes(url: str) -> bytes:
     req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
     with urllib.request.urlopen(req, timeout=30) as resp:
-        return json.loads(resp.read().decode("utf-8"))
+        return resp.read()
+
+
+def _get_json(url: str) -> dict:
+    return json.loads(_get_bytes(url).decode("utf-8"))
 
 
 def load_pending() -> dict:
@@ -70,49 +82,53 @@ def save_pending(pending: dict):
         json.dump(pending, f, indent=2)
 
 
-def find_new_s1_filings(days_back: int = 7) -> list[dict]:
+def find_new_s1_filings() -> list[dict]:
     """
-    Query EDGAR full-text search for S-1 filings in the last `days_back` days.
-    Returns a list of {cik, company_name, filed_at}.
+    Fetches the current-filings Atom feed for Form S-1 and parses out
+    company name, CIK, and filed date. Returns a list of
+    {cik, company_name, filed_at}.
     """
-    start = (date.today() - timedelta(days=days_back)).isoformat()
-    end = date.today().isoformat()
+    try:
+        raw = _get_bytes(CURRENT_FILINGS_URL)
+    except Exception as e:
+        print(f"[error fetching current filings feed] {e}", file=sys.stderr)
+        return []
 
-    params = {
-        "forms": "S-1",
-        "dateRange": "custom",
-        "startdt": start,
-        "enddt": end,
-    }
-    url = f"{FULLTEXT_SEARCH_URL}?{urllib.parse.urlencode(params)}"
-
-    data = _get(url)
-    hits = data.get("hits", {}).get("hits", [])
+    try:
+        root = ET.fromstring(raw)
+    except ET.ParseError as e:
+        print(f"[error parsing Atom feed] {e}", file=sys.stderr)
+        return []
 
     results = []
-    for h in hits:
-        src = h.get("_source", {})
-        cik_list = src.get("ciks", [])
-        if not cik_list:
+    for entry in root.findall("a:entry", ATOM_NS):
+        title_el = entry.find("a:title", ATOM_NS)
+        updated_el = entry.find("a:updated", ATOM_NS)
+        if title_el is None or not title_el.text:
             continue
-        results.append({
-            "cik": cik_list[0].lstrip("0"),  # normalize, e.g. "0001234567" -> "1234567"
-            "company_name": src.get("display_names", ["Unknown"])[0],
-            "filed_at": src.get("file_date", ""),
-        })
+
+        title = title_el.text  # e.g. "S-1 - EXAMPLE CORP (0001234567) (Filer)"
+        cik_match = CIK_PATTERN.search(title)
+        if not cik_match:
+            continue
+        cik = cik_match.group(1).lstrip("0")
+
+        # Company name is everything between "S-1 - " and " (CIK...)"
+        name_part = title.split(" - ", 1)[-1]
+        company_name = CIK_PATTERN.split(name_part)[0].strip()
+
+        filed_at = updated_el.text[:10] if updated_el is not None and updated_el.text else ""
+
+        results.append({"cik": cik, "company_name": company_name, "filed_at": filed_at})
+
     return results
 
 
 def fetch_ticker_map() -> dict:
-    """
-    Returns {cik_str: ticker} for every company SEC currently has an active
-    ticker for.
-    """
-    data = _get(TICKER_MAP_URL)
+    """Returns {cik_str: ticker} for every company SEC currently has an active ticker for."""
+    data = _get_json(TICKER_MAP_URL)
     mapping = {}
     for entry in data.get("data", []):
-        # company_tickers.json format: list of [cik, name, ticker] under "data",
-        # with "fields": ["cik","name","ticker"] -- handle dict or list shape
         if isinstance(entry, list):
             cik, name, ticker = entry
         else:
@@ -134,9 +150,8 @@ def append_to_universe(symbol: str, name: str, exchange: str = "NEW-IPO"):
 def main():
     pending = load_pending()
 
-    # Step 1: pick up any new S-1 filings from the last week
     print("Checking for new S-1 filings...", file=sys.stderr)
-    new_filings = find_new_s1_filings(days_back=7)
+    new_filings = find_new_s1_filings()
     added = 0
     for f in new_filings:
         if f["cik"] not in pending:
@@ -149,12 +164,14 @@ def main():
     print(f"  {added} new S-1 filing(s) added to pending list "
           f"({len(pending)} total pending)", file=sys.stderr)
 
-    # Be polite to SEC's servers between calls
-    time.sleep(1)
+    time.sleep(1)  # be polite to SEC's servers between calls
 
-    # Step 2: check which pending companies now have a live ticker
     print("Checking SEC ticker map for newly-live IPOs...", file=sys.stderr)
-    ticker_map = fetch_ticker_map()
+    try:
+        ticker_map = fetch_ticker_map()
+    except Exception as e:
+        print(f"[error fetching ticker map] {e}", file=sys.stderr)
+        ticker_map = {}
 
     newly_live = []
     still_pending = {}
