@@ -32,7 +32,14 @@ def was_recently_alerted(symbol: str) -> bool:
     last = log.get(symbol)
     if not last:
         return False
-    last_dt = datetime.fromisoformat(last)
+    try:
+        last_dt = datetime.fromisoformat(last)
+    except (TypeError, ValueError):
+        # Leftover data in an old/incompatible format (e.g. from before
+        # this file's structure changed) -- treat as "not recently
+        # alerted" rather than crashing. Gets overwritten with the
+        # correct format next time this symbol is actually alerted.
+        return False
     return (datetime.now(timezone.utc) - last_dt) < timedelta(hours=DEDUPE_HOURS)
 
 
