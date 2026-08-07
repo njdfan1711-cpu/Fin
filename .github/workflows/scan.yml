@@ -11,9 +11,6 @@ on:
 permissions:
   contents: write
 
-# Prevent two runs of this workflow from overlapping and racing each
-# other's git push -- if a new run starts while one's still going, the
-# old one is cancelled rather than both trying to push at once.
 concurrency:
   group: daily-foundation-scan
   cancel-in-progress: false
@@ -36,8 +33,6 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Build universe (Nasdaq + NYSE/AMEX)
-        env:
-          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
         run: python universe_builder.py
 
       - name: Check for newly-live IPOs
@@ -49,22 +44,19 @@ jobs:
       - name: Build eligible (liquidity/quality-filtered) universe
         run: python filters.py
 
-      - name: Run fundamentals scan
+      - name: Run fundamentals scan (records signals only, no push)
         env:
           FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
-          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
         run: python fundamentals_scan.py
 
-      - name: Run short interest scan
-        env:
-          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+      - name: Run short interest scan (records signals only, no push)
         run: python short_interest_scan.py
 
       - name: Commit updated state files
         run: |
           git config user.name "stock-scanner-bot"
-          git config user.email "actions@://github.com"
-          for f in universe.csv pending_ipos.json delisting_risk.json eligible.csv fundamentals_signals.json alert_log.json; do
+          git config user.email "actions@users.noreply.github.com"
+          for f in universe.csv pending_ipos.json delisting_risk.json eligible.csv fundamentals_signals.json signals_state.json; do
             if [ -f "$f" ]; then
               git add "$f"
             fi
