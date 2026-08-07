@@ -5,14 +5,16 @@ Runs on FINRA's own bi-monthly (twice-a-month) short interest reporting
 schedule -- checking more often just re-reads the same numbers, since
 that's how often the underlying data actually updates.
 
-Source: FINRA's official, free Equity Short Interest query API.
+Source: FINRA's official Equity Short Interest query API.
   https://api.finra.org/data/group/otcMarket/name/EquityShortInterest
-No API key required for this public query endpoint.
 
-This pulls the most recent settlement date's full report in one call,
-then filters down to your eligible tickers locally and flags any with a
-significant increase in short interest since the prior report (potential
-squeeze setup).
+BUG FIX (post-launch): the original version got an HTTP 400 because it
+requested results sorted by settlementDate without also including a
+required filter locking to one exact date -- FINRA's API requires an
+EQUAL compareFilter on a dataset's "partition field" any time you sort
+by it. Rather than guess at a date, this version first asks FINRA's
+/partitions endpoint which settlement dates actually exist, picks the
+most recent one, and then queries with an explicit filter for that date.
 
 NOTE: needs outbound access to api.finra.org. Test in your actual
 deployment, not in a network-restricted sandbox.
@@ -26,7 +28,8 @@ import urllib.request
 from config import ELIGIBLE_FILE, SHORT_INTEREST_SPIKE_PCT
 from signals_store import record_signal
 
-API_URL = "https://api.finra.org/data/group/otcMarket/name/EquityShortInterest"
+DATA_URL = "https://api.finra.org/data/group/otcMarket/name/EquityShortInterest"
+PARTITIONS_URL = "https://api.finra.org/partitions/group/otcMarket/name/EquityShortInterest"
 
 
 def load_eligible() -> set:
@@ -34,19 +37,9 @@ def load_eligible() -> set:
         return {row["symbol"] for row in csv.DictReader(f)}
 
 
-def fetch_latest_short_interest(limit: int = 20000) -> list[dict]:
-    """
-    Fetches the most recent report, sorted by settlement date descending.
-    We over-fetch (limit) and then only keep rows matching the single most
-    recent settlementDate actually present in the response, since a query
-    without a specific date returns whatever the API considers current.
-    """
-    payload = {
-        "limit": limit,
-        "sortFields": ["-settlementDate"],
-    }
+def _post(url: str, payload: dict) -> list:
     req = urllib.request.Request(
-        API_URL,
+        url,
         data=json.dumps(payload).encode("utf-8"),
         headers={
             "Content-Type": "application/json",
@@ -59,31 +52,79 @@ def fetch_latest_short_interest(limit: int = 20000) -> list[dict]:
         return json.loads(resp.read().decode("utf-8"))
 
 
+def _get(url: str):
+    req = urllib.request.Request(url, headers={"Accept": "application/json",
+                                                 "User-Agent": "personal-stock-scanner"})
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        return json.loads(resp.read().decode("utf-8"))
+
+
+def get_latest_settlement_date() -> str | None:
+    """
+    Asks FINRA which settlement dates actually exist for this dataset and
+    returns the most recent one. This is the correct way to discover
+    "today's report date" rather than guessing.
+    """
+    try:
+        data = _get(PARTITIONS_URL)
+    except Exception as e:
+        print(f"[error fetching partitions] {e}", file=sys.stderr)
+        return None
+
+    # Response shape can vary -- handle a couple of plausible structures
+    # defensively rather than assuming one exact format.
+    dates = []
+    if isinstance(data, list):
+        for entry in data:
+            if isinstance(entry, dict):
+                val = entry.get("settlementDate") or entry.get("value")
+                if val:
+                    dates.append(val)
+            elif isinstance(entry, str):
+                dates.append(entry)
+    elif isinstance(data, dict):
+        dates = data.get("settlementDate", []) or data.get("values", [])
+
+    if not dates:
+        return None
+    return sorted(dates)[-1]  # most recent, dates sort correctly as ISO strings
+
+
+def fetch_short_interest_for_date(settlement_date: str, limit: int = 20000) -> list[dict]:
+    payload = {
+        "compareFilters": [
+            {"compareType": "EQUAL", "fieldName": "settlementDate", "fieldValue": settlement_date}
+        ],
+        "limit": limit,
+    }
+    return _post(DATA_URL, payload)
+
+
 def main():
     eligible = load_eligible()
-    print(f"Fetching latest FINRA short interest report...", file=sys.stderr)
+    print("Looking up the latest FINRA short interest settlement date...", file=sys.stderr)
+
+    latest_date = get_latest_settlement_date()
+    if not latest_date:
+        print("Could not determine latest settlement date -- skipping this run.", file=sys.stderr)
+        return
+    print(f"  Latest settlement date: {latest_date}", file=sys.stderr)
 
     try:
-        rows = fetch_latest_short_interest()
+        rows = fetch_short_interest_for_date(latest_date)
     except Exception as e:
-        print(f"[error fetching short interest] {e}", file=sys.stderr)
+        print(f"[error fetching short interest data] {e}", file=sys.stderr)
         return
 
-    if not rows:
-        print("No data returned.", file=sys.stderr)
-        return
-
-    latest_date = rows[0].get("settlementDate")
-    latest_rows = [r for r in rows if r.get("settlementDate") == latest_date]
-    print(f"  {len(latest_rows)} row(s) for settlement date {latest_date}", file=sys.stderr)
+    print(f"  {len(rows)} row(s) returned for {latest_date}", file=sys.stderr)
 
     total_signals = 0
-    for r in latest_rows:
+    for r in rows:
         symbol = r.get("issueSymbolIdentifier", "")
         if symbol not in eligible:
             continue
 
-        change_pct = r.get("changePercent")
+        change_pct = r.get("changePercent") or r.get("percentageChangefromPreviousShort")
         if change_pct is None:
             continue
         try:

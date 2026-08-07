@@ -34,6 +34,7 @@ import yfinance as yf
 
 from config import (
     FINNHUB_API_KEY,
+    ELIGIBLE_FILE,
     MIN_SIGNAL_CATEGORIES,
     TOP_N_ALERTS,
     LATEST_ALERTS_FILE,
@@ -97,7 +98,19 @@ def fetch_current_prices(symbols: list[str]) -> dict:
     return prices
 
 
-def format_ticker_line(symbol: str, categories: dict, price, target) -> str:
+def load_company_names() -> dict:
+    names = {}
+    try:
+        import csv
+        with open(ELIGIBLE_FILE, newline="") as f:
+            for row in csv.DictReader(f):
+                names[row["symbol"]] = row.get("name", "")
+    except FileNotFoundError:
+        pass
+    return names
+
+
+def format_ticker_line(rank: int, symbol: str, name: str, categories: dict, price, target) -> str:
     reason_bits = []
     for cat, info in categories.items():
         label = CATEGORY_LABELS.get(cat, cat)
@@ -112,11 +125,14 @@ def format_ticker_line(symbol: str, categories: dict, price, target) -> str:
     elif price:
         price_bit = f" | ${price:.2f}"
 
-    return f"{symbol} ({len(categories)} signals){price_bit}\n  {reasons_text}"
+    display_name = name if name else symbol
+    header = f"{display_name} ({symbol}) #{rank}: {len(categories)} signals{price_bit}"
+    return f"{header}\n  {reasons_text}"
 
 
 def main():
     active = get_active_signals()
+    company_names = load_company_names()
 
     # Require confluence
     qualifying = {
@@ -128,19 +144,26 @@ def main():
 
     # Rank by confidence
     ranked = sorted(qualifying.items(), key=lambda kv: score_ticker(kv[1]), reverse=True)
+    # Attach each ticker's overall rank now, so the push and the full
+    # written list use the same index even after recently-alerted tickers
+    # get filtered out of the push.
+    ranked_with_rank = [(i, sym, cats) for i, (sym, cats) in enumerate(ranked, start=1)]
 
     # Write the FULL ranked list to the repo regardless of push cap
     with open(LATEST_ALERTS_FILE, "w") as f:
         f.write(f"# Latest Alerts ({len(ranked)} qualifying tickers)\n\n")
-        for rank, (sym, cats) in enumerate(ranked, start=1):
+        for rank, sym, cats in ranked_with_rank:
             count, strength = score_ticker(cats)
-            f.write(f"## {rank}. {sym} -- {count} signals, strength {strength:.2f}\n")
+            name = company_names.get(sym, "")
+            label = f"{name} ({sym})" if name else sym
+            f.write(f"## {rank}. {label} -- {count} signals, strength {strength:.2f}\n")
             for cat, info in cats.items():
                 f.write(f"- **{CATEGORY_LABELS.get(cat, cat)}**: {info['detail']}\n")
             f.write("\n")
 
     # Filter out recently-alerted, then cap to top N for the actual push
-    fresh_ranked = [(sym, cats) for sym, cats in ranked if not was_recently_alerted(sym)]
+    fresh_ranked = [(rank, sym, cats) for rank, sym, cats in ranked_with_rank
+                     if not was_recently_alerted(sym)]
     push_list = fresh_ranked[:TOP_N_ALERTS]
 
     if not push_list:
@@ -148,14 +171,15 @@ def main():
               "recently alerted already).", file=sys.stderr)
         return
 
-    symbols_to_price = [sym for sym, _ in push_list]
+    symbols_to_price = [sym for _, sym, _ in push_list]
     prices = fetch_current_prices(symbols_to_price)
 
     lines = []
-    for sym, cats in push_list:
+    for rank, sym, cats in push_list:
         price = prices.get(sym)
         target = fetch_price_target(sym)
-        lines.append(format_ticker_line(sym, cats, price, target))
+        name = company_names.get(sym, "")
+        lines.append(format_ticker_line(rank, sym, name, cats, price, target))
 
     message = "\n\n".join(lines)
     if len(message) > 3800:
