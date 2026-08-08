@@ -18,10 +18,18 @@ import urllib.request
 from config import NTFY_TOPIC
 
 
-def send_alert(title: str, message: str, priority: str = "default", tags: list[str] | None = None):
+def send_alert(title: str, message: str, priority: str = "default",
+               tags: list[str] | None = None, markdown: bool = False,
+               click_url: str | None = None):
     """
     priority: one of "min", "low", "default", "high", "urgent"
     tags: emoji shortcodes shown in the notification, e.g. ["chart_with_upwards_trend"]
+    markdown: if True, message is rendered with **bold**, *italics*, links,
+              etc. instead of plain text (ntfy's Markdown header)
+    click_url: if set, tapping the notification opens this URL (ntfy's
+               Click header) -- useful for linking straight to the full
+               ranked list in the repo, since long-press/inline links
+               don't work reliably across all ntfy clients
     """
     if not NTFY_TOPIC:
         print(f"[notify skipped -- NTFY_TOPIC not set] {title}: {message}")
@@ -34,6 +42,10 @@ def send_alert(title: str, message: str, priority: str = "default", tags: list[s
     }
     if tags:
         headers["Tags"] = ",".join(tags)
+    if markdown:
+        headers["Markdown"] = "yes"
+    if click_url:
+        headers["Click"] = click_url
 
     req = urllib.request.Request(
         url,
@@ -51,9 +63,11 @@ def send_alert(title: str, message: str, priority: str = "default", tags: list[s
 
 def send_batch_alert(matches: list[dict]):
     """
+    LEGACY / not used by the current pipeline -- compose_alerts.py builds
+    its own richer, markdown-formatted message directly. Kept here in case
+    it's useful for a simple one-off script later.
+
     matches: list of {"symbol": str, "reasons": list[str]}
-    Groups everything into one push notification instead of spamming one
-    per ticker, since a single scan run can surface many matches at once.
     """
     if not matches:
         return

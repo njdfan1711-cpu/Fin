@@ -12,14 +12,23 @@ actually worth pushing to your phone:
   2. Qualifying tickers are ranked by a confidence score: category count
      first (agreement across more independent signal types matters most),
      then combined signal strength as a tiebreaker.
-  3. Already-recently-alerted tickers are skipped (alert_log.py) so the
-     same names don't repeat every 30 minutes.
+  3. Tickers already pushed recently are NOT excluded -- a stock that
+     keeps qualifying stays visible every cycle rather than disappearing
+     just because you've seen it before (missing it once shouldn't mean
+     missing it entirely). Instead, still-qualifying repeats are shown
+     plainly and newly-qualifying tickers get a \U0001F195 NEW tag so you can
+     scan for what's fresh at a glance.
   4. For the top TOP_N_ALERTS, fetches a live price and Finnhub's analyst
      consensus price target -- giving each alert an actual "why" and a
      defensible target, rather than a bare list of tickers.
   5. Sends ONE push with the top-ranked picks (push length is limited, so
      everything qualifying -- not just the top N -- gets written to
      latest_alerts.md in the repo for full reference).
+  6. Attaches sector-level context (e.g. "tariff news affecting Steel")
+     to any ticker whose industry matches an active sector alert from
+     news_scan.py. This is ANNOTATION ONLY -- it never counts toward the
+     MIN_SIGNAL_CATEGORIES confluence requirement, so a broad macro
+     headline can't inflate confidence on its own.
 
 Run this as the last step of the intraday workflow, after technicals_scan
 and news_scan. Fundamentals/short-interest signals recorded earlier that
@@ -27,8 +36,10 @@ day remain active per their validity window and get pulled in here too.
 """
 
 import json
+import re
 import sys
 import urllib.request
+from datetime import datetime, timezone
 
 import yfinance as yf
 
@@ -36,8 +47,15 @@ from config import (
     FINNHUB_API_KEY,
     ELIGIBLE_FILE,
     MIN_SIGNAL_CATEGORIES,
+    MIN_QUALIFYING_STRENGTH,
+    STRONG_TIER_MIN_CATEGORIES,
+    STRONG_TIER_STRENGTH_FOR_TWO,
     TOP_N_ALERTS,
     LATEST_ALERTS_FILE,
+    TICKER_SECTORS_FILE,
+    SECTOR_ALERTS_FILE,
+    SECTOR_ALERT_VALIDITY_HOURS,
+    REPO_URL,
 )
 from signals_store import get_active_signals
 from alert_log import was_recently_alerted, mark_alerted
@@ -50,12 +68,34 @@ CATEGORY_LABELS = {
     "short_interest": "Short Interest",
 }
 
+# "caution" is a distinct pseudo-category: risk/warning flags (overextended
+# above the 50-day MA, unhealthy market regime, unconfirmed breakout volume)
+# that should never count toward the confluence requirement -- they're
+# context to weigh, not confirmation of an opportunity.
+CAUTION_CATEGORY = "caution"
+
 
 def score_ticker(categories: dict) -> tuple:
-    """Returns (category_count, total_strength) -- used as a sort key."""
-    count = len(categories)
-    total_strength = sum(info.get("strength", 0.5) for info in categories.values())
+    """Returns (category_count, total_strength) -- used as a sort key.
+    Excludes the caution category entirely from both count and strength."""
+    real_categories = {k: v for k, v in categories.items() if k != CAUTION_CATEGORY}
+    count = len(real_categories)
+    total_strength = sum(info.get("strength", 0.5) for info in real_categories.values())
     return (count, total_strength)
+
+
+def conviction_tier(category_count: int, total_strength: float) -> str:
+    """
+    'Strong' requires either genuine agreement across 3+ independent
+    categories, OR just 2 categories but with strength high enough that
+    it's clearly not a borderline case. Anything else that still clears
+    the qualifying bar is 'Moderate' -- worth a look, but less conviction.
+    """
+    if category_count >= STRONG_TIER_MIN_CATEGORIES:
+        return "STRONG"
+    if category_count == 2 and total_strength >= STRONG_TIER_STRENGTH_FOR_TWO:
+        return "STRONG"
+    return "MODERATE"
 
 
 def fetch_price_target(symbol: str):
@@ -110,35 +150,142 @@ def load_company_names() -> dict:
     return names
 
 
-def format_ticker_line(rank: int, symbol: str, name: str, categories: dict, price, target) -> str:
-    reason_bits = []
-    for cat, info in categories.items():
-        label = CATEGORY_LABELS.get(cat, cat)
-        reason_bits.append(f"{label}: {info['detail']}")
-    reasons_text = " | ".join(reason_bits)
+# Strips common "-Common Stock", "Class A Common Shares", etc. suffixes
+# from Nasdaq/NYSE security names for display -- just a display cleanup,
+# original names stay untouched everywhere else (matching, storage).
+_NAME_SUFFIX_PATTERNS = [
+    re.compile(r",?\s*-?\s*Class\s+[A-Z]\s+Common\s+(Stock|Shares)\b.*$", re.IGNORECASE),
+    re.compile(r",?\s*-?\s*Common\s+(Stock|Shares)\b.*$", re.IGNORECASE),
+    re.compile(r",?\s*-?\s*Ordinary\s+Shares\b.*$", re.IGNORECASE),
+]
 
+
+def clean_company_name(name: str) -> str:
+    if not name:
+        return name
+    cleaned = name
+    for pattern in _NAME_SUFFIX_PATTERNS:
+        cleaned = pattern.sub("", cleaned).strip()
+    return cleaned if cleaned else name
+
+
+def load_sectors() -> dict:
+    try:
+        with open(TICKER_SECTORS_FILE) as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {}
+
+
+def load_active_sector_alerts() -> list[dict]:
+    """Returns sector alerts still within their validity window."""
+    try:
+        with open(SECTOR_ALERTS_FILE) as f:
+            alerts = json.load(f)
+    except FileNotFoundError:
+        return []
+
+    now = datetime.now(timezone.utc)
+    active = []
+    for keyword, info in alerts.items():
+        try:
+            ts = datetime.fromisoformat(info["timestamp"])
+        except (KeyError, ValueError):
+            continue
+        age_hours = (now - ts).total_seconds() / 3600
+        if age_hours <= SECTOR_ALERT_VALIDITY_HOURS:
+            active.append(info)
+    return active
+
+
+def find_sector_annotation(industry: str, active_sector_alerts: list[dict]) -> str | None:
+    """
+    Annotation-only match: if this ticker's industry overlaps with an
+    active sector alert's industry list, return a short context line.
+    This is NEVER counted toward MIN_SIGNAL_CATEGORIES -- purely context.
+    """
+    if not industry:
+        return None
+    for alert in active_sector_alerts:
+        for target_industry in alert.get("industries", []):
+            if target_industry.lower() in industry.lower():
+                return f"[{alert.get('source', '')}] {alert.get('detail', '')}"
+    return None
+
+
+def format_ticker_line(rank: int, symbol: str, name: str, categories: dict,
+                        price, target, sector_note: str | None = None,
+                        is_new: bool = False) -> str:
+    """
+    Markdown-formatted: bold ticker/price header line, reasons as a clean
+    indented bullet list underneath instead of one long comma/pipe string.
+    """
     price_bit = ""
     if price and target:
         upside = ((target - price) / price) * 100
         direction = "upside" if upside >= 0 else "downside"
-        price_bit = f" | ${price:.2f} -> target ${target:.2f} ({upside:+.1f}% {direction})"
+        price_bit = f" — ${price:.2f} → target ${target:.2f} ({upside:+.1f}% {direction})"
     elif price:
-        price_bit = f" | ${price:.2f}"
+        price_bit = f" — ${price:.2f}"
 
-    display_name = name if name else symbol
-    header = f"{display_name} ({symbol}) #{rank}: {len(categories)} signals{price_bit}"
-    return f"{header}\n  {reasons_text}"
+    display_name = clean_company_name(name) if name else symbol
+    new_tag = "\U0001F195 " if is_new else ""  # 🆕
+
+    count, strength = score_ticker(categories)
+    tier = conviction_tier(count, strength)
+    tier_tag = "\U0001F525 STRONG" if tier == "STRONG" else "\u2713 Moderate"  # 🔥 / ✓
+
+    header = f"{new_tag}**#{rank} {symbol}** [{tier_tag}] _{display_name}_{price_bit}"
+
+    bullets = []
+    for cat, info in categories.items():
+        if cat == CAUTION_CATEGORY:
+            continue  # shown separately below with a warning marker
+        label = CATEGORY_LABELS.get(cat, cat)
+        bullets.append(f"  • **{label}:** {info['detail']}")
+    if CAUTION_CATEGORY in categories:
+        bullets.append(f"  • \u26A0\uFE0F **Caution:** {categories[CAUTION_CATEGORY]['detail']}")
+    if sector_note:
+        bullets.append(f"  • **Sector:** {sector_note}")
+
+    return header + "\n" + "\n".join(bullets)
+
+
+def truncate_to_whole_entries(entries: list[str], limit: int) -> tuple[str, int]:
+    """
+    Joins entries with blank-line separators, but stops adding whole
+    entries once the next one would exceed `limit` -- so the message never
+    cuts a ticker off mid-way through. Returns (message, entries_included).
+    """
+    included = []
+    total_len = 0
+    separator_len = 2  # "\n\n"
+    for entry in entries:
+        added_len = len(entry) + (separator_len if included else 0)
+        if total_len + added_len > limit:
+            break
+        included.append(entry)
+        total_len += added_len
+    return "\n\n".join(included), len(included)
 
 
 def main():
     active = get_active_signals()
     company_names = load_company_names()
+    sectors = load_sectors()
+    active_sector_alerts = load_active_sector_alerts()
+    print(f"{len(active_sector_alerts)} active sector-level alert(s) available for annotation.",
+          file=sys.stderr)
 
-    # Require confluence
-    qualifying = {
-        sym: cats for sym, cats in active.items()
-        if len(cats) >= MIN_SIGNAL_CATEGORIES
-    }
+    # Require confluence -- excludes the caution category so a single real
+    # signal plus a caution flag can't incorrectly count as "2" -- AND a
+    # minimum combined strength, so two borderline/weak signals don't
+    # qualify as easily as two strong ones.
+    qualifying = {}
+    for sym, cats in active.items():
+        count, strength = score_ticker(cats)
+        if count >= MIN_SIGNAL_CATEGORIES and strength >= MIN_QUALIFYING_STRENGTH:
+            qualifying[sym] = cats
     print(f"{len(active)} ticker(s) have active signals; "
           f"{len(qualifying)} qualify with {MIN_SIGNAL_CATEGORIES}+ categories.", file=sys.stderr)
 
@@ -154,21 +301,30 @@ def main():
         f.write(f"# Latest Alerts ({len(ranked)} qualifying tickers)\n\n")
         for rank, sym, cats in ranked_with_rank:
             count, strength = score_ticker(cats)
-            name = company_names.get(sym, "")
+            name = clean_company_name(company_names.get(sym, ""))
             label = f"{name} ({sym})" if name else sym
-            f.write(f"## {rank}. {label} -- {count} signals, strength {strength:.2f}\n")
+            f.write(f"## {rank}. {label} -- [{conviction_tier(count, strength)}] "
+                    f"{count} signals, strength {strength:.2f}\n")
             for cat, info in cats.items():
+                if cat == CAUTION_CATEGORY:
+                    continue  # written separately below, clearly marked
                 f.write(f"- **{CATEGORY_LABELS.get(cat, cat)}**: {info['detail']}\n")
+            if CAUTION_CATEGORY in cats:
+                f.write(f"- \u26A0\uFE0F **CAUTION**: {cats[CAUTION_CATEGORY]['detail']}\n")
+            sector_note = find_sector_annotation(sectors.get(sym, ""), active_sector_alerts)
+            if sector_note:
+                f.write(f"- **Sector note**: {sector_note}\n")
             f.write("\n")
 
-    # Filter out recently-alerted, then cap to top N for the actual push
-    fresh_ranked = [(rank, sym, cats) for rank, sym, cats in ranked_with_rank
-                     if not was_recently_alerted(sym)]
-    push_list = fresh_ranked[:TOP_N_ALERTS]
+    # Tag (not filter) tickers that were already pushed recently, so you
+    # can quickly scan for what's fresh vs. what's been holding steady --
+    # but nothing gets DROPPED from the push just because you've seen it
+    # before. A stock stays visible for as long as it keeps qualifying;
+    # it only disappears once it actually stops meeting the criteria.
+    push_list = ranked_with_rank[:TOP_N_ALERTS]
 
     if not push_list:
-        print("Nothing new to push (either no qualifying tickers, or all "
-              "recently alerted already).", file=sys.stderr)
+        print("Nothing qualifies right now.", file=sys.stderr)
         return
 
     symbols_to_price = [sym for _, sym, _ in push_list]
@@ -179,20 +335,34 @@ def main():
         price = prices.get(sym)
         target = fetch_price_target(sym)
         name = company_names.get(sym, "")
-        lines.append(format_ticker_line(rank, sym, name, cats, price, target))
+        sector_note = find_sector_annotation(sectors.get(sym, ""), active_sector_alerts)
+        is_new = not was_recently_alerted(sym)
+        lines.append(format_ticker_line(rank, sym, name, cats, price, target, sector_note, is_new))
 
-    message = "\n\n".join(lines)
-    if len(message) > 3800:
-        message = message[:3800] + "\n...(see latest_alerts.md in the repo for the rest)"
+    message, included_count = truncate_to_whole_entries(lines, 3800)
+    if included_count < len(lines):
+        message += f"\n\n_...+{len(lines) - included_count} more, see full list link above_"
 
-    title = f"{len(push_list)} high-confidence pick(s)"
-    if len(fresh_ranked) > len(push_list):
-        title += f" (+{len(fresh_ranked) - len(push_list)} more in repo)"
+    new_count = sum(1 for rank, sym, cats in push_list if not was_recently_alerted(sym))
+    strong_count = sum(1 for rank, sym, cats in push_list
+                        if conviction_tier(*score_ticker(cats)) == "STRONG")
+    # NOTE: no emoji in the title -- it becomes an HTTP header, and Python's
+    # urllib encodes headers as Latin-1, which crashes on characters like 🔥.
+    # Emoji are fine in the message BODY (sent as UTF-8), just not headers.
+    title = f"{len(push_list)} pick(s) ({strong_count} strong)"
+    if new_count:
+        title += f", {new_count} new"
+    if len(ranked_with_rank) > len(push_list):
+        title += f" +{len(ranked_with_rank) - len(push_list)} more in repo"
 
-    send_alert(title, message, priority="high", tags=["chart_with_upwards_trend"])
-    mark_alerted(symbols_to_price)
+    click_url = f"{REPO_URL}/blob/main/{LATEST_ALERTS_FILE}" if REPO_URL else None
 
-    print(f"\nPushed {len(push_list)} ticker(s). "
+    send_alert(title, message, priority="high", tags=["chart_with_upwards_trend"],
+               markdown=True, click_url=click_url)
+    mark_alerted([sym for _, sym, _ in push_list])
+
+    print(f"\nPushed {included_count}/{len(push_list)} ticker(s) (fit within message limit), "
+          f"{new_count} newly qualifying. "
           f"Full ranked list ({len(ranked)} total) written to {LATEST_ALERTS_FILE}.", file=sys.stderr)
 
 
