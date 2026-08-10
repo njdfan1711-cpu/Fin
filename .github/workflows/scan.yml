@@ -56,6 +56,7 @@ jobs:
         run: |
           git config user.name "stock-scanner-bot"
           git config user.email "actions@users.noreply.github.com"
+          git config merge.signals-state.driver "python3 merge_signals_state.py %O %A %B"
           for f in universe.csv pending_ipos.json delisting_risk.json eligible.csv fundamentals_signals.json signals_state.json; do
             if [ -f "$f" ]; then
               git add "$f"
@@ -63,5 +64,15 @@ jobs:
           done
           git diff --staged --quiet && echo "No changes to commit" && exit 0
           git commit -m "Daily scan update [automated]"
-          git pull --rebase origin main
-          git push
+          for attempt in 1 2 3 4 5; do
+            if git pull --rebase origin main && git push; then
+              break
+            fi
+            echo "Push/rebase attempt $attempt failed, retrying..."
+            git rebase --abort 2>/dev/null || true
+            sleep $((attempt * 5))
+            if [ "$attempt" = "5" ]; then
+              echo "::error::Could not push signal state after 5 attempts"
+              exit 1
+            fi
+          done
