@@ -142,17 +142,55 @@ def fetch_all_articles() -> list[dict]:
 def build_matchers(eligible: list[dict]) -> dict:
     """
     {symbol: compiled_regex} -- matches on the company name's first
-    distinctive word OR the ticker symbol as a standalone word, to cut
-    down false positives from short tickers matching common words.
+    DISTINCTIVE word OR the ticker symbol as a standalone word.
+
+    Two false-positive traps this guards against:
+
+    1. Generic leading words. Many legal names start with "The" (The
+       Chefs' Warehouse, The Vita Coco Company, The Baldwin Insurance
+       Group, ...) or other boilerplate (Inc, Corp, Group, Company, ...).
+       Using that as the match keyword makes the pattern fire on nearly
+       any article, since words like "the" appear everywhere. We skip
+       leading stopwords/corporate-suffix words and use the first
+       genuinely distinctive word instead. If nothing distinctive is
+       left, we fall back to symbol-only matching for that ticker.
+
+    2. Case-insensitive ticker collisions with common English words.
+       Tickers like ALL (Allstate), ARE (Alexandria Real Estate), CAT
+       (Caterpillar), GO (Grocery Outlet), BE (Bloom Energy), A
+       (Agilent) are themselves ordinary words. Matching them
+       case-insensitively means "all", "are", "cat", "go", "be", "a"
+       in any article count as a mention. Real ticker mentions in
+       financial news/RSS are capitalized, so the ticker half of the
+       pattern is matched case-SENSITIVELY (only the company-name half
+       stays case-insensitive), eliminating this class of false hit.
     """
+    STOPWORDS = {
+        "the", "a", "an", "inc", "incorporated", "corp", "corporation",
+        "company", "co", "group", "holding", "holdings", "ltd", "limited",
+        "plc", "llc", "class", "common", "stock",
+    }
+
     matchers = {}
     for row in eligible:
         symbol = row["symbol"]
         name = row["name"]
-        first_word = name.split()[0] if name else symbol
-        pattern = rf"\b({re.escape(first_word)}|{re.escape(symbol)})\b"
+
+        words = re.findall(r"[A-Za-z']+", name)
+        first_word = next((w for w in words if w.lower() not in STOPWORDS), None)
+
+        symbol_alt = re.escape(symbol)
+        if first_word:
+            # Name half stays case-insensitive (scoped inline flag);
+            # symbol half is case-sensitive by default.
+            pattern = rf"\b((?i:{re.escape(first_word)})|{symbol_alt})\b"
+        else:
+            # No distinctive name word (e.g. name is entirely generic) --
+            # match on the ticker only, case-sensitively.
+            pattern = rf"\b({symbol_alt})\b"
+
         try:
-            matchers[symbol] = re.compile(pattern, re.IGNORECASE)
+            matchers[symbol] = re.compile(pattern)
         except re.error:
             continue
     return matchers
