@@ -12,23 +12,63 @@ counts an earnings beat if it was actually reported within the last
 EARNINGS_RECENCY_DAYS (see config.py) -- i.e. it has to be genuinely
 recent news, not old news still sitting in the data.
 
+PERFORMANCE FIX (this version): the earnings-surprise check used to make
+one Finnhub /stock/earnings call PER eligible ticker -- at 2,442 eligible
+tickers that's ~2,442 calls, roughly half of this script's ~89-minute
+runtime on its own. Finnhub's /calendar/earnings endpoint returns EVERY
+company that reported (or is scheduled to report) in a date range in ONE
+call, so this version fetches the whole recency window once and matches
+it locally against eligible.csv -- same recency window, same surprise-%
+threshold, same signal quality, roughly half the API calls.
+
+NOTE ON ACCURACY: /calendar/earnings' "date" field is documented as the
+actual earnings release/announcement date. The old /stock/earnings
+"period" field used before was actually the fiscal quarter-END date, not
+the announcement date -- those can differ by several weeks, so the old
+recency check ("Nd ago") was silently measuring the wrong thing for most
+tickers. This version should be more accurate, not just faster.
+
+CACHING FIX (this version): the other half of this script's runtime --
+/stock/metric for revenue/EPS growth, the quality checklist, and the
+float proxy -- still has no bulk equivalent on Finnhub's free tier, so
+it's still one call per ticker. But that data only changes when a
+company actually reports, not daily, so each ticker's metrics are now
+cached (see METRICS_CACHE_FILE / METRICS_REFRESH_DAYS in config.py) and
+only re-fetched once stale. The FIRST run after this change still costs
+the full per-ticker pass -- every ticker starts with no cache entry, so
+everything is "stale." From the second run onward, only tickers whose
+cache has aged past METRICS_REFRESH_DAYS get a fresh call; everyone else
+reuses their cached findings (and still gets a fresh signal recorded
+today from that cached data -- caching the API call is not the same as
+skipping the day's signal, so confluence scoring stays continuous).
+
+If a fresh fetch fails (network hiccup, rate limit, etc.), the old cached
+value is kept AND the cache timestamp is NOT advanced -- so that ticker
+is retried on the next run rather than either losing its data for
+METRICS_REFRESH_DAYS or silently caching an empty result.
+
 Signals are RECORDED via signals_store.py, not pushed directly --
 compose_alerts.py decides what's push-worthy based on confluence across
 multiple signal categories.
 
-IMPORTANT: The 'metric' endpoint's exact field names (e.g. for YoY revenue
-growth) can vary/evolve on Finnhub's side. This script defensively checks
-a couple of plausible field name variants and skips gracefully if none are
-present -- search FINNHUB_KEY_CHECK below if you need to adjust these
-against a real response.
+IMPORTANT: Finnhub's exact field names (for both /calendar/earnings and
+the 'metric' endpoint) can vary/evolve on Finnhub's side. This script
+defensively checks a couple of plausible field name variants and skips
+gracefully if none are present -- search FINNHUB_KEY_CHECK below if you
+need to adjust these against a real response. I could not hit Finnhub's
+live API from the network-restricted sandbox this was written in, so
+watch the first real run's Actions log (the earnings-calendar record
+count printed near the top) to confirm it's returning real data before
+trusting it long-term.
 """
 
 import csv
 import json
+import os
 import sys
 import time
 import urllib.request
-from datetime import date, datetime
+from datetime import date, datetime, timedelta, timezone
 
 from config import (
     ELIGIBLE_FILE,
@@ -44,6 +84,8 @@ from config import (
     MIN_QUALITY_CHECKS_PASSED,
     FUNDAMENTALS_SIGNALS_FILE,
     FLOAT_DATA_FILE,
+    METRICS_CACHE_FILE,
+    METRICS_REFRESH_DAYS,
 )
 from signals_store import record_signal
 
@@ -63,58 +105,135 @@ def _get(url: str) -> dict:
         return json.loads(resp.read().decode("utf-8"))
 
 
-def check_earnings_surprise(symbol: str):
-    """Returns (detail_str, strength) or None. Only counts RECENT beats."""
-    url = f"{BASE_URL}/stock/earnings?symbol={symbol}&token={FINNHUB_API_KEY}"
+def fetch_earnings_calendar(from_date: date, to_date: date) -> list[dict]:
+    """One bulk call covering every symbol reporting in the window --
+    replaces what used to be a /stock/earnings call per eligible ticker."""
+    url = (f"{BASE_URL}/calendar/earnings?from={from_date.isoformat()}"
+           f"&to={to_date.isoformat()}&token={FINNHUB_API_KEY}")
     try:
         data = _get(url)
-    except Exception:
-        return None
-    if not data:
-        return None
+    except Exception as e:
+        print(f"  [earnings calendar error] {e}", file=sys.stderr)
+        return []
 
-    latest = data[0]  # most recent quarter first
+    # FINNHUB_KEY_CHECK -- confirm this wrapper key against a real response.
+    records = data.get("earningsCalendar")
+    if records is None:
+        print(f"  [WARNING] Expected key 'earningsCalendar' not found in response "
+              f"(got top-level keys: {list(data.keys())}). Finnhub may have changed "
+              f"this endpoint's shape -- update fetch_earnings_calendar().",
+              file=sys.stderr)
+        return []
+    return records
 
-    # Recency check -- this is the actual bug fix. 'period' is the
-    # reporting period date, formatted YYYY-MM-DD in Finnhub's docs.
-    period_str = latest.get("period")
-    if not period_str:
-        return None
+
+def build_earnings_surprise_map(eligible: set) -> dict:
+    """
+    Returns {symbol: (detail, strength)} for eligible tickers with a
+    qualifying, sufficiently-recent earnings beat. Replaces the old
+    per-ticker check_earnings_surprise() loop with one bulk calendar call.
+    """
+    today = date.today()
+    from_date = today - timedelta(days=EARNINGS_RECENCY_DAYS)
+    records = fetch_earnings_calendar(from_date, today)
+    print(f"  Earnings calendar: {len(records)} report(s) in the last "
+          f"{EARNINGS_RECENCY_DAYS} day(s) (all symbols, before filtering "
+          f"to your eligible universe)", file=sys.stderr)
+
+    results = {}
+    skipped_no_estimate = 0
+    for rec in records:
+        symbol = rec.get("symbol")
+        if symbol not in eligible:
+            continue
+
+        # FINNHUB_KEY_CHECK -- confirm these field names against a real
+        # response: date (announcement date), epsActual, epsEstimate.
+        period_str = rec.get("date")
+        actual = rec.get("epsActual")
+        estimate = rec.get("epsEstimate")
+        if not period_str:
+            continue
+        if actual is None or estimate in (None, 0):
+            skipped_no_estimate += 1
+            continue
+
+        try:
+            period_date = datetime.strptime(period_str, "%Y-%m-%d").date()
+        except ValueError:
+            continue
+
+        # The calendar can include near-future SCHEDULED reports as well
+        # as past ones -- only count ones that have actually happened and
+        # fall within the recency window.
+        days_ago = (today - period_date).days
+        if days_ago < 0 or days_ago > EARNINGS_RECENCY_DAYS:
+            continue
+
+        surprise_pct = ((actual - estimate) / abs(estimate)) * 100
+        if surprise_pct >= EARNINGS_SURPRISE_PCT:
+            detail = f"Earnings beat by {surprise_pct:.1f}% ({days_ago}d ago)"
+            strength = min(surprise_pct / 20, 1.0)
+            # A symbol shouldn't appear twice inside a 5-6 day window in
+            # practice, but keep the stronger reading defensively if it does.
+            if symbol not in results or strength > results[symbol][1]:
+                results[symbol] = (detail, strength)
+
+    if skipped_no_estimate:
+        print(f"  ({skipped_no_estimate} reported symbol(s) skipped -- no analyst "
+              f"estimate on file to compare against)", file=sys.stderr)
+
+    return results
+
+
+def load_metrics_cache() -> dict:
+    if os.path.exists(METRICS_CACHE_FILE):
+        try:
+            with open(METRICS_CACHE_FILE) as f:
+                return json.load(f)
+        except (json.JSONDecodeError, OSError):
+            return {}
+    return {}
+
+
+def save_metrics_cache(cache: dict):
+    with open(METRICS_CACHE_FILE, "w") as f:
+        json.dump(cache, f, indent=2)
+
+
+def is_cache_stale(entry: dict | None) -> bool:
+    """True if there's no cached entry, or it's older than
+    METRICS_REFRESH_DAYS. Malformed entries are treated as stale rather
+    than crashing the run."""
+    if not entry:
+        return True
     try:
-        period_date = datetime.strptime(period_str, "%Y-%m-%d").date()
-    except ValueError:
-        return None
-
-    days_ago = (date.today() - period_date).days
-    if days_ago < 0 or days_ago > EARNINGS_RECENCY_DAYS:
-        return None  # too old (or oddly in the future) -- not "news" anymore
-
-    actual = latest.get("actual")
-    estimate = latest.get("estimate")
-    if actual is None or estimate in (None, 0):
-        return None
-    surprise_pct = ((actual - estimate) / abs(estimate)) * 100
-
-    if surprise_pct >= EARNINGS_SURPRISE_PCT:
-        detail = f"Earnings beat by {surprise_pct:.1f}% ({days_ago}d ago)"
-        strength = min(surprise_pct / 20, 1.0)  # bigger beats rank higher
-        return (detail, strength)
-    return None
+        checked_at = datetime.fromisoformat(entry["checked_at"])
+    except (KeyError, ValueError, TypeError):
+        return True
+    age_days = (datetime.now(timezone.utc) - checked_at).total_seconds() / 86400
+    return age_days >= METRICS_REFRESH_DAYS
 
 
 def check_revenue_growth(symbol: str):
     """
-    Returns (findings, share_outstanding) where findings is the existing
-    list of (detail, strength) tuples and share_outstanding is a float
-    (millions) or None. share_outstanding comes from the SAME 'metric'
-    call already being made here -- feeds the separate momentum/low-float
-    scan (see config.py) at zero extra API cost.
+    Returns (findings, share_outstanding) on a successful API call, where
+    findings is the existing list of [detail, strength] pairs and
+    share_outstanding is a float (millions) or None. share_outstanding
+    comes from the SAME 'metric' call already being made here -- feeds
+    the separate momentum/low-float scan (see config.py) at zero extra
+    API cost.
+
+    Returns None (not a tuple) if the API call itself failed, so the
+    caller can tell "fetched successfully, nothing qualified" apart from
+    "fetch failed, don't trust/cache this" and act accordingly (keep the
+    old cached value and retry next run instead of caching an empty result).
     """
     url = f"{BASE_URL}/stock/metric?symbol={symbol}&metric=all&token={FINNHUB_API_KEY}"
     try:
         data = _get(url)
     except Exception:
-        return [], None
+        return None
     metric = data.get("metric", {})
     findings = []
 
@@ -178,26 +297,67 @@ def main():
         return
 
     symbols = load_eligible()
-    print(f"Running fundamentals scan on {len(symbols)} eligible tickers "
-          f"(~{len(symbols) * 2 / CALLS_PER_MINUTE:.0f} min expected)...", file=sys.stderr)
+    eligible_set = set(symbols)
+    metrics_cache = load_metrics_cache()
+    stale_count = sum(1 for s in symbols if is_cache_stale(metrics_cache.get(s)))
+    print(f"Running fundamentals scan on {len(symbols)} eligible tickers -- "
+          f"{stale_count} need a fresh /stock/metric call this run "
+          f"(~{stale_count / CALLS_PER_MINUTE:.0f} min expected), "
+          f"{len(symbols) - stale_count} served from cache, "
+          f"plus one bulk earnings-calendar call.", file=sys.stderr)
+
+    # One bulk call for earnings surprises across the whole eligible
+    # universe, instead of one call per ticker.
+    earnings_map = build_earnings_surprise_map(eligible_set)
+    print(f"  {len(earnings_map)} eligible ticker(s) have a qualifying recent "
+          f"earnings beat.", file=sys.stderr)
 
     signals = {}
     total_signals = 0
     float_data = {}
+    fresh_calls = 0
+    served_from_cache = 0
+    fetch_failures = 0
 
     for i, symbol in enumerate(symbols, start=1):
         details = []
         strengths = []
 
-        r1 = check_earnings_surprise(symbol)
-        time.sleep(SLEEP_BETWEEN_CALLS)
+        r1 = earnings_map.get(symbol)
         if r1:
             details.append(r1[0])
             strengths.append(r1[1])
 
-        r2, share_outstanding = check_revenue_growth(symbol)
-        time.sleep(SLEEP_BETWEEN_CALLS)
-        for detail, strength in r2:
+        cache_entry = metrics_cache.get(symbol)
+        if is_cache_stale(cache_entry):
+            result = check_revenue_growth(symbol)
+            time.sleep(SLEEP_BETWEEN_CALLS)
+            fresh_calls += 1
+            if result is None:
+                # Fetch failed -- reuse the old cached value if there is
+                # one (without advancing its timestamp, so it's retried
+                # next run), otherwise treat as "nothing today" without
+                # writing a cache entry, so it's attempted fresh again
+                # tomorrow rather than caching a false empty result.
+                fetch_failures += 1
+                if cache_entry:
+                    findings = cache_entry.get("findings", [])
+                    share_outstanding = cache_entry.get("share_outstanding")
+                else:
+                    findings, share_outstanding = [], None
+            else:
+                findings, share_outstanding = result
+                metrics_cache[symbol] = {
+                    "checked_at": datetime.now(timezone.utc).isoformat(),
+                    "findings": findings,
+                    "share_outstanding": share_outstanding,
+                }
+        else:
+            served_from_cache += 1
+            findings = cache_entry.get("findings", [])
+            share_outstanding = cache_entry.get("share_outstanding")
+
+        for detail, strength in findings:
             details.append(detail)
             strengths.append(strength)
         if share_outstanding is not None:
@@ -206,6 +366,10 @@ def main():
         if details:
             # Combine into ONE fundamentals-category signal so a second
             # finding doesn't silently overwrite the first in the store.
+            # Recorded every run regardless of whether today's metrics
+            # came from a fresh call or the cache, so the signal doesn't
+            # go stale/expire in signals_store just because the underlying
+            # API call was skipped today.
             combined_detail = "; ".join(details)
             combined_strength = max(strengths)
             record_signal(symbol, "fundamentals", combined_detail, strength=combined_strength)
@@ -214,6 +378,11 @@ def main():
 
         if i % 100 == 0:
             print(f"  ...{i}/{len(symbols)} checked", file=sys.stderr)
+
+    # Drop cache entries for tickers no longer in the eligible universe,
+    # so this file doesn't grow forever as the universe turns over.
+    metrics_cache = {s: v for s, v in metrics_cache.items() if s in eligible_set}
+    save_metrics_cache(metrics_cache)
 
     with open(FUNDAMENTALS_SIGNALS_FILE, "w") as f:
         json.dump(signals, f, indent=2)
@@ -224,6 +393,9 @@ def main():
     print(f"\n{total_signals} fundamentals signal(s) recorded "
           f"(only earnings beats within the last {EARNINGS_RECENCY_DAYS} days count).",
           file=sys.stderr)
+    print(f"{fresh_calls} fresh /stock/metric call(s) made ({fetch_failures} failed and "
+          f"fell back to cached/empty data), {served_from_cache} ticker(s) served "
+          f"entirely from cache.", file=sys.stderr)
     print(f"{len(float_data)} share-outstanding value(s) written to {FLOAT_DATA_FILE} "
           f"for the momentum scan.", file=sys.stderr)
 

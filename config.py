@@ -47,6 +47,21 @@ MIN_NET_MARGIN_PCT = 10.0         # simple stand-in for "healthy margins"
 MIN_QUALITY_CHECKS_PASSED = 3     # out of 4 (D/E, current ratio, ROE, margin) --
                                    # require most, not all, to be lenient on edge cases
 
+# --- Fundamentals metrics caching (Actions-minutes optimization) ---
+# The /stock/metric call (revenue/EPS growth, quality checklist, float
+# proxy) has no bulk equivalent on Finnhub's free tier, so it's still one
+# call per eligible ticker -- but revenue/EPS growth and balance-sheet
+# ratios only change when a company reports, not daily. Rather than
+# re-pull every ticker every single day, each ticker's metrics are cached
+# for METRICS_REFRESH_DAYS and only re-fetched once stale. This spreads
+# ~2,400 calls/day down to roughly (universe size / METRICS_REFRESH_DAYS)
+# calls/day on average once the cache is warm -- the first run after
+# adding this still costs the full per-ticker pass, since everything
+# starts stale.
+METRICS_CACHE_FILE = "metrics_cache.json"     # {symbol: {checked_at, findings, share_outstanding}}
+METRICS_REFRESH_DAYS = 5                       # roughly matches earnings-cycle cadence;
+                                                # lower = fresher data but more daily API cost
+
 # --- Short interest ---
 SHORT_INTEREST_SPIKE_PCT = 20.0   # % increase in short interest since last report
 
