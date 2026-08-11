@@ -43,6 +43,7 @@ from config import (
     MIN_NET_MARGIN_PCT,
     MIN_QUALITY_CHECKS_PASSED,
     FUNDAMENTALS_SIGNALS_FILE,
+    FLOAT_DATA_FILE,
 )
 from signals_store import record_signal
 
@@ -102,11 +103,18 @@ def check_earnings_surprise(symbol: str):
 
 
 def check_revenue_growth(symbol: str):
+    """
+    Returns (findings, share_outstanding) where findings is the existing
+    list of (detail, strength) tuples and share_outstanding is a float
+    (millions) or None. share_outstanding comes from the SAME 'metric'
+    call already being made here -- feeds the separate momentum/low-float
+    scan (see config.py) at zero extra API cost.
+    """
     url = f"{BASE_URL}/stock/metric?symbol={symbol}&metric=all&token={FINNHUB_API_KEY}"
     try:
         data = _get(url)
     except Exception:
-        return []
+        return [], None
     metric = data.get("metric", {})
     findings = []
 
@@ -157,7 +165,11 @@ def check_revenue_growth(symbol: str):
         strength = len(checks_passed) / 4.0
         findings.append((detail, strength))
 
-    return findings
+    # share_outstanding: Finnhub reports this in millions of shares.
+    # FINNHUB_KEY_CHECK -- confirm field name against a real response.
+    share_outstanding = metric.get("shareOutstanding")
+
+    return findings, share_outstanding
 
 
 def main():
@@ -171,6 +183,7 @@ def main():
 
     signals = {}
     total_signals = 0
+    float_data = {}
 
     for i, symbol in enumerate(symbols, start=1):
         details = []
@@ -182,11 +195,13 @@ def main():
             details.append(r1[0])
             strengths.append(r1[1])
 
-        r2 = check_revenue_growth(symbol)
+        r2, share_outstanding = check_revenue_growth(symbol)
         time.sleep(SLEEP_BETWEEN_CALLS)
         for detail, strength in r2:
             details.append(detail)
             strengths.append(strength)
+        if share_outstanding is not None:
+            float_data[symbol] = share_outstanding
 
         if details:
             # Combine into ONE fundamentals-category signal so a second
@@ -203,9 +218,14 @@ def main():
     with open(FUNDAMENTALS_SIGNALS_FILE, "w") as f:
         json.dump(signals, f, indent=2)
 
+    with open(FLOAT_DATA_FILE, "w") as f:
+        json.dump(float_data, f, indent=2)
+
     print(f"\n{total_signals} fundamentals signal(s) recorded "
           f"(only earnings beats within the last {EARNINGS_RECENCY_DAYS} days count).",
           file=sys.stderr)
+    print(f"{len(float_data)} share-outstanding value(s) written to {FLOAT_DATA_FILE} "
+          f"for the momentum scan.", file=sys.stderr)
 
 
 if __name__ == "__main__":

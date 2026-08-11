@@ -56,9 +56,12 @@ from config import (
     SECTOR_ALERTS_FILE,
     SECTOR_ALERT_VALIDITY_HOURS,
     REPO_URL,
+    MOMENTUM_MAX_PICKS_IN_PUSH,
+    MOMENTUM_PUSH_CHAR_BUDGET,
 )
 from signals_store import get_active_signals
 from alert_log import was_recently_alerted, mark_alerted
+from daily_pushes import record_push, prune_old_days
 from notify import send_alert
 
 CATEGORY_LABELS = {
@@ -74,11 +77,26 @@ CATEGORY_LABELS = {
 # context to weigh, not confirmation of an opportunity.
 CAUTION_CATEGORY = "caution"
 
+# "momentum" is a deliberately SEPARATE track (low-float + volume-spike
+# speculative setups -- see momentum_scan.py) with its own philosophy,
+# opposite to the quality/confluence approach used everywhere else. It's
+# excluded from the main scoring/STRONG-tier calculation for the same
+# reason CAUTION_CATEGORY is: blending it in would let a single
+# speculative volume spike plus one weak technical signal masquerade as a
+# "STRONG" quality-backed pick, which would quietly erode what that label
+# is supposed to mean. It gets its own separate section of the push
+# instead (see build_momentum_section below).
+MOMENTUM_CATEGORY = "momentum"
+
 
 def score_ticker(categories: dict) -> tuple:
     """Returns (category_count, total_strength) -- used as a sort key.
-    Excludes the caution category entirely from both count and strength."""
-    real_categories = {k: v for k, v in categories.items() if k != CAUTION_CATEGORY}
+    Excludes the caution AND momentum categories from both count and
+    strength -- neither should influence the main confluence score."""
+    real_categories = {
+        k: v for k, v in categories.items()
+        if k not in (CAUTION_CATEGORY, MOMENTUM_CATEGORY)
+    }
     count = len(real_categories)
     total_strength = sum(info.get("strength", 0.5) for info in real_categories.values())
     return (count, total_strength)
@@ -251,6 +269,46 @@ def format_ticker_line(rank: int, symbol: str, name: str, categories: dict,
     return header + "\n" + "\n".join(bullets)
 
 
+def format_momentum_line(rank: int, symbol: str, name: str, info: dict, price) -> str:
+    """
+    Deliberately distinct formatting from format_ticker_line -- no
+    STRONG/Moderate tier tag (that vocabulary belongs to the confluence
+    system), a different emoji, and an explicit risk note so this never
+    reads as equivalent conviction to a quality-backed pick.
+    """
+    price_bit = f" — ${price:.2f}" if price else ""
+    display_name = clean_company_name(name) if name else symbol
+    header = f"\u26A1 **#{rank} {symbol}**{price_bit} _{display_name}_"
+    bullet = f"  • {info['detail']}"
+    note = "  • _Speculative: low float + volume spike, not fundamentals-backed_"
+    return "\n".join([header, bullet, note])
+
+
+def build_momentum_section(momentum_ranked: list, company_names: dict, prices: dict,
+                            char_budget: int, max_picks: int) -> tuple[str, int, int]:
+    """
+    Builds the reserved speculative section. Returns (section_text,
+    included_count, total_qualifying_count). Capped by BOTH max_picks and
+    char_budget -- whichever is more restrictive wins -- so this section
+    can never grow large enough to threaten the main list's space.
+    """
+    if not momentum_ranked:
+        return "", 0, 0
+
+    capped = momentum_ranked[:max_picks]
+    lines = [
+        format_momentum_line(i, sym, company_names.get(sym, ""), info, prices.get(sym))
+        for i, (sym, info) in enumerate(capped, start=1)
+    ]
+    body, included = truncate_to_whole_entries(lines, char_budget)
+    if not body:
+        return "", 0, len(momentum_ranked)
+
+    section = "\u26A1 **Speculative / High-Risk** (low float + volume spike)\n\n" + body
+    return section, included, len(momentum_ranked)
+
+
+
 def truncate_to_whole_entries(entries: list[str], limit: int) -> tuple[str, int]:
     """
     Joins entries with blank-line separators, but stops adding whole
@@ -289,6 +347,21 @@ def main():
     print(f"{len(active)} ticker(s) have active signals; "
           f"{len(qualifying)} qualify with {MIN_SIGNAL_CATEGORIES}+ categories.", file=sys.stderr)
 
+    # Momentum/speculative track -- completely separate qualification,
+    # ranked purely by its own strength (there's only ever one category
+    # here, so category-count ranking wouldn't mean anything).
+    momentum_ranked = sorted(
+        (
+            (sym, cats[MOMENTUM_CATEGORY])
+            for sym, cats in active.items()
+            if MOMENTUM_CATEGORY in cats
+        ),
+        key=lambda kv: kv[1].get("strength", 0),
+        reverse=True,
+    )
+    print(f"{len(momentum_ranked)} ticker(s) qualify on the separate momentum/low-float track.",
+          file=sys.stderr)
+
     # Rank by confidence
     ranked = sorted(qualifying.items(), key=lambda kv: score_ticker(kv[1]), reverse=True)
     # Attach each ticker's overall rank now, so the push and the full
@@ -316,6 +389,18 @@ def main():
                 f.write(f"- **Sector note**: {sector_note}\n")
             f.write("\n")
 
+        if momentum_ranked:
+            f.write(f"\n# Speculative / High-Risk -- Low Float + Volume Spike "
+                     f"({len(momentum_ranked)} qualifying)\n\n")
+            f.write("_Separate track, not blended into the confluence scoring above. "
+                     "Low float (shares-outstanding proxy) + large price-confirmed volume "
+                     "spike -- see momentum_scan.py / config.py for thresholds._\n\n")
+            for rank, (sym, info) in enumerate(momentum_ranked, start=1):
+                name = clean_company_name(company_names.get(sym, ""))
+                label = f"{name} ({sym})" if name else sym
+                f.write(f"## {rank}. {label}\n")
+                f.write(f"- {info['detail']}\n\n")
+
     # Tag (not filter) tickers that were already pushed recently, so you
     # can quickly scan for what's fresh vs. what's been holding steady --
     # but nothing gets DROPPED from the push just because you've seen it
@@ -323,7 +408,7 @@ def main():
     # it only disappears once it actually stops meeting the criteria.
     push_list = ranked_with_rank[:TOP_N_ALERTS]
 
-    if not push_list:
+    if not push_list and not momentum_ranked:
         print("Nothing qualifies right now.", file=sys.stderr)
         return
 
@@ -357,13 +442,56 @@ def main():
 
     click_url = f"{REPO_URL}/blob/main/{LATEST_ALERTS_FILE}" if REPO_URL else None
 
-    send_alert(title, message, priority="high", tags=["chart_with_upwards_trend"],
-               markdown=True, click_url=click_url)
-    mark_alerted([sym for _, sym, _ in push_list])
+    if push_list:
+        send_alert(title, message, priority="high", tags=["chart_with_upwards_trend"],
+                   markdown=True, click_url=click_url)
+        mark_alerted([sym for _, sym, _ in push_list])
 
-    print(f"\nPushed {included_count}/{len(push_list)} ticker(s) (fit within message limit), "
-          f"{new_count} newly qualifying. "
-          f"Full ranked list ({len(ranked)} total) written to {LATEST_ALERTS_FILE}.", file=sys.stderr)
+        record_push([
+            {
+                "symbol": sym,
+                "tier": conviction_tier(*score_ticker(cats)),
+                "category_count": score_ticker(cats)[0],
+                "strength": score_ticker(cats)[1],
+                "categories": {
+                    cat: info["detail"] for cat, info in cats.items()
+                    if cat != CAUTION_CATEGORY
+                },
+            }
+            for _, sym, cats in push_list
+        ])
+        print(f"\nPushed {included_count}/{len(push_list)} ticker(s) (fit within message limit), "
+              f"{new_count} newly qualifying. "
+              f"Full ranked list ({len(ranked)} total) written to {LATEST_ALERTS_FILE}.", file=sys.stderr)
+    else:
+        print("No confluence picks qualify this cycle -- main push skipped "
+              "(momentum picks, if any, still send separately below).", file=sys.stderr)
+
+    # Speculative/momentum push -- SEPARATE notification, own fixed budget
+    # (not carved out of the main list's 3800 chars). Sent independently
+    # of whether the main list fired, so it's never at the mercy of how
+    # busy the main confluence list is on a given cycle -- which in
+    # practice is "full or nearly full" almost every cycle for this
+    # screener, so a shared/leftover budget would rarely show anything.
+    momentum_prices = fetch_current_prices([sym for sym, _ in momentum_ranked[:MOMENTUM_MAX_PICKS_IN_PUSH]])
+    momentum_section, momentum_included, momentum_total = build_momentum_section(
+        momentum_ranked, company_names, momentum_prices, MOMENTUM_PUSH_CHAR_BUDGET, MOMENTUM_MAX_PICKS_IN_PUSH
+    )
+    if momentum_section:
+        momentum_title = f"\u26A1 {momentum_included} speculative pick(s)"
+        if momentum_total > momentum_included:
+            momentum_title += f" +{momentum_total - momentum_included} more in repo"
+        if momentum_included < momentum_total:
+            momentum_section += f"\n\n_...+{momentum_total - momentum_included} more speculative, see repo_"
+        send_alert(momentum_title, momentum_section, priority="default",
+                   tags=["zap"], markdown=True, click_url=click_url)
+        print(f"Pushed {momentum_included}/{momentum_total} speculative ticker(s) as a separate alert.",
+              file=sys.stderr)
+    elif momentum_ranked:
+        print(f"{len(momentum_ranked)} speculative ticker(s) qualified but none fit "
+              f"the {MOMENTUM_PUSH_CHAR_BUDGET}-char budget -- see {LATEST_ALERTS_FILE}.", file=sys.stderr)
+
+    prune_old_days()
 
 
 if __name__ == "__main__":

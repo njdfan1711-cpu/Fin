@@ -57,6 +57,7 @@ SIGNAL_VALIDITY_HOURS = {
     "news": 8,             # catalyst relevance fades but not instantly
     "fundamentals": EARNINGS_RECENCY_DAYS * 24,
     "short_interest": 15 * 24,  # roughly matches FINRA's biweekly cadence
+    "momentum": 4,         # low-float volume-spike setups go cold fast, same window as technical
 }
 
 # --- Composite alert rules ---
@@ -83,6 +84,36 @@ STRONG_TIER_STRENGTH_FOR_TWO = 1.5   # OR just 2 categories, but with combined
 # top-ranked, so the same names don't spam every 30 min) ---
 DEDUPE_HOURS = 12
 
+# --- Momentum / speculative low-float scan -- a SEPARATE track from the
+# main confluence system, deliberately NOT blended into
+# MIN_SIGNAL_CATEGORIES/STRONG-tier scoring. This targets the opposite
+# philosophy from the rest of the screener on purpose: instead of
+# quality + multi-signal agreement, it looks for low-float stocks
+# showing an unusually large, price-confirmed volume spike -- the classic
+# setup behind fast, violent moves (and the mechanism paid "AI signal"
+# services like the Reddit-discussed "Oracle" platform are almost
+# certainly just repackaging). Kept in its own reserved section of the
+# push so it can never displace your main quality-backed picks.
+#
+# NOTE: Finnhub's free-tier 'shareOutstanding' field is used as a proxy
+# for float. True float (shares outstanding MINUS insider/locked-up
+# holdings) isn't available without a paid data source, so this will
+# occasionally be looser than a real float screener -- e.g. a company
+# with a large insider stake but low shares outstanding could slip in.
+# Documented tradeoff, not a bug; tighten MAX_SHARES_OUTSTANDING_MOMENTUM
+# further if that turns out to matter in practice.
+MAX_SHARES_OUTSTANDING_MOMENTUM = 15_000_000   # tight: genuinely low float/share count
+MOMENTUM_RELATIVE_VOLUME_TRIGGER = 5.0         # well above the main 2.5x technical trigger
+MOMENTUM_MIN_DAY_CHANGE_PCT = 8.0              # requires real price follow-through,
+                                                # not just volume noise with no direction
+MOMENTUM_MAX_PICKS_IN_PUSH = 3                 # hard cap on push entries, regardless of
+                                                # remaining character budget -- keeps this
+                                                # section small and skimmable by design
+MOMENTUM_PUSH_CHAR_BUDGET = 900                # reserved slice of the ~3800-char message,
+                                                # carved out AFTER the main list is built --
+                                                # main picks always get first claim on space
+FLOAT_DATA_FILE = "float_data.json"            # {symbol: shares_outstanding}, refreshed daily
+
 # --- Files ---
 UNIVERSE_FILE = "universe.csv"
 ELIGIBLE_FILE = "eligible.csv"
@@ -91,6 +122,8 @@ FUNDAMENTALS_SIGNALS_FILE = "fundamentals_signals.json"
 SIGNALS_STATE_FILE = "signals_state.json"      # rolling raw signals, all categories
 ALERT_LOG_FILE = "alert_log.json"              # composite-level "seen before" tracking
 LATEST_ALERTS_FILE = "latest_alerts.md"        # human-readable full ranked list
+DAILY_PUSHES_FILE = "daily_pushes.json"        # running log of actual pushes, per ET trading day
+DAILY_PUSHES_RETENTION_DAYS = 10               # how many days of history to keep
 
 # Auto-populated by the workflow (github.server_url + github.repository --
 # no secret needed, GitHub provides this automatically) so the push
