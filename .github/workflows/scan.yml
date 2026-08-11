@@ -57,7 +57,7 @@ jobs:
           git config user.name "stock-scanner-bot"
           git config user.email "actions@users.noreply.github.com"
           git config merge.signals-state.driver "python3 merge_signals_state.py %O %A %B"
-          for f in universe.csv pending_ipos.json delisting_risk.json eligible.csv fundamentals_signals.json signals_state.json; do
+          for f in universe.csv pending_ipos.json delisting_risk.json eligible.csv fundamentals_signals.json signals_state.json float_data.json metrics_cache.json; do
             if [ -f "$f" ]; then
               git add "$f"
             fi
