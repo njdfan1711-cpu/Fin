@@ -85,6 +85,12 @@ CATEGORY_LABELS = {
 # context to weigh, not confirmation of an opportunity.
 CAUTION_CATEGORY = "caution"
 
+# "earnings_quality" is a SEPARATE caution channel from CAUTION_CATEGORY
+# (owned by fundamentals_scan.py, not technicals_scan.py -- see that
+# script's docstring for why they can't share one category key). Same
+# treatment as CAUTION_CATEGORY: excluded from scoring, shown as a warning.
+EARNINGS_QUALITY_CATEGORY = "earnings_quality"
+
 # "momentum" is a deliberately SEPARATE track (low-float + volume-spike
 # speculative setups -- see momentum_scan.py) with its own philosophy,
 # opposite to the quality/confluence approach used everywhere else. It's
@@ -103,7 +109,7 @@ def score_ticker(categories: dict) -> tuple:
     strength -- neither should influence the main confluence score."""
     real_categories = {
         k: v for k, v in categories.items()
-        if k not in (CAUTION_CATEGORY, MOMENTUM_CATEGORY)
+        if k not in (CAUTION_CATEGORY, MOMENTUM_CATEGORY, EARNINGS_QUALITY_CATEGORY)
     }
     count = len(real_categories)
     total_strength = sum(info.get("strength", 0.5) for info in real_categories.values())
@@ -373,12 +379,14 @@ def format_ticker_line(rank: int, symbol: str, name: str, categories: dict,
 
     bullets = []
     for cat, info in categories.items():
-        if cat == CAUTION_CATEGORY:
-            continue  # shown separately below with a warning marker
+        if cat in (CAUTION_CATEGORY, EARNINGS_QUALITY_CATEGORY):
+            continue  # both shown separately below with a warning marker
         label = CATEGORY_LABELS.get(cat, cat)
         bullets.append(f"  • **{label}:** {info['detail']}")
     if CAUTION_CATEGORY in categories:
         bullets.append(f"  • \u26A0\uFE0F **Caution:** {categories[CAUTION_CATEGORY]['detail']}")
+    if EARNINGS_QUALITY_CATEGORY in categories:
+        bullets.append(f"  • \u26A0\uFE0F **Earnings quality:** {categories[EARNINGS_QUALITY_CATEGORY]['detail']}")
     if sector_note:
         bullets.append(f"  • **Sector:** {sector_note}")
     plan_bullet = format_trade_plan(compute_trade_plan(price, atr, STOP_ATR_MULT))

@@ -42,6 +42,17 @@ MAX_DEBT_TO_EQUITY = 1.0          # below this = low leverage
 MIN_CURRENT_RATIO = 1.5           # above this = can cover short-term liabilities
 MIN_ROE_PCT = 15.0                # above this = efficient use of capital
 MIN_NET_MARGIN_PCT = 10.0         # simple stand-in for "healthy margins"
+
+# Earnings-quality caution -- Finnhub's growth metrics (EPS/revenue YoY)
+# are documented as non-GAAP: adjusted to exclude one-time/unusual items.
+# That means a stock can show solid "EPS growth" from the same quarter it
+# posted a GAAP net loss from a large one-time charge (impairment,
+# write-down, restructuring) -- the adjusted number and the headline
+# number are answering different questions. netProfitMarginTTM/Annual is
+# GAAP-based, so a deeply negative margin here is a genuine red flag that
+# the adjusted-EPS growth signal alone won't catch.
+NET_MARGIN_CAUTION_PCT = -5.0      # below this = flag regardless of what the
+                                    # adjusted EPS/revenue growth figures say
                                    # (true peer-relative margin comparison would need
                                    # industry-average data we don't have a free source for)
 MIN_QUALITY_CHECKS_PASSED = 3     # out of 4 (D/E, current ratio, ROE, margin) --
@@ -71,6 +82,10 @@ SIGNAL_VALIDITY_HOURS = {
     "technical": 4,       # RSI/MA/volume -- intraday, goes stale fast
     "news": 8,             # catalyst relevance fades but not instantly
     "fundamentals": EARNINGS_RECENCY_DAYS * 24,
+    "earnings_quality": EARNINGS_RECENCY_DAYS * 24,  # same cadence as
+                                                      # fundamentals -- tied
+                                                      # to the same quarterly
+                                                      # metrics, same cache
     "short_interest": 15 * 24,  # roughly matches FINRA's biweekly cadence
     "momentum": 4,         # low-float volume-spike setups go cold fast, same window as technical
 }

@@ -81,6 +81,7 @@ from config import (
     MIN_CURRENT_RATIO,
     MIN_ROE_PCT,
     MIN_NET_MARGIN_PCT,
+    NET_MARGIN_CAUTION_PCT,
     MIN_QUALITY_CHECKS_PASSED,
     FUNDAMENTALS_SIGNALS_FILE,
     FLOAT_DATA_FILE,
@@ -217,12 +218,15 @@ def is_cache_stale(entry: dict | None) -> bool:
 
 def check_revenue_growth(symbol: str):
     """
-    Returns (findings, share_outstanding) on a successful API call, where
-    findings is the existing list of [detail, strength] pairs and
-    share_outstanding is a float (millions) or None. share_outstanding
-    comes from the SAME 'metric' call already being made here -- feeds
-    the separate momentum/low-float scan (see config.py) at zero extra
-    API cost.
+    Returns (findings, share_outstanding, caution) on a successful API
+    call, where findings is the existing list of [detail, strength] pairs,
+    share_outstanding is a float (millions) or None, and caution is an
+    (detail, strength) pair or None -- see NET_MARGIN_CAUTION_PCT in
+    config.py. Kept as a SEPARATE return value (recorded to its own
+    "earnings_quality" signal category, not merged into "fundamentals")
+    because technicals_scan.py already owns the "caution" category --
+    reusing that key here would mean whichever script runs later in the
+    day silently overwrites the other's caution note for that symbol.
 
     Returns None (not a tuple) if the API call itself failed, so the
     caller can tell "fetched successfully, nothing qualified" apart from
@@ -284,11 +288,30 @@ def check_revenue_growth(symbol: str):
         strength = len(checks_passed) / 4.0
         findings.append((detail, strength))
 
+    # Earnings-quality caution -- catches exactly the KHC case: adjusted
+    # EPS/revenue growth (Finnhub's growth metrics are non-GAAP) can look
+    # fine in the same quarter GAAP net margin gets wrecked by a one-time
+    # charge (impairment, write-down, restructuring). This is independent
+    # of whether eps_growth/revenue_growth qualified above -- a deeply
+    # negative margin is worth flagging on its own regardless of what the
+    # adjusted figures say. NOT scored (see MOMENTUM_CATEGORY/
+    # CAUTION_CATEGORY handling in compose_alerts.py) -- purely a warning
+    # shown alongside the pick.
+    caution = None
+    if net_margin is not None and net_margin < NET_MARGIN_CAUTION_PCT:
+        eps_note = f" despite {eps_growth:.1f}% adjusted EPS growth" if eps_growth and eps_growth > 0 else ""
+        caution = (
+            f"Net margin {net_margin:.1f}%{eps_note} -- Finnhub's growth "
+            f"figures are non-GAAP and can exclude one-time charges "
+            f"(impairments, write-downs); verify against the actual filing",
+            0.5,
+        )
+
     # share_outstanding: Finnhub reports this in millions of shares.
     # FINNHUB_KEY_CHECK -- confirm field name against a real response.
     share_outstanding = metric.get("shareOutstanding")
 
-    return findings, share_outstanding
+    return findings, share_outstanding, caution
 
 
 def main():
@@ -318,6 +341,7 @@ def main():
     fresh_calls = 0
     served_from_cache = 0
     fetch_failures = 0
+    earnings_quality_flags = 0
 
     for i, symbol in enumerate(symbols, start=1):
         details = []
@@ -343,19 +367,22 @@ def main():
                 if cache_entry:
                     findings = cache_entry.get("findings", [])
                     share_outstanding = cache_entry.get("share_outstanding")
+                    caution = cache_entry.get("caution")
                 else:
-                    findings, share_outstanding = [], None
+                    findings, share_outstanding, caution = [], None, None
             else:
-                findings, share_outstanding = result
+                findings, share_outstanding, caution = result
                 metrics_cache[symbol] = {
                     "checked_at": datetime.now(timezone.utc).isoformat(),
                     "findings": findings,
                     "share_outstanding": share_outstanding,
+                    "caution": caution,
                 }
         else:
             served_from_cache += 1
             findings = cache_entry.get("findings", [])
             share_outstanding = cache_entry.get("share_outstanding")
+            caution = cache_entry.get("caution")
 
         for detail, strength in findings:
             details.append(detail)
@@ -380,6 +407,15 @@ def main():
             signals[symbol] = details
             total_signals += len(details)
 
+        if caution:
+            # Separate category from "caution" (technicals_scan.py owns
+            # that one) -- see check_revenue_growth's docstring. Recorded
+            # every run for the same reason as the fundamentals signal
+            # above: shouldn't silently disappear just because today's
+            # metrics came from cache instead of a fresh call.
+            record_signal(symbol, "earnings_quality", caution[0], strength=caution[1])
+            earnings_quality_flags += 1
+
         if i % 100 == 0:
             print(f"  ...{i}/{len(symbols)} checked", file=sys.stderr)
 
@@ -397,6 +433,8 @@ def main():
     print(f"\n{total_signals} fundamentals signal(s) recorded "
           f"(only earnings beats within the last {EARNINGS_RECENCY_DAYS} days count).",
           file=sys.stderr)
+    print(f"{earnings_quality_flags} earnings-quality caution(s) recorded "
+          f"(net margin below {NET_MARGIN_CAUTION_PCT}%).", file=sys.stderr)
     print(f"{fresh_calls} fresh /stock/metric call(s) made ({fetch_failures} failed and "
           f"fell back to cached/empty data), {served_from_cache} ticker(s) served "
           f"entirely from cache.", file=sys.stderr)
