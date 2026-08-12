@@ -41,6 +41,7 @@ import sys
 import urllib.request
 from datetime import datetime, timezone
 
+import pandas as pd
 import yfinance as yf
 
 from config import (
@@ -58,6 +59,12 @@ from config import (
     REPO_URL,
     MOMENTUM_MAX_PICKS_IN_PUSH,
     MOMENTUM_PUSH_CHAR_BUDGET,
+    ATR_PERIOD,
+    ENTRY_BAND_ATR_MULT,
+    STOP_ATR_MULT,
+    MOMENTUM_STOP_ATR_MULT,
+    REWARD_RISK_RATIO,
+    DEFAULT_POSITION_SIZE_USD,
 )
 from signals_store import get_active_signals
 from alert_log import was_recently_alerted, mark_alerted
@@ -129,31 +136,105 @@ def fetch_price_target(symbol: str):
         return None
 
 
-def fetch_current_prices(symbols: list[str]) -> dict:
-    """Live-ish prices for just the shortlist -- cheap since it's a small batch."""
+def compute_atr(df: pd.DataFrame, period: int = ATR_PERIOD) -> float | None:
+    """Standard ATR: rolling mean of true range over `period` daily bars.
+    Returns None if there isn't enough history to fill the window."""
+    if len(df) <= period:
+        return None
+    high, low, close = df["High"], df["Low"], df["Close"]
+    prev_close = close.shift(1)
+    true_range = pd.concat([
+        high - low,
+        (high - prev_close).abs(),
+        (low - prev_close).abs(),
+    ], axis=1).max(axis=1)
+    atr = true_range.rolling(period).mean().iloc[-1]
+    return float(atr) if pd.notna(atr) else None
+
+
+def fetch_prices_and_atr(symbols: list[str]) -> dict:
+    """Live-ish price + ATR(14) for just the shortlist -- cheap since it's
+    a small batch. Replaces the old fetch_current_prices: everything that
+    used to just need a price now also needs ATR for the trade plan, and
+    pulling both from one download avoids a second API round-trip.
+    Pulls ~2 months of daily bars -- comfortably more than ATR_PERIOD
+    needs, with slack for holidays/thin trading."""
     if not symbols:
         return {}
     try:
         data = yf.download(
             tickers=" ".join(symbols),
-            period="1d",
+            period="2mo",
             interval="1d",
             group_by="ticker",
             threads=True,
             progress=False,
         )
     except Exception as e:
-        print(f"[price fetch error] {e}", file=sys.stderr)
+        print(f"[price/ATR fetch error] {e}", file=sys.stderr)
         return {}
 
-    prices = {}
+    results = {}
     for sym in symbols:
         try:
             df = data if len(symbols) == 1 else data[sym]
-            prices[sym] = float(df["Close"].dropna().iloc[-1])
+            df = df.dropna(subset=["Close"])
+            if df.empty:
+                continue
+            price = float(df["Close"].iloc[-1])
+            atr = compute_atr(df)
+            results[sym] = {"price": price, "atr": atr}
         except Exception:
             continue
-    return prices
+    return results
+
+
+def compute_trade_plan(price: float | None, atr: float | None, stop_atr_mult: float,
+                        position_size_usd: float = DEFAULT_POSITION_SIZE_USD,
+                        reward_risk_ratio: float = REWARD_RISK_RATIO,
+                        entry_band_atr_mult: float = ENTRY_BAND_ATR_MULT) -> dict | None:
+    """ATR-based volatility-scaled entry/stop/target -- not a flat percent,
+    so it naturally widens for volatile names and tightens for calm ones.
+    Returns None if there's no price/ATR to work with, or if the computed
+    stop would be at or above the entry (degenerate case, shouldn't happen
+    with a positive ATR but guarded against regardless)."""
+    if not price or not atr or atr <= 0:
+        return None
+
+    entry_low = price - entry_band_atr_mult * atr
+    entry_high = price + entry_band_atr_mult * atr
+    stop = price - stop_atr_mult * atr
+    risk_per_share = price - stop
+    if risk_per_share <= 0:
+        return None
+    target = price + reward_risk_ratio * risk_per_share
+
+    shares = int(position_size_usd // price) if price > 0 else 0
+    risk_usd = shares * risk_per_share
+
+    return {
+        "entry_low": entry_low,
+        "entry_high": entry_high,
+        "stop": stop,
+        "target": target,
+        "shares": shares,
+        "risk_usd": risk_usd,
+    }
+
+
+def format_trade_plan(plan: dict | None) -> str | None:
+    if not plan:
+        return None
+    return (f"  • **Trade plan:** entry ${plan['entry_low']:.2f}-${plan['entry_high']:.2f}, "
+            f"stop ${plan['stop']:.2f}, target ${plan['target']:.2f} "
+            f"(~{plan['shares']} sh, ~${plan['risk_usd']:.0f} at risk)")
+
+
+TRADE_PLAN_DISCLAIMER = (
+    "_Trade plan levels are volatility-based (ATR) estimates, not "
+    "recommendations -- not historically backtested. Confirm before "
+    "entering; exit discipline is on you._"
+)
 
 
 def load_company_names() -> dict:
@@ -232,7 +313,7 @@ def find_sector_annotation(industry: str, active_sector_alerts: list[dict]) -> s
 
 
 def format_ticker_line(rank: int, symbol: str, name: str, categories: dict,
-                        price, target, sector_note: str | None = None,
+                        price, target, atr=None, sector_note: str | None = None,
                         is_new: bool = False) -> str:
     """
     Markdown-formatted: bold ticker/price header line, reasons as a clean
@@ -265,27 +346,36 @@ def format_ticker_line(rank: int, symbol: str, name: str, categories: dict,
         bullets.append(f"  • \u26A0\uFE0F **Caution:** {categories[CAUTION_CATEGORY]['detail']}")
     if sector_note:
         bullets.append(f"  • **Sector:** {sector_note}")
+    plan_bullet = format_trade_plan(compute_trade_plan(price, atr, STOP_ATR_MULT))
+    if plan_bullet:
+        bullets.append(plan_bullet)
 
     return header + "\n" + "\n".join(bullets)
 
 
-def format_momentum_line(rank: int, symbol: str, name: str, info: dict, price) -> str:
+def format_momentum_line(rank: int, symbol: str, name: str, info: dict, price, atr=None) -> str:
     """
     Deliberately distinct formatting from format_ticker_line -- no
     STRONG/Moderate tier tag (that vocabulary belongs to the confluence
     system), a different emoji, and an explicit risk note so this never
-    reads as equivalent conviction to a quality-backed pick.
+    reads as equivalent conviction to a quality-backed pick. Trade plan
+    (when present) uses MOMENTUM_STOP_ATR_MULT -- tighter than the main
+    list's, since these setups move fast.
     """
     price_bit = f" — ${price:.2f}" if price else ""
     display_name = clean_company_name(name) if name else symbol
     header = f"\u26A1 **#{rank} {symbol}**{price_bit} _{display_name}_"
     bullet = f"  • {info['detail']}"
     note = "  • _Speculative: low float + volume spike, not fundamentals-backed_"
-    return "\n".join([header, bullet, note])
+    lines = [header, bullet, note]
+    plan_bullet = format_trade_plan(compute_trade_plan(price, atr, MOMENTUM_STOP_ATR_MULT))
+    if plan_bullet:
+        lines.append(plan_bullet)
+    return "\n".join(lines)
 
 
 def build_momentum_section(momentum_ranked: list, company_names: dict, prices: dict,
-                            char_budget: int, max_picks: int) -> tuple[str, int, int]:
+                            char_budget: int, max_picks: int, atrs: dict | None = None) -> tuple[str, int, int]:
     """
     Builds the reserved speculative section. Returns (section_text,
     included_count, total_qualifying_count). Capped by BOTH max_picks and
@@ -295,9 +385,10 @@ def build_momentum_section(momentum_ranked: list, company_names: dict, prices: d
     if not momentum_ranked:
         return "", 0, 0
 
+    atrs = atrs or {}
     capped = momentum_ranked[:max_picks]
     lines = [
-        format_momentum_line(i, sym, company_names.get(sym, ""), info, prices.get(sym))
+        format_momentum_line(i, sym, company_names.get(sym, ""), info, prices.get(sym), atrs.get(sym))
         for i, (sym, info) in enumerate(capped, start=1)
     ]
     body, included = truncate_to_whole_entries(lines, char_budget)
@@ -413,20 +504,25 @@ def main():
         return
 
     symbols_to_price = [sym for _, sym, _ in push_list]
-    prices = fetch_current_prices(symbols_to_price)
+    price_atr = fetch_prices_and_atr(symbols_to_price)
+    prices = {sym: v["price"] for sym, v in price_atr.items()}
+    atrs = {sym: v["atr"] for sym, v in price_atr.items()}
 
     lines = []
     for rank, sym, cats in push_list:
         price = prices.get(sym)
+        atr = atrs.get(sym)
         target = fetch_price_target(sym)
         name = company_names.get(sym, "")
         sector_note = find_sector_annotation(sectors.get(sym, ""), active_sector_alerts)
         is_new = not was_recently_alerted(sym)
-        lines.append(format_ticker_line(rank, sym, name, cats, price, target, sector_note, is_new))
+        lines.append(format_ticker_line(rank, sym, name, cats, price, target, atr, sector_note, is_new))
 
     message, included_count = truncate_to_whole_entries(lines, 3800)
     if included_count < len(lines):
         message += f"\n\n_...+{len(lines) - included_count} more, see full list link above_"
+    if "**Trade plan:**" in message:
+        message += f"\n\n{TRADE_PLAN_DISCLAIMER}"
 
     new_count = sum(1 for rank, sym, cats in push_list if not was_recently_alerted(sym))
     strong_count = sum(1 for rank, sym, cats in push_list
@@ -473,9 +569,13 @@ def main():
     # busy the main confluence list is on a given cycle -- which in
     # practice is "full or nearly full" almost every cycle for this
     # screener, so a shared/leftover budget would rarely show anything.
-    momentum_prices = fetch_current_prices([sym for sym, _ in momentum_ranked[:MOMENTUM_MAX_PICKS_IN_PUSH]])
+    momentum_symbols = [sym for sym, _ in momentum_ranked[:MOMENTUM_MAX_PICKS_IN_PUSH]]
+    momentum_price_atr = fetch_prices_and_atr(momentum_symbols)
+    momentum_prices = {sym: v["price"] for sym, v in momentum_price_atr.items()}
+    momentum_atrs = {sym: v["atr"] for sym, v in momentum_price_atr.items()}
     momentum_section, momentum_included, momentum_total = build_momentum_section(
-        momentum_ranked, company_names, momentum_prices, MOMENTUM_PUSH_CHAR_BUDGET, MOMENTUM_MAX_PICKS_IN_PUSH
+        momentum_ranked, company_names, momentum_prices, MOMENTUM_PUSH_CHAR_BUDGET,
+        MOMENTUM_MAX_PICKS_IN_PUSH, momentum_atrs
     )
     if momentum_section:
         momentum_title = f"\u26A1 {momentum_included} speculative pick(s)"
@@ -483,6 +583,8 @@ def main():
             momentum_title += f" +{momentum_total - momentum_included} more in repo"
         if momentum_included < momentum_total:
             momentum_section += f"\n\n_...+{momentum_total - momentum_included} more speculative, see repo_"
+        if "**Trade plan:**" in momentum_section:
+            momentum_section += f"\n\n{TRADE_PLAN_DISCLAIMER}"
         send_alert(momentum_title, momentum_section, priority="default",
                    tags=["zap"], markdown=True, click_url=click_url)
         print(f"Pushed {momentum_included}/{momentum_total} speculative ticker(s) as a separate alert.",

@@ -140,6 +140,20 @@ LATEST_ALERTS_FILE = "latest_alerts.md"        # human-readable full ranked list
 DAILY_PUSHES_FILE = "daily_pushes.json"        # running log of actual pushes, per ET trading day
 DAILY_PUSHES_RETENTION_DAYS = 10               # how many days of history to keep
 
+# --- Trade plan (entry/stop/target) -- ATR-based volatility-scaled levels,
+# computed live for just the small already-shortlisted push candidates.
+# No new daily state file (avoids the merge-conflict class of bug that
+# signals_state.json had) -- this is purely a display layer on top of
+# the existing price fetch.
+ATR_PERIOD = 14                       # standard ATR lookback, in daily bars
+ENTRY_BAND_ATR_MULT = 0.25            # entry zone = price +/- this * ATR
+STOP_ATR_MULT = 1.5                   # main-list stop distance, in ATRs
+MOMENTUM_STOP_ATR_MULT = 1.0          # tighter stop for the momentum track --
+                                       # low-float/volume-spike setups move
+                                       # fast, a 1.5x-ATR stop is too loose
+REWARD_RISK_RATIO = 2.0               # target = entry + this * (entry - stop)
+DEFAULT_POSITION_SIZE_USD = 3000      # used to size the suggested share count
+
 # Auto-populated by the workflow (github.server_url + github.repository --
 # no secret needed, GitHub provides this automatically) so the push
 # notification can link straight to the full list in the repo.
