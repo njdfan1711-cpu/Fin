@@ -43,6 +43,7 @@ jobs:
         env:
           FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          REPO_URL: ${{ github.server_url }}/${{ github.repository }}
         run: python compose_alerts.py
 
       - name: Commit updated signal/alert state
