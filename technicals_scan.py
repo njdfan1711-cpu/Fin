@@ -100,6 +100,23 @@ def compute_macd(closes: pd.Series):
     return macd_line, signal_line
 
 
+def _flatten_columns(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Newer yfinance versions (0.2.31+) default to MultiIndex columns even
+    for a single-ticker download (e.g. ("Close", "SPY") instead of just
+    "Close") -- requirements.txt doesn't pin a version, so a runner can
+    pick this up any time yfinance publishes a release. Without this,
+    df["Close"] is a one-column DataFrame instead of a Series, and
+    float(closes.iloc[-1]) blows up with "must be a string or a real
+    number, not 'Series'". Flattening to the first (price-type) level
+    makes single-ticker downloads behave the same regardless of version.
+    """
+    if isinstance(df.columns, pd.MultiIndex):
+        df = df.copy()
+        df.columns = df.columns.get_level_values(0)
+    return df
+
+
 def fetch_spy_data():
     """
     Fetched ONCE per cycle, not per ticker. Returns a dict with the 20-day
@@ -109,6 +126,7 @@ def fetch_spy_data():
     """
     try:
         df = yf.download("SPY", period="1y", interval="1d", progress=False)
+        df = _flatten_columns(df)
         closes = df["Close"].dropna()
         if len(closes) < SPY_LOOKBACK_DAYS + 1:
             return {"return_20d": None, "closes": closes, "bullish_regime": None}
@@ -246,6 +264,7 @@ def check_all_time_high(symbol: str, current_price: float):
     """
     try:
         df = yf.download(symbol, period="max", interval="1d", progress=False)
+        df = _flatten_columns(df)
         closes = df["Close"].dropna()
         if closes.empty:
             return None
@@ -298,6 +317,7 @@ def main():
         for sym in batch:
             try:
                 df = data if len(batch) == 1 else data[sym]
+                df = _flatten_columns(df)
                 findings, caution, hit_52wk_high, price = evaluate_symbol(df, spy_data)
             except Exception:
                 continue

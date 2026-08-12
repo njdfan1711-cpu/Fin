@@ -1,3 +1,8 @@
-yfinance
-pandas
-feedparser
+# Pinned exact -- an unpinned yfinance picked up a version that changed
+# its default column shape (single-ticker downloads now return MultiIndex
+# columns), which is what caused today's SPY fetch crash. Upgrades from
+# here should be a deliberate choice, tested against a real run, not
+# something that happens silently on the next scheduled workflow.
+yfinance==1.5.2
+pandas==3.0.2
+feedparser==6.0.14

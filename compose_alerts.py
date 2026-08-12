@@ -152,6 +152,25 @@ def compute_atr(df: pd.DataFrame, period: int = ATR_PERIOD) -> float | None:
     return float(atr) if pd.notna(atr) else None
 
 
+def _flatten_columns(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Newer yfinance versions (0.2.31+) default to MultiIndex columns even
+    for a single-ticker download (e.g. ("Close", "AAPL") instead of just
+    "Close") -- requirements.txt doesn't pin a version, so this can start
+    happening any time yfinance publishes a release. Without this,
+    df["Close"] is a one-column DataFrame instead of a Series, and
+    float(df["Close"].iloc[-1]) blows up with "must be a string or a real
+    number, not 'Series'". Only actually bites when exactly 1 symbol is
+    passed in (the len(symbols) == 1 path below uses the raw download
+    result directly) -- a real scenario here, since a shortlist push can
+    easily have just one qualifying pick.
+    """
+    if isinstance(df.columns, pd.MultiIndex):
+        df = df.copy()
+        df.columns = df.columns.get_level_values(0)
+    return df
+
+
 def fetch_prices_and_atr(symbols: list[str]) -> dict:
     """Live-ish price + ATR(14) for just the shortlist -- cheap since it's
     a small batch. Replaces the old fetch_current_prices: everything that
@@ -178,6 +197,7 @@ def fetch_prices_and_atr(symbols: list[str]) -> dict:
     for sym in symbols:
         try:
             df = data if len(symbols) == 1 else data[sym]
+            df = _flatten_columns(df)
             df = df.dropna(subset=["Close"])
             if df.empty:
                 continue
