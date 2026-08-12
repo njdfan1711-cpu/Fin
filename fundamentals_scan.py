@@ -370,8 +370,12 @@ def main():
             # came from a fresh call or the cache, so the signal doesn't
             # go stale/expire in signals_store just because the underlying
             # API call was skipped today.
+            # Small per-finding bonus (capped, see technicals_scan.py's
+            # matching comment) so tickers with more corroborating
+            # fundamentals findings rank slightly ahead of otherwise-tied
+            # ones, instead of falling back to arbitrary dict order.
             combined_detail = "; ".join(details)
-            combined_strength = max(strengths)
+            combined_strength = max(strengths) + min(0.05, 0.01 * (len(strengths) - 1))
             record_signal(symbol, "fundamentals", combined_detail, strength=combined_strength)
             signals[symbol] = details
             total_signals += len(details)

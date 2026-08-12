@@ -264,14 +264,27 @@ def main():
         if not pattern:
             continue
 
+        matches = []
         for a in recent_articles:
             text = f"{a.get('headline', '')} {a.get('summary', '')}"
             if pattern.search(text):
-                headline = a.get("headline", "")[:130]
-                source = a.get("source", "")
-                record_signal(symbol, "news", f"[{source}] {headline}", strength=0.7)
-                total_signals += 1
-                break  # one match is enough to record for this cycle
+                matches.append(a)
+
+        if matches:
+            headline = matches[0].get("headline", "")[:130]
+            source = matches[0].get("source", "")
+            detail = f"[{source}] {headline}"
+            if len(matches) > 1:
+                detail += f" (+{len(matches) - 1} more source(s))"
+            # Small per-additional-article bonus (capped, matching the
+            # scheme in technicals_scan.py/fundamentals_scan.py) so a
+            # story corroborated across multiple outlets ranks slightly
+            # ahead of a single-source hit at the same base strength,
+            # rather than every news signal being an identical 0.7 and
+            # falling back to arbitrary tie order.
+            strength = 0.7 + min(0.05, 0.01 * (len(matches) - 1))
+            record_signal(symbol, "news", detail, strength=strength)
+            total_signals += 1
 
     print(f"\n{total_signals} news signal(s) recorded.", file=sys.stderr)
 

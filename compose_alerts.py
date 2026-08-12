@@ -40,6 +40,7 @@ import re
 import sys
 import urllib.request
 from datetime import datetime, timezone
+import hashlib
 
 import pandas as pd
 import yfinance as yf
@@ -107,6 +108,20 @@ def score_ticker(categories: dict) -> tuple:
     count = len(real_categories)
     total_strength = sum(info.get("strength", 0.5) for info in real_categories.values())
     return (count, total_strength)
+
+
+def tiebreak_key(symbol: str) -> int:
+    """
+    Deterministic-per-day but otherwise arbitrary tiebreaker for tickers
+    that still land on an exact (category_count, strength) tie after the
+    upstream scans' evidence-count bonus. Rotates daily (seeded by UTC
+    date) so a tie doesn't perpetually favor the same tickers/alphabetical
+    order run after run -- it's purely a fairness mechanism, not a
+    confidence signal, so it's kept as the LAST sort key, after both real
+    scoring dimensions.
+    """
+    day_key = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    return int(hashlib.md5(f"{symbol}-{day_key}".encode()).hexdigest(), 16)
 
 
 def conviction_tier(category_count: int, total_strength: float) -> str:
@@ -473,8 +488,14 @@ def main():
     print(f"{len(momentum_ranked)} ticker(s) qualify on the separate momentum/low-float track.",
           file=sys.stderr)
 
-    # Rank by confidence
-    ranked = sorted(qualifying.items(), key=lambda kv: score_ticker(kv[1]), reverse=True)
+    # Rank by confidence, category count first then combined strength;
+    # tiebreak_key is the last-resort tertiary key for any exact ties
+    # left after the upstream scans' evidence-count bonus.
+    ranked = sorted(
+        qualifying.items(),
+        key=lambda kv: (*score_ticker(kv[1]), tiebreak_key(kv[0])),
+        reverse=True,
+    )
     # Attach each ticker's overall rank now, so the push and the full
     # written list use the same index even after recently-alerted tickers
     # get filtered out of the push.
@@ -528,6 +549,14 @@ def main():
     prices = {sym: v["price"] for sym, v in price_atr.items()}
     atrs = {sym: v["atr"] for sym, v in price_atr.items()}
 
+    # Computed BEFORE the message body so we can embed a real markdown
+    # hyperlink in the text itself, not just rely on ntfy's Click header
+    # (which makes the notification-as-a-whole tappable in some clients,
+    # but doesn't reliably work from an expanded/copyable message view --
+    # a proper [text](url) markdown link is more consistent across
+    # clients since Markdown: yes is already set on this push).
+    click_url = f"{REPO_URL}/blob/main/{LATEST_ALERTS_FILE}" if REPO_URL else None
+
     lines = []
     for rank, sym, cats in push_list:
         price = prices.get(sym)
@@ -540,7 +569,21 @@ def main():
 
     message, included_count = truncate_to_whole_entries(lines, 3800)
     if included_count < len(lines):
-        message += f"\n\n_...+{len(lines) - included_count} more, see full list link above_"
+        message += f"\n\n_...+{len(lines) - included_count} more of this push didn't fit here._"
+    # ALWAYS show a link to the full ranked list when there's more than
+    # what got pushed (the common case -- TOP_N_ALERTS caps the push, but
+    # the full qualifying list can run into the hundreds/thousands). This
+    # used to only appear when the push itself got truncated by the char
+    # budget, which almost never happens, so the link was effectively
+    # invisible on most cycles even though far more tickers than the top
+    # 20 were qualifying.
+    if len(ranked_with_rank) > len(push_list):
+        remaining = len(ranked_with_rank) - len(push_list)
+        if click_url:
+            message += f"\n\n**[View all {len(ranked_with_rank)} qualifying picks →]({click_url})** ({remaining} more than fit in this push)"
+        else:
+            message += (f"\n\n_{remaining} more qualifying pick(s) in {LATEST_ALERTS_FILE} in the repo "
+                        f"(no REPO_URL set, so no direct link -- see config.py)_")
     if "**Trade plan:**" in message:
         message += f"\n\n{TRADE_PLAN_DISCLAIMER}"
 
@@ -555,8 +598,6 @@ def main():
         title += f", {new_count} new"
     if len(ranked_with_rank) > len(push_list):
         title += f" +{len(ranked_with_rank) - len(push_list)} more in repo"
-
-    click_url = f"{REPO_URL}/blob/main/{LATEST_ALERTS_FILE}" if REPO_URL else None
 
     if push_list:
         send_alert(title, message, priority="high", tags=["chart_with_upwards_trend"],
@@ -602,7 +643,11 @@ def main():
         if momentum_total > momentum_included:
             momentum_title += f" +{momentum_total - momentum_included} more in repo"
         if momentum_included < momentum_total:
-            momentum_section += f"\n\n_...+{momentum_total - momentum_included} more speculative, see repo_"
+            remaining = momentum_total - momentum_included
+            if click_url:
+                momentum_section += f"\n\n**[View all {momentum_total} speculative picks →]({click_url})** ({remaining} more than fit in this push)"
+            else:
+                momentum_section += f"\n\n_{remaining} more speculative pick(s) in {LATEST_ALERTS_FILE} in the repo_"
         if "**Trade plan:**" in momentum_section:
             momentum_section += f"\n\n{TRADE_PLAN_DISCLAIMER}"
         send_alert(momentum_title, momentum_section, priority="default",

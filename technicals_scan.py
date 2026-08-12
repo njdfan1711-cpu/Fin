@@ -343,11 +343,23 @@ def main():
                 all_findings.setdefault(sym, []).append(result)
             time.sleep(1)  # light pacing for this smaller, separate batch of calls
 
-    # Record everything -- ONE combined signal per category per symbol
+    # Record everything -- ONE combined signal per category per symbol.
+    # combined_strength uses max() as its base (peak signal still matters
+    # most) but adds a small bonus per additional corroborating finding
+    # (capped) -- e.g. RSI + MA cross + volume spike genuinely deserves a
+    # slight edge over a single finding at the same peak strength. This is
+    # deliberately tiny (max +0.05) so it never flips a STRONG/Moderate
+    # tier boundary on its own -- it's a ranking tiebreaker, not a new
+    # scoring dimension. Without this, tickers with identical peak
+    # strength were indistinguishable, and ties fell back to whatever
+    # order they happened to sit in signals_state.json (effectively
+    # alphabetical, from the original build) instead of reflecting how
+    # much evidence actually backs each pick.
     total_signals = 0
     for sym, findings in all_findings.items():
         combined_detail = "; ".join(d for d, _ in findings)
-        combined_strength = max(s for _, s in findings)
+        strengths = [s for _, s in findings]
+        combined_strength = max(strengths) + min(0.05, 0.01 * (len(strengths) - 1))
         record_signal(sym, "technical", combined_detail, strength=combined_strength)
         total_signals += len(findings)
 
