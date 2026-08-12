@@ -2,10 +2,13 @@ name: Daily Foundation Scan
 
 on:
   schedule:
-    # 11:00 UTC = 6-7am ET, well before market open -- gives the heavy
-    # eligible-universe filter + fundamentals scan time to finish before
-    # the intraday workflow starts needing eligible.csv.
-    - cron: "0 11 * * 1-5"
+    # 11:07 UTC (not 11:00) -- GitHub's own docs warn that scheduled
+    # workflows are most likely to be delayed at the top of the hour,
+    # since that's the highest-congestion trigger time across all of
+    # GitHub Actions. Confirmed in practice here: the last several daily
+    # runs landed 2-4 hours late (13:25/14:56 UTC instead of 11:00).
+    # A few minutes off the hour avoids that congestion window.
+    - cron: "7 11 * * 1-5"
   workflow_dispatch: {}
 
 permissions:

@@ -2,9 +2,11 @@ name: Intraday Technical + News Scan
 
 on:
   schedule:
-    # Every 30 min, 13:00-21:59 UTC, weekdays -- covers NYSE hours across
-    # both EST and EDT since GitHub cron is fixed UTC.
-    - cron: "0,30 13-21 * * 1-5"
+    # 13:03/13:33 UTC etc (not the exact hour/half-hour) -- same top-of-
+    # hour congestion issue documented for scan.yml. A missed slot here
+    # just means a 30-min wait for the next one rather than losing the
+    # whole morning, but no reason not to dodge it too.
+    - cron: "3,33 13-21 * * 1-5"
   workflow_dispatch: {}
 
 permissions:
