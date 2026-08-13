@@ -66,6 +66,8 @@ from config import (
     MOMENTUM_STOP_ATR_MULT,
     REWARD_RISK_RATIO,
     DEFAULT_POSITION_SIZE_USD,
+    NTFY_MESSAGE_BYTE_LIMIT,
+    NTFY_SAFE_BODY_BYTE_BUDGET,
 )
 from signals_store import get_active_signals
 from alert_log import was_recently_alerted, mark_alerted
@@ -418,12 +420,13 @@ def format_momentum_line(rank: int, symbol: str, name: str, info: dict, price, a
 
 
 def build_momentum_section(momentum_ranked: list, company_names: dict, prices: dict,
-                            char_budget: int, max_picks: int, atrs: dict | None = None) -> tuple[str, int, int]:
+                            byte_budget: int, max_picks: int, atrs: dict | None = None) -> tuple[str, int, int]:
     """
     Builds the reserved speculative section. Returns (section_text,
     included_count, total_qualifying_count). Capped by BOTH max_picks and
-    char_budget -- whichever is more restrictive wins -- so this section
-    can never grow large enough to threaten the main list's space.
+    byte_budget (UTF-8 bytes, see truncate_to_whole_entries) -- whichever
+    is more restrictive wins -- so this section can never grow large
+    enough to threaten the main list's space.
     """
     if not momentum_ranked:
         return "", 0, 0
@@ -434,30 +437,61 @@ def build_momentum_section(momentum_ranked: list, company_names: dict, prices: d
         format_momentum_line(i, sym, company_names.get(sym, ""), info, prices.get(sym), atrs.get(sym))
         for i, (sym, info) in enumerate(capped, start=1)
     ]
-    body, included = truncate_to_whole_entries(lines, char_budget)
+    header = "\u26A1 **Speculative / High-Risk** (low float + volume spike)\n\n"
+    # Header bytes reserved BEFORE truncating the body -- it used to be
+    # prepended after truncation, uncounted against the budget, same class
+    # of bug fixed in main()'s message assembly.
+    body_budget = byte_budget - _utf8_len(header)
+    body, included = truncate_to_whole_entries(lines, body_budget)
     if not body:
         return "", 0, len(momentum_ranked)
 
-    section = "\u26A1 **Speculative / High-Risk** (low float + volume spike)\n\n" + body
+    section = header + body
     return section, included, len(momentum_ranked)
 
 
 
-def truncate_to_whole_entries(entries: list[str], limit: int) -> tuple[str, int]:
+def _utf8_len(s: str) -> int:
+    return len(s.encode("utf-8"))
+
+
+def _hard_truncate_utf8(s: str, max_bytes: int) -> str:
+    """
+    Last-resort truncation that can't split a multi-byte UTF-8 character
+    in half (which would corrupt the string / crash decoding). Used only
+    as a structural safety net -- see the comment at its call site in
+    main() -- normal operation should never actually reach this.
+    """
+    encoded = s.encode("utf-8")
+    if len(encoded) <= max_bytes:
+        return s
+    return encoded[:max_bytes].decode("utf-8", errors="ignore")
+
+
+def truncate_to_whole_entries(entries: list[str], byte_limit: int) -> tuple[str, int]:
     """
     Joins entries with blank-line separators, but stops adding whole
-    entries once the next one would exceed `limit` -- so the message never
-    cuts a ticker off mid-way through. Returns (message, entries_included).
+    entries once the next one would exceed `byte_limit` -- so the message
+    never cuts a ticker off mid-way through. Returns (message, entries_included).
+
+    IMPORTANT: byte_limit is UTF-8 encoded BYTES, not Python string
+    length. This matters a lot here specifically -- every STRONG tier tag
+    and caution bullet has an emoji in it, and emoji are 3-4+ bytes each
+    in UTF-8 despite being 1-2 Python characters. Measuring in Python
+    string length was the root cause of a real production bug: it let a
+    message quietly grow past ntfy's actual (byte-based) 4096-byte limit
+    while still reporting as "under budget" -- see NTFY_MESSAGE_BYTE_LIMIT
+    in config.py.
     """
     included = []
-    total_len = 0
-    separator_len = 2  # "\n\n"
+    total_bytes = 0
+    separator_bytes = 2  # "\n\n", both ASCII
     for entry in entries:
-        added_len = len(entry) + (separator_len if included else 0)
-        if total_len + added_len > limit:
+        entry_bytes = _utf8_len(entry) + (separator_bytes if included else 0)
+        if total_bytes + entry_bytes > byte_limit:
             break
         included.append(entry)
-        total_len += added_len
+        total_bytes += entry_bytes
     return "\n\n".join(included), len(included)
 
 
@@ -575,25 +609,49 @@ def main():
         is_new = not was_recently_alerted(sym)
         lines.append(format_ticker_line(rank, sym, name, cats, price, target, atr, sector_note, is_new))
 
-    message, included_count = truncate_to_whole_entries(lines, 3800)
-    if included_count < len(lines):
-        message += f"\n\n_...+{len(lines) - included_count} more of this push didn't fit here._"
-    # ALWAYS show a link to the full ranked list when there's more than
-    # what got pushed (the common case -- TOP_N_ALERTS caps the push, but
-    # the full qualifying list can run into the hundreds/thousands). This
-    # used to only appear when the push itself got truncated by the char
-    # budget, which almost never happens, so the link was effectively
-    # invisible on most cycles even though far more tickers than the top
-    # 20 were qualifying.
+    # Footer pieces are built FIRST, in their final form, so their exact
+    # byte cost is known BEFORE deciding how many ticker lines fit --
+    # rather than truncating lines to a budget and hoping whatever gets
+    # appended afterward still fits (that gap is what caused a real
+    # message to blow past ntfy's 4096-byte limit and get silently
+    # converted to a file attachment instead of shown as text).
+    footer = ""
     if len(ranked_with_rank) > len(push_list):
         remaining = len(ranked_with_rank) - len(push_list)
         if click_url:
-            message += f"\n\n**[View all {len(ranked_with_rank)} qualifying picks →]({click_url})** ({remaining} more than fit in this push)"
+            footer += f"\n\n**[View all {len(ranked_with_rank)} qualifying picks →]({click_url})** ({remaining} more than fit in this push)"
         else:
-            message += (f"\n\n_{remaining} more qualifying pick(s) in {LATEST_ALERTS_FILE} in the repo "
+            footer += (f"\n\n_{remaining} more qualifying pick(s) in {LATEST_ALERTS_FILE} in the repo "
                         f"(no REPO_URL set, so no direct link -- see config.py)_")
-    if "**Trade plan:**" in message:
-        message += f"\n\n{TRADE_PLAN_DISCLAIMER}"
+    # Conservative: reserve room for the disclaimer if ANY candidate line
+    # has a trade plan, not just the ones that end up fitting -- slightly
+    # over-reserves in the rare case every trade-plan line gets truncated
+    # out, which is the safe direction to be wrong in.
+    disclaimer_needed = any("**Trade plan:**" in line for line in lines)
+    if disclaimer_needed:
+        footer += f"\n\n{TRADE_PLAN_DISCLAIMER}"
+
+    # Fixed allowance for the "+N more of this push didn't fit here" note
+    # -- reserved unconditionally since whether it's actually needed
+    # depends on the truncation decision this budget feeds into.
+    TRUNCATION_NOTE_ALLOWANCE = 80
+
+    available_for_lines = NTFY_SAFE_BODY_BYTE_BUDGET - _utf8_len(footer) - TRUNCATION_NOTE_ALLOWANCE
+    lines_text, included_count = truncate_to_whole_entries(lines, available_for_lines)
+
+    message = lines_text
+    if included_count < len(lines):
+        message += f"\n\n_...+{len(lines) - included_count} more of this push didn't fit here._"
+    message += footer
+
+    # Structural safety net, not just careful arithmetic: if some future
+    # change adds text without updating the budget above, this still
+    # guarantees the message can never silently become an unreadable
+    # attachment -- it gets a visibly-truncated message instead, which is
+    # a much louder, easier-to-notice failure mode.
+    if _utf8_len(message) > NTFY_MESSAGE_BYTE_LIMIT - 96:
+        message = _hard_truncate_utf8(message, NTFY_MESSAGE_BYTE_LIMIT - 96)
+        message += "\n\n_(hard-truncated to fit -- see repo for full detail)_"
 
     new_count = sum(1 for rank, sym, cats in push_list if not was_recently_alerted(sym))
     strong_count = sum(1 for rank, sym, cats in push_list
@@ -633,7 +691,7 @@ def main():
               "(momentum picks, if any, still send separately below).", file=sys.stderr)
 
     # Speculative/momentum push -- SEPARATE notification, own fixed budget
-    # (not carved out of the main list's 3800 chars). Sent independently
+    # (not carved out of the main list's byte budget). Sent independently
     # of whether the main list fired, so it's never at the mercy of how
     # busy the main confluence list is on a given cycle -- which in
     # practice is "full or nearly full" almost every cycle for this
@@ -658,6 +716,13 @@ def main():
                 momentum_section += f"\n\n_{remaining} more speculative pick(s) in {LATEST_ALERTS_FILE} in the repo_"
         if "**Trade plan:**" in momentum_section:
             momentum_section += f"\n\n{TRADE_PLAN_DISCLAIMER}"
+        # Same structural safety net as the main message -- build_momentum_section
+        # already reserves its own header's bytes, but this push's footer
+        # (link + disclaimer) is appended after that budget check, same
+        # gap that caused the main push's bug, so it needs the same guard.
+        if _utf8_len(momentum_section) > NTFY_MESSAGE_BYTE_LIMIT - 96:
+            momentum_section = _hard_truncate_utf8(momentum_section, NTFY_MESSAGE_BYTE_LIMIT - 96)
+            momentum_section += "\n\n_(hard-truncated to fit -- see repo for full detail)_"
         send_alert(momentum_title, momentum_section, priority="default",
                    tags=["zap"], markdown=True, click_url=click_url)
         print(f"Pushed {momentum_included}/{momentum_total} speculative ticker(s) as a separate alert.",

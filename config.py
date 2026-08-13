@@ -100,6 +100,18 @@ MIN_QUALIFYING_STRENGTH = 1.0   # ALSO require combined strength across those
                                  # qualify exactly as easily as two strong ones
 TOP_N_ALERTS = 20           # cap on a single push, ranked by confidence
 
+# --- ntfy message size (https://docs.ntfy.sh/publish/#limitations) --
+# messages over this many BYTES (not Python string length -- see the note
+# at truncate_to_whole_entries in compose_alerts.py) get silently
+# converted to a downloadable .txt attachment instead of shown inline, no
+# error raised. Discovered the hard way: emoji (STRONG tier tags, caution
+# warnings) are 3-4 bytes each in UTF-8 but 1-2 Python characters, so a
+# budget measured in characters quietly under-counts the real size.
+NTFY_MESSAGE_BYTE_LIMIT = 4096
+# Stay comfortably under the hard limit -- ntfy's own server docs say
+# ">4K NOT RECOMMENDED, and largely untested" even for exactly 4096.
+NTFY_SAFE_BODY_BYTE_BUDGET = 3600
+
 # --- Conviction tiers (shown on every alert, so weak-but-qualifying and
 # genuinely strong matches don't look identical at a glance) ---
 STRONG_TIER_MIN_CATEGORIES = 3       # 3+ independent categories = automatically Strong
@@ -139,9 +151,10 @@ MOMENTUM_MIN_DAY_CHANGE_PCT = 8.0              # requires real price follow-thro
 MOMENTUM_MAX_PICKS_IN_PUSH = 3                 # hard cap on push entries, regardless of
                                                 # remaining character budget -- keeps this
                                                 # section small and skimmable by design
-MOMENTUM_PUSH_CHAR_BUDGET = 900                # reserved slice of the ~3800-char message,
-                                                # carved out AFTER the main list is built --
-                                                # main picks always get first claim on space
+MOMENTUM_PUSH_CHAR_BUDGET = 900                # reserved slice of the momentum push's own
+                                                # NTFY_SAFE_BODY_BYTE_BUDGET -- now measured
+                                                # in bytes despite the name (kept for backwards
+                                                # compat with anything reading this constant)
 FLOAT_DATA_FILE = "float_data.json"            # {symbol: shares_outstanding}, refreshed daily
 
 # --- Files ---
