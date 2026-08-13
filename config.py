@@ -33,6 +33,10 @@ RS_NEW_HIGH_LOOKBACK_DAYS = 60          # window for checking if the stock's per
 # --- Fundamentals trigger thresholds ---
 EARNINGS_SURPRISE_PCT = 5.0       # actual EPS beat estimate by this % or more
 EARNINGS_RECENCY_DAYS = 5         # only count an earnings beat if reported this recently
+EARNINGS_PROXIMITY_DAYS = 5        # flag a caution if the NEXT scheduled report is within
+                                    # this many days -- an ATR-based stop offers zero
+                                    # protection against an overnight earnings gap, and a
+                                    # multi-day swing hold can easily run right into one
 REVENUE_GROWTH_YOY_PCT = 10.0     # YoY revenue growth at or above this
 EPS_GROWTH_YOY_PCT = 10.0         # YoY EPS growth at or above this
 
@@ -81,6 +85,7 @@ SHORT_INTEREST_SPIKE_PCT = 20.0   # % increase in short interest since last repo
 SIGNAL_VALIDITY_HOURS = {
     "technical": 4,       # RSI/MA/volume -- intraday, goes stale fast
     "news": 8,             # catalyst relevance fades but not instantly
+    "news_caution": 8,     # same cadence as "news" -- same underlying data source
     "fundamentals": EARNINGS_RECENCY_DAYS * 24,
     "earnings_quality": EARNINGS_RECENCY_DAYS * 24,  # same cadence as
                                                       # fundamentals -- tied
@@ -167,6 +172,19 @@ ALERT_LOG_FILE = "alert_log.json"              # composite-level "seen before" t
 LATEST_ALERTS_FILE = "latest_alerts.md"        # human-readable full ranked list
 DAILY_PUSHES_FILE = "daily_pushes.json"        # running log of actual pushes, per ET trading day
 DAILY_PUSHES_RETENTION_DAYS = 10               # how many days of history to keep
+
+# --- Outcome tracking ---
+# Revisits past pushes N days later and records what the price actually
+# did -- did it hit the recorded target, the recorded stop, or neither --
+# so the system's thresholds can eventually be validated/tuned against
+# real results instead of guesses. Each push is evaluated EXACTLY ONCE
+# (the first run where it's old enough), then marked resolved and never
+# touched again -- keeps API usage bounded regardless of how long this
+# runs for.
+OUTCOME_LOOKBACK_DAYS = 7          # comfortably inside DAILY_PUSHES_RETENTION_DAYS
+                                    # above, so a push can't get pruned before
+                                    # it's old enough to be evaluated
+OUTCOME_HISTORY_FILE = "outcome_history.json"
 
 # --- Trade plan (entry/stop/target) -- ATR-based volatility-scaled levels,
 # computed live for just the small already-shortlisted push candidates.

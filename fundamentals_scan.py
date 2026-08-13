@@ -75,6 +75,7 @@ from config import (
     FINNHUB_API_KEY,
     EARNINGS_SURPRISE_PCT,
     EARNINGS_RECENCY_DAYS,
+    EARNINGS_PROXIMITY_DAYS,
     REVENUE_GROWTH_YOY_PCT,
     EPS_GROWTH_YOY_PCT,
     MAX_DEBT_TO_EQUITY,
@@ -128,20 +129,30 @@ def fetch_earnings_calendar(from_date: date, to_date: date) -> list[dict]:
     return records
 
 
-def build_earnings_surprise_map(eligible: set) -> dict:
+def build_earnings_surprise_map(eligible: set) -> tuple[dict, dict]:
     """
-    Returns {symbol: (detail, strength)} for eligible tickers with a
-    qualifying, sufficiently-recent earnings beat. Replaces the old
-    per-ticker check_earnings_surprise() loop with one bulk calendar call.
+    Returns (surprise_map, proximity_map):
+      - surprise_map: {symbol: (detail, strength)} for eligible tickers
+        with a qualifying, sufficiently-recent earnings beat.
+      - proximity_map: {symbol: (detail, strength)} for eligible tickers
+        with a report scheduled in the next EARNINGS_PROXIMITY_DAYS days --
+        a caution, since an ATR-based stop offers zero protection against
+        an overnight earnings gap.
+    Both come from ONE bulk calendar call spanning past AND future, since
+    Finnhub's calendar endpoint already returns both scheduled and
+    completed reports for a given date range -- no reason to pay for two
+    separate calls when one range covers what both maps need.
     """
     today = date.today()
     from_date = today - timedelta(days=EARNINGS_RECENCY_DAYS)
-    records = fetch_earnings_calendar(from_date, today)
-    print(f"  Earnings calendar: {len(records)} report(s) in the last "
-          f"{EARNINGS_RECENCY_DAYS} day(s) (all symbols, before filtering "
-          f"to your eligible universe)", file=sys.stderr)
+    to_date = today + timedelta(days=EARNINGS_PROXIMITY_DAYS)
+    records = fetch_earnings_calendar(from_date, to_date)
+    print(f"  Earnings calendar: {len(records)} report(s) from {EARNINGS_RECENCY_DAYS} day(s) "
+          f"ago through {EARNINGS_PROXIMITY_DAYS} day(s) ahead (all symbols, before "
+          f"filtering to your eligible universe)", file=sys.stderr)
 
-    results = {}
+    surprise_results = {}
+    proximity_results = {}
     skipped_no_estimate = 0
     for rec in records:
         symbol = rec.get("symbol")
@@ -155,19 +166,28 @@ def build_earnings_surprise_map(eligible: set) -> dict:
         estimate = rec.get("epsEstimate")
         if not period_str:
             continue
-        if actual is None or estimate in (None, 0):
-            skipped_no_estimate += 1
-            continue
 
         try:
             period_date = datetime.strptime(period_str, "%Y-%m-%d").date()
         except ValueError:
             continue
 
-        # The calendar can include near-future SCHEDULED reports as well
-        # as past ones -- only count ones that have actually happened and
-        # fall within the recency window.
-        days_ago = (today - period_date).days
+        days_ago = (today - period_date).days  # negative = still upcoming
+
+        # -- Upcoming: proximity caution, independent of the surprise check --
+        if 0 <= -days_ago <= EARNINGS_PROXIMITY_DAYS:
+            days_until = -days_ago
+            when = "today" if days_until == 0 else f"in {days_until}d"
+            detail = f"Earnings scheduled {when} ({period_date.isoformat()}) -- gap risk on a swing hold"
+            strength = 0.5
+            if symbol not in proximity_results or days_until < proximity_results[symbol][2]:
+                proximity_results[symbol] = (detail, strength, days_until)
+
+        # -- Past: earnings-beat signal, same logic as before --
+        if actual is None or estimate in (None, 0):
+            if days_ago >= 0:
+                skipped_no_estimate += 1
+            continue
         if days_ago < 0 or days_ago > EARNINGS_RECENCY_DAYS:
             continue
 
@@ -177,14 +197,16 @@ def build_earnings_surprise_map(eligible: set) -> dict:
             strength = min(surprise_pct / 20, 1.0)
             # A symbol shouldn't appear twice inside a 5-6 day window in
             # practice, but keep the stronger reading defensively if it does.
-            if symbol not in results or strength > results[symbol][1]:
-                results[symbol] = (detail, strength)
+            if symbol not in surprise_results or strength > surprise_results[symbol][1]:
+                surprise_results[symbol] = (detail, strength)
 
     if skipped_no_estimate:
         print(f"  ({skipped_no_estimate} reported symbol(s) skipped -- no analyst "
               f"estimate on file to compare against)", file=sys.stderr)
 
-    return results
+    # Strip the internal days_until sort key before returning.
+    proximity_results = {sym: (d, s) for sym, (d, s, _) in proximity_results.items()}
+    return surprise_results, proximity_results
 
 
 def load_metrics_cache() -> dict:
@@ -329,11 +351,13 @@ def main():
           f"{len(symbols) - stale_count} served from cache, "
           f"plus one bulk earnings-calendar call.", file=sys.stderr)
 
-    # One bulk call for earnings surprises across the whole eligible
-    # universe, instead of one call per ticker.
-    earnings_map = build_earnings_surprise_map(eligible_set)
+    # One bulk call for earnings surprises AND upcoming-earnings proximity
+    # across the whole eligible universe, instead of one call per ticker.
+    earnings_map, proximity_map = build_earnings_surprise_map(eligible_set)
     print(f"  {len(earnings_map)} eligible ticker(s) have a qualifying recent "
           f"earnings beat.", file=sys.stderr)
+    print(f"  {len(proximity_map)} eligible ticker(s) report within the next "
+          f"{EARNINGS_PROXIMITY_DAYS} day(s) (proximity caution).", file=sys.stderr)
 
     signals = {}
     total_signals = 0
@@ -407,13 +431,24 @@ def main():
             signals[symbol] = details
             total_signals += len(details)
 
-        if caution:
+        # Merge the CACHED margin-quality caution with the FRESH (every-run,
+        # never cached -- "days until next earnings" changes daily even
+        # when nothing else about the ticker does) proximity caution into
+        # one combined "earnings_quality" signal. Matches the same
+        # multi-finding-join pattern used for the "technical" and
+        # "fundamentals" categories elsewhere.
+        proximity = proximity_map.get(symbol)
+        caution_parts = [c for c in (caution, proximity) if c]
+        if caution_parts:
             # Separate category from "caution" (technicals_scan.py owns
             # that one) -- see check_revenue_growth's docstring. Recorded
             # every run for the same reason as the fundamentals signal
             # above: shouldn't silently disappear just because today's
             # metrics came from cache instead of a fresh call.
-            record_signal(symbol, "earnings_quality", caution[0], strength=caution[1])
+            combined_caution_detail = "; ".join(c[0] for c in caution_parts)
+            combined_caution_strength = max(c[1] for c in caution_parts)
+            record_signal(symbol, "earnings_quality", combined_caution_detail,
+                          strength=combined_caution_strength)
             earnings_quality_flags += 1
 
         if i % 100 == 0:

@@ -93,6 +93,25 @@ CAUTION_CATEGORY = "caution"
 # treatment as CAUTION_CATEGORY: excluded from scoring, shown as a warning.
 EARNINGS_QUALITY_CATEGORY = "earnings_quality"
 
+# "news_caution" -- owned by news_scan.py, same collision-avoidance reason
+# as above (a symbol could have a technical caution AND a bearish-news
+# caution in the same cycle; sharing one category slot would let whichever
+# script runs later silently overwrite the other's warning).
+NEWS_CAUTION_CATEGORY = "news_caution"
+
+# Single source of truth for every caution-style category -- both the
+# push-message renderer (format_ticker_line) and the latest_alerts.md
+# writer iterate this list, so adding a 4th caution channel later only
+# means adding one line here instead of remembering to update two
+# separate hand-coded blocks (which is exactly how EARNINGS_QUALITY_CATEGORY
+# ended up missing from the latest_alerts.md writer the first time).
+CAUTION_STYLE_CATEGORIES = [
+    (CAUTION_CATEGORY, "Caution"),
+    (EARNINGS_QUALITY_CATEGORY, "Earnings quality"),
+    (NEWS_CAUTION_CATEGORY, "News caution"),
+]
+CAUTION_STYLE_CATEGORY_KEYS = {cat for cat, _ in CAUTION_STYLE_CATEGORIES}
+
 # "momentum" is a deliberately SEPARATE track (low-float + volume-spike
 # speculative setups -- see momentum_scan.py) with its own philosophy,
 # opposite to the quality/confluence approach used everywhere else. It's
@@ -107,11 +126,13 @@ MOMENTUM_CATEGORY = "momentum"
 
 def score_ticker(categories: dict) -> tuple:
     """Returns (category_count, total_strength) -- used as a sort key.
-    Excludes the caution AND momentum categories from both count and
-    strength -- neither should influence the main confluence score."""
+    Excludes MOMENTUM_CATEGORY and every caution-style category (see
+    CAUTION_STYLE_CATEGORIES) from both count and strength -- none of
+    them should influence the main confluence score."""
+    excluded = {MOMENTUM_CATEGORY} | CAUTION_STYLE_CATEGORY_KEYS
     real_categories = {
         k: v for k, v in categories.items()
-        if k not in (CAUTION_CATEGORY, MOMENTUM_CATEGORY, EARNINGS_QUALITY_CATEGORY)
+        if k not in excluded
     }
     count = len(real_categories)
     total_strength = sum(info.get("strength", 0.5) for info in real_categories.values())
@@ -381,14 +402,13 @@ def format_ticker_line(rank: int, symbol: str, name: str, categories: dict,
 
     bullets = []
     for cat, info in categories.items():
-        if cat in (CAUTION_CATEGORY, EARNINGS_QUALITY_CATEGORY):
-            continue  # both shown separately below with a warning marker
+        if cat in CAUTION_STYLE_CATEGORY_KEYS:
+            continue  # all shown separately below with a warning marker
         label = CATEGORY_LABELS.get(cat, cat)
         bullets.append(f"  • **{label}:** {info['detail']}")
-    if CAUTION_CATEGORY in categories:
-        bullets.append(f"  • \u26A0\uFE0F **Caution:** {categories[CAUTION_CATEGORY]['detail']}")
-    if EARNINGS_QUALITY_CATEGORY in categories:
-        bullets.append(f"  • \u26A0\uFE0F **Earnings quality:** {categories[EARNINGS_QUALITY_CATEGORY]['detail']}")
+    for cat, label in CAUTION_STYLE_CATEGORIES:
+        if cat in categories:
+            bullets.append(f"  • \u26A0\uFE0F **{label}:** {categories[cat]['detail']}")
     if sector_note:
         bullets.append(f"  • **Sector:** {sector_note}")
     plan_bullet = format_trade_plan(compute_trade_plan(price, atr, STOP_ATR_MULT))
@@ -553,11 +573,12 @@ def main():
             f.write(f"## {rank}. {label} -- [{conviction_tier(count, strength)}] "
                     f"{count} signals, strength {strength:.2f}\n")
             for cat, info in cats.items():
-                if cat == CAUTION_CATEGORY:
+                if cat in CAUTION_STYLE_CATEGORY_KEYS:
                     continue  # written separately below, clearly marked
                 f.write(f"- **{CATEGORY_LABELS.get(cat, cat)}**: {info['detail']}\n")
-            if CAUTION_CATEGORY in cats:
-                f.write(f"- \u26A0\uFE0F **CAUTION**: {cats[CAUTION_CATEGORY]['detail']}\n")
+            for cat, label in CAUTION_STYLE_CATEGORIES:
+                if cat in cats:
+                    f.write(f"- \u26A0\uFE0F **{label.upper()}**: {cats[cat]['detail']}\n")
             sector_note = find_sector_annotation(sectors.get(sym, ""), active_sector_alerts)
             if sector_note:
                 f.write(f"- **Sector note**: {sector_note}\n")
@@ -678,8 +699,16 @@ def main():
                 "strength": score_ticker(cats)[1],
                 "categories": {
                     cat: info["detail"] for cat, info in cats.items()
-                    if cat != CAUTION_CATEGORY
+                    if cat not in CAUTION_STYLE_CATEGORY_KEYS
                 },
+                # Price/ATR/trade-plan levels AT PUSH TIME -- without this,
+                # there's no way to later check whether a pick actually
+                # worked out (see track_outcomes.py). None-safe: a symbol
+                # with a failed price fetch still gets pushed (existing
+                # behavior), just without anything to evaluate later.
+                "price_at_push": prices.get(sym),
+                "atr_at_push": atrs.get(sym),
+                "trade_plan": compute_trade_plan(prices.get(sym), atrs.get(sym), STOP_ATR_MULT),
             }
             for _, sym, cats in push_list
         ])
