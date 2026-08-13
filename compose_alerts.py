@@ -563,6 +563,29 @@ def main():
     # get filtered out of the push.
     ranked_with_rank = [(i, sym, cats) for i, (sym, cats) in enumerate(ranked, start=1)]
 
+    # Tag (not filter) tickers that were already pushed recently, so you
+    # can quickly scan for what's fresh vs. what's been holding steady --
+    # but nothing gets DROPPED from the push just because you've seen it
+    # before. A stock stays visible for as long as it keeps qualifying;
+    # it only disappears once it actually stops meeting the criteria.
+    push_list = ranked_with_rank[:TOP_N_ALERTS]
+
+    # Price/ATR fetched HERE, before the full list gets written -- only
+    # for push_list (the top TOP_N_ALERTS), same cost as before. This is
+    # what lets the trade-plan bullet appear in latest_alerts.md too, not
+    # just the ntfy push -- it used to be written before this data
+    # existed at all, so it was silently missing from the file regardless
+    # of how many tickers were involved. Fetching price/ATR for the FULL
+    # ranked list (which can run into the hundreds/thousands) isn't
+    # attempted -- that's a much bigger API cost for tickers that were
+    # never going to be pushed anyway, so entries past the top
+    # TOP_N_ALERTS simply won't have a trade-plan bullet, same as today's
+    # ntfy push.
+    symbols_to_price = [sym for _, sym, _ in push_list]
+    price_atr = fetch_prices_and_atr(symbols_to_price)
+    prices = {sym: v["price"] for sym, v in price_atr.items()}
+    atrs = {sym: v["atr"] for sym, v in price_atr.items()}
+
     # Write the FULL ranked list to the repo regardless of push cap
     with open(LATEST_ALERTS_FILE, "w") as f:
         f.write(f"# Latest Alerts ({len(ranked)} qualifying tickers)\n\n")
@@ -582,6 +605,17 @@ def main():
             sector_note = find_sector_annotation(sectors.get(sym, ""), active_sector_alerts)
             if sector_note:
                 f.write(f"- **Sector note**: {sector_note}\n")
+            # Only present for the top TOP_N_ALERTS -- see the comment
+            # where prices/atrs are fetched above. Rebuilt as a markdown
+            # list item ("- **Label**:") rather than reusing
+            # format_trade_plan's "•"-bullet form verbatim -- that form is
+            # styled for the ntfy push, and GitHub's markdown renderer
+            # only turns "-"/"*"-prefixed lines into proper list items.
+            plan = compute_trade_plan(prices.get(sym), atrs.get(sym), STOP_ATR_MULT)
+            if plan:
+                f.write(f"- **Trade plan**: entry ${plan['entry_low']:.2f}-${plan['entry_high']:.2f}, "
+                        f"stop ${plan['stop']:.2f}, target ${plan['target']:.2f} "
+                        f"(~{plan['shares']} sh, ~${plan['risk_usd']:.0f} at risk)\n")
             f.write("\n")
 
         if momentum_ranked:
@@ -596,21 +630,9 @@ def main():
                 f.write(f"## {rank}. {label}\n")
                 f.write(f"- {info['detail']}\n\n")
 
-    # Tag (not filter) tickers that were already pushed recently, so you
-    # can quickly scan for what's fresh vs. what's been holding steady --
-    # but nothing gets DROPPED from the push just because you've seen it
-    # before. A stock stays visible for as long as it keeps qualifying;
-    # it only disappears once it actually stops meeting the criteria.
-    push_list = ranked_with_rank[:TOP_N_ALERTS]
-
     if not push_list and not momentum_ranked:
         print("Nothing qualifies right now.", file=sys.stderr)
         return
-
-    symbols_to_price = [sym for _, sym, _ in push_list]
-    price_atr = fetch_prices_and_atr(symbols_to_price)
-    prices = {sym: v["price"] for sym, v in price_atr.items()}
-    atrs = {sym: v["atr"] for sym, v in price_atr.items()}
 
     # Computed BEFORE the message body so we can embed a real markdown
     # hyperlink in the text itself, not just rely on ntfy's Click header
