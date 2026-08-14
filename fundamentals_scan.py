@@ -84,6 +84,8 @@ from config import (
     MIN_NET_MARGIN_PCT,
     NET_MARGIN_CAUTION_PCT,
     MIN_QUALITY_CHECKS_PASSED,
+    RECOMMENDATION_TREND_MIN_ANALYSTS,
+    RECOMMENDATION_TREND_MIN_SCORE_DELTA,
     FUNDAMENTALS_SIGNALS_FILE,
     FLOAT_DATA_FILE,
     METRICS_CACHE_FILE,
@@ -238,22 +240,85 @@ def is_cache_stale(entry: dict | None) -> bool:
     return age_days >= METRICS_REFRESH_DAYS
 
 
+def fetch_recommendation_trend(symbol: str) -> list[dict] | None:
+    """Raw list of monthly {period, strongBuy, buy, hold, sell, strongSell}
+    dicts, most recent first (per Finnhub's documented ordering) -- or
+    None on any fetch failure."""
+    url = f"{BASE_URL}/stock/recommendation?symbol={symbol}&token={FINNHUB_API_KEY}"
+    try:
+        data = _get(url)
+        return data if isinstance(data, list) else None
+    except Exception:
+        return None
+
+
+def analyze_recommendation_trend(periods: list[dict]):
+    """
+    Returns (finding, caution) -- each an (detail, strength) tuple or None.
+    Compares the two most recent monthly periods: a weighted score
+    (strongBuy*2 + buy*1 - sell*1 - strongSell*2) rising by at least
+    RECOMMENDATION_TREND_MIN_SCORE_DELTA = analysts getting more bullish;
+    falling by that much = more bearish. Requires at least
+    RECOMMENDATION_TREND_MIN_ANALYSTS total analysts in the current period
+    so a single analyst flipping on a thinly-covered name doesn't swing this.
+    Small, genuinely ambiguous swings (neither threshold met) return
+    (None, None) -- deliberately not noisy.
+    """
+    if not periods or len(periods) < 2:
+        return None, None
+
+    def score(p):
+        return (p.get("strongBuy", 0) * 2 + p.get("buy", 0)
+                - p.get("sell", 0) - p.get("strongSell", 0) * 2)
+
+    def total(p):
+        return (p.get("strongBuy", 0) + p.get("buy", 0) + p.get("hold", 0)
+                 + p.get("sell", 0) + p.get("strongSell", 0))
+
+    current, previous = periods[0], periods[1]
+    if total(current) < RECOMMENDATION_TREND_MIN_ANALYSTS:
+        return None, None
+
+    delta = score(current) - score(previous)
+    bull_now = current.get("strongBuy", 0) + current.get("buy", 0)
+    bear_now = current.get("sell", 0) + current.get("strongSell", 0)
+
+    if delta >= RECOMMENDATION_TREND_MIN_SCORE_DELTA:
+        detail = (f"Analyst sentiment improving: {bull_now} buy/strongBuy vs. "
+                  f"{previous.get('strongBuy', 0) + previous.get('buy', 0)} last month")
+        strength = min(delta / 10, 1.0)
+        return (detail, strength), None
+    elif delta <= -RECOMMENDATION_TREND_MIN_SCORE_DELTA:
+        detail = (f"Analyst sentiment deteriorating: {bear_now} sell/strongSell vs. "
+                  f"{previous.get('sell', 0) + previous.get('strongSell', 0)} last month")
+        strength = min(abs(delta) / 10, 1.0)
+        return None, (detail, strength)
+
+    return None, None
+
+
 def check_revenue_growth(symbol: str):
     """
-    Returns (findings, share_outstanding, caution) on a successful API
+    Returns (findings, share_outstanding, cautions) on a successful API
     call, where findings is the existing list of [detail, strength] pairs,
-    share_outstanding is a float (millions) or None, and caution is an
-    (detail, strength) pair or None -- see NET_MARGIN_CAUTION_PCT in
-    config.py. Kept as a SEPARATE return value (recorded to its own
-    "earnings_quality" signal category, not merged into "fundamentals")
+    share_outstanding is a float (millions) or None, and cautions is a
+    LIST of (detail, strength) pairs (possibly empty) -- see
+    NET_MARGIN_CAUTION_PCT in config.py. Recorded to its own
+    "earnings_quality" signal category, not merged into "fundamentals",
     because technicals_scan.py already owns the "caution" category --
     reusing that key here would mean whichever script runs later in the
     day silently overwrites the other's caution note for that symbol.
 
-    Returns None (not a tuple) if the API call itself failed, so the
-    caller can tell "fetched successfully, nothing qualified" apart from
-    "fetch failed, don't trust/cache this" and act accordingly (keep the
-    old cached value and retry next run instead of caching an empty result).
+    Makes TWO separate Finnhub calls now (/stock/metric, then
+    /stock/recommendation) -- the second is a genuinely different
+    endpoint, can't be piggybacked for free the way share_outstanding
+    was. Sleeps between them so both count correctly against the
+    per-minute rate limit; the caller's own sleep after this function
+    returns still applies on top, spacing out the next symbol.
+
+    Returns None (not a tuple) if the FIRST call fails -- the second call
+    isn't attempted in that case, and the whole symbol is treated as a
+    fetch failure the same as before this feature existed.
     """
     url = f"{BASE_URL}/stock/metric?symbol={symbol}&metric=all&token={FINNHUB_API_KEY}"
     try:
@@ -319,21 +384,49 @@ def check_revenue_growth(symbol: str):
     # adjusted figures say. NOT scored (see MOMENTUM_CATEGORY/
     # CAUTION_CATEGORY handling in compose_alerts.py) -- purely a warning
     # shown alongside the pick.
-    caution = None
+    cautions = []
     if net_margin is not None and net_margin < NET_MARGIN_CAUTION_PCT:
         eps_note = f" despite {eps_growth:.1f}% adjusted EPS growth" if eps_growth and eps_growth > 0 else ""
-        caution = (
+        cautions.append((
             f"Net margin {net_margin:.1f}%{eps_note} -- Finnhub's growth "
             f"figures are non-GAAP and can exclude one-time charges "
             f"(impairments, write-downs); verify against the actual filing",
             0.5,
-        )
+        ))
+
+    # Analyst recommendation trend -- second Finnhub call, see docstring.
+    # A fetch failure here (including a premium-tier 403, if that's what
+    # this endpoint turns out to require) is swallowed silently: the
+    # symbol still gets everything already gathered above, it just won't
+    # have a recommendation-trend finding/caution this run.
+    time.sleep(SLEEP_BETWEEN_CALLS)
+    rec_periods = fetch_recommendation_trend(symbol)
+    if rec_periods:
+        rec_finding, rec_caution = analyze_recommendation_trend(rec_periods)
+        if rec_finding:
+            findings.append(rec_finding)
+        if rec_caution:
+            cautions.append(rec_caution)
 
     # share_outstanding: Finnhub reports this in millions of shares.
     # FINNHUB_KEY_CHECK -- confirm field name against a real response.
     share_outstanding = metric.get("shareOutstanding")
 
-    return findings, share_outstanding, caution
+    return findings, share_outstanding, cautions
+
+
+def _read_cached_cautions(entry: dict) -> list:
+    """
+    Backward-compat for cache entries written before this feature: old
+    entries have a singular "caution" key (one tuple or None); new ones
+    have a "cautions" list. Reading the new key first, falling back to
+    wrapping the old one, means existing metrics_cache.json data isn't
+    silently discarded/reset the first time this runs against it.
+    """
+    if "cautions" in entry:
+        return entry["cautions"]
+    old = entry.get("caution")
+    return [old] if old else []
 
 
 def main():
@@ -346,8 +439,8 @@ def main():
     metrics_cache = load_metrics_cache()
     stale_count = sum(1 for s in symbols if is_cache_stale(metrics_cache.get(s)))
     print(f"Running fundamentals scan on {len(symbols)} eligible tickers -- "
-          f"{stale_count} need a fresh /stock/metric call this run "
-          f"(~{stale_count / CALLS_PER_MINUTE:.0f} min expected), "
+          f"{stale_count} need a fresh /stock/metric + /stock/recommendation call "
+          f"this run (~{stale_count * 2 / CALLS_PER_MINUTE:.0f} min expected), "
           f"{len(symbols) - stale_count} served from cache, "
           f"plus one bulk earnings-calendar call.", file=sys.stderr)
 
@@ -391,22 +484,22 @@ def main():
                 if cache_entry:
                     findings = cache_entry.get("findings", [])
                     share_outstanding = cache_entry.get("share_outstanding")
-                    caution = cache_entry.get("caution")
+                    cautions = _read_cached_cautions(cache_entry)
                 else:
-                    findings, share_outstanding, caution = [], None, None
+                    findings, share_outstanding, cautions = [], None, []
             else:
-                findings, share_outstanding, caution = result
+                findings, share_outstanding, cautions = result
                 metrics_cache[symbol] = {
                     "checked_at": datetime.now(timezone.utc).isoformat(),
                     "findings": findings,
                     "share_outstanding": share_outstanding,
-                    "caution": caution,
+                    "cautions": cautions,
                 }
         else:
             served_from_cache += 1
             findings = cache_entry.get("findings", [])
             share_outstanding = cache_entry.get("share_outstanding")
-            caution = cache_entry.get("caution")
+            cautions = _read_cached_cautions(cache_entry)
 
         for detail, strength in findings:
             details.append(detail)
@@ -438,7 +531,7 @@ def main():
         # multi-finding-join pattern used for the "technical" and
         # "fundamentals" categories elsewhere.
         proximity = proximity_map.get(symbol)
-        caution_parts = [c for c in (caution, proximity) if c]
+        caution_parts = cautions + ([proximity] if proximity else [])
         if caution_parts:
             # Separate category from "caution" (technicals_scan.py owns
             # that one) -- see check_revenue_growth's docstring. Recorded

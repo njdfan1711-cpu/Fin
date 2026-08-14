@@ -62,6 +62,25 @@ NET_MARGIN_CAUTION_PCT = -5.0      # below this = flag regardless of what the
 MIN_QUALITY_CHECKS_PASSED = 3     # out of 4 (D/E, current ratio, ROE, margin) --
                                    # require most, not all, to be lenient on edge cases
 
+# --- Analyst recommendation trend (Finnhub /stock/recommendation) ---
+# Approximates the idea behind Zacks Rank (analysts getting more/less
+# bullish lately) without needing a proprietary score: compares the two
+# most recent monthly buy/hold/sell/strongBuy/strongSell periods for a
+# meaningful swing in either direction. NOT the same call as /stock/metric
+# above -- a genuinely separate API hit per ticker, so it shares the same
+# cache/refresh cadence rather than adding an uncoordinated second budget.
+# FINNHUB_KEY_CHECK -- unconfirmed whether this endpoint is free-tier or
+# requires a paid plan; documentation on this was ambiguous. Built
+# defensively (same fetch-failure handling as everything else here) so if
+# it turns out to be premium-gated, it just fails quietly and this signal
+# never fires rather than breaking the rest of the fundamentals scan.
+RECOMMENDATION_TREND_MIN_ANALYSTS = 3   # ignore thinly-covered names -- a single
+                                         # analyst flipping shouldn't swing this
+RECOMMENDATION_TREND_MIN_SCORE_DELTA = 2   # minimum weighted-score swing (see
+                                            # analyze_recommendation_trend) to
+                                            # count as a meaningful improve/
+                                            # deteriorate, not just noise
+
 # --- Fundamentals metrics caching (Actions-minutes optimization) ---
 # The /stock/metric call (revenue/EPS growth, quality checklist, float
 # proxy) has no bulk equivalent on Finnhub's free tier, so it's still one
