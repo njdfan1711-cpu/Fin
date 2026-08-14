@@ -212,6 +212,22 @@ def build_matchers(eligible: list[dict]) -> dict:
         "company", "co", "group", "holding", "holdings", "ltd", "limited",
         "plc", "llc", "class", "common", "stock",
     }
+    # Sector-generic words -- legitimate parts of a company's real name,
+    # but useless as a standalone match keyword: dozens of unrelated
+    # companies share one of these as their "distinctive" first word
+    # (Energy Fuels, Energy Vault, Power Solutions, ...), so a headline
+    # about ANY company in that sector false-positives on all of them.
+    # Real bug this caused: a single "Bloom Energy" headline matched
+    # NRGV (Energy Vault), UUUU (Energy Fuels), AND PSIX (Power
+    # Solutions) simultaneously -- none of them Bloom Energy.
+    GENERIC_SECTOR_WORDS = {
+        "energy", "power", "solar", "gold", "silver", "mining", "metals",
+        "resources", "capital", "financial", "global", "national",
+        "international", "american", "united", "systems", "networks",
+        "digital", "health", "healthcare", "pharma", "biosciences",
+        "technologies", "tech", "industries", "enterprises", "partners",
+        "ventures", "solutions", "services",
+    }
 
     matchers = {}
     for row in eligible:
@@ -219,16 +235,31 @@ def build_matchers(eligible: list[dict]) -> dict:
         name = row["name"]
 
         words = re.findall(r"[A-Za-z']+", name)
-        first_word = next((w for w in words if w.lower() not in STOPWORDS), None)
+        distinctive = [w for w in words if w.lower() not in STOPWORDS]
+
+        # Prefer a TWO-word phrase whenever the name has one available --
+        # far more specific than any single word ("Power Solutions" vs.
+        # "Power"), and self-scaling to new tickers without needing a
+        # hand-maintained blocklist to cover every case. Falls back to a
+        # single word only when the name doesn't have a second one, and
+        # even then, refuses to match on a lone generic sector word --
+        # ticker-only in that case.
+        first_word = distinctive[0] if distinctive else None
+        name_phrase = None
+        if len(distinctive) >= 2:
+            name_phrase = rf"{re.escape(distinctive[0])}\s+{re.escape(distinctive[1])}"
+        elif first_word and first_word.lower() not in GENERIC_SECTOR_WORDS:
+            name_phrase = re.escape(first_word)
 
         symbol_alt = re.escape(symbol)
-        if first_word:
+        if name_phrase:
             # Name half stays case-insensitive (scoped inline flag);
             # symbol half is case-sensitive by default.
-            pattern = rf"\b((?i:{re.escape(first_word)})|{symbol_alt})\b"
+            pattern = rf"\b((?i:{name_phrase})|{symbol_alt})\b"
         else:
-            # No distinctive name word (e.g. name is entirely generic) --
-            # match on the ticker only, case-sensitively.
+            # No usable distinctive name phrase (generic single word, or
+            # nothing distinctive at all) -- match on the ticker only,
+            # case-sensitively.
             pattern = rf"\b({symbol_alt})\b"
 
         try:
