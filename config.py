@@ -80,6 +80,10 @@ RECOMMENDATION_TREND_MIN_SCORE_DELTA = 2   # minimum weighted-score swing (see
                                             # analyze_recommendation_trend) to
                                             # count as a meaningful improve/
                                             # deteriorate, not just noise
+THIN_COVERAGE_MAX_ANALYSTS = 4   # 4 or fewer total ratings = flag as thin --
+                                  # less price discovery/scrutiny than a
+                                  # widely-covered name, real risk factor
+                                  # independent of any trend direction
 
 # --- Fundamentals metrics caching (Actions-minutes optimization) ---
 # The /stock/metric call (revenue/EPS growth, quality checklist, float

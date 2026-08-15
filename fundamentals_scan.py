@@ -86,6 +86,7 @@ from config import (
     MIN_QUALITY_CHECKS_PASSED,
     RECOMMENDATION_TREND_MIN_ANALYSTS,
     RECOMMENDATION_TREND_MIN_SCORE_DELTA,
+    THIN_COVERAGE_MAX_ANALYSTS,
     FUNDAMENTALS_SIGNALS_FILE,
     FLOAT_DATA_FILE,
     METRICS_CACHE_FILE,
@@ -254,18 +255,26 @@ def fetch_recommendation_trend(symbol: str) -> list[dict] | None:
 
 def analyze_recommendation_trend(periods: list[dict]):
     """
-    Returns (finding, caution) -- each an (detail, strength) tuple or None.
-    Compares the two most recent monthly periods: a weighted score
-    (strongBuy*2 + buy*1 - sell*1 - strongSell*2) rising by at least
-    RECOMMENDATION_TREND_MIN_SCORE_DELTA = analysts getting more bullish;
-    falling by that much = more bearish. Requires at least
-    RECOMMENDATION_TREND_MIN_ANALYSTS total analysts in the current period
-    so a single analyst flipping on a thinly-covered name doesn't swing this.
-    Small, genuinely ambiguous swings (neither threshold met) return
-    (None, None) -- deliberately not noisy.
+    Returns (finding, cautions) -- finding is an (detail, strength) tuple
+    or None; cautions is a LIST (0, 1, or 2 entries -- thin-coverage and
+    deteriorating-sentiment are independent and can both apply at once).
+
+    Thin coverage is checked FIRST and independently of everything else
+    below -- it's not a trend read, it's "there isn't enough analyst
+    attention on this name to trust price discovery the way you would on
+    a widely-covered one," which is exactly the situation where a trend
+    comparison would be least reliable anyway.
+
+    Trend comparison: compares the two most recent monthly periods, a
+    weighted score (strongBuy*2 + buy*1 - sell*1 - strongSell*2) rising
+    by at least RECOMMENDATION_TREND_MIN_SCORE_DELTA = analysts getting
+    more bullish; falling by that much = more bearish. Requires at least
+    RECOMMENDATION_TREND_MIN_ANALYSTS total analysts in the current
+    period so a single analyst flipping doesn't swing this. Small,
+    genuinely ambiguous swings return no finding -- deliberately not noisy.
     """
-    if not periods or len(periods) < 2:
-        return None, None
+    if not periods:
+        return None, []
 
     def score(p):
         return (p.get("strongBuy", 0) * 2 + p.get("buy", 0)
@@ -275,10 +284,23 @@ def analyze_recommendation_trend(periods: list[dict]):
         return (p.get("strongBuy", 0) + p.get("buy", 0) + p.get("hold", 0)
                  + p.get("sell", 0) + p.get("strongSell", 0))
 
-    current, previous = periods[0], periods[1]
-    if total(current) < RECOMMENDATION_TREND_MIN_ANALYSTS:
-        return None, None
+    current = periods[0]
+    total_current = total(current)
+    cautions = []
 
+    if 0 < total_current <= THIN_COVERAGE_MAX_ANALYSTS:
+        cautions.append((
+            f"Thin analyst coverage ({total_current} total rating(s)) -- "
+            f"less scrutiny/price discovery than a widely-covered name",
+            0.4,
+        ))
+
+    if len(periods) < 2 or total_current < RECOMMENDATION_TREND_MIN_ANALYSTS:
+        # Not enough data/analysts for a reliable TREND read, but the
+        # thin-coverage caution above (if any) still stands on its own.
+        return None, cautions
+
+    previous = periods[1]
     delta = score(current) - score(previous)
     bull_now = current.get("strongBuy", 0) + current.get("buy", 0)
     bear_now = current.get("sell", 0) + current.get("strongSell", 0)
@@ -287,13 +309,15 @@ def analyze_recommendation_trend(periods: list[dict]):
         detail = (f"Analyst sentiment improving: {bull_now} buy/strongBuy vs. "
                   f"{previous.get('strongBuy', 0) + previous.get('buy', 0)} last month")
         strength = min(delta / 10, 1.0)
-        return (detail, strength), None
+        return (detail, strength), cautions
     elif delta <= -RECOMMENDATION_TREND_MIN_SCORE_DELTA:
         detail = (f"Analyst sentiment deteriorating: {bear_now} sell/strongSell vs. "
                   f"{previous.get('sell', 0) + previous.get('strongSell', 0)} last month")
         strength = min(abs(delta) / 10, 1.0)
-        return None, (detail, strength)
+        cautions.append((detail, strength))
+        return None, cautions
 
+    return None, cautions
     return None, None
 
 
@@ -402,11 +426,10 @@ def check_revenue_growth(symbol: str):
     time.sleep(SLEEP_BETWEEN_CALLS)
     rec_periods = fetch_recommendation_trend(symbol)
     if rec_periods:
-        rec_finding, rec_caution = analyze_recommendation_trend(rec_periods)
+        rec_finding, rec_cautions = analyze_recommendation_trend(rec_periods)
         if rec_finding:
             findings.append(rec_finding)
-        if rec_caution:
-            cautions.append(rec_caution)
+        cautions.extend(rec_cautions)
 
     # share_outstanding: Finnhub reports this in millions of shares.
     # FINNHUB_KEY_CHECK -- confirm field name against a real response.
