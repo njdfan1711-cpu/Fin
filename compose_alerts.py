@@ -36,14 +36,18 @@ day remain active per their validity window and get pulled in here too.
 """
 
 import json
+import os
 import re
 import sys
 import urllib.request
 from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 import hashlib
 
 import pandas as pd
 import yfinance as yf
+
+ET = ZoneInfo("America/New_York")
 
 from config import (
     FINNHUB_API_KEY,
@@ -54,6 +58,7 @@ from config import (
     STRONG_TIER_STRENGTH_FOR_TWO,
     TOP_N_ALERTS,
     LATEST_ALERTS_FILE,
+    ALERTS_HISTORY_DIR,
     TICKER_SECTORS_FILE,
     SECTOR_ALERTS_FILE,
     SECTOR_ALERT_VALIDITY_HOURS,
@@ -586,53 +591,81 @@ def main():
     prices = {sym: v["price"] for sym, v in price_atr.items()}
     atrs = {sym: v["atr"] for sym, v in price_atr.items()}
 
-    # Write the FULL ranked list to the repo regardless of push cap
-    with open(LATEST_ALERTS_FILE, "w") as f:
-        f.write(f"# Latest Alerts ({len(ranked)} qualifying tickers)\n\n")
-        for rank, sym, cats in ranked_with_rank:
-            count, strength = score_ticker(cats)
+    # Write the FULL ranked list to the repo regardless of push cap.
+    # Built as a single in-memory string first so the exact same content
+    # can be written to BOTH the always-current file (latest_alerts.md,
+    # kept for anything that links/reads "the latest" -- e.g. the ntfy
+    # push click-through) AND a per-run timestamped snapshot in
+    # ALERTS_HISTORY_DIR. One snapshot per run (not per day) since the
+    # qualifying list fluctuates intraday as tickers add/drop -- a
+    # daily-only file would silently lose whichever tickers didn't
+    # survive to the last run of the day.
+    import io
+    run_stamp = datetime.now(timezone.utc).astimezone(ET).strftime("%Y-%m-%d_%H%M")
+    buf = io.StringIO()
+    f = buf
+    f.write(f"# Latest Alerts ({len(ranked)} qualifying tickers)\n")
+    f.write(f"_Run: {run_stamp} ET_\n\n")
+    for rank, sym, cats in ranked_with_rank:
+        count, strength = score_ticker(cats)
+        name = clean_company_name(company_names.get(sym, ""))
+        label = f"{name} ({sym})" if name else sym
+        f.write(f"## {rank}. {label} -- [{conviction_tier(count, strength)}] "
+                f"{count} signals, strength {strength:.2f}\n")
+        for cat, info in cats.items():
+            if cat in CAUTION_STYLE_CATEGORY_KEYS:
+                continue  # written separately below, clearly marked
+            f.write(f"- **{CATEGORY_LABELS.get(cat, cat)}**: {info['detail']}\n")
+        for cat, label in CAUTION_STYLE_CATEGORIES:
+            if cat in cats:
+                f.write(f"- \u26A0\uFE0F **{label.upper()}**: {cats[cat]['detail']}\n")
+        sector_note = find_sector_annotation(sectors.get(sym, ""), active_sector_alerts)
+        if sector_note:
+            f.write(f"- **Sector note**: {sector_note}\n")
+        # Only present for the top TOP_N_ALERTS -- see the comment
+        # where prices/atrs are fetched above. Rebuilt as a markdown
+        # list item ("- **Label**:") rather than reusing
+        # format_trade_plan's "•"-bullet form verbatim -- that form is
+        # styled for the ntfy push, and GitHub's markdown renderer
+        # only turns "-"/"*"-prefixed lines into proper list items.
+        plan = compute_trade_plan(prices.get(sym), atrs.get(sym), STOP_ATR_MULT)
+        if plan:
+            f.write(f"- **Trade plan**: entry ${plan['entry_low']:.2f}-${plan['entry_high']:.2f}, "
+                    f"stop ${plan['stop']:.2f}, target ${plan['target']:.2f} "
+                    f"(~{plan['shares']} sh, ~${plan['risk_usd']:.0f} at risk)\n")
+        f.write("\n")
+
+    if momentum_ranked:
+        f.write(f"\n# Speculative / High-Risk -- Low Float + Volume Spike "
+                 f"({len(momentum_ranked)} qualifying)\n\n")
+        f.write("_Separate track, not blended into the confluence scoring above. "
+                 "Low float (shares-outstanding proxy) + large price-confirmed volume "
+                 "spike -- see momentum_scan.py / config.py for thresholds._\n\n")
+        for rank, (sym, info) in enumerate(momentum_ranked, start=1):
             name = clean_company_name(company_names.get(sym, ""))
             label = f"{name} ({sym})" if name else sym
-            f.write(f"## {rank}. {label} -- [{conviction_tier(count, strength)}] "
-                    f"{count} signals, strength {strength:.2f}\n")
-            for cat, info in cats.items():
-                if cat in CAUTION_STYLE_CATEGORY_KEYS:
-                    continue  # written separately below, clearly marked
-                f.write(f"- **{CATEGORY_LABELS.get(cat, cat)}**: {info['detail']}\n")
-            for cat, label in CAUTION_STYLE_CATEGORIES:
-                if cat in cats:
-                    f.write(f"- \u26A0\uFE0F **{label.upper()}**: {cats[cat]['detail']}\n")
-            sector_note = find_sector_annotation(sectors.get(sym, ""), active_sector_alerts)
-            if sector_note:
-                f.write(f"- **Sector note**: {sector_note}\n")
-            # Only present for the top TOP_N_ALERTS -- see the comment
-            # where prices/atrs are fetched above. Rebuilt as a markdown
-            # list item ("- **Label**:") rather than reusing
-            # format_trade_plan's "•"-bullet form verbatim -- that form is
-            # styled for the ntfy push, and GitHub's markdown renderer
-            # only turns "-"/"*"-prefixed lines into proper list items.
-            plan = compute_trade_plan(prices.get(sym), atrs.get(sym), STOP_ATR_MULT)
-            if plan:
-                f.write(f"- **Trade plan**: entry ${plan['entry_low']:.2f}-${plan['entry_high']:.2f}, "
-                        f"stop ${plan['stop']:.2f}, target ${plan['target']:.2f} "
-                        f"(~{plan['shares']} sh, ~${plan['risk_usd']:.0f} at risk)\n")
-            f.write("\n")
-
-        if momentum_ranked:
-            f.write(f"\n# Speculative / High-Risk -- Low Float + Volume Spike "
-                     f"({len(momentum_ranked)} qualifying)\n\n")
-            f.write("_Separate track, not blended into the confluence scoring above. "
-                     "Low float (shares-outstanding proxy) + large price-confirmed volume "
-                     "spike -- see momentum_scan.py / config.py for thresholds._\n\n")
-            for rank, (sym, info) in enumerate(momentum_ranked, start=1):
-                name = clean_company_name(company_names.get(sym, ""))
-                label = f"{name} ({sym})" if name else sym
-                f.write(f"## {rank}. {label}\n")
-                f.write(f"- {info['detail']}\n\n")
+            f.write(f"## {rank}. {label}\n")
+            f.write(f"- {info['detail']}\n\n")
 
     if not push_list and not momentum_ranked:
         print("Nothing qualifies right now.", file=sys.stderr)
         return
+
+    # Same content goes to two places: the always-current file (path
+    # never changes, so anything pointing at "latest_alerts.md" keeps
+    # working) and a per-run timestamped copy that's never overwritten,
+    # for looking back at exactly what was alerted -- and at what
+    # entry/stop/target -- at any point in the past. Written only when
+    # there's an actual alert (i.e. past the "nothing qualifies" check
+    # above) -- most intraday runs find nothing new, and a history file
+    # per empty run would massively outnumber real alerts for no benefit.
+    alert_content = buf.getvalue()
+    with open(LATEST_ALERTS_FILE, "w") as out:
+        out.write(alert_content)
+    os.makedirs(ALERTS_HISTORY_DIR, exist_ok=True)
+    history_path = os.path.join(ALERTS_HISTORY_DIR, f"latest_alerts_{run_stamp}.md")
+    with open(history_path, "w") as out:
+        out.write(alert_content)
 
     # Computed BEFORE the message body so we can embed a real markdown
     # hyperlink in the text itself, not just rely on ntfy's Click header

@@ -192,7 +192,12 @@ DELISTING_RISK_FILE = "delisting_risk.json"
 FUNDAMENTALS_SIGNALS_FILE = "fundamentals_signals.json"
 SIGNALS_STATE_FILE = "signals_state.json"      # rolling raw signals, all categories
 ALERT_LOG_FILE = "alert_log.json"              # composite-level "seen before" tracking
-LATEST_ALERTS_FILE = "latest_alerts.md"        # human-readable full ranked list
+LATEST_ALERTS_FILE = "latest_alerts.md"        # human-readable full ranked list -- always
+                                                # the CURRENT/most-recent run; overwritten
+                                                # each run, same as before
+ALERTS_HISTORY_DIR = "alerts_history"          # one timestamped snapshot per run, ET,
+                                                # e.g. alerts_history/latest_alerts_2026-08-19_0933.md
+                                                # -- never overwritten, for trade-plan lookback
 DAILY_PUSHES_FILE = "daily_pushes.json"        # running log of actual pushes, per ET trading day
 DAILY_PUSHES_RETENTION_DAYS = 10               # how many days of history to keep
 
