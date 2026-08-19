@@ -58,6 +58,12 @@ jobs:
               git add "$f"
             fi
           done
+          # One timestamped snapshot per run, never overwritten -- lets
+          # past trade plans (entry/stop/target) be looked back on later,
+          # since latest_alerts.md itself is overwritten every run.
+          if [ -d alerts_history ]; then
+            git add alerts_history/
+          fi
           git diff --staged --quiet && echo "No changes to commit" && exit 0
           git commit -m "Intraday scan update [automated]"
           for attempt in 1 2 3 4 5; do
