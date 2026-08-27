@@ -53,6 +53,12 @@ jobs:
           git config user.name "stock-scanner-bot"
           git config user.email "actions@users.noreply.github.com"
           git config merge.signals-state.driver "python3 merge_signals_state.py %O %A %B"
+          git config merge.alert-log.driver "python3 merge_alert_log.py %O %A %B"
+          git config merge.daily-pushes.driver "python3 merge_daily_pushes.py %O %A %B"
+          # Built-in trivial "keep whichever side is present" resolver --
+          # used for files that are fully regenerated each run (see
+          # .gitattributes) and have nothing to structurally merge.
+          git config merge.ours.driver true
           for f in signals_state.json alert_log.json latest_alerts.md daily_pushes.json; do
             if [ -f "$f" ]; then
               git add "$f"
