@@ -1,1 +1,11 @@
 signals_state.json merge=signals-state
+alert_log.json merge=alert-log
+daily_pushes.json merge=daily-pushes
+
+# latest_alerts.md and the alerts_history/ snapshots are fully
+# regenerated every run with no cross-run accumulation -- there's
+# nothing to actually merge, so a real conflict here just needs to not
+# block the push. "ours" keeps whichever side the rebase is holding at
+# that point; the next run 30 min later overwrites it anyway.
+latest_alerts.md merge=ours
+alerts_history/*.md merge=ours
