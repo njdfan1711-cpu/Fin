@@ -1,6 +1,7 @@
 symbol,name,exchange,etf,test_issue
 A,"Agilent Technologies, Inc. Common Stock",NYSE,N,N
 AA,Alcoa Corporation Common Stock,NYSE,N,N
+AAC,Ares Acquisition Corporation III Class A Ordinary Shares,NYSE,N,N
 AACG,"ATA Creativity Global - American Depositary Shares, each representing two common shares",NASDAQ,N,N
 AACI,Armada Acquisition Corp. III - Class A Ordinary Share,NASDAQ,N,N
 AACIU,Armada Acquisition Corp. III - Units,NASDAQ,N,N
@@ -226,7 +227,6 @@ AIFC,AI Financial Corporation - Common Stock,NASDAQ,N,N
 AIFF,"Firefly Neuroscience, Inc.  - Common Stock",NASDAQ,N,N
 AIFU,AIFU Inc. - Class A Ordinary Share,NASDAQ,N,N
 AIG,"American International Group, Inc. New Common Stock",NYSE,N,N
-AIHS,Senmiao Technology Limited - Common Stock,NASDAQ,N,N
 AII,"American Integrity Insurance Group, Inc. Common Stock",NYSE,N,N
 AIIA,AI Infrastructure Acquisition Corp. Class A Ordinary Shares,NYSE,N,N
 AIIO,Robo.ai Inc. - Class B Ordinary Shares,NASDAQ,N,N
@@ -1435,9 +1435,6 @@ CMDB,Costamare Bulkers Holdings Limited Common Stock,NYSE,N,N
 CME,CME Group Inc. - Class A Common Stock,NASDAQ,N,N
 CMG,"Chipotle Mexican Grill, Inc. Common Stock",NYSE,N,N
 CMI,Cummins Inc. Common Stock,NYSE,N,N
-CMII,Columbus Circle Capital Corp II - Class A Ordinary Shares,NASDAQ,N,N
-CMIIU,Columbus Circle Capital Corp II - Unit,NASDAQ,N,N
-CMIIW,Columbus Circle Capital Corp II - Warrant,NASDAQ,N,N
 CMMB,Chemomab Therapeutics Ltd.  - American Depositary Shares,NASDAQ,N,N
 CMND,Clearmind Medicine Inc. - Common Shares,NASDAQ,N,N
 CMP,Compass Minerals Intl Inc Common Stock,NYSE,N,N
@@ -3287,6 +3284,9 @@ IPVVW,"InterPrivate Investment Partners V, Inc. - Warrants",NASDAQ,N,N
 IPW,iPower Inc. - Common Stock,NASDAQ,N,N
 IPWR,Ideal Power Inc. - Common Stock,NASDAQ,N,N
 IPX,IperionX Limited - American Depositary Share,NASDAQ,N,N
+IPXG,Inection Point Acquisition Corp. VII  - Class A Ordinary Shares,NASDAQ,N,N
+IPXGU,Inection Point Acquisition Corp. VII  - Unit,NASDAQ,N,N
+IPXGW,Inection Point Acquisition Corp. VII  - Warrant,NASDAQ,N,N
 IQ,"iQIYI, Inc. - American Depositary Shares",NASDAQ,N,N
 IQI,Invesco Quality Municipal Income Trust Common Stock,NYSE,N,N
 IQMX,IQM Quantum Computers Oyj - American Depositary Shares,NASDAQ,N,N
@@ -3423,6 +3423,7 @@ JSM,"Navient Corporation - 6% Senior Notes due December 15, 2043",NASDAQ,N,N
 JSPR,"Jasper Therapeutics, Inc. - Class A Common Stock",NASDAQ,N,N
 JSPRW,"Jasper Therapeutics, Inc. - Warrant",NASDAQ,N,N
 JTAI,Jet.AI Inc. - Common Stock,NASDAQ,N,N
+JTTT,JATT III Acquisition Corp - Ordinary Shares,NASDAQ,N,N
 JUNS,"Jupiter Neurosciences, Inc. - Common Stock",NASDAQ,N,N
 JVA,"Coffee Holding Co., Inc. - Common Stock",NASDAQ,N,N
 JWEL,Jowell Global Ltd. - Ordinary Shares,NASDAQ,N,N
@@ -3639,7 +3640,6 @@ LEA,Lear Corporation Common Stock,NYSE,N,N
 LECO,"Lincoln Electric Holdings, Inc. - Common Shares",NASDAQ,N,N
 LEDS,SemiLEDS Corporation - Common Stock,NASDAQ,N,N
 LEE,"Lee Enterprises, Incorporated - Common Stock",NASDAQ,N,N
-LEG,"Leggett & Platt, Incorporated Common Stock",NYSE,N,N
 LEGH,Legacy Housing Corporation - Common Stock,NASDAQ,N,N
 LEGN,Legend Biotech Corporation - American Depositary Shares,NASDAQ,N,N
 LEGO,Legato Merger Corp. IV Ordinary Shares,NYSE American,N,N
@@ -4483,7 +4483,6 @@ NTWK,NETSOL Technologies Inc. - Common Stock,NASDAQ,N,N
 NTWO,Newbury Street II Acquisition Corp - Class A Ordinary Shares,NASDAQ,N,N
 NTWOU,Newbury Street II Acquisition Corp - Unit,NASDAQ,N,N
 NTWOW,Newbury Street II Acquisition Corp - Warrant,NASDAQ,N,N
-NTZ,"Natuzzi, S.p.A.",NYSE,N,N
 NU,Nu Holdings Ltd. Class A Ordinary Shares,NYSE,N,N
 NUAI,"New Era Energy & Digital, Inc. - Common Stock",NASDAQ,N,N
 NUAIW,"New Era Energy & Digital, Inc. - Warrants",NASDAQ,N,N
@@ -5384,6 +5383,7 @@ RMT,"Royce Micro-Cap Trust, Inc. Common Stock",NYSE,N,N
 RMTI,"Rockwell Medical, Inc. - Common Stock",NASDAQ,N,N
 RNA,"Atrium Therapeutics, Inc. - Common Stock",NASDAQ,N,N
 RNAC,"Cartesian Therapeutics, Inc. - Common Stock",NASDAQ,N,N
+RNAQU,Rainier Acquisition Corporation - Units,NASDAQ,N,N
 RNAZ,"TransCode Therapeutics, Inc. - Common Stock",NASDAQ,N,N
 RNG,"RingCentral, Inc. Class A Common Stock",NYSE,N,N
 RNGR,"Ranger Energy Services, Inc. Class A Common Stock",NYSE,N,N
@@ -5522,6 +5522,7 @@ SATA,"Strive, Inc. - Variable Rate Series A Perpetual Preferred Stock",NASDAQ,N,
 SATL,Satellogic Inc. - Class A Common Stock,NASDAQ,N,N
 SATLW,Satellogic Inc. - Warrant,NASDAQ,N,N
 SAV,Saratoga Investment Corp 7.50% Notes due 2031,NYSE,N,N
+SAX,Saratoga Investment Corp 8.00% Notes due 2031,NYSE,N,N
 SAY,Saratoga Investment Corp 8.125% Notes due 2027,NYSE,N,N
 SAZ,Saratoga Investment Corp 8.50% Notes due 2028,NYSE,N,N
 SB,"Safe Bulkers, Inc Common Stock ($0.001 par value)",NYSE,N,N
@@ -5548,6 +5549,7 @@ SBXD,SilverBox Corp IV Class A Ordinary Shares,NYSE,N,N
 SBXE,SilverBox Corp V Class A Ordinary Shares,NYSE,N,N
 SCAG,Scage Future - American Depositary Shares,NASDAQ,N,N
 SCAGW,Scage Future - Warrants,NASDAQ,N,N
+SCATU,Southern Cross Acquisition II Corp. - Units,NASDAQ,N,N
 SCCD,Sachem Capital Corp. 6.00% Notes due 2026,NYSE American,N,N
 SCCE,Sachem Capital Corp. 6.00% Notes due 2027,NYSE American,N,N
 SCCF,Sachem Capital Corp. 7.125% Notes due 2027,NYSE American,N,N
@@ -6467,6 +6469,7 @@ V,Visa Inc.,NYSE,N,N
 VABK,Virginia National Bankshares Corporation - Common Stock,NASDAQ,N,N
 VAC,Marriott Vacations Worldwide Corporation Common Stock,NYSE,N,N
 VACI,Viking Acquisition Corp. I Class A Ordinary Shares,NYSE,N,N
+VAI,Valor Energy Incorporated - Common Stock,NASDAQ,N,N
 VAL,Valaris Limited Common Shares,NYSE,N,N
 VALE,VALE S.A.  American Depositary Shares Each Representing one common share,NYSE,N,N
 VALN,Valneva SE - American Depositary Shares,NASDAQ,N,N
@@ -6701,7 +6704,6 @@ WHLRP,"Wheeler Real Estate Investment Trust, Inc. - Series B Preferred Stock",NA
 WHR,Whirlpool Corporation Common Stock,NYSE,N,N
 WHWK,"Whitehawk Therapeutics, Inc. - Common Stock",NASDAQ,N,N
 WIA,Western Asset Inflation-Linked Income Fund,NYSE,N,N
-WILC,"G. Willi-Food International,  Ltd. - Ordinary Shares",NASDAQ,N,N
 WIMI,WiMi Hologram Cloud Inc. - Class B Ordinary Shares,NASDAQ,N,N
 WINA,Winmark Corporation - Common Stock,NASDAQ,N,N
 WING,Wingstop Inc. - Common Stock,NASDAQ,N,N
@@ -6849,7 +6851,9 @@ XRXDW,Xerox Holdings Corporation - Warrants,NASDAQ,N,N
 XSLL,Xsolla SPAC 1 - Class A Ordinary Shares,NASDAQ,N,N
 XSLLU,Xsolla SPAC 1 - Units,NASDAQ,N,N
 XSLLW,Xsolla SPAC 1 - Warrants,NASDAQ,N,N
+XTER,Karman Line Acquisition Corp. - Class A Ordinary Shares,NASDAQ,N,N
 XTERU,Karman Line Acquisition Corp. - Units,NASDAQ,N,N
+XTERW,Karman Line Acquisition Corp. - Warrants,NASDAQ,N,N
 XTIA,"XTI Aerospace, Inc. Common Stock  - Common Stock",NASDAQ,N,N
 XTLB,XTL Biopharmaceuticals Ltd. - American Depositary Shares,NASDAQ,N,N
 XTNT,"Xtant Medical Holdings, Inc. Common Stock",NYSE American,N,N
