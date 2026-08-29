@@ -51,6 +51,29 @@ def record_signal(symbol: str, category: str, detail: str, strength: float = 1.0
     _save(state)
 
 
+def clear_signal(symbol: str, category: str):
+    """
+    Remove a single category entry for a symbol, if present.
+
+    Needed for signals whose human-readable detail bakes in relative-day
+    language (e.g. "Earnings scheduled today (2026-08-26)"). Those go
+    stale the moment the underlying condition stops applying, not on the
+    category's normal validity-window timer -- so when a scan determines
+    there's nothing current to report, it should call this instead of
+    just skipping the write, or the last-written detail string keeps
+    showing (now wrong) until the window happens to expire on its own.
+    """
+    state = _load()
+    entry = state.get(symbol)
+    if entry and category in entry:
+        del entry[category]
+        if entry:
+            state[symbol] = entry
+        else:
+            del state[symbol]
+        _save(state)
+
+
 def get_active_signals() -> dict:
     """
     Returns {symbol: {category: {"detail", "strength", "timestamp"}}} for

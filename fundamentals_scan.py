@@ -92,7 +92,7 @@ from config import (
     METRICS_CACHE_FILE,
     METRICS_REFRESH_DAYS,
 )
-from signals_store import record_signal
+from signals_store import record_signal, clear_signal
 
 BASE_URL = "https://finnhub.io/api/v1"
 CALLS_PER_MINUTE = 55  # stay a little under Finnhub's 60/min free cap
@@ -566,6 +566,15 @@ def main():
             record_signal(symbol, "earnings_quality", combined_caution_detail,
                           strength=combined_caution_strength)
             earnings_quality_flags += 1
+        else:
+            # Nothing current to report (net margin is fine AND no
+            # earnings date in the proximity window). Actively clear any
+            # prior entry instead of leaving it -- otherwise a caution
+            # written on, say, 8/26 ("Earnings scheduled today") just
+            # sits there under earnings_quality's 5-day validity window,
+            # displayed as still-current on 8/28 even though the report
+            # date has come and gone.
+            clear_signal(symbol, "earnings_quality")
 
         if i % 100 == 0:
             print(f"  ...{i}/{len(symbols)} checked", file=sys.stderr)
