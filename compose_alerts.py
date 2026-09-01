@@ -331,17 +331,9 @@ def format_trade_plan(plan: dict | None, resolution_days: dict | None = None) ->
         if target_stats and stop_stats:
             base += (f"\n  • **Expected timeframe:** historically ~{target_stats['median_days']:.0f}d "
                      f"to target, ~{stop_stats['median_days']:.0f}d to stop "
-                     f"(n={target_stats['n']}/{stop_stats['n']}); most signals resolve neither "
-                     f"way within a week, so treat this as a rough floor, not a firm ETA.")
+                     f"(n={target_stats['n']}/{stop_stats['n']})")
 
     return base
-
-
-TRADE_PLAN_DISCLAIMER = (
-    "_Trade plan levels are volatility-based (ATR) estimates, not "
-    "recommendations -- not historically backtested. Confirm before "
-    "entering; exit discipline is on you._"
-)
 
 
 def load_company_names() -> dict:
@@ -743,14 +735,6 @@ def main():
         else:
             footer += (f"\n\n_{remaining} more qualifying pick(s) in {LATEST_ALERTS_FILE} in the repo "
                         f"(no REPO_URL set, so no direct link -- see config.py)_")
-    # Conservative: reserve room for the disclaimer if ANY candidate line
-    # has a trade plan, not just the ones that end up fitting -- slightly
-    # over-reserves in the rare case every trade-plan line gets truncated
-    # out, which is the safe direction to be wrong in.
-    disclaimer_needed = any("**Trade plan:**" in line for line in lines)
-    if disclaimer_needed:
-        footer += f"\n\n{TRADE_PLAN_DISCLAIMER}"
-
     # Fixed allowance for the "+N more of this push didn't fit here" note
     # -- reserved unconditionally since whether it's actually needed
     # depends on the truncation decision this budget feeds into.
@@ -842,12 +826,10 @@ def main():
                 momentum_section += f"\n\n**[View all {momentum_total} speculative picks →]({click_url})** ({remaining} more than fit in this push)"
             else:
                 momentum_section += f"\n\n_{remaining} more speculative pick(s) in {LATEST_ALERTS_FILE} in the repo_"
-        if "**Trade plan:**" in momentum_section:
-            momentum_section += f"\n\n{TRADE_PLAN_DISCLAIMER}"
         # Same structural safety net as the main message -- build_momentum_section
         # already reserves its own header's bytes, but this push's footer
-        # (link + disclaimer) is appended after that budget check, same
-        # gap that caused the main push's bug, so it needs the same guard.
+        # (link) is appended after that budget check, same gap that
+        # caused the main push's bug, so it needs the same guard.
         if _utf8_len(momentum_section) > NTFY_MESSAGE_BYTE_LIMIT - 96:
             momentum_section = _hard_truncate_utf8(momentum_section, NTFY_MESSAGE_BYTE_LIMIT - 96)
             momentum_section += "\n\n_(hard-truncated to fit -- see repo for full detail)_"
