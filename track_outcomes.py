@@ -37,6 +37,7 @@ often than that; a 7-day-minimum-old push doesn't need hourly re-checking.
 
 import json
 import os
+import statistics
 import sys
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
@@ -79,6 +80,42 @@ def load_outcome_history() -> dict:
         with open(OUTCOME_HISTORY_FILE) as f:
             return json.load(f)
     return {}
+
+
+def typical_resolution_days() -> dict:
+    """
+    Median days_to_outcome for target_hit and stop_hit, computed fresh
+    from outcome_history.json every time it's called -- so it improves
+    automatically as more signals resolve, rather than being a hardcoded
+    guess. Since every trade_plan sizes its stop/target as a fixed ATR
+    multiple (see compute_trade_plan in compose_alerts.py), this number
+    is already volatility-normalized: a high-ATR stock and a low-ATR
+    stock are both covering the same *relative* distance, so one
+    system-wide median applies across both rather than needing a
+    separate estimate per stock.
+
+    Shared by position_monitor.py (checking held positions) and
+    compose_alerts.py (annotating new trade plans with an expected
+    timeframe) -- one implementation, read-only against this file, same
+    reasoning as the rest of this module.
+
+    Returns {} for an outcome type with no resolved samples yet, rather
+    than a fabricated fallback number -- callers decide how to handle
+    "not enough data yet".
+    """
+    history = load_outcome_history()
+    by_outcome = {"target_hit": [], "stop_hit": []}
+    for entry in history.values():
+        outcome = entry.get("outcome")
+        days = entry.get("days_to_outcome")
+        if outcome in by_outcome and days is not None:
+            by_outcome[outcome].append(days)
+
+    return {
+        outcome: {"median_days": statistics.median(values), "n": len(values)}
+        for outcome, values in by_outcome.items()
+        if values
+    }
 
 
 def save_outcome_history(history: dict):
