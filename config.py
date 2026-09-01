@@ -214,12 +214,35 @@ OUTCOME_LOOKBACK_DAYS = 7          # comfortably inside DAILY_PUSHES_RETENTION_D
                                     # it's old enough to be evaluated
 OUTCOME_HISTORY_FILE = "outcome_history.json"
 
+# --- Position monitor -------------------------------------------------
+# Checks OPEN_POSITIONS_FILE (synced from the trade log) against the
+# trade_plan Fin generated when each symbol was originally pushed --
+# the feedback loop that was missing between "here's a stop/target" at
+# signal time and what actually happens to a position afterward.
+OPEN_POSITIONS_FILE = "open_positions.json"
+POSITION_MONITOR_STATE_FILE = "position_monitor_state.json"
+# How many days back to search daily_pushes.json for the trade_plan that
+# was active on/before a position's entry_date. 21 covers a full push
+# retention cycle with room to spare (DAILY_PUSHES_RETENTION_DAYS below).
+POSITION_PLAN_LOOKBACK_DAYS = 21
+# If a position has been held this many multiples of the empirical
+# median days-to-resolution (from outcome_history.json) without hitting
+# either its stop or target, flag it as overdue -- the "this trade has
+# outrun its own thesis" alert.
+OVERDUE_HOLD_MULTIPLIER = 2.0
+
 # --- Trade plan (entry/stop/target) -- ATR-based volatility-scaled levels,
 # computed live for just the small already-shortlisted push candidates.
 # No new daily state file (avoids the merge-conflict class of bug that
 # signals_state.json had) -- this is purely a display layer on top of
 # the existing price fetch.
 ATR_PERIOD = 14                       # standard ATR lookback, in daily bars
+LOW_ATR_PCT_CAUTION = 3.0             # ATR below this % of price rarely resolves to
+                                       # target within the tracking window (0/171 in a
+                                       # 515-sample backtest of daily_pushes.json vs.
+                                       # outcome_history.json) -- flagged, not excluded,
+                                       # since the sample is still thin (14 target hits
+                                       # total across all ATR levels).
 ENTRY_BAND_ATR_MULT = 0.25            # entry zone = price +/- this * ATR
 STOP_ATR_MULT = 1.5                   # main-list stop distance, in ATRs
 MOMENTUM_STOP_ATR_MULT = 1.0          # tighter stop for the momentum track --

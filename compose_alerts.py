@@ -47,7 +47,14 @@ import hashlib
 import pandas as pd
 import yfinance as yf
 
+from track_outcomes import typical_resolution_days
+
 ET = ZoneInfo("America/New_York")
+
+# Computed once per run (not per-ticker) -- outcome_history.json doesn't
+# change mid-run, and this keeps format_ticker_line/format_momentum_line's
+# signatures unchanged rather than threading it through every call site.
+RESOLUTION_DAYS = typical_resolution_days()
 
 from config import (
     FINNHUB_API_KEY,
@@ -66,6 +73,7 @@ from config import (
     MOMENTUM_MAX_PICKS_IN_PUSH,
     MOMENTUM_PUSH_CHAR_BUDGET,
     ATR_PERIOD,
+    LOW_ATR_PCT_CAUTION,
     ENTRY_BAND_ATR_MULT,
     STOP_ATR_MULT,
     MOMENTUM_STOP_ATR_MULT,
@@ -291,12 +299,42 @@ def compute_trade_plan(price: float | None, atr: float | None, stop_atr_mult: fl
     }
 
 
-def format_trade_plan(plan: dict | None) -> str | None:
+def format_low_atr_caution(price: float | None, atr: float | None) -> str | None:
+    """
+    Flags (doesn't exclude) picks whose ATR is a small percentage of
+    price. Backtesting daily_pushes.json against outcome_history.json
+    found 0 of 171 signals below LOW_ATR_PCT_CAUTION hit their target
+    within the tracking window -- they either stopped out quickly or sat
+    unresolved. Kept as a caution rather than a hard filter since the
+    sample (14 target hits total, across all ATR levels) is still thin.
+    """
+    if not price or not atr or price <= 0:
+        return None
+    atr_pct = (atr / price) * 100
+    if atr_pct >= LOW_ATR_PCT_CAUTION:
+        return None
+    return (f"  • \u26A0\uFE0F **Low relative volatility:** ATR is only {atr_pct:.1f}% of price "
+            f"-- historically these rarely reach target within a week; more often they "
+            f"stop out quickly or just sit unresolved.")
+
+
+def format_trade_plan(plan: dict | None, resolution_days: dict | None = None) -> str | None:
     if not plan:
         return None
-    return (f"  • **Trade plan:** entry ${plan['entry_low']:.2f}-${plan['entry_high']:.2f}, "
+    base = (f"  • **Trade plan:** entry ${plan['entry_low']:.2f}-${plan['entry_high']:.2f}, "
             f"stop ${plan['stop']:.2f}, target ${plan['target']:.2f} "
             f"(~{plan['shares']} sh, ~${plan['risk_usd']:.0f} at risk)")
+
+    if resolution_days:
+        target_stats = resolution_days.get("target_hit")
+        stop_stats = resolution_days.get("stop_hit")
+        if target_stats and stop_stats:
+            base += (f"\n  • **Expected timeframe:** historically ~{target_stats['median_days']:.0f}d "
+                     f"to target, ~{stop_stats['median_days']:.0f}d to stop "
+                     f"(n={target_stats['n']}/{stop_stats['n']}); most signals resolve neither "
+                     f"way within a week, so treat this as a rough floor, not a firm ETA.")
+
+    return base
 
 
 TRADE_PLAN_DISCLAIMER = (
@@ -416,9 +454,12 @@ def format_ticker_line(rank: int, symbol: str, name: str, categories: dict,
             bullets.append(f"  • \u26A0\uFE0F **{label}:** {categories[cat]['detail']}")
     if sector_note:
         bullets.append(f"  • **Sector:** {sector_note}")
-    plan_bullet = format_trade_plan(compute_trade_plan(price, atr, STOP_ATR_MULT))
+    plan_bullet = format_trade_plan(compute_trade_plan(price, atr, STOP_ATR_MULT), RESOLUTION_DAYS)
     if plan_bullet:
         bullets.append(plan_bullet)
+    caution = format_low_atr_caution(price, atr)
+    if caution:
+        bullets.append(caution)
 
     return header + "\n" + "\n".join(bullets)
 
@@ -438,9 +479,12 @@ def format_momentum_line(rank: int, symbol: str, name: str, info: dict, price, a
     bullet = f"  • {info['detail']}"
     note = "  • _Speculative: low float + volume spike, not fundamentals-backed_"
     lines = [header, bullet, note]
-    plan_bullet = format_trade_plan(compute_trade_plan(price, atr, MOMENTUM_STOP_ATR_MULT))
+    plan_bullet = format_trade_plan(compute_trade_plan(price, atr, MOMENTUM_STOP_ATR_MULT), RESOLUTION_DAYS)
     if plan_bullet:
         lines.append(plan_bullet)
+    caution = format_low_atr_caution(price, atr)
+    if caution:
+        lines.append(caution)
     return "\n".join(lines)
 
 
