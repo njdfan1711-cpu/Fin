@@ -49,6 +49,11 @@ BATCH_PAUSE_SECONDS = 6   # pause between batches -- increased from 2. Yahoo's
                           # needs to be more conservative than it first seemed
 RETRY_COOLDOWN_SECONDS = 45  # longer pause before the retry pass, to let
                              # any rate limit actually reset
+BATCH_TIMEOUT_SECONDS = 30   # per-batch request timeout. Without this, a
+                             # batch hitting Yahoo mid-rate-limit can hang
+                             # indefinitely instead of erroring out into the
+                             # existing retry pass below -- this is what
+                             # turned ~15min runs into ~2hr runs on bad days
 
 
 def load_universe() -> list[dict]:
@@ -83,6 +88,7 @@ def get_price_volume_batch(symbols: list[str]) -> dict:
             group_by="ticker",
             threads=True,
             progress=False,
+            timeout=BATCH_TIMEOUT_SECONDS,
         )
     except Exception as e:
         print(f"  [batch error] {e}", file=sys.stderr)
