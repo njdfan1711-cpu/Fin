@@ -1,0 +1,39 @@
+name: Daily Scan Watchdog
+
+on:
+  schedule:
+    # 13:03 UTC = 9:03am ET during EDT (mid-March through early
+    # November). Checks whether scan.yml -- normally triggered
+    # ~11:07 UTC / ~7:07am ET -- has actually produced a run yet today.
+    # Off the top of the hour for the same reason as scan.yml's own
+    # cron: avoids GitHub's highest-congestion trigger window.
+    #
+    # NOTE: during EST (winter), 13:03 UTC is 8:03am ET, an hour
+    # earlier than intended -- still well after the scan's normal
+    # start time, just not a strict 9am check. Shift to "3 14 * * 1-5"
+    # for a true 9am ET check in the winter months, or leave as-is if
+    # the hour drift doesn't matter to you.
+    - cron: "3 13 * * 1-5"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  watchdog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check if today's Daily Foundation Scan has run
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python watchdog.py
