@@ -206,6 +206,16 @@ def build_matchers(eligible: list[dict]) -> dict:
        financial news/RSS are capitalized, so the ticker half of the
        pattern is matched case-SENSITIVELY (only the company-name half
        stays case-insensitive), eliminating this class of false hit.
+
+    3. Sentence-initial capitalization still slips past #2. Real bug
+       this caused: "Taiwan Semiconductor Just Set a New Company
+       Record. A New All-Time High Stock Price Is Coming" matched
+       ticker A (Agilent) -- the case-sensitive guard above only rules
+       out lowercase "a", but "A" as the first word of a new sentence
+       is capitalized for grammar, not because anyone means the
+       ticker. is_sentence_initial_match() below screens this out for
+       the symbol-only branch specifically -- see its docstring for
+       what this does and doesn't catch.
     """
     STOPWORDS = {
         "the", "a", "an", "inc", "incorporated", "corp", "corporation",
@@ -254,19 +264,50 @@ def build_matchers(eligible: list[dict]) -> dict:
         symbol_alt = re.escape(symbol)
         if name_phrase:
             # Name half stays case-insensitive (scoped inline flag);
-            # symbol half is case-sensitive by default.
-            pattern = rf"\b((?i:{name_phrase})|{symbol_alt})\b"
+            # symbol half is case-sensitive by default. Named groups so
+            # callers can tell which alternative fired -- needed to
+            # apply the sentence-initial guard (see
+            # is_sentence_initial_match) only to the symbol branch.
+            pattern = rf"\b(?:(?P<name>(?i:{name_phrase}))|(?P<sym>{symbol_alt}))\b"
         else:
             # No usable distinctive name phrase (generic single word, or
             # nothing distinctive at all) -- match on the ticker only,
             # case-sensitively.
-            pattern = rf"\b({symbol_alt})\b"
+            pattern = rf"\b(?P<sym>{symbol_alt})\b"
 
         try:
             matchers[symbol] = re.compile(pattern)
         except re.error:
             continue
     return matchers
+
+
+_SENTENCE_END_RE = re.compile(r"[.!?]\s*$")
+
+
+def is_sentence_initial_match(headline: str, match_start: int) -> bool:
+    """
+    True if the match at match_start is the first word of the headline,
+    or immediately follows sentence-ending punctuation -- i.e. a
+    position where ordinary English capitalizes ANY word, ticker or
+    not. This is what let "...Record. A New All-Time High..." match
+    ticker A: capitalized because it starts a sentence, not because
+    it's the ticker.
+
+    Deliberately narrow -- catches only that specific pattern. It does
+    NOT catch a short ticker colliding with Title Case headline
+    convention mid-headline (e.g. "Agilent Stock Is A Buy Now"), which
+    would need a different check (something like: most words in the
+    headline are capitalized, so this one being capitalized proves
+    nothing). Left alone for now since the observed failure was
+    specifically the sentence-boundary case -- worth revisiting if
+    title-case collisions turn out to be a real recurring source of
+    false positives too.
+    """
+    prefix = headline[:match_start].rstrip()
+    if not prefix:
+        return True
+    return bool(_SENTENCE_END_RE.search(prefix))
 
 
 def detect_sector_alerts(articles: list[dict]):
@@ -350,8 +391,14 @@ def main():
         matches = []
         for a in recent_articles:
             headline = a.get("headline", "")
-            if pattern.search(headline):
-                matches.append(a)
+            m = pattern.search(headline)
+            if not m:
+                continue
+            if m.lastgroup == "sym" and is_sentence_initial_match(headline, m.start()):
+                continue  # capitalized because it starts a sentence, not
+                          # because it's the ticker -- see build_matchers
+                          # docstring point 3
+            matches.append(a)
 
         if not matches:
             continue
