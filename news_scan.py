@@ -244,8 +244,21 @@ def build_matchers(eligible: list[dict]) -> dict:
         symbol = row["symbol"]
         name = row["name"]
 
-        words = re.findall(r"[A-Za-z']+", name)
-        distinctive = [w for w in words if w.lower() not in STOPWORDS]
+        # [A-Za-z0-9'] -- NOT letters-only. A letters-only pattern here
+        # was a real bug: it split "Five9, Inc." into "Five" + "Inc",
+        # silently dropping the "9" and leaving the plain English word
+        # "five" as the ticker's supposedly-distinctive match phrase --
+        # which then matched constantly in unrelated articles. Digits
+        # are part of the word they're attached to (Five9, C3.ai's "3"),
+        # not separators.
+        words = re.findall(r"[A-Za-z0-9']+", name)
+        # A word that's purely digits (no letters at all) is exactly as
+        # useless as a generic sector word for matching purposes -- "7"
+        # or "3" alone would match constantly in unrelated text -- so it
+        # doesn't count as distinctive even though it survives the
+        # stopword filter below.
+        distinctive = [w for w in words
+                       if w.lower() not in STOPWORDS and not w.isdigit()]
 
         # Prefer a TWO-word phrase whenever the name has one available --
         # far more specific than any single word ("Power Solutions" vs.
@@ -308,6 +321,31 @@ def is_sentence_initial_match(headline: str, match_start: int) -> bool:
     if not prefix:
         return True
     return bool(_SENTENCE_END_RE.search(prefix))
+
+
+_DOTTED_ABBREV_AFTER_RE = re.compile(r"^\.[A-Z]\.")
+_DOTTED_ABBREV_BEFORE_RE = re.compile(r"[A-Z]\.$")
+
+
+def is_dotted_abbreviation_match(headline: str, match_start: int, match_end: int) -> bool:
+    """
+    True if the match is one letter of a multi-letter dotted
+    abbreviation -- U.S., U.K., U.N., U.S.A., etc. Real bug this caused:
+    ticker U (Unity) matched the "U" in "U.S." -- \\b treats a period as
+    a word boundary exactly like a space, so \\bU\\b happily matches
+    inside "U.S." even though it's obviously not a ticker mention there.
+
+    Checks the specific shape (period-letter-period) rather than just
+    "next to a period", since a genuine ticker mention ending a
+    sentence ("...upgraded U.") is also followed by a bare period and
+    shouldn't be blocked by that alone. Checks both directions so it
+    catches the match landing on either letter of a 2-letter
+    abbreviation (the "U" in "U.S." AND the "S" in "U.S.", if some
+    other ticker happened to be S).
+    """
+    after = headline[match_end:match_end + 3]
+    before = headline[max(0, match_start - 2):match_start]
+    return bool(_DOTTED_ABBREV_AFTER_RE.match(after)) or bool(_DOTTED_ABBREV_BEFORE_RE.search(before))
 
 
 def detect_sector_alerts(articles: list[dict]):
@@ -398,6 +436,10 @@ def main():
                 continue  # capitalized because it starts a sentence, not
                           # because it's the ticker -- see build_matchers
                           # docstring point 3
+            if m.lastgroup == "sym" and is_dotted_abbreviation_match(headline, m.start(), m.end()):
+                continue  # part of a dotted abbreviation (U.S., U.K.,
+                          # etc), not a ticker mention -- see
+                          # is_dotted_abbreviation_match docstring
             matches.append(a)
 
         if not matches:
