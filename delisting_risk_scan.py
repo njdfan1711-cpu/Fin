@@ -41,11 +41,35 @@ OUTPUT_FILE = "delisting_risk.json"
 # a flag naturally ages out if no new deficiency notice keeps appearing.
 LOOKBACK_DAYS = 270
 
+# SEC's full-text search endpoint (efts.sec.gov) is noticeably flakier
+# than most of the other data sources this project hits -- occasional
+# 5xx and timeouts, not just under heavy load. A couple of quick retries
+# clears most of those. RETRY_BACKOFF_SECONDS deliberately short: this
+# runs once a day, not something worth stalling the whole pipeline over.
+MAX_RETRIES = 3
+RETRY_BACKOFF_SECONDS = 5
+
 
 def _get(url: str) -> dict:
-    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        return json.loads(resp.read().decode("utf-8"))
+    last_error = None
+    for attempt in range(1, MAX_RETRIES + 1):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                return json.loads(resp.read().decode("utf-8"))
+        except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError) as e:
+            last_error = e
+            # 4xx means the request itself is wrong (bad params, bad URL)
+            # -- retrying won't help, fail fast instead of burning 3
+            # attempts on something that'll never succeed.
+            if isinstance(e, urllib.error.HTTPError) and 400 <= e.code < 500:
+                raise
+            print(f"  [delisting-risk] request failed (attempt {attempt}/"
+                  f"{MAX_RETRIES}): {e} -- {'retrying' if attempt < MAX_RETRIES else 'giving up'}",
+                  file=sys.stderr)
+            if attempt < MAX_RETRIES:
+                time.sleep(RETRY_BACKOFF_SECONDS)
+    raise last_error
 
 
 def fetch_ticker_map() -> dict:
@@ -125,4 +149,18 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:
+        # This is a caution flag on top of the real filters, not a core
+        # dependency -- if SEC's search API is having a bad day, that
+        # should cost you the delisting-risk filter for today, not the
+        # entire daily scan (universe build, fundamentals, everything
+        # downstream). Deliberately NOT writing OUTPUT_FILE here:
+        # filters.py's load_delisting_risk() already treats a missing
+        # file as "no delisting-risk data" and carries on, so leaving
+        # any prior day's file in place (if one exists) is also fine --
+        # either way this fails open, never closed.
+        print(f"[delisting-risk] scan failed, skipping for today: {e}",
+              file=sys.stderr)
+        sys.exit(0)

@@ -770,8 +770,15 @@ def main():
         title += f" +{len(ranked_with_rank) - len(push_list)} more in repo"
 
     if push_list:
+        # click_url deliberately NOT passed here -- ntfy's Click header
+        # makes the ENTIRE notification a single tap target for that URL,
+        # which hijacks the tap gesture that would otherwise expand a
+        # long/collapsed notification to show the rest of the message.
+        # The link doesn't need it anyway: it's already embedded as a
+        # real [text](url) markdown link in the footer text above, which
+        # is tappable on its own once the message is expanded.
         send_alert(title, message, priority="high", tags=["chart_with_upwards_trend"],
-                   markdown=True, click_url=click_url)
+                   markdown=True)
         mark_alerted([sym for _, sym, _ in push_list])
 
         record_push([
@@ -834,7 +841,9 @@ def main():
             momentum_section = _hard_truncate_utf8(momentum_section, NTFY_MESSAGE_BYTE_LIMIT - 96)
             momentum_section += "\n\n_(hard-truncated to fit -- see repo for full detail)_"
         send_alert(momentum_title, momentum_section, priority="default",
-                   tags=["zap"], markdown=True, click_url=click_url)
+                   tags=["zap"], markdown=True)  # click_url omitted -- see
+                                                    # main push's send_alert
+                                                    # call for why
         print(f"Pushed {momentum_included}/{momentum_total} speculative ticker(s) as a separate alert.",
               file=sys.stderr)
     elif momentum_ranked:
