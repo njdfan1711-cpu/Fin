@@ -230,6 +230,13 @@ POSITION_PLAN_LOOKBACK_DAYS = 21
 # either its stop or target, flag it as overdue -- the "this trade has
 # outrun its own thesis" alert.
 OVERDUE_HOLD_MULTIPLIER = 2.0
+# Independent of the stop -- a position can be down a lot without ever
+# touching its (often wider, ATR-based) stop. This is a faster "hey,
+# pay attention" check: % loss from entry price, regardless of where
+# the stop actually sits. Checked on the intraday cadence (see
+# intraday.yml) specifically so a fast midday move surfaces same-day
+# rather than waiting for the next morning's daily scan.
+POSITION_DRAWDOWN_ALERT_PCT = 10.0
 
 # --- Trade plan (entry/stop/target) -- ATR-based volatility-scaled levels,
 # computed live for just the small already-shortlisted push candidates.

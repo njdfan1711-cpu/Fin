@@ -47,6 +47,7 @@ from config import (
     DAILY_PUSHES_FILE,
     POSITION_PLAN_LOOKBACK_DAYS,
     OVERDUE_HOLD_MULTIPLIER,
+    POSITION_DRAWDOWN_ALERT_PCT,
 )
 from notify import send_alert
 from track_outcomes import typical_resolution_days
@@ -162,6 +163,16 @@ def evaluate_position(pos: dict, plan: dict | None, current_price: float | None,
     if current_price is not None and entry_price:
         pnl_pct = ((current_price - entry_price) / entry_price) * 100
         result["pnl_pct"] = round(pnl_pct, 2)
+
+        # Independent of stop/target/plan -- pure "how far underwater is
+        # this position right now" check, so it still fires even for a
+        # manual pick with no matched Fin trade_plan to compare against.
+        if pnl_pct <= -POSITION_DRAWDOWN_ALERT_PCT:
+            result["conditions"].append("drawdown_threshold")
+            result["detail_lines"].append(
+                f"{pos['symbol']}: down {abs(pnl_pct):.1f}% from entry "
+                f"(${entry_price:.2f} → ${current_price:.2f})."
+            )
 
     if plan and current_price is not None:
         stop = plan.get("stop")
