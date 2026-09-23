@@ -9,3 +9,8 @@ daily_pushes.json merge=daily-pushes
 # that point; the next run 30 min later overwrites it anyway.
 latest_alerts.md merge=ours
 alerts_history/*.md merge=ours
+# Same reasoning -- position_monitor.py fully rebuilds this from
+# scratch each run (current open positions + their live conditions),
+# nothing to merge, and it's only ever written by intraday.yml's own
+# serialized runs anyway.
+position_monitor_state.json merge=ours
