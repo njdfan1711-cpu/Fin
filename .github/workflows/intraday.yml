@@ -48,6 +48,11 @@ jobs:
           REPO_URL: ${{ github.server_url }}/${{ github.repository }}
         run: python compose_alerts.py
 
+      - name: Check open positions (stop/target/drawdown/overdue)
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python position_monitor.py
+
       - name: Commit updated signal/alert state
         run: |
           git config user.name "stock-scanner-bot"
@@ -59,7 +64,7 @@ jobs:
           # used for files that are fully regenerated each run (see
           # .gitattributes) and have nothing to structurally merge.
           git config merge.ours.driver true
-          for f in signals_state.json alert_log.json latest_alerts.md daily_pushes.json; do
+          for f in signals_state.json alert_log.json latest_alerts.md daily_pushes.json position_monitor_state.json; do
             if [ -f "$f" ]; then
               git add "$f"
             fi
