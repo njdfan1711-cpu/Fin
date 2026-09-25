@@ -33,6 +33,32 @@ def _save(state: dict):
         json.dump(state, f, indent=2)
 
 
+def combine_strengths(strengths: list[float], decay: float = 0.6) -> float:
+    """
+    Combines multiple within-category finding strengths into one category
+    score. Replaces the old max(strengths) + min(0.05, 0.01*(len-1))
+    scheme, which effectively threw away every finding except the
+    strongest one -- once two tickers shared the same top finding (a
+    common case, since several findings use flat hardcoded strengths and
+    the continuous ones are capped at 1.0), their combined strength was
+    identical regardless of what else fired, producing large exact-tie
+    clusters in the final ranking.
+
+    Sorts findings strongest-first, then sums them with a geometric
+    decay per rank (each finding contributes `decay`x less than the one
+    before it). The strongest finding still dominates and is never
+    reduced -- it keeps its full value -- so relative signal importance
+    is preserved; every additional corroborating finding now adds a real,
+    varying amount instead of a flat capped bonus, so tickers with
+    different combinations of firing signals actually land on different
+    totals instead of the same one.
+    """
+    if not strengths:
+        return 0.0
+    ordered = sorted(strengths, reverse=True)
+    return sum(s * (decay ** i) for i, s in enumerate(ordered))
+
+
 def record_signal(symbol: str, category: str, detail: str, strength: float = 1.0):
     """
     category: one of "technical", "news", "fundamentals", "short_interest"

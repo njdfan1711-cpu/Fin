@@ -92,7 +92,7 @@ from config import (
     METRICS_CACHE_FILE,
     METRICS_REFRESH_DAYS,
 )
-from signals_store import record_signal, clear_signal
+from signals_store import record_signal, clear_signal, combine_strengths
 
 BASE_URL = "https://finnhub.io/api/v1"
 CALLS_PER_MINUTE = 55  # stay a little under Finnhub's 60/min free cap
@@ -537,12 +537,13 @@ def main():
             # came from a fresh call or the cache, so the signal doesn't
             # go stale/expire in signals_store just because the underlying
             # API call was skipped today.
-            # Small per-finding bonus (capped, see technicals_scan.py's
-            # matching comment) so tickers with more corroborating
-            # fundamentals findings rank slightly ahead of otherwise-tied
-            # ones, instead of falling back to arbitrary dict order.
+            # See combine_strengths() in signals_store.py -- every
+            # corroborating fundamentals finding contributes a real,
+            # decaying amount instead of a flat capped bonus, so tickers
+            # with different combinations of findings land on different
+            # totals instead of tying whenever they share the same top one.
             combined_detail = "; ".join(details)
-            combined_strength = max(strengths) + min(0.05, 0.01 * (len(strengths) - 1))
+            combined_strength = combine_strengths(strengths)
             record_signal(symbol, "fundamentals", combined_detail, strength=combined_strength)
             signals[symbol] = details
             total_signals += len(details)

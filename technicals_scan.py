@@ -63,7 +63,7 @@ from config import (
     MAX_MA50_EXTENSION_PCT,
     RS_NEW_HIGH_LOOKBACK_DAYS,
 )
-from signals_store import record_signal
+from signals_store import record_signal, combine_strengths
 
 BATCH_SIZE = 75
 BATCH_PAUSE_SECONDS = 4
@@ -344,22 +344,22 @@ def main():
             time.sleep(1)  # light pacing for this smaller, separate batch of calls
 
     # Record everything -- ONE combined signal per category per symbol.
-    # combined_strength uses max() as its base (peak signal still matters
-    # most) but adds a small bonus per additional corroborating finding
-    # (capped) -- e.g. RSI + MA cross + volume spike genuinely deserves a
-    # slight edge over a single finding at the same peak strength. This is
-    # deliberately tiny (max +0.05) so it never flips a STRONG/Moderate
-    # tier boundary on its own -- it's a ranking tiebreaker, not a new
-    # scoring dimension. Without this, tickers with identical peak
-    # strength were indistinguishable, and ties fell back to whatever
-    # order they happened to sit in signals_state.json (effectively
-    # alphabetical, from the original build) instead of reflecting how
-    # much evidence actually backs each pick.
+    # See combine_strengths() in signals_store.py -- every corroborating
+    # finding contributes a real, geometrically-decaying amount (the
+    # strongest finding still counts most) instead of the old flat
+    # +0.05-max bonus, so tickers with different combinations of firing
+    # findings land on genuinely different totals instead of tying
+    # whenever they share the same peak finding. NOTE: this raises the
+    # achievable ceiling for a category with several findings (e.g. RSI +
+    # MA cross + volume spike can now sum well past the old ~1.05 cap) --
+    # see the STRONG_TIER_STRENGTH_FOR_TWO / MIN_QUALIFYING_STRENGTH
+    # comment in config.py, those thresholds were tuned against the old
+    # scale and may need revisiting once real scores come in.
     total_signals = 0
     for sym, findings in all_findings.items():
         combined_detail = "; ".join(d for d, _ in findings)
         strengths = [s for _, s in findings]
-        combined_strength = max(strengths) + min(0.05, 0.01 * (len(strengths) - 1))
+        combined_strength = combine_strengths(strengths)
         record_signal(sym, "technical", combined_detail, strength=combined_strength)
         total_signals += len(findings)
 
