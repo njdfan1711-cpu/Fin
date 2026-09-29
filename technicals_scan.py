@@ -63,7 +63,7 @@ from config import (
     MAX_MA50_EXTENSION_PCT,
     RS_NEW_HIGH_LOOKBACK_DAYS,
 )
-from signals_store import record_signal, combine_strengths
+from signals_store import record_signal, combine_strengths, clear_signals_batch
 
 BATCH_SIZE = 75
 BATCH_PAUSE_SECONDS = 4
@@ -294,6 +294,7 @@ def main():
     all_findings = {}   # symbol -> list of (detail, strength)
     all_caution = {}    # symbol -> list of (detail, strength)
     ath_candidates = {} # symbol -> current_price, for the targeted follow-up pass
+    evaluated = set()   # symbols successfully evaluated this cycle
 
     total_batches = (len(symbols) + BATCH_SIZE - 1) // BATCH_SIZE
 
@@ -319,6 +320,7 @@ def main():
                 df = data if len(batch) == 1 else data[sym]
                 df = _flatten_columns(df)
                 findings, caution, hit_52wk_high, price = evaluate_symbol(df, spy_data)
+                evaluated.add(sym)
             except Exception:
                 continue
 
@@ -342,6 +344,16 @@ def main():
             if result:
                 all_findings.setdefault(sym, []).append(result)
             time.sleep(1)  # light pacing for this smaller, separate batch of calls
+
+    # Clear stale entries: symbols we successfully evaluated this cycle
+    # that produced NO findings/cautions now. Without this, their last
+    # recorded signal keeps counting toward confluence until the
+    # validity window expires. Symbols that errored out are left alone
+    # (we don't know their current state).
+    cleared_tech = clear_signals_batch(evaluated - set(all_findings), "technical")
+    cleared_caut = clear_signals_batch(evaluated - set(all_caution), "caution")
+    print(f"Cleared {cleared_tech} stale technical and {cleared_caut} stale caution entries.",
+          file=sys.stderr)
 
     # Record everything -- ONE combined signal per category per symbol.
     # See combine_strengths() in signals_store.py -- every corroborating

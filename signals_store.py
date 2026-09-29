@@ -100,6 +100,25 @@ def clear_signal(symbol: str, category: str):
         _save(state)
 
 
+def clear_signals_batch(symbols, category: str) -> int:
+    """
+    Like clear_signal(), but for many symbols in ONE load/save cycle.
+    Returns how many entries were actually removed.
+    """
+    state = _load()
+    cleared = 0
+    for sym in symbols:
+        entry = state.get(sym)
+        if entry and category in entry:
+            del entry[category]
+            cleared += 1
+            if not entry:
+                del state[sym]
+    if cleared:
+        _save(state)
+    return cleared
+
+
 def get_active_signals() -> dict:
     """
     Returns {symbol: {category: {"detail", "strength", "timestamp"}}} for
