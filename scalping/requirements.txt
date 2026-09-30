@@ -1,0 +1,7 @@
+# Kept separate from the root requirements.txt on purpose -- this is a
+# different project sharing the repo, not a dependency of the main
+# screener. Same pinned versions as root for now since the actual needs
+# (yfinance, pandas) happen to be identical, but this file is free to
+# diverge without touching anything the swing screener depends on.
+yfinance==1.5.2
+pandas==3.0.2
