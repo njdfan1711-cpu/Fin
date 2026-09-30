@@ -87,6 +87,11 @@ from alert_log import was_recently_alerted, mark_alerted
 from daily_pushes import record_push, prune_old_days
 from notify import send_alert
 
+# Per-request timeout for the yfinance price/ATR batch. Same reasoning as
+# BATCH_TIMEOUT_SECONDS in filters.py: without a timeout, one stalled
+# request can hang this step (and the whole intraday run) indefinitely.
+PRICE_FETCH_TIMEOUT_SECONDS = 30
+
 CATEGORY_LABELS = {
     "technical": "Technical",
     "news": "News",
@@ -245,6 +250,7 @@ def fetch_prices_and_atr(symbols: list[str]) -> dict:
             group_by="ticker",
             threads=True,
             progress=False,
+            timeout=PRICE_FETCH_TIMEOUT_SECONDS,
         )
     except Exception as e:
         print(f"[price/ATR fetch error] {e}", file=sys.stderr)

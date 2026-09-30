@@ -6,6 +6,50 @@ session before diagnosing or re-fixing something, since commit messages
 for automated runs all look identical and won't show what's already
 been touched.
 
+## 2026-09-30
+Audit of this log against the live files (pulled from `main`, 2026-09-30 19:38 UTC).
+Corrections to earlier entries are listed first, then changes made.
+
+Corrections:
+- 9/24 "migrated off native `schedule:`" was incomplete: cron-job.org
+  was added, but the native `schedule:` blocks stayed in `scan.yml` and
+  `intraday.yml`, so both triggers fired. Removed below.
+- 9/24 "added `timeout=` to `yf.download()` in `filters.py` and
+  `compose_alerts.py`" was only true for `filters.py`. The call in
+  `compose_alerts.py` (`fetch_prices_and_atr`) had no timeout. Fixed
+  below.
+- The ranking overhaul from a parallel session (`confidence_score()`,
+  widening `REVENUE_EPS_GROWTH_DIVISOR` 30->60 and
+  `OUTPERFORMANCE_DIVISOR` 15->40, raising
+  `PER_CATEGORY_STRENGTH_CEILING`) is NOT in the repo. Live code still
+  uses `/30` (fundamentals) and `/15` (technicals) saturating caps, and
+  `score_ticker()` still returns raw total strength. Tie-clustering is
+  addressed only by the 9/26 `combine_strengths()` change.
+
+Changes:
+- `scan.yml`, `intraday.yml`: removed the native `schedule:` blocks;
+  both are now `workflow_dispatch`-only, triggered by cron-job.org.
+  Late native runs were overlapping cron-job.org runs in the concurrency
+  group (one pending slot, so extras were cancelled) and risking
+  duplicate scans/alerts. `watchdog.yml` keeps its native schedule on
+  purpose (separate backstop).
+- `compose_alerts.py`: added `PRICE_FETCH_TIMEOUT_SECONDS = 30` and
+  passed it as `timeout=` to the `yf.download()` in
+  `fetch_prices_and_atr()`.
+- `technicals_scan.py`, `signals_store.py` (already live, logged here):
+  added `clear_signals_batch()`; each intraday cycle now clears stale
+  "technical" and "caution" signals for tickers that were evaluated
+  successfully but produced no findings. Tickers whose fetch failed are
+  left untouched.
+
+Known gaps (not changed):
+- `compose_alerts.py`: comments near `tiebreak_key()` and the `ranked =`
+  sort still reference the removed "evidence-count bonus".
+- `compose_alerts.py`: inner per-symbol `except Exception: continue` in
+  `fetch_prices_and_atr()` is still unlogged (see 9/24 note).
+- `config.py`: `SIGNAL_VALIDITY_HOURS` has no `"caution"` key, so
+  caution signals fall back to the 24h default. Consider `"caution": 4`.
+
 ## 2026-09-26
 - Rewrote category strength combining (`fundamentals_scan.py`,
   `technicals_scan.py`) from `max(strengths) + capped bonus` to a new
