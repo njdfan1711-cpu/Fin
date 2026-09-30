@@ -1,0 +1,68 @@
+name: Scalp Backtest (scalping project)
+
+# workflow_dispatch ONLY for now, deliberately no schedule: -- the main
+# screener's scan.yml/intraday.yml learned the hard way that GitHub
+# Actions' native `schedule:` trigger is unreliable (see ../CHANGELOG.md,
+# the 9/24 entry, and scan.yml/intraday.yml's own comments), and that
+# problem isn't specific to those workflows -- it'd affect this one too.
+# Once you want this running automatically every day, the known-working
+# fix is the same one already set up for scan.yml/intraday.yml: a
+# cron-job.org job that calls this workflow's `workflow_dispatch` REST
+# endpoint on a schedule, rather than relying on GitHub's own scheduler.
+# That's a 5-minute add (clone the existing cron-job.org job, point the
+# URL at this workflow, change the schedule) whenever you're ready --
+# just say so and I'll walk through it.
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scalp-backtest
+  cancel-in-progress: false
+
+jobs:
+  scalp-backtest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies (scalping project's own requirements.txt)
+        run: pip install -r scalping/requirements.txt
+
+      - name: Run scalp backtest
+        working-directory: scalping
+        run: python scalp_backtest.py
+
+      - name: Commit updated trade log/summary
+        run: |
+          git config user.name "stock-scanner-bot"
+          git config user.email "actions@users.noreply.github.com"
+          for f in scalping/scalp_backtest_trades.csv scalping/scalp_backtest_summary.json; do
+            if [ -f "$f" ]; then
+              git add "$f"
+            fi
+          done
+          git diff --staged --quiet && echo "No changes to commit" && exit 0
+          git commit -m "Scalp backtest update [automated]"
+          for attempt in 1 2 3 4 5; do
+            if git pull --rebase origin main && git push; then
+              break
+            fi
+            echo "Push/rebase attempt $attempt failed, retrying..."
+            git rebase --abort 2>/dev/null || true
+            sleep $((attempt * 5))
+            if [ "$attempt" = "5" ]; then
+              echo "::error::Could not push scalp backtest results after 5 attempts"
+              exit 1
+            fi
+          done
