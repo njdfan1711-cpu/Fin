@@ -59,6 +59,13 @@ same convention as the main changelog.
   then build the live signal engine against Alpaca paper trading, then
   1-2 weeks of paper results before small live size on Schwab. Schwab
   refresh tokens expire every 7 days and need a browser re-login.
+- **Universe widened 2026-10-02:** added AMD, MSFT, META, GOOGL, AVGO,
+  NFLX, MU, PLTR, COIN, HOOD, UBER, JPM, XOM, SPY, QQQ to `CANDIDATES`
+  (now 30 symbols) for a bigger sample; SPY/QQQ act as tight-spread
+  benchmarks. Existing trade history is kept; new symbols only add rows,
+  so later results cover a larger universe than the first 42 trades.
+  Added local-only `spread_logger.py` / `spread_report.py` (not for the
+  repo) to measure real Schwab bid/ask spreads on the same 30 symbols.
 - **Pending:** consider removing low-priced tickers (NIO, F, AAL, SOFI, T,
   and similar) from `CANDIDATES`; not yet changed.
 
