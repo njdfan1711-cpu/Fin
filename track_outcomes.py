@@ -49,6 +49,8 @@ from config import (
     DAILY_PUSHES_FILE,
     OUTCOME_LOOKBACK_DAYS,
     OUTCOME_HISTORY_FILE,
+    ENTRY_BAND_ATR_MULT,
+    TAKE_PROFIT_ATR_MULT,
 )
 
 ET = ZoneInfo("America/New_York")
@@ -130,6 +132,55 @@ def entry_id(day_key: str, entry: dict) -> str:
     return f"{day_key}::{entry['symbol']}::{entry.get('pushed_at', '')}"
 
 
+def compute_path_metrics(window_bars: pd.DataFrame, price_at_push: float | None,
+                         trade_plan: dict | None) -> dict:
+    """
+    Whole-window path stats, independent of which exit (target/stop/none)
+    resolved first -- the existing outcome only says what happened FIRST,
+    which hides how far a pick ran before reversing:
+      max_favorable_pct / max_adverse_pct -- best High / worst Low in the
+        window, as % of price_at_push
+      tp1_level / tp1_outcome / days_to_tp1 -- whether the take-profit
+        level (TAKE_PROFIT_ATR_MULT x ATR above entry) was touched before
+        the stop. Same-day double-breach is counted as stop-first,
+        matching evaluate_outcome's conservative rule.
+    Fields are additive; entries resolved before this existed simply
+    don't have them.
+    """
+    metrics: dict = {}
+    if window_bars is None or window_bars.empty or not price_at_push:
+        return metrics
+    metrics["max_favorable_pct"] = round((float(window_bars["High"].max()) - price_at_push)
+                                         / price_at_push * 100, 2)
+    metrics["max_adverse_pct"] = round((float(window_bars["Low"].min()) - price_at_push)
+                                       / price_at_push * 100, 2)
+
+    plan = trade_plan or {}
+    tp = plan.get("take_profit")
+    if tp is None and plan.get("entry_low") is not None and plan.get("entry_high") is not None:
+        # Older plans predate take_profit; ATR is recoverable from the
+        # entry band (price +/- ENTRY_BAND_ATR_MULT * ATR).
+        atr = (plan["entry_high"] - plan["entry_low"]) / (2 * ENTRY_BAND_ATR_MULT)
+        tp = price_at_push + TAKE_PROFIT_ATR_MULT * atr
+    if tp is None:
+        return metrics
+    stop = plan.get("stop")
+    metrics["tp1_level"] = round(float(tp), 4)
+    metrics["tp1_outcome"] = "neither"
+    push_idx0 = window_bars.index[0]
+    for idx, row in window_bars.iterrows():
+        hit_tp = row["High"] >= tp
+        hit_stop = stop is not None and row["Low"] <= stop
+        if hit_stop:  # includes same-day double breach -> stop first
+            metrics["tp1_outcome"] = "stop_first"
+            break
+        if hit_tp:
+            metrics["tp1_outcome"] = "tp1_first"
+            metrics["days_to_tp1"] = int((idx - push_idx0).days)
+            break
+    return metrics
+
+
 def evaluate_outcome(symbol: str, push_date: str, price_at_push: float,
                       trade_plan: dict) -> dict | None:
     """
@@ -181,6 +232,8 @@ def evaluate_outcome(symbol: str, push_date: str, price_at_push: float,
     if window_bars.empty:
         return {"outcome": "no_data", "note": "no bars after push date yet -- too recent"}
 
+    extras = compute_path_metrics(window_bars, price_at_push, trade_plan)
+
     if target is not None and stop is not None:
         for idx, row in window_bars.iterrows():
             hit_target = row["High"] >= target
@@ -188,18 +241,21 @@ def evaluate_outcome(symbol: str, push_date: str, price_at_push: float,
             if hit_target and hit_stop:
                 # Ambiguous same-day double-breach -- see docstring.
                 return {
+                    **extras,
                     "outcome": "stop_hit", "outcome_date": idx.strftime("%Y-%m-%d"),
                     "outcome_price": stop, "note": "same-day double-breach, assumed stop first",
                     "days_to_outcome": (idx.to_pydatetime().replace(tzinfo=None) - push_dt).days,
                 }
             if hit_target:
                 return {
+                    **extras,
                     "outcome": "target_hit", "outcome_date": idx.strftime("%Y-%m-%d"),
                     "outcome_price": target,
                     "days_to_outcome": (idx.to_pydatetime().replace(tzinfo=None) - push_dt).days,
                 }
             if hit_stop:
                 return {
+                    **extras,
                     "outcome": "stop_hit", "outcome_date": idx.strftime("%Y-%m-%d"),
                     "outcome_price": stop,
                     "days_to_outcome": (idx.to_pydatetime().replace(tzinfo=None) - push_dt).days,
@@ -211,6 +267,7 @@ def evaluate_outcome(symbol: str, push_date: str, price_at_push: float,
     last_close = float(last_bar["Close"])
     return_pct = ((last_close - price_at_push) / price_at_push) * 100 if price_at_push else None
     return {
+        **extras,
         "outcome": "no_hit",
         "outcome_date": window_bars.index[-1].strftime("%Y-%m-%d"),
         "outcome_price": last_close,
@@ -273,6 +330,8 @@ def main():
             "strength": entry.get("strength"),
             "pushed_day": day_key,
             "price_at_push": price_at_push,
+            "atr_at_push": entry.get("atr_at_push"),
+            "chase": entry.get("chase"),
             "trade_plan": trade_plan,
             "resolved_at": datetime.now(timezone.utc).isoformat(),
             **result,

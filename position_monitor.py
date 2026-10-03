@@ -48,6 +48,9 @@ from config import (
     POSITION_PLAN_LOOKBACK_DAYS,
     OVERDUE_HOLD_MULTIPLIER,
     POSITION_DRAWDOWN_ALERT_PCT,
+    ENTRY_BAND_ATR_MULT,
+    TAKE_PROFIT_ATR_MULT,
+    REVIEW_HOLD_MULTIPLIER,
 )
 from notify import send_alert
 from track_outcomes import typical_resolution_days
@@ -193,6 +196,24 @@ def evaluate_position(pos: dict, plan: dict | None, current_price: float | None,
                 f"(${target:.2f}){tag}."
             )
 
+        # Take-profit: entry + TAKE_PROFIT_ATR_MULT x ATR, measured from the
+        # price actually paid. ATR is recoverable from the plan's entry band
+        # (price +/- ENTRY_BAND_ATR_MULT x ATR) so this also works for plans
+        # recorded before take_profit existed. Most winners resolve far
+        # smaller than the full target, so this is the realistic exit cue.
+        lo, hi = plan.get("entry_low"), plan.get("entry_high")
+        if entry_price and lo is not None and hi is not None and hi > lo:
+            atr_est = (hi - lo) / (2 * ENTRY_BAND_ATR_MULT)
+            tp_level = entry_price + TAKE_PROFIT_ATR_MULT * atr_est
+            result["take_profit"] = round(tp_level, 2)
+            if current_price >= tp_level and "target_reached" not in result["conditions"]:
+                result["conditions"].append("take_profit_reached")
+                result["detail_lines"].append(
+                    f"{pos['symbol']}: ${current_price:.2f} is at/above its take-profit "
+                    f"level (${tp_level:.2f}, entry + {TAKE_PROFIT_ATR_MULT:g} ATR){tag} -- "
+                    f"consider locking in the gain."
+                )
+
     entry_date = pos.get("entryDate")
     if entry_date:
         try:
@@ -203,12 +224,26 @@ def evaluate_position(pos: dict, plan: dict | None, current_price: float | None,
             target_stats = resolution_days.get("target_hit")
             median_days = target_stats["median_days"] if target_stats else FALLBACK_OVERDUE_DAYS
             overdue_threshold = median_days * OVERDUE_HOLD_MULTIPLIER
+            review_threshold = median_days * REVIEW_HOLD_MULTIPLIER
             if "stop_breached" not in result["conditions"] and days_held > overdue_threshold:
                 result["conditions"].append("overdue")
                 result["detail_lines"].append(
                     f"{pos['symbol']}: held {days_held}d, well past the ~{median_days:.0f}d "
                     f"median resolution time for signals that hit their target -- this "
                     f"trade has likely outrun its original thesis."
+                )
+            elif ("stop_breached" not in result["conditions"]
+                  and "take_profit_reached" not in result["conditions"]
+                  and days_held > review_threshold):
+                # Earlier, softer checkpoint than "overdue": a time-based
+                # prompt to decide on purpose rather than drift.
+                pnl_txt = (f" now {result['pnl_pct']:+.1f}% vs entry;"
+                           if result.get("pnl_pct") is not None else "")
+                result["conditions"].append("review_due")
+                result["detail_lines"].append(
+                    f"{pos['symbol']}: held {days_held}d (~{median_days:.0f}d is typical to "
+                    f"target);{pnl_txt} time to reassess -- is the original thesis intact, "
+                    f"and is this capital better used elsewhere?"
                 )
         except ValueError:
             pass

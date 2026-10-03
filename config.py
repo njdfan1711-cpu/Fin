@@ -258,6 +258,33 @@ MOMENTUM_STOP_ATR_MULT = 1.0          # tighter stop for the momentum track --
 REWARD_RISK_RATIO = 2.0               # target = entry + this * (entry - stop)
 DEFAULT_POSITION_SIZE_USD = 3000      # used to size the suggested share count
 
+# Take-profit level (shown in the trade plan + watched by position_monitor).
+# The full target (REWARD_RISK_RATIO x a 1.5-ATR stop = 3 ATR, ~12% for a
+# typical pick) was hit by only ~5% of pushes inside the 7-day window
+# (58 of 1,075 unique ticker-days in outcome_history.json, 2026-10-03).
+# Real exits have clustered near +2% (~0.5 ATR at the median 3.8% ATR),
+# so this is the "realistic" level. Lower-bound hit rate for 0.5 ATR from
+# that same history is ~29% (stop_hit paths are unknown, so the true rate
+# is higher). track_outcomes.py now records tp1_outcome so this multiple
+# can be re-tuned against real paths instead of that lower bound.
+TAKE_PROFIT_ATR_MULT = 0.5
+
+# "Chase" caution -- flags a pick that has already run today or this week,
+# since the entry zone is built off the CURRENT price and so moves up with
+# the run. Volatility-scaled like everything else here. Display-only (no
+# effect on ranking). Back-test on 526 consecutive-day push pairs was
+# weak/inconclusive (stop rate ~35% for >=1 ATR run-ups vs ~35% flat), so
+# this is logged per push (the "chase" field in daily_pushes/outcome
+# history) and should be re-validated once there's more data.
+CHASE_DAY_ATR_MULT = 1.0     # up >= this many ATRs vs prior close
+CHASE_5D_ATR_MULT = 2.0      # or up >= this many ATRs vs ~5 bars ago
+
+# position_monitor "review" checkpoint: fires when a position has been
+# held longer than this multiple of the empirical median days-to-target
+# (earlier and softer than OVERDUE_HOLD_MULTIPLIER, which stays the
+# stronger second alert).
+REVIEW_HOLD_MULTIPLIER = 1.0
+
 # Auto-populated by the workflow (github.server_url + github.repository --
 # no secret needed, GitHub provides this automatically) so the push
 # notification can link straight to the full list in the repo.

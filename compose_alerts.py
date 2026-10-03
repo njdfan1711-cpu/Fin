@@ -79,6 +79,9 @@ from config import (
     MOMENTUM_STOP_ATR_MULT,
     REWARD_RISK_RATIO,
     DEFAULT_POSITION_SIZE_USD,
+    TAKE_PROFIT_ATR_MULT,
+    CHASE_DAY_ATR_MULT,
+    CHASE_5D_ATR_MULT,
     NTFY_MESSAGE_BYTE_LIMIT,
     NTFY_SAFE_BODY_BYTE_BUDGET,
 )
@@ -266,7 +269,11 @@ def fetch_prices_and_atr(symbols: list[str]) -> dict:
                 continue
             price = float(df["Close"].iloc[-1])
             atr = compute_atr(df)
-            results[sym] = {"price": price, "atr": atr}
+            closes = df["Close"]
+            prev_close = float(closes.iloc[-2]) if len(closes) >= 2 else None
+            close_5d = float(closes.iloc[-6]) if len(closes) >= 6 else None
+            results[sym] = {"price": price, "atr": atr,
+                            "prev_close": prev_close, "close_5d": close_5d}
         except Exception:
             continue
     return results
@@ -291,6 +298,7 @@ def compute_trade_plan(price: float | None, atr: float | None, stop_atr_mult: fl
     if risk_per_share <= 0:
         return None
     target = price + reward_risk_ratio * risk_per_share
+    take_profit = price + TAKE_PROFIT_ATR_MULT * atr
 
     shares = int(position_size_usd // price) if price > 0 else 0
     risk_usd = shares * risk_per_share
@@ -300,9 +308,41 @@ def compute_trade_plan(price: float | None, atr: float | None, stop_atr_mult: fl
         "entry_high": entry_high,
         "stop": stop,
         "target": target,
+        "take_profit": take_profit,
         "shares": shares,
         "risk_usd": risk_usd,
     }
+
+
+def compute_chase_info(price: float | None, atr: float | None,
+                       prev_close: float | None, close_5d: float | None) -> dict | None:
+    """How far the pick has already run, in % and in ATRs. 'flagged' when
+    it is up >= CHASE_DAY_ATR_MULT ATRs vs the prior close, or
+    >= CHASE_5D_ATR_MULT ATRs vs ~5 bars ago. Returns None without data."""
+    if not price or not atr or atr <= 0 or not prev_close:
+        return None
+    day_pct = (price - prev_close) / prev_close * 100
+    day_atr = (price - prev_close) / atr
+    info = {"day_chg_pct": round(day_pct, 2), "day_chg_atr": round(day_atr, 2),
+            "chg5_pct": None, "chg5_atr": None, "prev_close": round(prev_close, 4)}
+    flagged = day_atr >= CHASE_DAY_ATR_MULT
+    if close_5d:
+        info["chg5_pct"] = round((price - close_5d) / close_5d * 100, 2)
+        info["chg5_atr"] = round((price - close_5d) / atr, 2)
+        flagged = flagged or info["chg5_atr"] >= CHASE_5D_ATR_MULT
+    info["flagged"] = bool(flagged)
+    return info
+
+
+def format_chase_caution(info: dict | None) -> str | None:
+    if not info or not info.get("flagged"):
+        return None
+    parts = [f"up {info['day_chg_pct']:+.1f}% today ({info['day_chg_atr']:.1f} ATR)"]
+    if info.get("chg5_atr") is not None and info["chg5_atr"] >= CHASE_5D_ATR_MULT:
+        parts.append(f"{info['chg5_pct']:+.1f}% over ~5 days")
+    return (f"  \u2022 \u26A0\uFE0F **Chase risk:** {', '.join(parts)}. The entry zone is built "
+            f"off today's price, so it has moved up with the run -- consider waiting for a "
+            f"pullback toward the prior close (${info['prev_close']:.2f}).")
 
 
 def format_low_atr_caution(price: float | None, atr: float | None) -> str | None:
@@ -327,8 +367,13 @@ def format_low_atr_caution(price: float | None, atr: float | None) -> str | None
 def format_trade_plan(plan: dict | None, resolution_days: dict | None = None) -> str | None:
     if not plan:
         return None
+    tp_bit = ""
+    if plan.get("take_profit"):
+        entry_mid = (plan["entry_low"] + plan["entry_high"]) / 2
+        tp_pct = (plan["take_profit"] - entry_mid) / entry_mid * 100
+        tp_bit = f"take-profit ${plan['take_profit']:.2f} ({tp_pct:+.1f}%), "
     base = (f"  • **Trade plan:** entry ${plan['entry_low']:.2f}-${plan['entry_high']:.2f}, "
-            f"stop ${plan['stop']:.2f}, target ${plan['target']:.2f} "
+            f"{tp_bit}stop ${plan['stop']:.2f}, full target ${plan['target']:.2f} "
             f"(~{plan['shares']} sh, ~${plan['risk_usd']:.0f} at risk)")
 
     if resolution_days:
@@ -419,7 +464,7 @@ def find_sector_annotation(industry: str, active_sector_alerts: list[dict]) -> s
 
 def format_ticker_line(rank: int, symbol: str, name: str, categories: dict,
                         price, target, atr=None, sector_note: str | None = None,
-                        is_new: bool = False) -> str:
+                        is_new: bool = False, chase_info: dict | None = None) -> str:
     """
     Markdown-formatted: bold ticker/price header line, reasons as a clean
     indented bullet list underneath instead of one long comma/pipe string.
@@ -458,6 +503,9 @@ def format_ticker_line(rank: int, symbol: str, name: str, categories: dict,
     caution = format_low_atr_caution(price, atr)
     if caution:
         bullets.append(caution)
+    chase_caution = format_chase_caution(chase_info)
+    if chase_caution:
+        bullets.append(chase_caution)
 
     return header + "\n" + "\n".join(bullets)
 
@@ -672,9 +720,17 @@ def main():
         # only turns "-"/"*"-prefixed lines into proper list items.
         plan = compute_trade_plan(prices.get(sym), atrs.get(sym), STOP_ATR_MULT)
         if plan:
+            entry_mid = (plan["entry_low"] + plan["entry_high"]) / 2
+            tp_pct = (plan["take_profit"] - entry_mid) / entry_mid * 100
             f.write(f"- **Trade plan**: entry ${plan['entry_low']:.2f}-${plan['entry_high']:.2f}, "
-                    f"stop ${plan['stop']:.2f}, target ${plan['target']:.2f} "
+                    f"take-profit ${plan['take_profit']:.2f} ({tp_pct:+.1f}%), "
+                    f"stop ${plan['stop']:.2f}, full target ${plan['target']:.2f} "
                     f"(~{plan['shares']} sh, ~${plan['risk_usd']:.0f} at risk)\n")
+            pa = price_atr.get(sym, {})
+            chase_line = format_chase_caution(
+                compute_chase_info(prices.get(sym), atrs.get(sym), pa.get("prev_close"), pa.get("close_5d")))
+            if chase_line:
+                f.write("- \u26A0\uFE0F **CAUTION**: " + chase_line.split("**Chase risk:** ", 1)[1] + "\n")
         f.write("\n")
 
     if momentum_ranked:
@@ -725,7 +781,10 @@ def main():
         name = company_names.get(sym, "")
         sector_note = find_sector_annotation(sectors.get(sym, ""), active_sector_alerts)
         is_new = not was_recently_alerted(sym)
-        lines.append(format_ticker_line(rank, sym, name, cats, price, target, atr, sector_note, is_new))
+        pa = price_atr.get(sym, {})
+        chase_info = compute_chase_info(price, atr, pa.get("prev_close"), pa.get("close_5d"))
+        lines.append(format_ticker_line(rank, sym, name, cats, price, target, atr, sector_note, is_new,
+                                        chase_info=chase_info))
 
     # Footer pieces are built FIRST, in their final form, so their exact
     # byte cost is known BEFORE deciding how many ticker lines fit --
@@ -806,6 +865,9 @@ def main():
                 "price_at_push": prices.get(sym),
                 "atr_at_push": atrs.get(sym),
                 "trade_plan": compute_trade_plan(prices.get(sym), atrs.get(sym), STOP_ATR_MULT),
+                "chase": compute_chase_info(prices.get(sym), atrs.get(sym),
+                                            price_atr.get(sym, {}).get("prev_close"),
+                                            price_atr.get(sym, {}).get("close_5d")),
             }
             for _, sym, cats in push_list
         ])

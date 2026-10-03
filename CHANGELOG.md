@@ -6,6 +6,52 @@ session before diagnosing or re-fixing something, since commit messages
 for automated runs all look identical and won't show what's already
 been touched.
 
+## 2026-10-03
+Built from live `main` (pulled 2026-10-03). Four changes from the review of
+13 closed trades (13 wins, +$579.62, avg +2.1%, ~4d hold) and the 1,075
+unique resolved pushes in `outcome_history.json`. Offline tests only so far
+(synthetic bars / mocked yfinance); first live runs should be watched.
+
+- Take-profit level: `compose_alerts.py` `compute_trade_plan()` now adds
+  `take_profit = price + TAKE_PROFIT_ATR_MULT * ATR` (new
+  `TAKE_PROFIT_ATR_MULT = 0.5` in `config.py`, ~+1.9% at the median ATR).
+  Shown in the push and `latest_alerts.md` ("take-profit $X (+Y%)"); the
+  full 3-ATR target stays but is labelled "full target". Why: only ~5% of
+  pushes hit the full target inside 7 days; real exits cluster near +2%.
+  `position_monitor.py` adds a `take_profit_reached` alert, measured from
+  the price actually paid (ATR is recovered from the plan's entry band, so
+  it also works on plans recorded before this change).
+- Chase flag: `compose_alerts.py` `fetch_prices_and_atr()` now also returns
+  `prev_close` and `close_5d`; new `compute_chase_info()` /
+  `format_chase_caution()` add a display-only "Chase risk" caution when a
+  pick is up >= `CHASE_DAY_ATR_MULT` (1.0) ATR today or
+  >= `CHASE_5D_ATR_MULT` (2.0) ATR over ~5 bars. Does not affect ranking.
+  Logged per push as `chase` in `daily_pushes.json`. Caveat: a back-test on
+  526 consecutive-day push pairs was inconclusive (stop rate ~35% both for
+  >=1 ATR run-ups and flat days), so treat as a prompt, not a proven edge.
+- Path tracking: `track_outcomes.py` new `compute_path_metrics()` adds
+  `max_favorable_pct`, `max_adverse_pct`, `tp1_level`, `tp1_outcome`
+  (`tp1_first` / `stop_first` / `neither`; same-day double breach counts as
+  stop-first) and `days_to_tp1` to every newly resolved entry, plus
+  `atr_at_push` and `chase`. Only entries resolved after this deploys have
+  them (no backfill; yfinance history is not stored). Use these to re-tune
+  `TAKE_PROFIT_ATR_MULT` and to build the per-filter scorecard.
+- Time-based reassess: `position_monitor.py` new `review_due` condition at
+  `REVIEW_HOLD_MULTIPLIER` (1.0) x median days-to-target (~6d), softer and
+  earlier than `overdue` (2.0x, unchanged). Message states days held and
+  P&L vs entry. Suppressed once a stop, take-profit or `overdue` fires.
+- `config.py`: added `TAKE_PROFIT_ATR_MULT`, `CHASE_DAY_ATR_MULT`,
+  `CHASE_5D_ATR_MULT`, `REVIEW_HOLD_MULTIPLIER`.
+
+Notes:
+- Reward/risk reality check: with a 1.5-ATR stop and a 0.5-ATR take-profit,
+  taking profit at the first level only pays if it is reached roughly 75%+
+  of the time before the stop. Lower-bound hit rate from history is ~29%
+  (upper ~61%; stop_hit paths unknown). Path tracking will settle this.
+- Still open from earlier entries: stale "evidence-count bonus" comments in
+  `compose_alerts.py`, unlogged inner `except` in `fetch_prices_and_atr`,
+  and no `"caution"` key in `SIGNAL_VALIDITY_HOURS`.
+
 ## 2026-09-30
 Audit of this log against the live files (pulled from `main`, 2026-09-30 19:38 UTC).
 Corrections to earlier entries are listed first, then changes made.
