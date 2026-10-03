@@ -83,6 +83,10 @@ import yfinance as yf
 CANDIDATES = [
     "NVDA", "AAPL", "TSLA", "AMZN", "INTC", "BAC", "F", "T", "AAL",
     "SOFI", "SMCI", "WBD", "NIO", "SNAP", "PATH",
+    # Added 2026-10-02: more liquid large/mid-priced names plus SPY/QQQ
+    # as tight-spread benchmarks, to widen the sample.
+    "AMD", "MSFT", "META", "GOOGL", "AVGO", "NFLX", "MU", "PLTR",
+    "COIN", "HOOD", "UBER", "JPM", "XOM", "SPY", "QQQ",
 ]
 
 # --- Strategy thresholds -------------------------------------------------
