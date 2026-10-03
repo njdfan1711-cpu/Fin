@@ -66,6 +66,31 @@ same convention as the main changelog.
   so later results cover a larger universe than the first 42 trades.
   Added local-only `spread_logger.py` / `spread_report.py` (not for the
   repo) to measure real Schwab bid/ask spreads on the same 30 symbols.
+- **Added `guardrails.py` + `test_guardrails.py`** (safety layer for the
+  future live bot; no network, nothing connected to Schwab yet). All
+  orders must go through `guarded_submit()`. Rules: equities only;
+  allowed-symbol list; sides limited to BUY and SELL, with SELL allowed
+  only up to shares already held (so short selling is impossible);
+  BUYs need a limit price and may not exceed $3,000 notional (fixed,
+  does not grow with the account); max 1 open position (pending entries
+  count); $500 daily loss limit (realized + open P&L) halts new entries;
+  circuit breaker of 40 entries/day (set `MAX_TRADES_PER_DAY = None` to
+  disable); `STOP.txt` blocks new entries, `FLATTEN.txt` blocks entries
+  and signals the bot loop to cancel orders and close its own positions.
+  Multiple simultaneous positions deferred until one-at-a-time results
+  are consistent and the account has grown.
+- **Added `build_watchlist.py` + `scalp_watchlist.yml`** (daily scalp
+  watch list). Reads the Daily Scan's `eligible.csv` and keeps names with
+  price $20-$1,000 and price x 20-day avg volume >= $100M/day, ranked by
+  dollar volume, capped at 500 -> `scalping/scalp_watchlist.csv`. First
+  run: 827 of 2,448 eligible names passed; top 500 written. The
+  workflow is `workflow_dispatch` only (trigger from cron-job.org after
+  the Daily Scan finishes). Note: the Daily Scan universe excludes ETFs,
+  so SPY/QQQ are not on the list. Planned: add a measured-spread filter
+  once `spread_logger.py` has data. NOT yet wired into the logger,
+  backtest, or `guardrails.py` (whose ALLOWED_SYMBOLS is still the
+  30-name list and must be updated before the live bot can trade
+  anything else).
 - **Pending:** consider removing low-priced tickers (NIO, F, AAL, SOFI, T,
   and similar) from `CANDIDATES`; not yet changed.
 
