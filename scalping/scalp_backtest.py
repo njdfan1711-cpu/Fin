@@ -101,6 +101,16 @@ SCALP_MAX_HOLD_MINUTES = 15        # time-stop -- exit regardless of
                                     # price if neither target nor stop
                                     # hit within this many minutes
 
+# --- Trailing-stop variant (run side by side with the fixed target on
+# the SAME entries, results kept in separate files so the original
+# history stays comparable) ---
+# No fixed profit target. The initial stop (SCALP_STOP_PCT) applies until
+# price has risen TRAIL_ARM_PCT above entry; from then on the stop trails
+# TRAIL_PCT below the highest high seen, and never drops below the
+# initial stop. The time-stop still applies.
+TRAIL_ARM_PCT = 0.175              # roughly half of SCALP_TARGET_PCT
+TRAIL_PCT = 0.15                   # trail distance below the high-water mark
+
 # reward:risk here is ~1.75:1 (0.35/0.20) -- deliberately less than
 # Fin's swing-trade default of 2:1 (see REWARD_RISK_RATIO in config.py),
 # since scalping targets have to be reachable within minutes, not days;
@@ -124,6 +134,8 @@ COMMISSION_PER_TRADE = 0.0         # Schwab equities are commission-free
 
 TRADES_FILE = "scalp_backtest_trades.csv"
 SUMMARY_FILE = "scalp_backtest_summary.json"
+TRAIL_TRADES_FILE = "scalp_backtest_trail_trades.csv"
+TRAIL_SUMMARY_FILE = "scalp_backtest_trail_summary.json"
 
 
 def fetch_1m_bars(symbols: list[str]) -> dict[str, pd.DataFrame]:
@@ -161,7 +173,7 @@ def compute_session_vwap(df: pd.DataFrame) -> pd.Series:
     return cum_pv / cum_vol.replace(0, float("nan"))
 
 
-def find_trades(symbol: str, df: pd.DataFrame) -> list[dict]:
+def find_trades(symbol: str, df: pd.DataFrame, mode: str = "fixed") -> list[dict]:
     """Walks the bar series looking for entries per the strategy rules
     above, then simulates the exit for each one. Returns a list of
     trade dicts -- one per completed trade."""
@@ -174,6 +186,7 @@ def find_trades(symbol: str, df: pd.DataFrame) -> list[dict]:
     in_position = False
     entry_idx = None
     entry_price = None
+    high_water = None
 
     for i in range(20, len(df)):
         row = df.iloc[i]
@@ -186,7 +199,25 @@ def find_trades(symbol: str, df: pd.DataFrame) -> list[dict]:
             exit_reason = None
             exit_price = None
 
-            if row["High"] >= target_price:
+            if mode == "trail":
+                # Ordering within a 1-minute bar is unknowable, so this
+                # takes the pessimistic read: if the stop was not yet
+                # trailing and the bar's low touched the initial stop,
+                # that is a loss; once trailing, the bar's high is
+                # assumed to come first, then the low tests the new trail.
+                arm_price = entry_price * (1 + TRAIL_ARM_PCT / 100)
+                was_armed = high_water >= arm_price
+                if not was_armed and row["Low"] <= stop_price:
+                    exit_reason, exit_price = "stop", stop_price
+                else:
+                    high_water = max(high_water, row["High"])
+                    if high_water >= arm_price:
+                        trail_stop = max(stop_price, high_water * (1 - TRAIL_PCT / 100))
+                        if row["Low"] <= trail_stop:
+                            exit_reason, exit_price = "trail_stop", trail_stop
+                    if not exit_reason and bars_held >= SCALP_MAX_HOLD_MINUTES:
+                        exit_reason, exit_price = "time_stop", row["Close"]
+            elif row["High"] >= target_price:
                 exit_reason, exit_price = "target", target_price
             elif row["Low"] <= stop_price:
                 exit_reason, exit_price = "stop", stop_price
@@ -225,6 +256,7 @@ def find_trades(symbol: str, df: pd.DataFrame) -> list[dict]:
             in_position = True
             entry_idx = i
             entry_price = row["Close"]
+            high_water = entry_price
 
     return trades
 
@@ -242,25 +274,16 @@ def load_existing_trade_keys(path: str) -> set:
     return keys
 
 
-def main():
-    print(f"Fetching 1-minute bars for {len(CANDIDATES)} candidate(s)...", file=sys.stderr)
-    bars = fetch_1m_bars(CANDIDATES)
-    if not bars:
-        print("No data fetched for any symbol -- nothing to backtest.", file=sys.stderr)
-        return
-
-    all_trades = []
-    for sym, df in bars.items():
-        trades = find_trades(sym, df)
-        print(f"  [{sym}] {len(trades)} trade(s) found", file=sys.stderr)
-        all_trades.extend(trades)
-
-    existing_keys = load_existing_trade_keys(TRADES_FILE)
+def record_and_summarize(all_trades: list[dict], trades_file: str,
+                         summary_file: str, label: str) -> None:
+    """Appends genuinely new trades to trades_file, then writes a summary
+    over the FULL accumulated file."""
+    existing_keys = load_existing_trade_keys(trades_file)
     new_trades = [t for t in all_trades
                   if (t["symbol"], t["entry_time"]) not in existing_keys]
 
-    file_exists = os.path.exists(TRADES_FILE)
-    with open(TRADES_FILE, "a", newline="") as f:
+    file_exists = os.path.exists(trades_file)
+    with open(trades_file, "a", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=[
             "symbol", "entry_time", "exit_time", "entry_price", "exit_price",
             "shares", "exit_reason", "held_minutes", "gross_pnl", "cost", "net_pnl",
@@ -270,18 +293,15 @@ def main():
         for t in new_trades:
             writer.writerow(t)
 
-    print(f"\n{len(new_trades)} new trade(s) appended to {TRADES_FILE} "
+    print(f"\n[{label}] {len(new_trades)} new trade(s) appended to {trades_file} "
           f"({len(all_trades) - len(new_trades)} already on file from a prior run).",
           file=sys.stderr)
 
-    # Summary over the FULL accumulated file, not just this run -- so
-    # the picture improves as more days accumulate over the next week
-    # or two, rather than resetting each run.
-    with open(TRADES_FILE, newline="") as f:
+    with open(trades_file, newline="") as f:
         all_rows = list(csv.DictReader(f))
 
     if not all_rows:
-        print("No trades in the accumulated file yet.", file=sys.stderr)
+        print(f"[{label}] No trades in the accumulated file yet.", file=sys.stderr)
         return
 
     net_pnls = [float(r["net_pnl"]) for r in all_rows]
@@ -299,6 +319,7 @@ def main():
         peak = max(peak, e)
         max_drawdown = min(max_drawdown, e - peak)
 
+    reasons = ("target", "stop", "trail_stop", "time_stop")
     summary = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "total_trades": len(all_rows),
@@ -312,15 +333,35 @@ def main():
         "max_drawdown": round(max_drawdown, 2),
         "exit_reason_counts": {
             reason: sum(1 for r in all_rows if r["exit_reason"] == reason)
-            for reason in ("target", "stop", "time_stop")
+            for reason in reasons
+            if any(r["exit_reason"] == reason for r in all_rows)
         },
     }
-    with open(SUMMARY_FILE, "w") as f:
+    with open(summary_file, "w") as f:
         json.dump(summary, f, indent=2)
 
-    print(f"\n--- Summary (all {len(all_rows)} accumulated trade(s)) ---", file=sys.stderr)
+    print(f"\n--- {label} summary (all {len(all_rows)} accumulated trade(s)) ---", file=sys.stderr)
     for k, v in summary.items():
         print(f"  {k}: {v}", file=sys.stderr)
+
+
+def main():
+    print(f"Fetching 1-minute bars for {len(CANDIDATES)} candidate(s)...", file=sys.stderr)
+    bars = fetch_1m_bars(CANDIDATES)
+    if not bars:
+        print("No data fetched for any symbol -- nothing to backtest.", file=sys.stderr)
+        return
+
+    fixed_trades, trail_trades = [], []
+    for sym, df in bars.items():
+        f_t = find_trades(sym, df, mode="fixed")
+        t_t = find_trades(sym, df, mode="trail")
+        print(f"  [{sym}] fixed: {len(f_t)} trade(s), trail: {len(t_t)} trade(s)", file=sys.stderr)
+        fixed_trades.extend(f_t)
+        trail_trades.extend(t_t)
+
+    record_and_summarize(fixed_trades, TRADES_FILE, SUMMARY_FILE, "fixed target")
+    record_and_summarize(trail_trades, TRAIL_TRADES_FILE, TRAIL_SUMMARY_FILE, "trailing stop")
 
 
 if __name__ == "__main__":
