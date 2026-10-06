@@ -6,6 +6,55 @@ session before diagnosing or re-fixing something, since commit messages
 for automated runs all look identical and won't show what's already
 been touched.
 
+## 2026-10-03 (scorecard)
+Built from live `main` (HEAD 0deca82, pulled 2026-10-03). Per-feature
+scorecard for the swing track only (not scalping). Tested offline
+(synthetic data + a real backfill run); first live runs should be watched.
+
+- New `features.py`: turns a push's signal/caution text into stable tags
+  (`tech:rsi_oversold`, `fund:eps_growth`, `caut:extended_above_ma`,
+  `atr:low(<3%)`, `caut:chase`, `tier:*`, `cats:*`, ...). Pure functions.
+- `compose_alerts.py`: new `build_push_features()`; `record_push()` now
+  stores a `features` list per push (daily_pushes.json is pruned long
+  before outcomes resolve, so the tags must be saved at push time).
+- `track_outcomes.py`: copies `features` into each new outcome_history
+  entry.
+- New `backfill_features.py` (idempotent): recovers features for entries
+  resolved before this existed, by matching each to its run in
+  `alerts_history/*.md` (push timestamp + symbol) and rejecting any match
+  whose tier / signal count / strength disagrees with the entry. Writes
+  the sidecar `outcome_features.json` (a separate static-ish file, so it
+  never clobbers `outcome_history.json`). First run: 4,554 of 5,220
+  entries recovered, 0 rejected. Unrecoverable: pushes before 2026-08-19
+  (alerts_history starts 8/19 18:05), 5 on 9/21, and 142 no_data entries.
+- New `scorecard.py` -> `scorecard.md`: per feature, n, distinct tickers,
+  stop%, target%, avg R-multiple (stop = -1R, target = +2R, else marked at
+  the day-7 close), win% with a 95% Wilson interval, lift vs baseline;
+  < 30 samples labelled insufficient data; always-present features hidden;
+  one sample per ticker per day; includes a take-profit/path section that
+  fills in as path-tracked entries resolve. Regenerates weekly (skips if
+  the report is < 7 days old; `--force` overrides). Stop-outs are capped
+  at -1R by construction (gap-throughs not modelled).
+- `scan.yml`: two new `continue-on-error` steps after "Track outcomes"
+  (backfill, then scorecard); `outcome_features.json` and `scorecard.md`
+  added to the commit list. The backfill step is a no-op once every
+  pre-feature push has resolved (~1-2 weeks).
+- Early read (hypotheses, NOT tuning guidance): baseline over 958
+  ticker-days (8/19-9/25): stop 32%, target 5%, avg R -0.11, win 41%.
+  `caut:extended_above_ma` (n=183) and `caut:analyst_deteriorating`
+  (n=53) did worse than baseline with intervals excluding it;
+  `atr:high(>=4.5%)` did better. `atr:low(<3%)` was roughly average,
+  which does not support the premise behind LOW_ATR_PCT_CAUTION (0/171
+  targets in a smaller sample) -- revisit with more data, don't retune
+  yet. ~30 features were tested, so a few flags are expected by chance.
+
+Open items found while checking the repo (not changed here):
+- Stray `compose_alerts-1.py` in the repo root (from an "Add files via
+  upload" commit; differs from `compose_alerts.py`, nothing imports it).
+  Safe to delete once confirmed it is not wanted.
+- `scalping/CHANGELOG.md` (10/02) says a guard step was added to
+  `intraday.yml`; the live `intraday.yml` has no such step. Unresolved.
+
 ## 2026-10-03
 Built from live `main` (pulled 2026-10-03). Four changes from the review of
 13 closed trades (13 wins, +$579.62, avg +2.1%, ~4d hold) and the 1,075

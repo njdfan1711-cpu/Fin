@@ -86,6 +86,7 @@ from config import (
     NTFY_SAFE_BODY_BYTE_BUDGET,
 )
 from signals_store import get_active_signals
+from features import extract_features
 from alert_log import was_recently_alerted, mark_alerted
 from daily_pushes import record_push, prune_old_days
 from notify import send_alert
@@ -343,6 +344,21 @@ def format_chase_caution(info: dict | None) -> str | None:
     return (f"  \u2022 \u26A0\uFE0F **Chase risk:** {', '.join(parts)}. The entry zone is built "
             f"off today's price, so it has moved up with the run -- consider waiting for a "
             f"pullback toward the prior close (${info['prev_close']:.2f}).")
+
+
+def build_push_features(cats: dict, tier: str, category_count: int,
+                        price: float | None, atr: float | None,
+                        chase_info: dict | None) -> list:
+    """Normalized feature tags for one push (see features.py) -- stored with
+    the push so outcome_history can be scored per feature later, since
+    daily_pushes.json is pruned long before outcomes are evaluated."""
+    signals = {cat: info["detail"] for cat, info in cats.items()
+               if cat not in CAUTION_STYLE_CATEGORY_KEYS}
+    cautions = [cats[cat]["detail"] for cat in CAUTION_STYLE_CATEGORY_KEYS if cat in cats]
+    atr_pct = (atr / price * 100) if (atr and price) else None
+    return extract_features(signals, cautions, tier=tier, category_count=category_count,
+                            atr_pct=atr_pct,
+                            chase_flagged=bool(chase_info and chase_info.get("flagged")))
 
 
 def format_low_atr_caution(price: float | None, atr: float | None) -> str | None:
@@ -868,6 +884,12 @@ def main():
                 "chase": compute_chase_info(prices.get(sym), atrs.get(sym),
                                             price_atr.get(sym, {}).get("prev_close"),
                                             price_atr.get(sym, {}).get("close_5d")),
+                "features": build_push_features(
+                    cats, conviction_tier(*score_ticker(cats)), score_ticker(cats)[0],
+                    prices.get(sym), atrs.get(sym),
+                    compute_chase_info(prices.get(sym), atrs.get(sym),
+                                       price_atr.get(sym, {}).get("prev_close"),
+                                       price_atr.get(sym, {}).get("close_5d"))),
             }
             for _, sym, cats in push_list
         ])
