@@ -6,6 +6,26 @@ session before diagnosing or re-fixing something, since commit messages
 for automated runs all look identical and won't show what's already
 been touched.
 
+## 2026-10-06 (cleanup)
+Built from live `main` (HEAD 662ea41, pulled 2026-10-06). Housekeeping only;
+no ranking, trade-plan or alert-content changes. Swing track only.
+
+- Deploy note: the 2026-10-03 (scorecard) package below, plus the
+  `track_outcomes.py` and `scan.yml` edits, were uploaded to `main` on
+  2026-10-06 (commits 185189b, 088a73d, 662ea41), not 10-03.
+- `config.py`: added `"caution": 4` to `SIGNAL_VALIDITY_HOURS`. The
+  technicals scan writes cautions under the `"caution"` category and
+  rewrites them every run, but with no key they fell through to the 24h
+  default and could linger well past the 4h `"technical"` window.
+- `compose_alerts.py`: two stale comments (in `tiebreak_key` and the
+  ranking step) referred to an upstream "evidence-count bonus" that no
+  longer exists; they now point to `combine_strengths` (9/26 change).
+- `compose_alerts.py`: the per-symbol `except` in `fetch_prices_and_atr`
+  now logs `[price/ATR parse error] SYM: ...` to stderr instead of
+  silently skipping the ticker.
+- Still open: delete stray `compose_alerts-1.py` (manual, via GitHub UI);
+  `intraday.yml` guard step mentioned in `scalping/CHANGELOG.md` is absent.
+
 ## 2026-10-03 (scorecard)
 Built from live `main` (HEAD 0deca82, pulled 2026-10-03). Per-feature
 scorecard for the swing track only (not scalping). Tested offline

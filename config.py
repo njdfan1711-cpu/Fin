@@ -116,6 +116,9 @@ SIGNAL_VALIDITY_HOURS = {
                                                       # metrics, same cache
     "short_interest": 15 * 24,  # roughly matches FINRA's biweekly cadence
     "momentum": 4,         # low-float volume-spike setups go cold fast, same window as technical
+    "caution": 4,          # technicals-derived cautions (extended above MA, light-volume high,
+                           # weak market regime) are rewritten every technicals scan, so same
+                           # window as "technical" -- previously fell through to the 24h default
 }
 
 # --- Composite alert rules ---

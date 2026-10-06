@@ -165,7 +165,7 @@ def tiebreak_key(symbol: str) -> int:
     """
     Deterministic-per-day but otherwise arbitrary tiebreaker for tickers
     that still land on an exact (category_count, strength) tie after the
-    upstream scans' evidence-count bonus. Rotates daily (seeded by UTC
+    signals_store.combine_strengths' geometric-decay sum. Rotates daily (seeded by UTC
     date) so a tie doesn't perpetually favor the same tickers/alphabetical
     order run after run -- it's purely a fairness mechanism, not a
     confidence signal, so it's kept as the LAST sort key, after both real
@@ -275,7 +275,8 @@ def fetch_prices_and_atr(symbols: list[str]) -> dict:
             close_5d = float(closes.iloc[-6]) if len(closes) >= 6 else None
             results[sym] = {"price": price, "atr": atr,
                             "prev_close": prev_close, "close_5d": close_5d}
-        except Exception:
+        except Exception as e:
+            print(f"[price/ATR parse error] {sym}: {e}", file=sys.stderr)
             continue
     return results
 
@@ -663,7 +664,7 @@ def main():
 
     # Rank by confidence, category count first then combined strength;
     # tiebreak_key is the last-resort tertiary key for any exact ties
-    # left after the upstream scans' evidence-count bonus.
+    # left after combine_strengths' geometric-decay sum.
     ranked = sorted(
         qualifying.items(),
         key=lambda kv: (*score_ticker(kv[1]), tiebreak_key(kv[0])),
