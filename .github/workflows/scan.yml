@@ -54,12 +54,20 @@ jobs:
       - name: Track outcomes of past picks (target/stop hit-rate)
         run: python track_outcomes.py
 
+      - name: Recover push-time features for entries resolved before feature tracking (idempotent)
+        continue-on-error: true
+        run: python backfill_features.py
+
+      - name: Refresh per-feature scorecard (weekly; skips if report is < 7 days old)
+        continue-on-error: true
+        run: python scorecard.py
+
       - name: Commit updated state files
         run: |
           git config user.name "stock-scanner-bot"
           git config user.email "actions@users.noreply.github.com"
           git config merge.signals-state.driver "python3 merge_signals_state.py %O %A %B"
-          for f in universe.csv pending_ipos.json delisting_risk.json eligible.csv fundamentals_signals.json signals_state.json float_data.json metrics_cache.json outcome_history.json; do
+          for f in universe.csv pending_ipos.json delisting_risk.json eligible.csv fundamentals_signals.json signals_state.json float_data.json metrics_cache.json outcome_history.json outcome_features.json scorecard.md; do
             if [ -f "$f" ]; then
               git add "$f"
             fi
