@@ -332,6 +332,7 @@ def main():
             "price_at_push": price_at_push,
             "atr_at_push": entry.get("atr_at_push"),
             "chase": entry.get("chase"),
+            "features": entry.get("features"),
             "trade_plan": trade_plan,
             "resolved_at": datetime.now(timezone.utc).isoformat(),
             **result,
