@@ -88,7 +88,7 @@ from config import (
 from signals_store import get_active_signals
 from features import extract_features
 from alert_log import was_recently_alerted, mark_alerted
-from daily_pushes import record_push, prune_old_days
+from daily_pushes import record_push, prune_old_days, symbol_history
 from notify import send_alert
 
 # Per-request timeout for the yfinance price/ATR batch. Same reasoning as
@@ -271,7 +271,16 @@ def fetch_prices_and_atr(symbols: list[str]) -> dict:
             price = float(df["Close"].iloc[-1])
             atr = compute_atr(df)
             closes = df["Close"]
-            prev_close = float(closes.iloc[-2]) if len(closes) >= 2 else None
+            # Before the open (and on weekends/holidays) yfinance has no bar for
+            # today yet, so closes.iloc[-1] is the LAST COMPLETED session and
+            # iloc[-2] is the close the day before -- using it as "prior close"
+            # reported yesterday's move as "today's". Only treat iloc[-2] as the
+            # prior close when the last bar is actually today's session.
+            session_started = pd.Timestamp(closes.index[-1]).date() >= datetime.now(ET).date()
+            if len(closes) >= 2:
+                prev_close = float(closes.iloc[-2] if session_started else closes.iloc[-1])
+            else:
+                prev_close = None
             close_5d = float(closes.iloc[-6]) if len(closes) >= 6 else None
             results[sym] = {"price": price, "atr": atr,
                             "prev_close": prev_close, "close_5d": close_5d}
@@ -339,8 +348,15 @@ def compute_chase_info(price: float | None, atr: float | None,
 def format_chase_caution(info: dict | None) -> str | None:
     if not info or not info.get("flagged"):
         return None
+    five_d = (info.get("chg5_atr") is not None and info["chg5_atr"] >= CHASE_5D_ATR_MULT)
+    if round(info["day_chg_pct"], 1) == 0 and five_d:
+        # Pre-open / no session yet: the "prior close" IS the last price, so
+        # there's no day move to report and no lower prior-close to wait for.
+        return (f"  \u2022 \u26A0\uFE0F **Chase risk:** {info['chg5_pct']:+.1f}% over ~5 days "
+                f"({info['chg5_atr']:.1f} ATR). The entry zone is built off the latest price, "
+                f"so it has moved up with the run -- consider waiting for a pullback.")
     parts = [f"up {info['day_chg_pct']:+.1f}% today ({info['day_chg_atr']:.1f} ATR)"]
-    if info.get("chg5_atr") is not None and info["chg5_atr"] >= CHASE_5D_ATR_MULT:
+    if five_d:
         parts.append(f"{info['chg5_pct']:+.1f}% over ~5 days")
     return (f"  \u2022 \u26A0\uFE0F **Chase risk:** {', '.join(parts)}. The entry zone is built "
             f"off today's price, so it has moved up with the run -- consider waiting for a "
@@ -349,7 +365,9 @@ def format_chase_caution(info: dict | None) -> str | None:
 
 def build_push_features(cats: dict, tier: str, category_count: int,
                         price: float | None, atr: float | None,
-                        chase_info: dict | None) -> list:
+                        chase_info: dict | None,
+                        history: dict | None = None,
+                        asof: datetime | None = None) -> list:
     """Normalized feature tags for one push (see features.py) -- stored with
     the push so outcome_history can be scored per feature later, since
     daily_pushes.json is pruned long before outcomes are evaluated."""
@@ -357,9 +375,16 @@ def build_push_features(cats: dict, tier: str, category_count: int,
                if cat not in CAUTION_STYLE_CATEGORY_KEYS}
     cautions = [cats[cat]["detail"] for cat in CAUTION_STYLE_CATEGORY_KEYS if cat in cats]
     atr_pct = (atr / price * 100) if (atr and price) else None
+    prior_days = runup_pct = None
+    if history is not None:
+        prior_days = history.get("prior_days")
+        fp = history.get("first_price")
+        if fp and price:
+            runup_pct = (price - fp) / fp * 100
     return extract_features(signals, cautions, tier=tier, category_count=category_count,
                             atr_pct=atr_pct,
-                            chase_flagged=bool(chase_info and chase_info.get("flagged")))
+                            chase_flagged=bool(chase_info and chase_info.get("flagged")),
+                            asof=asof, prior_push_days=prior_days, runup_pct=runup_pct)
 
 
 def format_low_atr_caution(price: float | None, atr: float | None) -> str | None:
@@ -864,6 +889,8 @@ def main():
                    markdown=True, click_url=click_url)
         mark_alerted([sym for _, sym, _ in push_list])
 
+        push_hist = symbol_history([sym for _, sym, _ in push_list])   # BEFORE record_push
+        push_asof = datetime.now(timezone.utc)
         record_push([
             {
                 "symbol": sym,
@@ -890,7 +917,8 @@ def main():
                     prices.get(sym), atrs.get(sym),
                     compute_chase_info(prices.get(sym), atrs.get(sym),
                                        price_atr.get(sym, {}).get("prev_close"),
-                                       price_atr.get(sym, {}).get("close_5d"))),
+                                       price_atr.get(sym, {}).get("close_5d")),
+                    history=push_hist.get(sym), asof=push_asof),
             }
             for _, sym, cats in push_list
         ])

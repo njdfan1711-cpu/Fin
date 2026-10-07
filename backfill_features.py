@@ -31,6 +31,7 @@ UTC = timezone.utc
 HISTORY_DIR = "alerts_history"
 OUTCOME_FILE = "outcome_history.json"
 OUT_FILE = "outcome_features.json"
+REFRESH = "--refresh" in sys.argv    # recompute ALL entries (e.g. after new tags are added)
 MATCH_WINDOW = timedelta(minutes=45)   # push happens shortly after the md is written
 
 _HEAD = re.compile(r"^## \d+\. .*\((?P<sym>[^()]+)\) -- \[(?P<tier>[A-Za-z]+)\] "
@@ -85,7 +86,7 @@ def main():
     stats = {"matched": 0, "no_run": 0, "mismatch": 0, "kept": 0}
 
     for eid, e in outcomes.items():
-        if eid in out:
+        if eid in out and not REFRESH:
             stats["kept"] += 1
             continue
         if e.get("outcome") == "no_data" and e.get("category_count") is None:
@@ -115,7 +116,8 @@ def main():
             atr = (tp["entry_high"] - tp["entry_low"]) / 0.5      # band = +/-0.25 ATR
             atr_pct = atr / e["price_at_push"] * 100
         out[eid] = {"features": extract_features(t["signals"], t["cautions"], tier=t["tier"],
-                                                 category_count=t["n"], atr_pct=atr_pct)}
+                                                 category_count=t["n"], atr_pct=atr_pct,
+                                                 asof=best[0])}
         stats["matched"] += 1
 
     with open(OUT_FILE, "w") as f:

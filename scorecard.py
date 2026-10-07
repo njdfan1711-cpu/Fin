@@ -48,6 +48,9 @@ GROUPS = [
     ("Fundamental findings", ("fund:",)),
     ("Volatility (ATR % of price)", ("atr:",)),
     ("Cautions", ("caut:",)),
+    ("Volume at 52-wk high (time-adjusted)", ("volhi:",)),
+    ("Push timing (ET)", ("time:",)),
+    ("Signal age / run-up since first push", ("age:", "runup:")),
 ]
 
 

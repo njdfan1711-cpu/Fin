@@ -6,6 +6,80 @@ session before diagnosing or re-fixing something, since commit messages
 for automated runs all look identical and won't show what's already
 been touched.
 
+## 2026-10-07 (pre-open prior-close fix)
+Built from live `main` (HEAD 2c15594, pulled 2026-10-07) and shipped in the
+same upload as the 2026-10-07 scorecard-features batch below, so `compose_alerts.py`
+and this changelog are cumulative (both changes). Swing track only.
+
+Bug: `fetch_prices_and_atr` took `prev_close = closes.iloc[-2]`. Before the open
+(and on weekends/holidays) yfinance has no bar for today, so `iloc[-1]` is the
+last completed session and `iloc[-2]` is the close the day before it. Chase
+risk then reported yesterday's move as "up X% today" and named a stale
+"prior close" as the pullback level. Checked against `daily_pushes.json`:
+39 of 41 pre-open pushes that were re-pushed later the same day had a
+`prev_close` equal to the stale value; their pre-open price equalled the
+correct `prev_close` seen after the open (e.g. NAT 10-05: $8.17 vs $8.42).
+Trade-plan levels (entry/stop/target) use price and ATR only and were not affected.
+
+- `compose_alerts.py` `fetch_prices_and_atr`: `prev_close` is `iloc[-2]` only
+  when the last bar's date is today (ET); otherwise it is the last close, so
+  the day change is 0 until a session exists. `close_5d` is unchanged.
+- `compose_alerts.py` `format_chase_caution`: when there is no day move but the
+  5-day run still flags, the caution reads "Chase risk: +X% over ~5 days (N ATR)
+  ... consider waiting for a pullback" with no stale price level or "today" claim.
+  Wording for in-session pushes is unchanged.
+- Effect: pre-open pushes no longer get a day-move chase flag from yesterday's
+  session (the 5-day trigger still applies), so some pre-open `caut:chase` tags
+  will change. Historical stored `chase` fields and outcome entries are not
+  rewritten; scorecard `caut:chase` rows mix old and new definitions until
+  enough new pushes accumulate.
+- Not changed / still open: `technicals_scan.py` takes `volumes.iloc[-1]` as
+  "today's volume" and has the same possible last-bar assumption pre-open
+  (not yet checked against data); the `time:`/`volhi:` tags skip pre-10:00 ET
+  pushes for that reason.
+
+## 2026-10-07 (scorecard features: volume timing, push time, signal age)
+Built from live `main` (HEAD 2c15594, pulled 2026-10-07). Tag/logging only:
+no ranking, trade-plan, caution-text or alert-content changes. Swing track only.
+
+Why: the relative-volume ratio in `technicals_scan.py` is volume SO FAR today /
+the 20-day average of FULL days, so it reads low mid-session (alert-history
+medians: ~0.2-0.6x between 10:00-15:00 ET, ~0.9-1.0x only after the close).
+The "new 52-week high on light volume" caution therefore fires on most highs
+and says little about real volume. Raw ratio and thresholds are unchanged;
+the scorecard can now test volume on a time-adjusted basis.
+
+- `features.py`: new tags. `time:` (pre_open / open_hour / midday /
+  late_session / after_close / closed, ET push time); `volhi:` (low_adj <0.8x,
+  normal_adj 0.8-1.5x, high_adj >=1.5x: raw ratio parsed from the existing
+  light/confirmed-volume text, divided by an approximate cumulative
+  intraday-volume share; skipped before 10:00 ET); `age:` (new / recurring
+  2-4d / stale 5d+ from prior push days) and `runup:` (<2% / 2-5% / >=5% since
+  the first push of the current streak). The intraday curve is a heuristic,
+  not measured from this repo. Also: the chase caution line in alert text now
+  maps to `caut:chase` when backfilling from alerts_history (it previously
+  fell into `caut:news_caution`). `extract_features` gained optional
+  `asof`, `prior_push_days`, `runup_pct` args (all default None).
+- `daily_pushes.py`: new read-only `symbol_history()` (prior push days in the
+  current streak, gaps up to 4 calendar days; price at the streak's first push).
+- `compose_alerts.py`: `build_push_features` takes `history`/`asof`;
+  `symbol_history()` is called before `record_push()`. Stored push `features`
+  now include the new tags going forward.
+- `backfill_features.py`: new `--refresh` flag recomputes every entry; passes
+  the alert-run timestamp so history gets `time:`/`volhi:` tags. `age:`/`runup:`
+  cannot be backfilled (needs push history that was pruned) and accumulate
+  from live pushes only.
+- `scorecard.py`: three new report sections for the tags above.
+- `outcome_features.json` / `scorecard.md`: regenerated with
+  `backfill_features.py --refresh` then `scorecard.py --force`.
+  Window is now 2026-08-19 to 09-30 (1055 ticker-days) because more outcomes
+  resolved since 10-03, so the baseline moved (win 44%, avg R -0.04).
+- Early read (hypotheses only; one regime, many tags tested): time-adjusted
+  volume at highs shows no clear pattern (low 37% n=111, normal 43% n=104,
+  high 36% n=70, baseline 44%). `time:pre_open` pushes look better (57%, n=208)
+  and midday/after-close worse; may reflect measurement/price-timing effects.
+  Don't retune thresholds on this.
+
 ## 2026-10-06 (cleanup)
 Built from live `main` (HEAD 662ea41, pulled 2026-10-06). Housekeeping only;
 no ranking, trade-plan or alert-content changes. Swing track only.

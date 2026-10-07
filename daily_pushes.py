@@ -62,3 +62,34 @@ def prune_old_days():
               timedelta(days=DAILY_PUSHES_RETENTION_DAYS)).strftime("%Y-%m-%d")
     pruned = {day: entries for day, entries in log.items() if day >= cutoff}
     _save(pruned)
+
+
+def symbol_history(symbols) -> dict:
+    """For each symbol: how many EARLIER ET trading days it was already pushed
+    (a streak, allowing gaps of up to 4 calendar days for weekends/holidays),
+    and the price at the first push of that streak. Read-only; call BEFORE
+    record_push() so today's pushes aren't counted.
+
+    -> {sym: {"prior_days": int, "first_price": float | None}}
+    """
+    log = _load()
+    today = _today_et_key()
+    out = {}
+    for sym in symbols:
+        days = sorted(d for d, entries in log.items()
+                      if d < today and any(e.get("symbol") == sym for e in entries))
+        streak, nxt = [], datetime.strptime(today, "%Y-%m-%d")
+        for d in reversed(days):
+            dt = datetime.strptime(d, "%Y-%m-%d")
+            if (nxt - dt).days > 4:
+                break
+            streak.append(d)
+            nxt = dt
+        first_price = None
+        if streak:
+            first = min(streak)
+            prices = [e.get("price_at_push") for e in log[first]
+                      if e.get("symbol") == sym and e.get("price_at_push")]
+            first_price = float(prices[0]) if prices else None
+        out[sym] = {"prior_days": len(streak), "first_price": first_price}
+    return out
