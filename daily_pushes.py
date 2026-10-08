@@ -65,39 +65,56 @@ def prune_old_days():
 
 
 def symbol_history(symbols) -> dict:
-    """Streak info per symbol, from the retained push log. Read-only; call
+    """Streak info per symbol from the retained push log. Read-only; call
     BEFORE record_push() so the current cycle isn't counted.
 
-    prior_days:   EARLIER ET trading days in the current streak (a streak
-                  allows gaps of up to 4 calendar days, so weekends and
-                  holidays don't break it).
-    first_price:  price at the first push of that streak (None if unknown).
-    pushed_today: already pushed in an earlier cycle today.
+    A "trading day" is any day that has a key in the log (weekends/holidays
+    have no pushes, so they are simply skipped -- no holiday calendar needed).
+    A streak is an UNBROKEN run of those days ending the day before today:
+    one missed day resets it.
 
-    -> {sym: {"prior_days": int, "first_price": float | None, "pushed_today": bool}}
+    prior_days:   length of that unbroken run (0 = not pushed on the latest
+                  prior trading day). "Day N" = prior_days + 1.
+    first_price:  price at the first push of the run (None if none/unknown).
+    pushed_today: already pushed in an earlier cycle today.
+    ever_pushed:  pushed any time in the retained log, today included.
+    prev_run:     if the ticker was pushed earlier in the log but NOT on the
+                  latest prior trading day, the length of its most recent
+                  broken run (else 0). Used for the 'Back' marker.
+
+    -> {sym: {"prior_days", "first_price", "pushed_today", "ever_pushed", "prev_run"}}
     """
     log = _load()
     today = _today_et_key()
     prior = sorted(d for d in log if d < today)
-    day_syms = {d: {e.get("symbol") for e in log[d]} for d in list(prior) + ([today] if today in log else [])}
-    today_syms = day_syms.get(today, set())
+    day_syms = {d: {e.get("symbol") for e in log[d]} for d in prior}
+    today_syms = {e.get("symbol") for e in log.get(today, [])}
     out = {}
     for sym in symbols:
-        streak, nxt = [], datetime.strptime(today, "%Y-%m-%d")
-        for d in reversed(prior):
-            if sym not in day_syms[d]:
-                continue
-            dt = datetime.strptime(d, "%Y-%m-%d")
-            if (nxt - dt).days > 4:
-                break
-            streak.append(d)
-            nxt = dt
+        i = len(prior) - 1
+        run = 0
+        while i >= 0 and sym in day_syms[prior[i]]:
+            run += 1
+            i -= 1
         first_price = None
-        if streak:
-            first = min(streak)
-            prices = [e.get("price_at_push") for e in log[first]
+        if run:
+            first_day = prior[i + 1]
+            prices = [e.get("price_at_push") for e in log[first_day]
                       if e.get("symbol") == sym and e.get("price_at_push")]
             first_price = float(prices[0]) if prices else None
-        out[sym] = {"prior_days": len(streak), "first_price": first_price,
-                    "pushed_today": sym in today_syms}
+        prev_run = 0
+        ever_prior = run > 0
+        if run == 0:
+            j = i
+            while j >= 0 and sym not in day_syms[prior[j]]:
+                j -= 1
+            if j >= 0:
+                ever_prior = True
+                while j >= 0 and sym in day_syms[prior[j]]:
+                    prev_run += 1
+                    j -= 1
+        out[sym] = {"prior_days": run, "first_price": first_price,
+                    "pushed_today": sym in today_syms,
+                    "ever_pushed": ever_prior or sym in today_syms,
+                    "prev_run": prev_run}
     return out

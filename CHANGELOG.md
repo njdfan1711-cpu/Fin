@@ -6,6 +6,41 @@ session before diagnosing or re-fixing something, since commit messages
 for automated runs all look identical and won't show what's already
 been touched.
 
+## 2026-10-08 (strict streaks, Back marker, NEW = never seen)
+Built from live `main` (HEAD c62eb78, pulled 2026-10-08; the streak-tag batch
+below verified live by file hash). Display only. Swing track only. Supersedes
+the "gaps of up to 4 calendar days" streak rule in the entry below.
+
+Why: that rule counted days pushed, tolerating missed days, so an on-again/
+off-again ticker read as a long streak. On the real log (10-08), DHT (pushed
+every day except 10-06) showed "Day 8" when strictly it is Day 2, HPE showed
+Day 6 vs 3, PTC/PBR showed Day 3 vs 1; 4 of 20 tickers shown at Day 3+ had
+broken runs.
+
+- `daily_pushes.py` `symbol_history()`: a streak is now an UNBROKEN run of
+  trading days ending the day before today; one missed day resets it. A
+  "trading day" is any day with a key in the push log (weekends/holidays have
+  no pushes and are skipped, so no holiday calendar). New return fields
+  `ever_pushed` (anywhere in the retained log, today included) and `prev_run`
+  (length of the most recent broken run). `prior_days`/`first_price`/
+  `pushed_today` keep their names. Side effect: the scorecard's `age:` and
+  `runup:` tags (via `compose_alerts.py` -> `features.py`) now use the strict
+  streak too; they started collecting 10-07, so only a day or two of
+  looser-rule data exists.
+- `compose_alerts.py`: streak tag shown at Day 3+ (`STREAK_TAG_MIN_DAYS`
+  unchanged) only for unbroken runs. New `\u21A9 Back (was Day N)` marker for a
+  ticker whose previous run was N >= 3 and was broken by a missed day. Runs of
+  1-2 days that broke get no marker. Applies to the ntfy header line and the
+  `## N.` header in `alerts_history`.
+- `compose_alerts.py`: NEW now means never pushed anywhere in the retained log
+  (~10 days), so a ticker that dropped for a day and returned is no longer
+  re-labelled NEW. The "N new" count in the push title uses the same rule.
+- Replay on the push log: Day 3+ tags 16 of 28 tickers pushed 10-08 (was 20);
+  DHT 10-07 -> "Back (was Day 6)"; HPE 10-08 -> Day 3; PTC/PBR -> no tag, not NEW.
+- Caveats: the log keeps ~10 days, so streaks cap there; a workflow outage
+  that leaves a trading day with no pushes at all breaks every streak that
+  day (conservative).
+
 ## 2026-10-07 (streak tag + NEW logic fix)
 Built from live `main` (HEAD b5454ef, pulled 2026-10-07; the scorecard-features
 and pre-open-fix batches below verified live by file hash). Display only: no

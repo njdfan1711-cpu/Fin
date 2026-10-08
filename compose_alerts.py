@@ -518,16 +518,28 @@ def streak_day_and_move(hist: dict | None, price) -> tuple[int, float | None]:
 
 
 def format_streak_tag(hist: dict | None, price) -> str:
-    """Display-only 'how long has this been on the list' tag, shown once a
-    ticker has been pushed on STREAK_TAG_MIN_DAYS+ consecutive trading days:
-    e.g. '📅 Day 8 (+12.1% since 1st alert)'. Empty string otherwise."""
-    day, move = streak_day_and_move(hist, price)
-    if day < STREAK_TAG_MIN_DAYS:
-        return ""
-    if move is None:
-        return f"\U0001F4C5 Day {day}"
-    return f"\U0001F4C5 Day {day} ({move:+.1f}% since 1st alert)"
+    """Display-only persistence tag.
 
+    * '📅 Day 8 (+12.1% since 1st alert)' -- an UNBROKEN run of trading days
+      with a push, shown once it reaches STREAK_TAG_MIN_DAYS.
+    * '↩ Back (was Day 6)' -- the ticker had a run of STREAK_TAG_MIN_DAYS+
+      that was broken by a missed trading day and it has returned; flags
+      on-again/off-again names instead of presenting them as streaks.
+    * '' otherwise."""
+    day, move = streak_day_and_move(hist, price)
+    if day >= STREAK_TAG_MIN_DAYS:
+        if move is None:
+            return f"\U0001F4C5 Day {day}"
+        return f"\U0001F4C5 Day {day} ({move:+.1f}% since 1st alert)"
+    prev_run = (hist or {}).get("prev_run", 0)
+    if prev_run >= STREAK_TAG_MIN_DAYS:
+        return f"\u21A9 Back (was Day {prev_run})"
+    return ""
+
+
+def is_new_ticker(hist: dict | None) -> bool:
+    """NEW = not pushed anywhere in the retained push log (today included)."""
+    return not (hist or {}).get("ever_pushed", False)
 
 def format_ticker_line(rank: int, symbol: str, name: str, categories: dict,
                         price, target, atr=None, sector_note: str | None = None,
@@ -856,12 +868,10 @@ def main():
         target = fetch_price_target(sym)
         name = company_names.get(sym, "")
         sector_note = find_sector_annotation(sectors.get(sym, ""), active_sector_alerts)
-        # NEW = never pushed in the current streak (neither today nor a prior
-        # trading day). The old test (not alerted in the last DEDUPE_HOURS=12)
-        # re-labelled every repeat as NEW on the first push after any overnight
-        # or weekend gap.
-        sh = streak_hist.get(sym) or {}
-        is_new = sh.get("prior_days", 0) == 0 and not sh.get("pushed_today", False)
+        # NEW = never pushed anywhere in the retained push log. The old test
+        # (not alerted in the last DEDUPE_HOURS=12) re-labelled every repeat as
+        # NEW on the first push after any overnight or weekend gap.
+        is_new = is_new_ticker(streak_hist.get(sym))
         pa = price_atr.get(sym, {})
         chase_info = compute_chase_info(price, atr, pa.get("prev_close"), pa.get("close_5d"))
         lines.append(format_ticker_line(rank, sym, name, cats, price, target, atr, sector_note, is_new,
@@ -905,8 +915,7 @@ def main():
         message += "\n\n_(hard-truncated to fit -- see repo for full detail)_"
 
     new_count = sum(1 for rank, sym, cats in push_list
-                    if (streak_hist.get(sym) or {}).get("prior_days", 0) == 0
-                    and not (streak_hist.get(sym) or {}).get("pushed_today", False))
+                    if is_new_ticker(streak_hist.get(sym)))
     strong_count = sum(1 for rank, sym, cats in push_list
                         if conviction_tier(*score_ticker(cats)) == "STRONG")
     # NOTE: no emoji in the title -- it becomes an HTTP header, and Python's
