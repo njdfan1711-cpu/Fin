@@ -57,6 +57,7 @@ ET = ZoneInfo("America/New_York")
 RESOLUTION_DAYS = typical_resolution_days()
 
 from config import (
+    STREAK_TAG_MIN_DAYS,
     FINNHUB_API_KEY,
     ELIGIBLE_FILE,
     MIN_SIGNAL_CATEGORIES,
@@ -87,7 +88,7 @@ from config import (
 )
 from signals_store import get_active_signals
 from features import extract_features
-from alert_log import was_recently_alerted, mark_alerted
+from alert_log import mark_alerted
 from daily_pushes import record_push, prune_old_days, symbol_history
 from notify import send_alert
 
@@ -504,9 +505,34 @@ def find_sector_annotation(industry: str, active_sector_alerts: list[dict]) -> s
     return None
 
 
+def streak_day_and_move(hist: dict | None, price) -> tuple[int, float | None]:
+    """(day number in the current push streak, % move since its first push).
+    Day 1 = first time pushed. The % move is None if the first price or the
+    current price is unknown."""
+    if not hist:
+        return 1, None
+    day = int(hist.get("prior_days", 0)) + 1
+    fp = hist.get("first_price")
+    move = (price - fp) / fp * 100 if (fp and price) else None
+    return day, move
+
+
+def format_streak_tag(hist: dict | None, price) -> str:
+    """Display-only 'how long has this been on the list' tag, shown once a
+    ticker has been pushed on STREAK_TAG_MIN_DAYS+ consecutive trading days:
+    e.g. '📅 Day 8 (+12.1% since 1st alert)'. Empty string otherwise."""
+    day, move = streak_day_and_move(hist, price)
+    if day < STREAK_TAG_MIN_DAYS:
+        return ""
+    if move is None:
+        return f"\U0001F4C5 Day {day}"
+    return f"\U0001F4C5 Day {day} ({move:+.1f}% since 1st alert)"
+
+
 def format_ticker_line(rank: int, symbol: str, name: str, categories: dict,
                         price, target, atr=None, sector_note: str | None = None,
-                        is_new: bool = False, chase_info: dict | None = None) -> str:
+                        is_new: bool = False, chase_info: dict | None = None,
+                        streak_tag: str = "") -> str:
     """
     Markdown-formatted: bold ticker/price header line, reasons as a clean
     indented bullet list underneath instead of one long comma/pipe string.
@@ -527,6 +553,8 @@ def format_ticker_line(rank: int, symbol: str, name: str, categories: dict,
     tier_tag = "\U0001F525 STRONG" if tier == "STRONG" else "\u2713 Moderate"  # 🔥 / ✓
 
     header = f"{new_tag}**#{rank} {symbol}** [{tier_tag}] _{display_name}_{price_bit}"
+    if streak_tag:
+        header += f" \u00B7 {streak_tag}"
 
     bullets = []
     for cat, info in categories.items():
@@ -732,6 +760,10 @@ def main():
     # qualifying list fluctuates intraday as tickers add/drop -- a
     # daily-only file would silently lose whichever tickers didn't
     # survive to the last run of the day.
+    # Streak history for every ranked ticker (read-only; must run BEFORE this
+    # cycle's record_push so the current push isn't counted as a prior day).
+    streak_hist = symbol_history([sym for _, sym, _ in ranked_with_rank])
+
     import io
     run_stamp = datetime.now(timezone.utc).astimezone(ET).strftime("%Y-%m-%d_%H%M")
     buf = io.StringIO()
@@ -742,8 +774,10 @@ def main():
         count, strength = score_ticker(cats)
         name = clean_company_name(company_names.get(sym, ""))
         label = f"{name} ({sym})" if name else sym
+        streak_tag = format_streak_tag(streak_hist.get(sym), prices.get(sym))
         f.write(f"## {rank}. {label} -- [{conviction_tier(count, strength)}] "
-                f"{count} signals, strength {strength:.2f}\n")
+                f"{count} signals, strength {strength:.2f}"
+                f"{' \u00B7 ' + streak_tag if streak_tag else ''}\n")
         for cat, info in cats.items():
             if cat in CAUTION_STYLE_CATEGORY_KEYS:
                 continue  # written separately below, clearly marked
@@ -822,11 +856,17 @@ def main():
         target = fetch_price_target(sym)
         name = company_names.get(sym, "")
         sector_note = find_sector_annotation(sectors.get(sym, ""), active_sector_alerts)
-        is_new = not was_recently_alerted(sym)
+        # NEW = never pushed in the current streak (neither today nor a prior
+        # trading day). The old test (not alerted in the last DEDUPE_HOURS=12)
+        # re-labelled every repeat as NEW on the first push after any overnight
+        # or weekend gap.
+        sh = streak_hist.get(sym) or {}
+        is_new = sh.get("prior_days", 0) == 0 and not sh.get("pushed_today", False)
         pa = price_atr.get(sym, {})
         chase_info = compute_chase_info(price, atr, pa.get("prev_close"), pa.get("close_5d"))
         lines.append(format_ticker_line(rank, sym, name, cats, price, target, atr, sector_note, is_new,
-                                        chase_info=chase_info))
+                                        chase_info=chase_info,
+                                        streak_tag=format_streak_tag(streak_hist.get(sym), price)))
 
     # Footer pieces are built FIRST, in their final form, so their exact
     # byte cost is known BEFORE deciding how many ticker lines fit --
@@ -864,7 +904,9 @@ def main():
         message = _hard_truncate_utf8(message, NTFY_MESSAGE_BYTE_LIMIT - 96)
         message += "\n\n_(hard-truncated to fit -- see repo for full detail)_"
 
-    new_count = sum(1 for rank, sym, cats in push_list if not was_recently_alerted(sym))
+    new_count = sum(1 for rank, sym, cats in push_list
+                    if (streak_hist.get(sym) or {}).get("prior_days", 0) == 0
+                    and not (streak_hist.get(sym) or {}).get("pushed_today", False))
     strong_count = sum(1 for rank, sym, cats in push_list
                         if conviction_tier(*score_ticker(cats)) == "STRONG")
     # NOTE: no emoji in the title -- it becomes an HTTP header, and Python's
@@ -889,7 +931,7 @@ def main():
                    markdown=True, click_url=click_url)
         mark_alerted([sym for _, sym, _ in push_list])
 
-        push_hist = symbol_history([sym for _, sym, _ in push_list])   # BEFORE record_push
+        push_hist = streak_hist   # computed before record_push (see above)
         push_asof = datetime.now(timezone.utc)
         record_push([
             {

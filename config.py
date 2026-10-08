@@ -157,6 +157,10 @@ STRONG_TIER_STRENGTH_FOR_TWO = 1.5   # OR just 2 categories, but with combined
 # top-ranked, so the same names don't spam every 30 min) ---
 DEDUPE_HOURS = 12
 
+# Show the "Day N" streak tag on a ticker once it has been pushed on this many
+# consecutive trading days (counting today). Display only.
+STREAK_TAG_MIN_DAYS = 3
+
 # --- Momentum / speculative low-float scan -- a SEPARATE track from the
 # main confluence system, deliberately NOT blended into
 # MIN_SIGNAL_CATEGORIES/STRONG-tier scoring. This targets the opposite

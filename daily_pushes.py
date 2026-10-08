@@ -65,21 +65,28 @@ def prune_old_days():
 
 
 def symbol_history(symbols) -> dict:
-    """For each symbol: how many EARLIER ET trading days it was already pushed
-    (a streak, allowing gaps of up to 4 calendar days for weekends/holidays),
-    and the price at the first push of that streak. Read-only; call BEFORE
-    record_push() so today's pushes aren't counted.
+    """Streak info per symbol, from the retained push log. Read-only; call
+    BEFORE record_push() so the current cycle isn't counted.
 
-    -> {sym: {"prior_days": int, "first_price": float | None}}
+    prior_days:   EARLIER ET trading days in the current streak (a streak
+                  allows gaps of up to 4 calendar days, so weekends and
+                  holidays don't break it).
+    first_price:  price at the first push of that streak (None if unknown).
+    pushed_today: already pushed in an earlier cycle today.
+
+    -> {sym: {"prior_days": int, "first_price": float | None, "pushed_today": bool}}
     """
     log = _load()
     today = _today_et_key()
+    prior = sorted(d for d in log if d < today)
+    day_syms = {d: {e.get("symbol") for e in log[d]} for d in list(prior) + ([today] if today in log else [])}
+    today_syms = day_syms.get(today, set())
     out = {}
     for sym in symbols:
-        days = sorted(d for d, entries in log.items()
-                      if d < today and any(e.get("symbol") == sym for e in entries))
         streak, nxt = [], datetime.strptime(today, "%Y-%m-%d")
-        for d in reversed(days):
+        for d in reversed(prior):
+            if sym not in day_syms[d]:
+                continue
             dt = datetime.strptime(d, "%Y-%m-%d")
             if (nxt - dt).days > 4:
                 break
@@ -91,5 +98,6 @@ def symbol_history(symbols) -> dict:
             prices = [e.get("price_at_push") for e in log[first]
                       if e.get("symbol") == sym and e.get("price_at_push")]
             first_price = float(prices[0]) if prices else None
-        out[sym] = {"prior_days": len(streak), "first_price": first_price}
+        out[sym] = {"prior_days": len(streak), "first_price": first_price,
+                    "pushed_today": sym in today_syms}
     return out
