@@ -91,6 +91,48 @@ same convention as the main changelog.
   backtest, or `guardrails.py` (whose ALLOWED_SYMBOLS is still the
   30-name list and must be updated before the live bot can trade
   anything else).
+- **Added `IDEAS.md`** (backlog of candidate rules; none implemented).
+  Includes skipping the first/last 15 minutes, avoiding entries while SPY
+  is down, and skipping over-extended entries, plus a guiding principle
+  of testing one idea at a time and tagging signals (rather than only
+  filtering them) so the cost of each rule in lost good trades is visible.
+- **Measured-spread cost model (backtest).** First spread-logger results
+  (2 partial days, core hours) showed the flat 2c/share assumption was
+  wrong in both directions: too high for cheap stocks (1c on a $3 stock is
+  already 0.30% of price) and too low for high-priced ones (e.g. META
+  ~20c). `scalp_backtest.py` now re-costs every accumulated trade in the
+  SUMMARY from `measured_spreads.csv` (symbol -> median spread as % of
+  price): cost/share = max(1c, price x pct) x `SPREAD_COST_MULTIPLIER`;
+  symbols with no data fall back to the flat 2c and are listed. The
+  `cost` / `net_pnl` columns in the trades CSVs deliberately stay on the
+  old flat model so older and newer rows remain consistent; the summary
+  JSON now carries total gross/cost/net under the measured model, the old
+  flat-model net for comparison, breakdowns by spread tier (<=0.03% vs
+  wider) and by symbol. Result on the first 180 trades: net -$551 (flat
+  model) -> -$334 (measured); gross edge is only +$25 (about $0.14 per
+  trade). The 93 trades in tight-spread names (<=0.03%) netted +$18 (about
+  $0.20/trade, within noise); the 86 trades in wider-spread names lost
+  $356 (NIO alone about -$245). Conclusion: costs were hurting badly, but
+  the entry signal itself shows almost no gross edge yet.
+- **Spread logger v2 + report.** `spread_logger.py` now logs the 30 core
+  symbols plus the daily watchlist (downloaded from GitHub at startup),
+  ~510 symbols, polling every 10s in batches of 100, summarized per symbol
+  per minute (`logs\spread_min_YYYY-MM-DD.csv`, roughly 20 MB/day). Stale
+  and crossed quotes are dropped; symbols that return no quotes are
+  printed after ~5 minutes (WBD returned none in the first run).
+  Credentials can live in `schwab_credentials.txt` (key line 1, secret line
+  2) so script updates never wipe them. `spread_report.py` reads both the
+  old per-quote logs and the new per-minute logs and writes
+  `measured_spreads.csv` (upload to the repo's scalping/ folder to update
+  backtest costs). p90 in the new report is over 1-minute averages, so it
+  reads slightly lower than the first report's per-quote p90.
+- **Watchlist spread filter.** `build_watchlist.py` drops names whose
+  measured median spread exceeds 0.03% of price (about $0.90 round trip on
+  a $3,000 trade, under 10% of the profit target), when
+  `measured_spreads.csv` is present. Names with no measurement yet are kept
+  (marked `spread_known = no`) so the logger can measure them. First run:
+  5 names dropped (AMD, COIN, HOOD, PLTR, T); 500 written, 15 with measured
+  spreads.
 - **Pending:** consider removing low-priced tickers (NIO, F, AAL, SOFI, T,
   and similar) from `CANDIDATES`; not yet changed.
 

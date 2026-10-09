@@ -136,6 +136,21 @@ COMMISSION_PER_TRADE = 0.0         # Schwab equities are commission-free
                                     # as of this writing -- confirm this
                                     # is still true before trusting it
 
+# --- Measured-spread cost model (added 2026-10) ---
+# measured_spreads.csv (next to this script) holds each symbol's measured
+# median bid/ask spread as a % of price, produced by spread_report.py from
+# the local spread_logger.py data. Summaries re-cost EVERY accumulated trade
+# from its gross P&L using these numbers:
+#   cost per share = max(MIN_TICK_COST, entry_price x median_pct / 100) x multiplier
+# Symbols with no measured data fall back to SCALP_ASSUMED_SPREAD_CENTS and
+# are listed in the summary. The cost/net_pnl columns in the trades CSVs
+# stay on the OLD flat-cents model so older and newer rows are consistent;
+# the summary JSON is where the measured-cost results live.
+MEASURED_SPREADS_FILE = "measured_spreads.csv"
+MIN_TICK_COST = 0.01               # one-cent minimum tick per share
+SPREAD_COST_MULTIPLIER = 1.0       # e.g. 1.5 to stress-test (stops/fast markets cost more)
+TIGHT_SPREAD_PCT = 0.03            # tier boundary used in the summary
+
 TRADES_FILE = "scalp_backtest_trades.csv"
 SUMMARY_FILE = "scalp_backtest_summary.json"
 TRAIL_TRADES_FILE = "scalp_backtest_trail_trades.csv"
@@ -265,6 +280,31 @@ def find_trades(symbol: str, df: pd.DataFrame, mode: str = "fixed") -> list[dict
     return trades
 
 
+def load_measured_spreads() -> dict:
+    """symbol -> median spread as % of price. Empty dict if file missing."""
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), MEASURED_SPREADS_FILE)
+    table = {}
+    if not os.path.exists(path):
+        print(f"{MEASURED_SPREADS_FILE} not found -- using the flat "
+              f"{SCALP_ASSUMED_SPREAD_CENTS}c model for everything.", file=sys.stderr)
+        return table
+    with open(path, newline="") as f:
+        for r in csv.DictReader(f):
+            try:
+                table[r["symbol"].strip().upper()] = float(r["median_pct"])
+            except (KeyError, ValueError):
+                continue
+    return table
+
+
+def measured_cost_per_share(symbol: str, price: float, table: dict):
+    """Returns (round-trip cost per share in dollars, True if measured)."""
+    pct = table.get(symbol)
+    if pct is None:
+        return SCALP_ASSUMED_SPREAD_CENTS / 100, False
+    return max(MIN_TICK_COST, price * pct / 100) * SPREAD_COST_MULTIPLIER, True
+
+
 def load_existing_trade_keys(path: str) -> set:
     """(symbol, entry_time) pairs already on file, so re-running this
     script as new days of data become available appends only genuinely
@@ -308,7 +348,19 @@ def record_and_summarize(all_trades: list[dict], trades_file: str,
         print(f"[{label}] No trades in the accumulated file yet.", file=sys.stderr)
         return
 
-    net_pnls = [float(r["net_pnl"]) for r in all_rows]
+    spreads = load_measured_spreads()
+    trades = []
+    for r in all_rows:
+        gross = float(r["gross_pnl"])
+        shares = int(float(r["shares"]))
+        cps, known = measured_cost_per_share(r["symbol"], float(r["entry_price"]), spreads)
+        cost = shares * cps + COMMISSION_PER_TRADE
+        trades.append({"symbol": r["symbol"], "gross": gross, "cost": cost,
+                       "net": gross - cost, "known": known,
+                       "pct": spreads.get(r["symbol"]),
+                       "flat_net": float(r["net_pnl"])})
+
+    net_pnls = [t["net"] for t in trades]
     wins = [p for p in net_pnls if p > 0]
     losses = [p for p in net_pnls if p <= 0]
 
@@ -323,9 +375,30 @@ def record_and_summarize(all_trades: list[dict], trades_file: str,
         peak = max(peak, e)
         max_drawdown = min(max_drawdown, e - peak)
 
+    def bucket(rows):
+        return {
+            "trades": len(rows),
+            "gross_pnl": round(sum(t["gross"] for t in rows), 2),
+            "cost": round(sum(t["cost"] for t in rows), 2),
+            "net_pnl": round(sum(t["net"] for t in rows), 2),
+            "avg_net_per_trade": round(sum(t["net"] for t in rows) / len(rows), 2) if rows else None,
+        }
+
+    tight = [t for t in trades if t["known"] and t["pct"] <= TIGHT_SPREAD_PCT]
+    wide = [t for t in trades if t["known"] and t["pct"] > TIGHT_SPREAD_PCT]
+    unknown = [t for t in trades if not t["known"]]
+    by_symbol = {}
+    for t in trades:
+        by_symbol.setdefault(t["symbol"], []).append(t)
+    by_symbol = dict(sorted(((k, bucket(v)) for k, v in by_symbol.items()),
+                            key=lambda kv: kv[1]["net_pnl"]))
+
     reasons = ("target", "stop", "trail_stop", "time_stop")
     summary = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
+        "cost_model": (f"measured median spread per symbol x{SPREAD_COST_MULTIPLIER} "
+                       f"(flat {SCALP_ASSUMED_SPREAD_CENTS}c fallback)"),
+        "symbols_without_spread_data": sorted({t["symbol"] for t in unknown}),
         "total_trades": len(all_rows),
         "win_count": len(wins),
         "loss_count": len(losses),
@@ -333,13 +406,22 @@ def record_and_summarize(all_trades: list[dict], trades_file: str,
         "avg_net_pnl_per_trade": round(sum(net_pnls) / len(net_pnls), 2),
         "avg_win": round(sum(wins) / len(wins), 2) if wins else None,
         "avg_loss": round(sum(losses) / len(losses), 2) if losses else None,
+        "total_gross_pnl": round(sum(t["gross"] for t in trades), 2),
+        "total_cost": round(sum(t["cost"] for t in trades), 2),
         "total_net_pnl": round(sum(net_pnls), 2),
+        "total_net_pnl_flat_cost_model": round(sum(t["flat_net"] for t in trades), 2),
         "max_drawdown": round(max_drawdown, 2),
         "exit_reason_counts": {
             reason: sum(1 for r in all_rows if r["exit_reason"] == reason)
             for reason in reasons
             if any(r["exit_reason"] == reason for r in all_rows)
         },
+        "by_spread_tier": {
+            f"tight_le_{TIGHT_SPREAD_PCT}pct": bucket(tight),
+            f"wide_gt_{TIGHT_SPREAD_PCT}pct": bucket(wide),
+            "no_spread_data": bucket(unknown),
+        },
+        "by_symbol": by_symbol,
     }
     with open(summary_file, "w") as f:
         json.dump(summary, f, indent=2)

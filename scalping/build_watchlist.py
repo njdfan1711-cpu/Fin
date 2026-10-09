@@ -11,6 +11,10 @@ the ~2,400 eligible names to the most liquid, reasonably priced ones:
   * dollar volume (price x 20-day avg volume) >= MIN_DOLLAR_VOLUME
   * plain symbols only (letters), to avoid quote-format surprises with
     class shares like BRK.B
+  * if measured_spreads.csv is present (from spread_report.py), names whose
+    measured median spread is above MAX_MEDIAN_SPREAD_PCT are dropped.
+    Names with no measured spread yet are KEPT (so the logger can measure
+    them) and marked spread_known = no.
   * ranked by dollar volume, capped at MAX_NAMES
 
 Run from the scalping/ folder:  python build_watchlist.py
@@ -31,6 +35,21 @@ MIN_PRICE = 20.0
 MAX_PRICE = 1000.0
 MIN_DOLLAR_VOLUME = 100_000_000   # dollars traded per day, approx
 MAX_NAMES = 500
+MEASURED_SPREADS_FILE = "measured_spreads.csv"
+MAX_MEDIAN_SPREAD_PCT = 0.03      # round trip ~ <= $0.90 on a $3,000 trade
+
+
+def load_measured_spreads() -> dict:
+    if not os.path.exists(MEASURED_SPREADS_FILE):
+        return {}
+    table = {}
+    with open(MEASURED_SPREADS_FILE, newline="") as f:
+        for r in csv.DictReader(f):
+            try:
+                table[r["symbol"].strip().upper()] = float(r["median_pct"])
+            except (KeyError, ValueError):
+                continue
+    return table
 
 
 def main() -> int:
@@ -41,7 +60,8 @@ def main() -> int:
     with open(ELIGIBLE_FILE, newline="") as f:
         rows = list(csv.DictReader(f))
 
-    kept, skipped_symbol = [], 0
+    spreads = load_measured_spreads()
+    kept, skipped_symbol, dropped_wide = [], 0, 0
     for r in rows:
         sym = (r.get("symbol") or "").strip().upper()
         try:
@@ -54,6 +74,10 @@ def main() -> int:
             continue
         dollar_vol = price * avg_vol
         if MIN_PRICE <= price <= MAX_PRICE and dollar_vol >= MIN_DOLLAR_VOLUME:
+            spread_pct = spreads.get(sym)
+            if spread_pct is not None and spread_pct > MAX_MEDIAN_SPREAD_PCT:
+                dropped_wide += 1
+                continue
             kept.append({
                 "symbol": sym,
                 "name": r.get("name", ""),
@@ -61,6 +85,8 @@ def main() -> int:
                 "price": round(price, 2),
                 "avg_volume": int(avg_vol),
                 "dollar_volume": int(dollar_vol),
+                "median_spread_pct": "" if spread_pct is None else spread_pct,
+                "spread_known": "no" if spread_pct is None else "yes",
             })
 
     kept.sort(key=lambda x: x["dollar_volume"], reverse=True)
@@ -71,12 +97,16 @@ def main() -> int:
 
     with open(OUTPUT_FILE, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=[
-            "rank", "symbol", "name", "exchange", "price", "avg_volume", "dollar_volume"])
+            "rank", "symbol", "name", "exchange", "price", "avg_volume", "dollar_volume",
+            "median_spread_pct", "spread_known"])
         w.writeheader()
         w.writerows(kept)
 
     print(f"eligible rows: {len(rows)} | non-plain symbols skipped: {skipped_symbol} | "
+          f"dropped for wide measured spread: {dropped_wide} | "
           f"passed filters: {passed} | written (cap {MAX_NAMES}): {len(kept)}")
+    known = sum(1 for k in kept if k["spread_known"] == "yes")
+    print(f"spread measured for {known} of {len(kept)} names; the rest still need logging")
     print(f"top 5: {', '.join(k['symbol'] for k in kept[:5])}")
     if kept:
         print(f"lowest included: {kept[-1]['symbol']} "
