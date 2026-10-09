@@ -43,11 +43,17 @@ jobs:
         working-directory: scalping
         run: python scalp_backtest.py
 
+      - name: Analyze tagged signals
+        working-directory: scalping
+        run: |
+          python analyze_tags.py fixed || echo "tag analysis (fixed) skipped"
+          python analyze_tags.py trail || echo "tag analysis (trail) skipped"
+
       - name: Commit updated trade log/summary
         run: |
           git config user.name "stock-scanner-bot"
           git config user.email "actions@users.noreply.github.com"
-          for f in scalping/scalp_backtest_trades.csv scalping/scalp_backtest_summary.json scalping/scalp_backtest_trail_trades.csv scalping/scalp_backtest_trail_summary.json; do
+          for f in scalping/scalp_backtest_trades.csv scalping/scalp_backtest_summary.json scalping/scalp_backtest_trail_trades.csv scalping/scalp_backtest_trail_summary.json scalping/scalp_signals_tagged.csv scalping/scalp_tag_analysis.md scalping/scalp_tag_analysis_trail.md; do
             if [ -f "$f" ]; then
               git add "$f"
             fi
