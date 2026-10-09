@@ -133,6 +133,28 @@ same convention as the main changelog.
   (marked `spread_known = no`) so the logger can measure them. First run:
   5 names dropped (AMD, COIN, HOOD, PLTR, T); 500 written, 15 with measured
   spreads.
+- **Signal tagging + analysis (no strategy change).** `scalp_backtest.py`
+  now records, for every entry, the conditions at that moment in
+  `scalp_signals_tagged.csv` (one row per mode + symbol + entry time):
+  minutes since the open, distance above VWAP, 3-min momentum, volume
+  ratio, recent volatility (avg 1-min range), stock moves over the last
+  15 and 30 minutes and since the day's open, SPY's return since the open /
+  last 15 min / position vs its VWAP, the stock's 15-min strength vs SPY,
+  the stock's measured spread, and the best/worst price reached during the
+  hold. Entries and exits are unchanged (verified identical on test data).
+  Tags can only be created for trades inside yfinance's 7-day window, so
+  the first run tags the most recent ~5 trading days; older trades stay
+  untagged. New `analyze_tags.py` (run by the backtest workflow after each
+  backtest) writes `scalp_tag_analysis.md` (fixed exits) and
+  `scalp_tag_analysis_trail.md`: baseline; what-if filters judged by what
+  the REMOVED trades earned (skip first/last 15 min, skip first 30 min,
+  skip SPY-down variants, skip over-extended, skip stocks not beating SPY,
+  tight spreads only); results bucketed by each condition with win-rate
+  confidence intervals; price-path stats for tuning exits; stop-out rates
+  by volatility. All results are labelled hypotheses; nothing becomes a
+  rule until it holds up on fresh data. The workflow now also commits the
+  tag file and analysis files. Known limit: the backtest allows one
+  position per symbol, while the live bot will hold one position in total.
 - **Pending:** consider removing low-priced tickers (NIO, F, AAL, SOFI, T,
   and similar) from `CANDIDATES`; not yet changed.
 

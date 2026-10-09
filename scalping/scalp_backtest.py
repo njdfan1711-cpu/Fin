@@ -151,6 +151,24 @@ MIN_TICK_COST = 0.01               # one-cent minimum tick per share
 SPREAD_COST_MULTIPLIER = 1.0       # e.g. 1.5 to stress-test (stops/fast markets cost more)
 TIGHT_SPREAD_PCT = 0.03            # tier boundary used in the summary
 
+# --- Signal tagging (added 2026-10) ---
+# Every entry is recorded with the market conditions at that moment, so
+# candidate rules from IDEAS.md (skip open/close, avoid SPY-down, skip
+# over-extended, volatility-scaled exits...) can be judged AFTER the fact by
+# what the trades they would have removed actually earned -- without adding
+# any rule to the strategy. analyze_tags.py does that analysis. One row per
+# (mode, symbol, entry_time); trades older than yfinance's 7-day window
+# cannot be tagged retroactively, so tagging starts from the first run.
+TAGS_FILE = "scalp_signals_tagged.csv"
+TAG_FIELDS = [
+    "mode", "symbol", "entry_time", "entry_price", "shares", "exit_reason",
+    "held_minutes", "gross_pnl",
+    "minutes_since_open", "vwap_dist_pct", "mom3_pct", "volume_ratio",
+    "range20_pct", "ret15_pct", "ext30_pct", "ext_from_open_pct",
+    "spy_ret_open_pct", "spy_ret_15m_pct", "spy_vs_vwap_pct", "rs15_vs_spy_pct",
+    "spread_pct", "max_up_pct", "max_down_pct",
+]
+
 TRADES_FILE = "scalp_backtest_trades.csv"
 SUMMARY_FILE = "scalp_backtest_summary.json"
 TRAIL_TRADES_FILE = "scalp_backtest_trail_trades.csv"
@@ -192,7 +210,42 @@ def compute_session_vwap(df: pd.DataFrame) -> pd.Series:
     return cum_pv / cum_vol.replace(0, float("nan"))
 
 
-def find_trades(symbol: str, df: pd.DataFrame, mode: str = "fixed") -> list[dict]:
+def _num(x, nd=4):
+    """Round a number for the tags file; blank if missing/NaN."""
+    try:
+        if x is None or pd.isna(x):
+            return ""
+        return round(float(x), nd)
+    except (TypeError, ValueError):
+        return ""
+
+
+def _minutes_since_open(ts) -> int:
+    """Minutes after 9:30 AM Eastern for a bar timestamp."""
+    try:
+        if ts.tzinfo is not None:
+            ts = ts.tz_convert("America/New_York")
+    except (AttributeError, TypeError):
+        pass
+    return int(ts.hour * 60 + ts.minute - (9 * 60 + 30))
+
+
+def build_spy_context(spy_df):
+    """Per-minute SPY market context (None if SPY data is unavailable)."""
+    if spy_df is None or spy_df.empty:
+        return None
+    ctx = pd.DataFrame(index=spy_df.index)
+    day = spy_df.index.date
+    vwap = compute_session_vwap(spy_df)
+    ctx["spy_vs_vwap_pct"] = (spy_df["Close"] / vwap - 1) * 100
+    day_open = spy_df["Open"].groupby(day).transform("first")
+    ctx["spy_ret_open_pct"] = (spy_df["Close"] / day_open - 1) * 100
+    ctx["spy_ret_15m_pct"] = spy_df["Close"].groupby(day).pct_change(15, fill_method=None) * 100
+    return ctx
+
+
+def find_trades(symbol: str, df: pd.DataFrame, mode: str = "fixed",
+                spy_ctx=None, spreads=None) -> list[dict]:
     """Walks the bar series looking for entries per the strategy rules
     above, then simulates the exit for each one. Returns a list of
     trade dicts -- one per completed trade."""
@@ -200,8 +253,16 @@ def find_trades(symbol: str, df: pd.DataFrame, mode: str = "fixed") -> list[dict
     df["vwap"] = compute_session_vwap(df)
     df["avg_vol20"] = df["Volume"].rolling(20).mean()
     df["mom3"] = df["Close"].pct_change(3) * 100
+    # Extra context columns used only for tagging (no effect on entries/exits).
+    day_key = df.index.date
+    df["ret15"] = df["Close"].groupby(day_key).pct_change(15, fill_method=None) * 100
+    df["ret30"] = df["Close"].groupby(day_key).pct_change(30, fill_method=None) * 100
+    df["day_open"] = df["Open"].groupby(day_key).transform("first")
+    df["range20"] = ((df["High"] - df["Low"]) / df["Close"] * 100).rolling(20).mean()
+    spreads = spreads or {}
 
     trades = []
+    entry_tags = {}
     in_position = False
     entry_idx = None
     entry_price = None
@@ -260,6 +321,13 @@ def find_trades(symbol: str, df: pd.DataFrame, mode: str = "fixed") -> list[dict
                     "gross_pnl": round(gross_pnl, 2),
                     "cost": round(cost, 2),
                     "net_pnl": round(net_pnl, 2),
+                    "tags": {
+                        **entry_tags,
+                        "max_up_pct": _num((df["High"].iloc[entry_idx + 1:i + 1].max()
+                                            / entry_price - 1) * 100),
+                        "max_down_pct": _num((df["Low"].iloc[entry_idx + 1:i + 1].min()
+                                              / entry_price - 1) * 100),
+                    },
                 })
                 in_position = False
             continue
@@ -276,6 +344,32 @@ def find_trades(symbol: str, df: pd.DataFrame, mode: str = "fixed") -> list[dict
             entry_idx = i
             entry_price = row["Close"]
             high_water = entry_price
+            ts = df.index[i]
+            spy_now = {}
+            if spy_ctx is not None:
+                try:
+                    spy_now = (spy_ctx.loc[ts] if ts in spy_ctx.index
+                               else spy_ctx.loc[:ts].iloc[-1]).to_dict()
+                except (KeyError, IndexError):
+                    spy_now = {}
+            rs15 = (row["ret15"] - spy_now["spy_ret_15m_pct"]
+                    if spy_now and not pd.isna(row["ret15"])
+                    and not pd.isna(spy_now.get("spy_ret_15m_pct")) else None)
+            entry_tags = {
+                "minutes_since_open": _minutes_since_open(ts),
+                "vwap_dist_pct": _num((row["Close"] / row["vwap"] - 1) * 100),
+                "mom3_pct": _num(row["mom3"]),
+                "volume_ratio": _num(row["Volume"] / row["avg_vol20"], 3),
+                "range20_pct": _num(row["range20"]),
+                "ret15_pct": _num(row["ret15"]),
+                "ext30_pct": _num(row["ret30"]),
+                "ext_from_open_pct": _num((row["Close"] / row["day_open"] - 1) * 100),
+                "spy_ret_open_pct": _num(spy_now.get("spy_ret_open_pct")),
+                "spy_ret_15m_pct": _num(spy_now.get("spy_ret_15m_pct")),
+                "spy_vs_vwap_pct": _num(spy_now.get("spy_vs_vwap_pct")),
+                "rs15_vs_spy_pct": _num(rs15),
+                "spread_pct": _num(spreads.get(symbol)),
+            }
 
     return trades
 
@@ -331,7 +425,7 @@ def record_and_summarize(all_trades: list[dict], trades_file: str,
         writer = csv.DictWriter(f, fieldnames=[
             "symbol", "entry_time", "exit_time", "entry_price", "exit_price",
             "shares", "exit_reason", "held_minutes", "gross_pnl", "cost", "net_pnl",
-        ])
+        ], extrasaction="ignore")
         if not file_exists:
             writer.writeheader()
         for t in new_trades:
@@ -431,6 +525,32 @@ def record_and_summarize(all_trades: list[dict], trades_file: str,
         print(f"  {k}: {v}", file=sys.stderr)
 
 
+def record_tags(trades: list[dict], mode: str) -> None:
+    """Appends tagged rows for trades not already in TAGS_FILE."""
+    existing = set()
+    if os.path.exists(TAGS_FILE):
+        with open(TAGS_FILE, newline="") as f:
+            existing = {(r["mode"], r["symbol"], r["entry_time"]) for r in csv.DictReader(f)}
+    new_rows = []
+    for t in trades:
+        if (mode, t["symbol"], t["entry_time"]) in existing:
+            continue
+        row = {"mode": mode, "symbol": t["symbol"], "entry_time": t["entry_time"],
+               "entry_price": t["entry_price"], "shares": t["shares"],
+               "exit_reason": t["exit_reason"], "held_minutes": t["held_minutes"],
+               "gross_pnl": t["gross_pnl"]}
+        row.update(t.get("tags", {}))
+        new_rows.append(row)
+    file_exists = os.path.exists(TAGS_FILE)
+    with open(TAGS_FILE, "a", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=TAG_FIELDS, extrasaction="ignore")
+        if not file_exists:
+            w.writeheader()
+        w.writerows(new_rows)
+    print(f"[tags/{mode}] {len(new_rows)} new tagged signal(s) added to {TAGS_FILE}.",
+          file=sys.stderr)
+
+
 def main():
     print(f"Fetching 1-minute bars for {len(CANDIDATES)} candidate(s)...", file=sys.stderr)
     bars = fetch_1m_bars(CANDIDATES)
@@ -438,16 +558,23 @@ def main():
         print("No data fetched for any symbol -- nothing to backtest.", file=sys.stderr)
         return
 
+    spy_ctx = build_spy_context(bars.get("SPY"))
+    if spy_ctx is None:
+        print("SPY data unavailable -- SPY context tags will be blank.", file=sys.stderr)
+    spreads = load_measured_spreads()
+
     fixed_trades, trail_trades = [], []
     for sym, df in bars.items():
-        f_t = find_trades(sym, df, mode="fixed")
-        t_t = find_trades(sym, df, mode="trail")
+        f_t = find_trades(sym, df, mode="fixed", spy_ctx=spy_ctx, spreads=spreads)
+        t_t = find_trades(sym, df, mode="trail", spy_ctx=spy_ctx, spreads=spreads)
         print(f"  [{sym}] fixed: {len(f_t)} trade(s), trail: {len(t_t)} trade(s)", file=sys.stderr)
         fixed_trades.extend(f_t)
         trail_trades.extend(t_t)
 
     record_and_summarize(fixed_trades, TRADES_FILE, SUMMARY_FILE, "fixed target")
     record_and_summarize(trail_trades, TRAIL_TRADES_FILE, TRAIL_SUMMARY_FILE, "trailing stop")
+    record_tags(fixed_trades, "fixed")
+    record_tags(trail_trades, "trail")
 
 
 if __name__ == "__main__":
