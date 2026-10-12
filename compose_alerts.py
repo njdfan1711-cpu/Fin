@@ -206,6 +206,11 @@ def fetch_price_target(symbol: str):
 def compute_atr(df: pd.DataFrame, period: int = ATR_PERIOD) -> float | None:
     """Standard ATR: rolling mean of true range over `period` daily bars.
     Returns None if there isn't enough history to fill the window."""
+    # Drop bars with missing High/Low/Close first: one NaN bar inside the
+    # window used to turn the whole rolling mean into NaN, which silently
+    # removed the trade plan (and the chase/low-volatility cautions) for
+    # that ticker.
+    df = df.dropna(subset=["High", "Low", "Close"])
     if len(df) <= period:
         return None
     high, low, close = df["High"], df["Low"], df["Close"]
@@ -238,15 +243,57 @@ def _flatten_columns(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
+def _parse_price_atr(df: pd.DataFrame):
+    """One symbol's daily bars -> (result dict or None, reason string).
+    The reason is only used for logging when the result is None."""
+    if df is None or df.empty:
+        return None, "no price bars returned"
+    df = _flatten_columns(df)
+    if "Close" not in df.columns:
+        return None, "no price bars returned"
+    df = df.dropna(subset=["Close"])
+    if df.empty:
+        return None, "no price bars returned"
+    price = float(df["Close"].iloc[-1])
+    atr = compute_atr(df)
+    if atr is None:
+        return None, f"ATR could not be computed ({len(df)} usable bars, need > {ATR_PERIOD})"
+    closes = df["Close"]
+    # Before the open (and on weekends/holidays) yfinance has no bar for
+    # today yet, so closes.iloc[-1] is the LAST COMPLETED session and
+    # iloc[-2] is the close the day before -- using it as "prior close"
+    # reported yesterday's move as "today's". Only treat iloc[-2] as the
+    # prior close when the last bar is actually today's session.
+    session_started = pd.Timestamp(closes.index[-1]).date() >= datetime.now(ET).date()
+    if len(closes) >= 2:
+        prev_close = float(closes.iloc[-2] if session_started else closes.iloc[-1])
+    else:
+        prev_close = None
+    close_5d = float(closes.iloc[-6]) if len(closes) >= 6 else None
+    return {"price": price, "atr": atr,
+            "prev_close": prev_close, "close_5d": close_5d}, ""
+
+
+# Safety cap on one-by-one retries so a bad Yahoo moment can't stall the run.
+MAX_PRICE_RETRIES = 15
+
+
 def fetch_prices_and_atr(symbols: list[str]) -> dict:
     """Live-ish price + ATR(14) for just the shortlist -- cheap since it's
     a small batch. Replaces the old fetch_current_prices: everything that
     used to just need a price now also needs ATR for the trade plan, and
     pulling both from one download avoids a second API round-trip.
     Pulls ~2 months of daily bars -- comfortably more than ATR_PERIOD
-    needs, with slack for holidays/thin trading."""
+    needs, with slack for holidays/thin trading.
+
+    Any symbol that comes back without a usable price/ATR from the batch
+    call is retried on its own (a single-ticker download is often fine when
+    the batch returns blanks for one name), and every symbol that is still
+    missing is logged by name with the reason -- previously these failures
+    were silent, and the pick simply appeared without a trade plan."""
     if not symbols:
         return {}
+    data = None
     try:
         data = yf.download(
             tickers=" ".join(symbols),
@@ -258,36 +305,47 @@ def fetch_prices_and_atr(symbols: list[str]) -> dict:
             timeout=PRICE_FETCH_TIMEOUT_SECONDS,
         )
     except Exception as e:
-        print(f"[price/ATR fetch error] {e}", file=sys.stderr)
-        return {}
+        print(f"[price/ATR fetch error] batch download failed: {e}", file=sys.stderr)
 
     results = {}
+    missing = {}   # symbol -> reason
     for sym in symbols:
+        if data is None:
+            missing[sym] = "batch download failed"
+            continue
         try:
             df = data if len(symbols) == 1 else data[sym]
-            df = _flatten_columns(df)
-            df = df.dropna(subset=["Close"])
-            if df.empty:
-                continue
-            price = float(df["Close"].iloc[-1])
-            atr = compute_atr(df)
-            closes = df["Close"]
-            # Before the open (and on weekends/holidays) yfinance has no bar for
-            # today yet, so closes.iloc[-1] is the LAST COMPLETED session and
-            # iloc[-2] is the close the day before -- using it as "prior close"
-            # reported yesterday's move as "today's". Only treat iloc[-2] as the
-            # prior close when the last bar is actually today's session.
-            session_started = pd.Timestamp(closes.index[-1]).date() >= datetime.now(ET).date()
-            if len(closes) >= 2:
-                prev_close = float(closes.iloc[-2] if session_started else closes.iloc[-1])
-            else:
-                prev_close = None
-            close_5d = float(closes.iloc[-6]) if len(closes) >= 6 else None
-            results[sym] = {"price": price, "atr": atr,
-                            "prev_close": prev_close, "close_5d": close_5d}
+            res, reason = _parse_price_atr(df)
         except Exception as e:
-            print(f"[price/ATR parse error] {sym}: {e}", file=sys.stderr)
-            continue
+            res, reason = None, f"parse error: {e}"
+        if res is None:
+            missing[sym] = reason
+        else:
+            results[sym] = res
+
+    if missing:
+        print(f"[price/ATR] {len(missing)} symbol(s) missing after batch: "
+              + ", ".join(f"{s} ({r})" for s, r in missing.items()), file=sys.stderr)
+        for sym in list(missing)[:MAX_PRICE_RETRIES]:
+            try:
+                one = yf.download(
+                    tickers=sym,
+                    period="3mo",
+                    interval="1d",
+                    progress=False,
+                    timeout=PRICE_FETCH_TIMEOUT_SECONDS,
+                )
+                res, reason = _parse_price_atr(one)
+            except Exception as e:
+                res, reason = None, f"retry error: {e}"
+            if res is not None:
+                results[sym] = res
+                print(f"[price/ATR] {sym}: recovered on individual retry", file=sys.stderr)
+            else:
+                print(f"[price/ATR] {sym}: STILL MISSING after retry -- {reason}. "
+                      f"No trade plan or chase caution will be shown for it.", file=sys.stderr)
+        for sym in list(missing)[MAX_PRICE_RETRIES:]:
+            print(f"[price/ATR] {sym}: not retried (retry cap {MAX_PRICE_RETRIES})", file=sys.stderr)
     return results
 
 
