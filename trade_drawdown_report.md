@@ -1,24 +1,25 @@
 # Trade drawdown report
 
-Generated 2026-10-12 22:15 UTC. Source: open_positions.json (Fin Trade Log) + Yahoo daily bars.
+Generated 2026-10-12 22:47 UTC. Source: open_positions.json (Fin Trade Log) + Yahoo daily bars.
 
 Stop used: entry minus 1.5 x ATR(14) as of the day before entry (Fin's default plan, not your actual stop).
 
 ## Summary (closed trades with enough data)
 
-- Trades analyzed: 12 of 16 closed
-- Dipped below entry at some point: 7
-- Dipped 2% or more: 4; 3% or more: 4; 5% or more: 1
-- Median worst dip: -0.5%; deepest: -9.1%
-- **Trades where Fin's stop level was reached before you exited: 1**
-- Closed with a gain: 12 of 12
+- Trades analyzed: 14 of 16 closed
+- Dipped below entry at some point: 9
+- Dipped 2% or more: 5; 3% or more: 5; 5% or more: 2
+- Median worst dip: -0.5%; deepest: -15.5%
+- **Trades where Fin's stop level was reached before you exited: 2**
+- Closed with a gain: 14 of 14
 
-Stop reached on: CDNA. On those, holding past Fin's stop turned a would-be loss into a win.
+Stop reached on: PSIX, CDNA. On those, holding past Fin's stop turned a would-be loss into a win.
 
 ## Closed trades
 
 | Symbol | Entry | Exit / now | Held (cal. days) | Worst dip | $ at worst | Closes under entry | Stop level | Stop reached? | Result |
 |---|---|---|---|---|---|---|---|---|---|
+| PSIX | 2026-08-13 @ $41.03 | 2026-09-08 | 26 | -15.5% (2026-09-01) | -$477 | 16 | $36.24 (-11.7%) | YES | +0.8% +$23 (exit) |
 | B | 2026-08-20 @ $46.15 | 2026-08-24 | 4 | none (2026-08-20) | $0 | 0 | $43.41 (-5.9%) | no | +4.1% +$44 (exit) |
 | CHYM | 2026-08-24 @ $32.92 | 2026-08-26 | 2 | -1.6% (2026-08-25) | -$17 | 0 | $30.08 (-8.6%) | no | +0.6% +$6 (exit) |
 | SSRM | 2026-08-26 @ $38.28 | 2026-08-27 | 1 | -0.5% (2026-08-26) | -$5 | 0 | $35.90 (-6.2%) | no | +1.2% +$13 (exit) |
@@ -30,6 +31,7 @@ Stop reached on: CDNA. On those, holding past Fin's stop turned a would-be loss 
 | S | 2026-09-24 @ $23.94 | 2026-09-24 | 0 | none (2026-09-24) | $0 | 0 | $22.30 (-6.8%) | no | +1.3% +$44 (exit) |
 | AVT | 2026-09-25 @ $103.41 | 2026-10-02 | 7 | -4.7% (2026-10-01) | -$160 | 4 | $97.68 (-5.5%) | no | +2.8% +$95 (exit) |
 | NAT | 2026-10-05 @ $8.41 | 2026-10-07 | 2 | -3.3% (2026-10-06) | -$115 | 2 | $7.90 (-6.0%) | no | +0.2% +$8 (exit) |
+| INSW | 2026-10-07 @ $118.44 | 2026-10-08 | 1 | -1.3% (2026-10-07) | -$43 | 0 | $111.11 (-6.2%) | no | +2.2% +$77 (exit) |
 | PENG | 2026-10-09 @ $72.84 | 2026-10-09 | 0 | none (2026-10-09) | $0 | 0 | $66.41 (-8.8%) | no | +0.9% +$31 (exit) |
 
 ## Open positions (marked to latest close)
@@ -41,10 +43,8 @@ Stop reached on: CDNA. On those, holding past Fin's stop turned a would-be loss 
 
 ## Not analyzed
 
-- PSIX: entry date missing in log
 - ETOR: entry date missing in log
 - A: entry date missing in log
-- ISNW: price data unavailable
 
 ## How to read this
 
