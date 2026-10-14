@@ -145,8 +145,13 @@ def fetch_all_articles() -> list[dict]:
 # identically to an earnings beat just because the ticker's name appears
 # in both), not to make fine-grained calls on ambiguous headlines. Most
 # headlines won't match either list, and that's fine -- they're treated
-# as neutral and still count as a normal positive "news" signal, same as
-# before this change.
+# as neutral. As of 2026-10-12 a NEUTRAL headline is still recorded and
+# shown on the alert, but under its own "news_neutral" category that does
+# NOT count toward the confluence score or the STRONG tier. Only a headline
+# that matches the bullish list counts as a scored "news" signal. (Before
+# that, "no keyword matched" was scored as good news, which let a headline
+# like "AST SpaceMobile is feeling the heat from SpaceX" count as a
+# positive third signal and lift the alert to STRONG.)
 BEARISH_KEYWORDS = [
     "recall", "lawsuit", "sues", "sued", "investigation", "probe", "fraud",
     "resigns", "resignation", "delisting", "delisted", "bankruptcy",
@@ -155,6 +160,13 @@ BEARISH_KEYWORDS = [
     "crash", "downgrade", "downgraded", "warns", "warning", "scandal",
     "subpoena", "restatement", "restates", "class action", "shortfall",
     "halts production", "data breach", "hack", "impairment",
+    # Added 2026-10-12: pressure/decline phrasing the original list missed.
+    "feeling the heat", "under pressure", "under fire", "threat",
+    "threatens", "slides", "slumps", "tumbles", "sinks", "falls", "drops",
+    "sell-off", "selloff", "disappoints", "setback", "outage", "delayed",
+    "delays", "fined", "slashes", "cuts forecast", "cuts outlook",
+    "lowers guidance", "lowers outlook", "cuts price target",
+    "price target cut", "short seller", "short report", "sec charges",
 ]
 BULLISH_KEYWORDS = [
     "beats estimates", "beat estimates", "upgrade", "upgraded",
@@ -411,6 +423,7 @@ def main():
 
     total_signals = 0
     caution_signals = 0
+    neutral_signals = 0
     for row in eligible:
         symbol = row["symbol"]
         pattern = matchers.get(symbol)
@@ -474,12 +487,19 @@ def main():
             # still visible as a warning without inflating the score.
             record_signal(symbol, "news_caution", detail, strength=strength)
             caution_signals += 1
-        else:
+        elif overall == "bullish":
             record_signal(symbol, "news", detail, strength=strength)
             total_signals += 1
+        else:
+            # Neutral: shown for context, never scored (see keyword-list
+            # comment above). Recorded to its own category so it can't
+            # overwrite a scored "news" or "news_caution" entry.
+            record_signal(symbol, "news_neutral", detail, strength=strength)
+            neutral_signals += 1
 
-    print(f"\n{total_signals} news signal(s) recorded, "
-          f"{caution_signals} flagged as bearish-leaning caution instead.", file=sys.stderr)
+    print(f"\n{total_signals} bullish news signal(s) recorded, "
+          f"{caution_signals} flagged as bearish-leaning caution, "
+          f"{neutral_signals} neutral (shown, not scored).", file=sys.stderr)
 
 
 if __name__ == "__main__":

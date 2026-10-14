@@ -100,6 +100,7 @@ PRICE_FETCH_TIMEOUT_SECONDS = 30
 CATEGORY_LABELS = {
     "technical": "Technical",
     "news": "News",
+    "news_neutral": "News (context, not scored)",
     "fundamentals": "Fundamentals",
     "short_interest": "Short Interest",
 }
@@ -146,13 +147,20 @@ CAUTION_STYLE_CATEGORY_KEYS = {cat for cat, _ in CAUTION_STYLE_CATEGORIES}
 # instead (see build_momentum_section below).
 MOMENTUM_CATEGORY = "momentum"
 
+# "news_neutral" -- a headline that matched neither the bullish nor the
+# bearish keyword list (see news_scan.py). Displayed like any other signal
+# line, but excluded from the confluence count and strength, so it can't
+# qualify a ticker or lift it to the STRONG tier.
+NEWS_NEUTRAL_CATEGORY = "news_neutral"
+
 
 def score_ticker(categories: dict) -> tuple:
     """Returns (category_count, total_strength) -- used as a sort key.
-    Excludes MOMENTUM_CATEGORY and every caution-style category (see
-    CAUTION_STYLE_CATEGORIES) from both count and strength -- none of
-    them should influence the main confluence score."""
-    excluded = {MOMENTUM_CATEGORY} | CAUTION_STYLE_CATEGORY_KEYS
+    Excludes MOMENTUM_CATEGORY, NEWS_NEUTRAL_CATEGORY and every
+    caution-style category (see CAUTION_STYLE_CATEGORIES) from both count
+    and strength -- none of them should influence the main confluence
+    score."""
+    excluded = {MOMENTUM_CATEGORY, NEWS_NEUTRAL_CATEGORY} | CAUTION_STYLE_CATEGORY_KEYS
     real_categories = {
         k: v for k, v in categories.items()
         if k not in excluded
@@ -256,8 +264,8 @@ def _parse_price_atr(df: pd.DataFrame):
         return None, "no price bars returned"
     price = float(df["Close"].iloc[-1])
     atr = compute_atr(df)
-    if atr is None:
-        return None, f"ATR could not be computed ({len(df)} usable bars, need > {ATR_PERIOD})"
+    soft_reason = ("" if atr is not None else
+                   f"ATR could not be computed ({len(df)} usable bars, need > {ATR_PERIOD})")
     closes = df["Close"]
     # Before the open (and on weekends/holidays) yfinance has no bar for
     # today yet, so closes.iloc[-1] is the LAST COMPLETED session and
@@ -270,8 +278,10 @@ def _parse_price_atr(df: pd.DataFrame):
     else:
         prev_close = None
     close_5d = float(closes.iloc[-6]) if len(closes) >= 6 else None
+    # A usable price with no ATR is returned (not dropped), exactly as before:
+    # callers still get the price, just no trade plan. soft_reason says why.
     return {"price": price, "atr": atr,
-            "prev_close": prev_close, "close_5d": close_5d}, ""
+            "prev_close": prev_close, "close_5d": close_5d}, soft_reason
 
 
 # Safety cap on one-by-one retries so a bad Yahoo moment can't stall the run.
@@ -322,6 +332,8 @@ def fetch_prices_and_atr(symbols: list[str]) -> dict:
             missing[sym] = reason
         else:
             results[sym] = res
+            if res["atr"] is None:      # price ok, ATR not: keep price, retry for ATR
+                missing[sym] = reason
 
     if missing:
         print(f"[price/ATR] {len(missing)} symbol(s) missing after batch: "
@@ -338,11 +350,14 @@ def fetch_prices_and_atr(symbols: list[str]) -> dict:
                 res, reason = _parse_price_atr(one)
             except Exception as e:
                 res, reason = None, f"retry error: {e}"
-            if res is not None:
+            if res is not None and res["atr"] is not None:
                 results[sym] = res
                 print(f"[price/ATR] {sym}: recovered on individual retry", file=sys.stderr)
             else:
-                print(f"[price/ATR] {sym}: STILL MISSING after retry -- {reason}. "
+                if res is not None and sym not in results:
+                    results[sym] = res          # price-only fallback
+                why = reason or missing[sym]
+                print(f"[price/ATR] {sym}: STILL MISSING after retry -- {why}. "
                       f"No trade plan or chase caution will be shown for it.", file=sys.stderr)
         for sym in list(missing)[MAX_PRICE_RETRIES:]:
             print(f"[price/ATR] {sym}: not retried (retry cap {MAX_PRICE_RETRIES})", file=sys.stderr)

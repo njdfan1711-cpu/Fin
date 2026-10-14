@@ -6,6 +6,161 @@ session before diagnosing or re-fixing something, since commit messages
 for automated runs all look identical and won't show what's already
 been touched.
 
+## 2026-10-13 (neutral news no longer scores)
+Built from live `main` (news_scan.py, config.py, compose_alerts.py pulled
+2026-10-13; compose_alerts.py also carries the 2026-10-12 price/ATR changes).
+Tested with mocked headlines and by re-scoring the published
+`latest_alerts.md` (15:37 ET run); not yet seen in a live run.
+
+Why: the 10-13 ASTS alert showed the headline "AST SpaceMobile's stock is
+feeling the heat from SpaceX's wireless plans" as a positive **News** signal.
+`classify_headline_sentiment()` is a keyword check, and that headline matched
+neither list, so it was called "neutral". Neutral headlines were recorded
+under the scored `news` category, which made ASTS 3 categories / strength 2.10
+= STRONG. Without that line it is 2 categories / 1.40 = Moderate.
+
+- `news_scan.py`: neutral headlines are now recorded under a new
+  `news_neutral` category (shown on the alert, never scored). Only a headline
+  that matches the bullish list is recorded as a scored `news` signal.
+  Bearish still goes to `news_caution`, and bearish still wins if sources
+  disagree. The run log summary now reports bullish / caution / neutral counts.
+- `news_scan.py`: bearish keyword list widened with decline/pressure phrasing
+  ("feeling the heat", "under pressure", "under fire", "threat(ens)", "slides",
+  "slumps", "tumbles", "sinks", "falls", "drops", "sell-off", "disappoints",
+  "setback", "outage", "delay(s)(ed)", "fined", "slashes", "cuts forecast /
+  outlook / price target", "lowers guidance / outlook", "short seller / report",
+  "SEC charges"). Generic words like "falls" and "drops" can mis-fire; a
+  false bearish only moves a headline to a warning line, it never adds score.
+- `compose_alerts.py`: new `NEWS_NEUTRAL_CATEGORY`, excluded in
+  `score_ticker()` (so it can't count toward `MIN_SIGNAL_CATEGORIES` or the
+  STRONG tier) and labelled "News (context, not scored)" in the push and in
+  `latest_alerts.md`.
+- `config.py`: add `"news_neutral": 8,` to `SIGNAL_VALIDITY_HOURS` (same 8-hour
+  window as `news`). Done as a one-line edit, not a file replacement. If it is
+  missing, the neutral line simply lives 24 hours instead of 8.
+- Effect on the 10-13 alerts (807 qualifying; only 5 had a News line):
+  ASTS STRONG -> Moderate with a News caution warning; DB stays STRONG (2
+  categories, 2.07); FUN, AI, and Z would drop below 2 categories and stop
+  alerting. FUN ("Six Flags' stock slumps toward 16-year low") now reads as
+  bearish. AI and Z were ticker-symbol false matches (a Meta/AI-model story and
+  "Gen Z renters"), not real company news.
+- Going forward `features.py` "news" tags and outcome stats only cover
+  bullish-headline pushes; earlier history includes neutral ones.
+- Not changed, worth a look: single/short-letter ticker symbols (Z, AI) still
+  match unrelated headlines. They no longer score, but they still display.
+- Signals already stored under `news` before this change expire on their
+  normal 8-hour window, so the old behavior can show for up to 8 hours after
+  deploy.
+
+## 2026-10-12 (Fin Trade Log: ticker edit, and how the app works)
+The Trade Log is a single-file HTML app, `Fin_Trade_Log.html`, kept on Greg's
+device. It is NOT in this repo. This entry records how it functions, since
+nothing else does. Only the Edit flow was changed today (see "Change").
+
+Why: ISNW was entered instead of INSW and Edit could not change a ticker, so
+the drawdown report showed "no price data" for that trade. Edit also could not
+set an entry date, so the three older trades with a blank entry date (PSIX,
+ETOR, one A) could not be fixed either.
+
+Change (only `editTrade()` was touched; the rest of the file is identical):
+- Edit now asks, in order: ticker, entry price, shares, entry date, and for
+  closed trades exit price and exit date. Ticker is trimmed and uppercased and
+  must match letters/digits/"."/"-" (1-10 chars, starting with a letter, so
+  BRK.B works). Entry date must be YYYY-MM-DD, or blank to keep the current
+  one. A bad ticker or date shows an alert and changes nothing. Cancel at any
+  prompt before the last abandons the edit with nothing changed.
+- The trade's id, notes, status and exit data are kept when the ticker is
+  renamed, so nothing needs to be deleted and re-added.
+- Tested by running the edit function in Node (rename a closed trade, blank
+  date keeps old, fill a missing entry date, invalid ticker, invalid date,
+  cancel at first prompt, cancel mid-way, open trade). Not yet tried in a
+  browser on the device.
+- After an edit, the normal save triggers a GitHub sync, which writes the
+  corrected symbol to `open_positions.json`. Re-run "Trade drawdown report"
+  afterwards.
+
+How the Trade Log works:
+- Storage: the browser's localStorage, key `trades` (a JSON array). Per
+  device and browser; clearing site data erases it, and opening the file in a
+  different browser or from a different location can show an empty log.
+  Export is the backup.
+- Trade record: `id`, `symbol`, `entryPrice`, `shares`, `entryDate`, `notes`,
+  `status` (open/closed), `exitPrice`, `exitDate`.
+- Add Trade form: symbol (uppercased), entry price, shares, entry date
+  (defaults to today), notes. New trades start as open.
+- Close: type the exit price in the open trade's row and tap Close. Sets
+  status closed, `exitPrice`, and `exitDate` = today.
+- Edit: prompts described above. Notes are not editable.
+- Del: removes the trade immediately, with no confirmation.
+- Summary cards: realized P&L (sum over closed trades), open position count,
+  open cost basis.
+- P&L Over Time chart (Chart.js 4.4.1 from cdnjs, so the chart needs internet
+  but the trade list does not): Daily (last 30 days), Weekly (52), Monthly
+  (12), Yearly, YTD. Trades are bucketed by exit date (entry date if there is
+  no exit date). Four widgets for the selected period: period P&L, average
+  P&L per trade, win rate, trades closed.
+- Trade table: filter All / Open / Closed; open trades first, then by date
+  descending. Columns: symbol (+ notes), status, entry price/shares/date,
+  exit price/date, P&L in $ and %.
+- Export downloads `fin-trades-export-YYYY-MM-DD.json` containing
+  `{exportedFrom, exportedAt, trades}`. Import accepts that file (or a bare
+  array), skips rows missing symbol/entryPrice/shares, and REPLACES the whole
+  log after a confirmation.
+- GitHub sync: after every save (add, close, edit, delete, import) and on
+  "Sync now", the app reads the current sha of `open_positions.json` and PUTs
+  the full `{exportedFrom, exportedAt, trades}` to `main` in
+  njdfan1711-cpu/Fin, using a fine-grained token (Contents: read and write)
+  stored in localStorage as `gh_sync_token`. The status line shows the result.
+  The file contains ALL trades, open and closed (the on-screen note says "open
+  positions", which undersells it). The app is the source of truth: any manual
+  edit to `open_positions.json` is overwritten at the next save.
+  `position_monitor.py` and `trade_drawdown_report.py` read this file.
+- Also: dark/light theme (localStorage `theme`) and a phone vs desktop layout
+  chosen from the browser's user agent.
+- Known quirks, not changed: new-trade and close dates use the UTC date, so
+  closing a trade after about 8 PM Eastern records the next calendar day;
+  Delete has no confirmation; the sync note text says "open positions".
+
+## 2026-10-12 (price/ATR retry, trade drawdown report)
+Built from live `main` (compose_alerts.py pulled 2026-10-12). Tested against
+simulated Yahoo data only; first live run still to be checked in the Actions log.
+
+Why: PENG ranked #7 on the 10-12 intraday push (15:37 ET) with no trade plan
+and no chase/low-volatility caution. All three need price + ATR from
+`fetch_prices_and_atr()`, so that ticker's data came back empty or unusable.
+Cause could not be confirmed from here (no access to the run log); the two
+candidates were a blank Yahoo batch result for PENG, or gap bars (NaN
+High/Low) inside the 14-day ATR window, which made the whole rolling mean NaN
+and silently dropped the plan.
+
+- `compose_alerts.py` `compute_atr()`: drops bars with missing High/Low/Close
+  before computing, so one gap bar no longer turns the ATR into None. Result
+  on clean data is identical to before.
+- `compose_alerts.py` `fetch_prices_and_atr()`: any ticker that comes back
+  with no price, or a price but no ATR, from the batch call is now retried on
+  its own (`period="3mo"`, capped at `MAX_PRICE_RETRIES = 15`). If the whole
+  batch download throws, every ticker gets that retry. A ticker that still
+  has a price but no ATR (e.g. a very new listing) is kept price-only, as
+  before. Per-symbol parsing moved into new helper `_parse_price_atr()`; the
+  prior-close / 5-day-close logic is unchanged.
+- `compose_alerts.py`: every ticker missing after the batch is now logged by
+  name with the reason, then logged again as "recovered on individual retry"
+  or "STILL MISSING after retry". Search the Actions log for `price/ATR`.
+  Closes the old "known gap" from the 9/24 entry (silent per-symbol skips).
+- New `trade_drawdown_report.py` (repo root) + `.github/workflows/trade_drawdown.yml`
+  (manual dispatch only). Reads `open_positions.json`, pulls daily bars, and
+  commits `trade_drawdown_report.md`: per trade, worst dip below entry, closes
+  under entry, Fin's default stop level (entry - `STOP_ATR_MULT` x ATR as of
+  the day before entry), and whether price reached it while held. Entry and
+  exit days use closes only (daily bars can't show intraday order), so the
+  worst dip is never overstated. Trades with a blank `entryDate` in the log
+  (PSIX, ETOR, one A) are skipped. Purpose: all 16 closed trades are wins, but
+  holding through dips keeps would-be losses open, so this checks how deep the
+  wins dipped and whether Fin's stop would have fired on any of them.
+- Still open: `DEFAULT_POSITION_SIZE_USD` in `config.py` is still 3000 while
+  live position size is ~3,500 (rising to ~4,700); it only affects the
+  suggested share count. Delete stray `compose_alerts-1.py` if still present.
+
 ## 2026-10-08 (strict streaks, Back marker, NEW = never seen)
 Built from live `main` (HEAD c62eb78, pulled 2026-10-08; the streak-tag batch
 below verified live by file hash). Display only. Swing track only. Supersedes
