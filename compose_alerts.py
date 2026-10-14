@@ -765,8 +765,34 @@ def truncate_to_whole_entries(entries: list[str], byte_limit: int) -> tuple[str,
     return "\n\n".join(included), len(included)
 
 
+def drop_stale_duplicate_news(active: dict) -> int:
+    """
+    Added 2026-10-14. Before 2026-10-12 a neutral headline was recorded as a
+    scored "news" signal. That old entry stays "active" until its validity
+    window runs out, so right after the neutral-news change the same headline
+    showed up twice (once as "News", once as "News (context, not scored)")
+    and the stale "News" copy still counted toward the signal total.
+    If a ticker's "news" and "news_neutral" entries are the same headline,
+    drop the stale "news" one. Returns how many were dropped.
+    """
+    def headline_key(detail: str) -> str:
+        return detail.split(" (+", 1)[0].strip().lower()
+
+    dropped = 0
+    for cats in active.values():
+        if "news" in cats and NEWS_NEUTRAL_CATEGORY in cats:
+            if headline_key(cats["news"].get("detail", "")) == headline_key(
+                    cats[NEWS_NEUTRAL_CATEGORY].get("detail", "")):
+                del cats["news"]
+                dropped += 1
+    return dropped
+
+
 def main():
     active = get_active_signals()
+    dup_count = drop_stale_duplicate_news(active)
+    if dup_count:
+        print(f"Dropped {dup_count} stale duplicate news signal(s).", file=sys.stderr)
     company_names = load_company_names()
     sectors = load_sectors()
     active_sector_alerts = load_active_sector_alerts()

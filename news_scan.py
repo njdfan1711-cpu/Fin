@@ -249,7 +249,20 @@ def build_matchers(eligible: list[dict]) -> dict:
         "digital", "health", "healthcare", "pharma", "biosciences",
         "technologies", "tech", "industries", "enterprises", "partners",
         "ventures", "solutions", "services",
+        # Added 2026-10-14: "bank" alone is the lead word of dozens of
+        # unrelated lenders (Bank of America, Bank of Hawaii, Bank OZK...).
+        "bank", "banks", "bancorp", "bancshares", "banc", "trust",
     }
+    # Connector words that sit INSIDE a company name ("Bank of America").
+    # They are never distinctive on their own, but they must stay in the
+    # match phrase so "Bank of America" is matched as one unit. Before
+    # 2026-10-14 "of" counted as the second distinctive word, so the phrase
+    # became just "Bank of" and fired on EVERY "Bank of ..." company.
+    CONNECTORS = {"of", "the", "and", "for", "de", "del", "du", "la"}
+    # Lead words shared by many unrelated companies. When a name starts
+    # with one, require up to THREE distinctive words (Bank of New York
+    # Mellon -> "Bank of New York"), not two.
+    WEAK_LEADS = {"bank", "banks", "bancorp", "bancshares", "banc", "trust", "first"}
 
     matchers = {}
     for row in eligible:
@@ -270,7 +283,9 @@ def build_matchers(eligible: list[dict]) -> dict:
         # doesn't count as distinctive even though it survives the
         # stopword filter below.
         distinctive = [w for w in words
-                       if w.lower() not in STOPWORDS and not w.isdigit()]
+                       if w.lower() not in STOPWORDS
+                       and w.lower() not in CONNECTORS
+                       and not w.isdigit()]
 
         # Prefer a TWO-word phrase whenever the name has one available --
         # far more specific than any single word ("Power Solutions" vs.
@@ -282,7 +297,21 @@ def build_matchers(eligible: list[dict]) -> dict:
         first_word = distinctive[0] if distinctive else None
         name_phrase = None
         if len(distinctive) >= 2:
-            name_phrase = rf"{re.escape(distinctive[0])}\s+{re.escape(distinctive[1])}"
+            want = 3 if distinctive[0].lower() in WEAK_LEADS else 2
+            chosen = distinctive[:want]
+            # Rebuild the phrase from the original word order so inner
+            # connectors ("of", "the") are kept literally.
+            parts, picked = [], 0
+            started = False
+            for w in words:
+                wl = w.lower()
+                if picked < len(chosen) and w == chosen[picked]:
+                    parts.append(re.escape(w))
+                    picked += 1
+                    started = True
+                elif started and picked < len(chosen) and wl in CONNECTORS:
+                    parts.append(re.escape(w))
+            name_phrase = r"\s+".join(parts)
         elif first_word and first_word.lower() not in GENERIC_SECTOR_WORDS:
             name_phrase = re.escape(first_word)
 
