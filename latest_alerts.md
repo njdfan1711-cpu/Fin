@@ -1,721 +1,726 @@
-# Latest Alerts (798 qualifying tickers)
-_Run: 2026-10-14_1136 ET_
+# Latest Alerts (795 qualifying tickers)
+_Run: 2026-10-14_1207 ET_
 
 ## 1. Bank of Hawaii Corporation (BOH) -- [STRONG] 3 signals, strength 2.70
 - **Fundamentals**: Revenue growth 38.6% YoY; EPS growth 37.4% YoY
 - **News**: [MarketWatch Top Stories] Bank of America adds a profit miss to the misery of a $1.2 billion government fine
-- **Technical**: RSI oversold (25.5)
+- **Technical**: RSI oversold (25.4)
 - **News (context, not scored)**: [MarketWatch Top Stories] Bank of America adds a profit miss to the misery of a $1.2 billion government fine
-- **Trade plan**: entry $65.70-$66.46, take-profit $66.85 (+1.2%), stop $63.77, full target $70.69 (~45 sh, ~$104 at risk)
+- **Trade plan**: entry $65.68-$66.45, take-profit $66.83 (+1.2%), stop $63.76, full target $70.68 (~45 sh, ~$104 at risk)
 
-## 2. Bank of America Corporation (BAC) -- [STRONG] 3 signals, strength 2.62
+## 2. Charles Schwab Corporation (The) (SCHW) -- [STRONG] 3 signals, strength 2.62
+- **Fundamentals**: Revenue growth 11.2% YoY; EPS growth 43.2% YoY
+- **News**: [MarketWatch Top Stories] Charles Schwab and DoorDash ranked among bargain stocks that could lead the market higher
+- **News (context, not scored)**: [MarketWatch Top Stories] Charles Schwab and DoorDash ranked among bargain stocks that could lead the market higher
+- **Technical**: MACD bullish crossover
+- ⚠️ **EARNINGS QUALITY**: Earnings scheduled in 1d (2026-10-15) -- gap risk on a swing hold
+- **Trade plan**: entry $95.76-$96.60, take-profit $97.02 (+0.9%), stop $93.65, full target $101.24 (~31 sh, ~$78 at risk)
+
+## 3. Bank of America Corporation (BAC) -- [STRONG] 3 signals, strength 2.62
 - **Fundamentals**: Revenue growth 99.4% YoY; EPS growth 25.8% YoY
 - **News**: [MarketWatch Top Stories] Bank of America adds a profit miss to the misery of a $1.2 billion government fine
-- **Technical**: RSI oversold (21.1)
+- **Technical**: RSI oversold (22.4)
 - **News (context, not scored)**: [MarketWatch Top Stories] Bank of America adds a profit miss to the misery of a $1.2 billion government fine
 - ⚠️ **EARNINGS QUALITY**: Earnings scheduled today (2026-10-14) -- gap risk on a swing hold
-- **Trade plan**: entry $50.29-$50.91, take-profit $51.22 (+1.2%), stop $48.74, full target $54.32 (~59 sh, ~$110 at risk)
+- **Trade plan**: entry $50.63-$51.24, take-profit $51.55 (+1.2%), stop $49.08, full target $54.65 (~58 sh, ~$108 at risk)
 
-## 3. BlackRock, Inc. (BLK) -- [STRONG] 3 signals, strength 2.24
+## 4. BlackRock, Inc. (BLK) -- [STRONG] 3 signals, strength 2.35
 - **Fundamentals**: Earnings beat by 10.7% (0d ago); Revenue growth 26.5% YoY; Quality checklist passed (D/E 0.23, Current ratio 2.13, Net margin 24.1%)
-- **Technical**: Outperforming S&P 500 by 0.2pts (20d)
+- **Technical**: Outperforming S&P 500 by 1.9pts (20d)
 - **News**: [MarketWatch Top Stories] BlackRock now manages assets equal to half the size of the U.S. economy after 15% growth
 - ⚠️ **EARNINGS QUALITY**: Earnings scheduled today (2026-10-14) -- gap risk on a swing hold
-- **Trade plan**: entry $1061.01-$1072.33, take-profit $1077.99 (+1.1%), stop $1032.70, full target $1134.61 (~2 sh, ~$68 at risk)
+- **Trade plan**: entry $1073.41-$1084.73, take-profit $1090.39 (+1.0%), stop $1045.10, full target $1147.02 (~2 sh, ~$68 at risk)
 
-## 4. The Bank of New York Mellon Corporation (BNY) -- [STRONG] 3 signals, strength 2.10
+## 5. The Bank of New York Mellon Corporation (BNY) -- [STRONG] 3 signals, strength 2.10
 - **Fundamentals**: EPS growth 31.7% YoY
-- **Technical**: RSI oversold (13.4)
+- **Technical**: RSI oversold (13.7)
 - **News**: [MarketWatch Top Stories] Bank of America adds a profit miss to the misery of a $1.2 billion government fine
 - **News (context, not scored)**: [MarketWatch Top Stories] Bank of America adds a profit miss to the misery of a $1.2 billion government fine
 - ⚠️ **EARNINGS QUALITY**: Earnings scheduled in 1d (2026-10-15) -- gap risk on a swing hold
-- **Trade plan**: entry $136.00-$137.38, take-profit $138.08 (+1.0%), stop $132.53, full target $145.01 (~21 sh, ~$87 at risk)
+- **Trade plan**: entry $136.35-$137.73, take-profit $138.43 (+1.0%), stop $132.88, full target $145.36 (~21 sh, ~$87 at risk)
 
-## 5. Everpure, Inc. (P) -- [STRONG] 2 signals, strength 3.45 · 📅 Day 8 (+3.8% since 1st alert)
+## 6. Everpure, Inc. (P) -- [STRONG] 2 signals, strength 3.45 · 📅 Day 8 (+3.9% since 1st alert)
 - **Fundamentals**: Revenue growth 27.2% YoY; EPS growth 79.9% YoY; Quality checklist passed (D/E 0.00, Current ratio 1.60, ROE 17.4%); Analyst sentiment improving: 23 buy/strongBuy vs. 19 last month
-- **Technical**: RSI overbought (74.0); Price above rising 50/200-day MAs; Outperforming S&P 500 by 47.0pts (20d)
+- **Technical**: RSI overbought (73.2); Price above rising 50/200-day MAs; Outperforming S&P 500 by 46.5pts (20d)
 - ⚠️ **CAUTION**: Extended 28% above 50-day MA -- elevated pullback risk
-- **Trade plan**: entry $143.81-$147.03, take-profit $148.65 (+2.2%), stop $135.74, full target $164.77 (~20 sh, ~$194 at risk)
+- **Trade plan**: entry $144.00-$147.24, take-profit $148.87 (+2.2%), stop $135.88, full target $165.09 (~20 sh, ~$195 at risk)
 
-## 6. Penguin Solutions, Inc. (PENG) -- [STRONG] 2 signals, strength 3.42 · 📅 Day 7 (+17.0% since 1st alert)
-- **Fundamentals**: Revenue growth 26.5% YoY; EPS growth 554.5% YoY; Quality checklist passed (D/E 0.77, Current ratio 2.25, ROE 16.0%, Net margin 10.4%)
-- **Technical**: RSI overbought (71.6); Price above rising 50/200-day MAs; Outperforming S&P 500 by 45.1pts (20d)
-- ⚠️ **CAUTION**: Extended 26% above 50-day MA -- elevated pullback risk
-- **Trade plan**: entry $69.56-$72.28, take-profit $73.64 (+3.8%), stop $62.77, full target $87.23 (~42 sh, ~$342 at risk)
-
-## 7. CareDx, Inc. (CDNA) -- [STRONG] 2 signals, strength 3.32 · 📅 Day 8 (-1.4% since 1st alert)
-- **Fundamentals**: Revenue growth 34.4% YoY; EPS growth 227.0% YoY; Quality checklist passed (D/E 0.00, Current ratio 2.86, ROE 32.8%, Net margin 24.2%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 21.1pts (20d)
-- **Trade plan**: entry $65.20-$67.17, take-profit $68.15 (+3.0%), stop $60.29, full target $77.97 (~45 sh, ~$265 at risk)
-
-## 8. Petroleo Brasileiro S.A. Petrobras ADS (PBR) -- [STRONG] 2 signals, strength 3.32 · 📅 Day 5 (+4.7% since 1st alert)
+## 7. Petroleo Brasileiro S.A. Petrobras ADS (PBR) -- [STRONG] 2 signals, strength 3.42 · 📅 Day 5 (+5.4% since 1st alert)
 - **Fundamentals**: Revenue growth 11.2% YoY; EPS growth 72.4% YoY; Quality checklist passed (D/E 0.92, ROE 30.2%, Net margin 24.3%)
-- **Technical**: RSI overbought (87.4); Price above rising 50/200-day MAs; Outperforming S&P 500 by 20.0pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); 52-week high, but still 0.2% below all-time high ($25.67) -- possible overhead resistance
-- ⚠️ **CAUTION**: New 52-week high but on light volume (0.3x average) -- unconfirmed breakout; Extended 26% above 50-day MA -- elevated pullback risk
-- **Trade plan**: entry $25.49-$25.88, take-profit $26.08 (+1.5%), stop $24.51, full target $28.03 (~116 sh, ~$136 at risk)
-- ⚠️ **CAUTION**: up +0.7% today (0.2 ATR), +7.1% over ~5 days. The entry zone is built off today's price, so it has moved up with the run -- consider waiting for a pullback toward the prior close ($25.50).
+- **Technical**: RSI overbought (87.8); Price above rising 50/200-day MAs; Outperforming S&P 500 by 21.1pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); New ALL-TIME high -- no overhead resistance from prior sellers
+- ⚠️ **CAUTION**: New 52-week high but on light volume (0.4x average) -- unconfirmed breakout; Extended 27% above 50-day MA -- elevated pullback risk
+- **Trade plan**: entry $25.65-$26.05, take-profit $26.24 (+1.5%), stop $24.68, full target $28.19 (~116 sh, ~$136 at risk)
+- ⚠️ **CAUTION**: up +1.4% today (0.5 ATR), +7.8% over ~5 days. The entry zone is built off today's price, so it has moved up with the run -- consider waiting for a pullback toward the prior close ($25.50).
 
-## 9. Palantir Technologies Inc. (PLTR) -- [STRONG] 2 signals, strength 3.30 · 📅 Day 7 (+5.4% since 1st alert)
-- **Fundamentals**: Revenue growth 78.9% YoY; EPS growth 290.0% YoY; Quality checklist passed (D/E 0.00, Current ratio 7.11, ROE 37.5%, Net margin 49.0%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 14.7pts (20d)
-- **Trade plan**: entry $202.88-$205.82, take-profit $207.29 (+1.4%), stop $195.53, full target $221.98 (~14 sh, ~$123 at risk)
+## 8. CareDx, Inc. (CDNA) -- [STRONG] 2 signals, strength 3.32 · 📅 Day 8 (-2.4% since 1st alert)
+- **Fundamentals**: Revenue growth 34.4% YoY; EPS growth 227.0% YoY; Quality checklist passed (D/E 0.00, Current ratio 2.86, ROE 32.8%, Net margin 24.2%)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 19.8pts (20d)
+- **Trade plan**: entry $64.59-$66.55, take-profit $67.53 (+3.0%), stop $59.68, full target $77.35 (~45 sh, ~$265 at risk)
 
-## 10. MACOM Technology Solutions Holdings, Inc. (MTSI) -- [STRONG] 2 signals, strength 3.30 · 📅 Day 8 (-7.5% since 1st alert)
+## 9. MACOM Technology Solutions Holdings, Inc. (MTSI) -- [STRONG] 2 signals, strength 3.30 · 📅 Day 8 (-7.7% since 1st alert)
 - **Fundamentals**: Revenue growth 28.4% YoY; EPS growth 166.7% YoY; Quality checklist passed (D/E 0.43, Current ratio 3.71, ROE 17.1%, Net margin 20.7%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 15.6pts (20d)
-- **Trade plan**: entry $293.32-$301.88, take-profit $306.15 (+2.9%), stop $271.94, full target $348.93 (~10 sh, ~$257 at risk)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 15.0pts (20d)
+- **Trade plan**: entry $292.59-$301.22, take-profit $305.54 (+2.9%), stop $271.01, full target $348.70 (~10 sh, ~$259 at risk)
 
-## 11. FIGS, Inc. (FIGS) -- [STRONG] 2 signals, strength 3.28 · 📅 Day 3 (-0.0% since 1st alert)
+## 10. Palantir Technologies Inc. (PLTR) -- [STRONG] 2 signals, strength 3.30 · 📅 Day 7 (+5.4% since 1st alert)
+- **Fundamentals**: Revenue growth 78.9% YoY; EPS growth 290.0% YoY; Quality checklist passed (D/E 0.00, Current ratio 7.11, ROE 37.5%, Net margin 49.0%)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 14.6pts (20d)
+- **Trade plan**: entry $202.89-$205.84, take-profit $207.32 (+1.4%), stop $195.51, full target $222.08 (~14 sh, ~$124 at risk)
+
+## 11. Penguin Solutions, Inc. (PENG) -- [STRONG] 2 signals, strength 3.28 · 📅 Day 7 (+15.9% since 1st alert)
+- **Fundamentals**: Revenue growth 26.5% YoY; EPS growth 554.5% YoY; Quality checklist passed (D/E 0.77, Current ratio 2.25, ROE 16.0%, Net margin 10.4%)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 42.5pts (20d)
+- **Trade plan**: entry $68.85-$71.61, take-profit $72.99 (+3.9%), stop $61.94, full target $86.81 (~42 sh, ~$348 at risk)
+
+## 12. FIGS, Inc. (FIGS) -- [STRONG] 2 signals, strength 3.28 · 📅 Day 3 (+1.3% since 1st alert)
 - **Fundamentals**: Revenue growth 24.7% YoY; EPS growth 686.6% YoY
-- **Technical**: RSI overbought (85.7); 20/50-day MA bullish crossover; Price above rising 50/200-day MAs; Outperforming S&P 500 by 35.0pts (20d)
-- **Trade plan**: entry $17.35-$17.79, take-profit $18.02 (+2.5%), stop $16.23, full target $20.25 (~170 sh, ~$228 at risk)
-- ⚠️ **CAUTION**: up -2.4% today (-0.5 ATR), +25.0% over ~5 days. The entry zone is built off today's price, so it has moved up with the run -- consider waiting for a pullback toward the prior close ($18.00).
+- **Technical**: RSI overbought (85.2); 20/50-day MA bullish crossover; Price above rising 50/200-day MAs; Outperforming S&P 500 by 34.7pts (20d)
+- **Trade plan**: entry $17.59-$18.03, take-profit $18.26 (+2.5%), stop $16.47, full target $20.49 (~168 sh, ~$225 at risk)
+- ⚠️ **CAUTION**: up -1.1% today (-0.2 ATR), +26.7% over ~5 days. The entry zone is built off today's price, so it has moved up with the run -- consider waiting for a pullback toward the prior close ($18.00).
 
-## 12. Vicor Corporation (VICR) -- [STRONG] 2 signals, strength 3.26 · 📅 Day 8 (-15.5% since 1st alert)
+## 13. Vicor Corporation (VICR) -- [STRONG] 2 signals, strength 3.26 · 📅 Day 8 (-15.8% since 1st alert)
 - **Fundamentals**: Revenue growth 24.9% YoY; EPS growth 115.3% YoY; Quality checklist passed (D/E 0.00, Current ratio 8.99, ROE 19.8%, Net margin 30.6%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 33.8pts (20d)
-- **Trade plan**: entry $246.10-$255.80, take-profit $260.65 (+3.9%), stop $221.86, full target $309.12 (~11 sh, ~$320 at risk)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 33.3pts (20d)
+- **Trade plan**: entry $244.89-$254.69, take-profit $259.59 (+3.9%), stop $220.38, full target $308.61 (~12 sh, ~$353 at risk)
 
-## 13. Paysign, Inc. (PAYS) -- [STRONG] 2 signals, strength 3.23 · 📅 Day 7 (+0.6% since 1st alert)
+## 14. Paysign, Inc. (PAYS) -- [STRONG] 2 signals, strength 3.23 · 📅 Day 7 (+1.1% since 1st alert)
 - **Fundamentals**: Revenue growth 46.8% YoY; EPS growth 111.1% YoY; Quality checklist passed (D/E 0.00, ROE 30.1%, Net margin 15.7%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 23.9pts (20d)
-- **Trade plan**: entry $14.78-$15.13, take-profit $15.30 (+2.3%), stop $13.91, full target $17.05 (~200 sh, ~$209 at risk)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 24.5pts (20d)
+- **Trade plan**: entry $14.85-$15.19, take-profit $15.37 (+2.3%), stop $13.97, full target $17.11 (~199 sh, ~$208 at risk)
 
-## 14. GameStop Corporation (GME) -- [STRONG] 2 signals, strength 3.10
-- **Fundamentals**: EPS growth 106.1% YoY; Quality checklist passed (D/E 0.76, Current ratio 15.30, ROE 15.7%, Net margin 25.2%)
-- **Technical**: Outperforming S&P 500 by 25.6pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); 52-week high, but still 67.6% below all-time high ($86.88) -- possible overhead resistance
-- ⚠️ **CAUTION**: New 52-week high but on light volume (0.4x average) -- unconfirmed breakout; Extended 32% above 50-day MA -- elevated pullback risk
-- **Trade plan**: entry $27.86-$28.41, take-profit $28.69 (+2.0%), stop $26.48, full target $31.44 (~106 sh, ~$175 at risk)
-- ⚠️ **CAUTION**: up +3.4% today (0.8 ATR), +14.5% over ~5 days. The entry zone is built off today's price, so it has moved up with the run -- consider waiting for a pullback toward the prior close ($27.22).
-
-## 15. Ciena Corporation (CIEN) -- [STRONG] 2 signals, strength 3.07
-- **Fundamentals**: Revenue growth 32.6% YoY; EPS growth 362.8% YoY; Quality checklist passed (D/E 0.58, Current ratio 2.73, ROE 22.8%, Net margin 10.9%)
-- **Technical**: 20/50-day MA bullish crossover; Outperforming S&P 500 by 7.6pts (20d)
-- **Trade plan**: entry $368.34-$381.29, take-profit $387.77 (+3.5%), stop $335.95, full target $452.55 (~8 sh, ~$311 at risk)
-
-## 16. On Holding AG Class A (ONON) -- [STRONG] 2 signals, strength 3.06
-- **Fundamentals**: Revenue growth 18.5% YoY; EPS growth 188.6% YoY; Quality checklist passed (D/E 0.32, Current ratio 2.71, ROE 23.1%, Net margin 12.3%)
-- **Technical**: RSI overbought (82.3); Outperforming S&P 500 by 26.9pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 1 sell/strongSell vs. 1 last month
-- **Trade plan**: entry $34.87-$35.36, take-profit $35.61 (+1.4%), stop $33.62, full target $38.11 (~85 sh, ~$127 at risk)
-
-## 17. Exelixis, Inc. (EXEL) -- [STRONG] 2 signals, strength 3.03
-- **Fundamentals**: EPS growth 52.7% YoY; Quality checklist passed (D/E 0.00, Current ratio 3.56, ROE 42.5%, Net margin 35.3%)
-- **Technical**: RSI overbought (73.8); Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.5pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); New ALL-TIME high -- no overhead resistance from prior sellers
+## 15. Suncor Energy  Inc. (SU) -- [STRONG] 2 signals, strength 3.15
+- **Fundamentals**: Revenue growth 13.8% YoY; EPS growth 65.6% YoY; Quality checklist passed (D/E 0.32, ROE 19.4%, Net margin 15.8%); Analyst sentiment improving: 25 buy/strongBuy vs. 23 last month
+- **Technical**: RSI overbought (75.6); Price above rising 50/200-day MAs; Outperforming S&P 500 by 6.6pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); New ALL-TIME high -- no overhead resistance from prior sellers
 - ⚠️ **CAUTION**: New 52-week high but on light volume (0.3x average) -- unconfirmed breakout
+- **Trade plan**: entry $74.64-$75.50, take-profit $75.94 (+1.2%), stop $72.46, full target $80.28 (~39 sh, ~$102 at risk)
+- ⚠️ **CAUTION**: up -0.2% today (-0.1 ATR), +10.2% over ~5 days. The entry zone is built off today's price, so it has moved up with the run -- consider waiting for a pullback toward the prior close ($75.20).
+
+## 16. Valero Energy Corporation (VLO) -- [STRONG] 2 signals, strength 3.15
+- **Fundamentals**: Revenue growth 12.6% YoY; EPS growth 896.0% YoY; Quality checklist passed (D/E 0.45, Current ratio 1.65, ROE 29.9%)
+- **Technical**: RSI overbought (86.0); Price above rising 50/200-day MAs; Outperforming S&P 500 by 10.7pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); New ALL-TIME high -- no overhead resistance from prior sellers
+- ⚠️ **CAUTION**: New 52-week high but on light volume (0.2x average) -- unconfirmed breakout
+- **Trade plan**: entry $452.26-$460.33, take-profit $464.37 (+1.8%), stop $432.07, full target $504.74 (~6 sh, ~$145 at risk)
+
+## 17. GameStop Corporation (GME) -- [STRONG] 2 signals, strength 3.10
+- **Fundamentals**: EPS growth 106.1% YoY; Quality checklist passed (D/E 0.76, Current ratio 15.30, ROE 15.7%, Net margin 25.2%)
+- **Technical**: Outperforming S&P 500 by 25.2pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); 52-week high, but still 67.7% below all-time high ($86.88) -- possible overhead resistance
+- ⚠️ **CAUTION**: New 52-week high but on light volume (0.5x average) -- unconfirmed breakout; Extended 32% above 50-day MA -- elevated pullback risk
+- **Trade plan**: entry $27.69-$28.25, take-profit $28.52 (+2.0%), stop $26.32, full target $31.27 (~107 sh, ~$177 at risk)
+- ⚠️ **CAUTION**: up +2.8% today (0.7 ATR), +13.8% over ~5 days. The entry zone is built off today's price, so it has moved up with the run -- consider waiting for a pullback toward the prior close ($27.22).
+
+## 18. On Holding AG Class A (ONON) -- [STRONG] 2 signals, strength 3.06
+- **Fundamentals**: Revenue growth 18.5% YoY; EPS growth 188.6% YoY; Quality checklist passed (D/E 0.32, Current ratio 2.71, ROE 23.1%, Net margin 12.3%)
+- **Technical**: RSI overbought (81.8); Outperforming S&P 500 by 26.8pts (20d)
 - ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 1 sell/strongSell vs. 1 last month
-- **Trade plan**: entry $60.30-$61.13, take-profit $61.55 (+1.4%), stop $58.22, full target $65.70 (~49 sh, ~$122 at risk)
+- **Trade plan**: entry $34.88-$35.37, take-profit $35.62 (+1.4%), stop $33.63, full target $38.12 (~85 sh, ~$127 at risk)
 
-## 18. DHT Holdings, Inc. (DHT) -- [STRONG] 2 signals, strength 3.01 · 📅 Day 6 (+5.5% since 1st alert)
-- **Fundamentals**: Revenue growth 38.9% YoY; EPS growth 148.7% YoY; Quality checklist passed (D/E 0.38, Current ratio 2.80, ROE 39.6%, Net margin 65.5%)
-- **Technical**: RSI overbought (75.6); Price above rising 50/200-day MAs; Outperforming S&P 500 by 7.7pts (20d)
-- **Trade plan**: entry $25.00-$25.54, take-profit $25.81 (+2.1%), stop $23.65, full target $28.51 (~118 sh, ~$191 at risk)
-
-## 19. FormFactor, Inc. (FORM) -- [STRONG] 2 signals, strength 3.01
-- **Fundamentals**: Revenue growth 18.0% YoY; EPS growth 156.2% YoY; Quality checklist passed (D/E 0.01, Current ratio 4.50, Net margin 12.8%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 14.8pts (20d)
-- **Trade plan**: entry $120.90-$124.56, take-profit $126.40 (+3.0%), stop $111.73, full target $144.74 (~24 sh, ~$264 at risk)
-
-## 20. Marathon Petroleum Corporation (MPC) -- [STRONG] 2 signals, strength 2.99
+## 19. Marathon Petroleum Corporation (MPC) -- [STRONG] 2 signals, strength 3.02
 - **Fundamentals**: Revenue growth 15.8% YoY; EPS growth 330.2% YoY
-- **Technical**: RSI overbought (88.0); Price above rising 50/200-day MAs; Outperforming S&P 500 by 12.6pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); New ALL-TIME high -- no overhead resistance from prior sellers
+- **Technical**: RSI overbought (88.2); Price above rising 50/200-day MAs; Outperforming S&P 500 by 13.0pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); New ALL-TIME high -- no overhead resistance from prior sellers
 - ⚠️ **CAUTION**: New 52-week high but on light volume (0.2x average) -- unconfirmed breakout
-- **Trade plan**: entry $472.80-$480.72, take-profit $484.68 (+1.7%), stop $453.01, full target $524.26 (~6 sh, ~$142 at risk)
-- ⚠️ **CAUTION**: up -0.1% today (-0.0 ATR), +7.8% over ~5 days. The entry zone is built off today's price, so it has moved up with the run -- consider waiting for a pullback toward the prior close ($476.98).
+- **Trade plan**: entry $474.60-$482.52, take-profit $486.48 (+1.7%), stop $454.81, full target $526.06 (~6 sh, ~$142 at risk)
+- ⚠️ **CAUTION**: up +0.3% today (0.1 ATR), +8.2% over ~5 days. The entry zone is built off today's price, so it has moved up with the run -- consider waiting for a pullback toward the prior close ($476.98).
 
-## 21. Advanced Micro Devices, Inc. (AMD) -- [STRONG] 2 signals, strength 2.99 · 📅 Day 8
-- **Fundamentals**: Revenue growth 39.5% YoY; EPS growth 124.3% YoY; Quality checklist passed (D/E 0.05, Current ratio 2.85, Net margin 15.6%); Analyst sentiment improving: 49 buy/strongBuy vs. 48 last month
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 10.7pts (20d)
+## 20. Ciena Corporation (CIEN) -- [STRONG] 2 signals, strength 3.02
+- **Fundamentals**: Revenue growth 32.6% YoY; EPS growth 362.8% YoY; Quality checklist passed (D/E 0.58, Current ratio 2.73, ROE 22.8%, Net margin 10.9%)
+- **Technical**: 20/50-day MA bullish crossover; Outperforming S&P 500 by 6.5pts (20d)
+- **Trade plan**: entry $362.85-$376.01, take-profit $382.59 (+3.6%), stop $329.95, full target $448.38 (~8 sh, ~$316 at risk)
 
-## 22. EOG Resources, Inc. (EOG) -- [STRONG] 2 signals, strength 2.97
+## 21. EOG Resources, Inc. (EOG) -- [STRONG] 2 signals, strength 2.98
 - **Fundamentals**: Revenue growth 18.7% YoY; EPS growth 24.8% YoY; Quality checklist passed (D/E 0.27, Current ratio 1.63, ROE 22.4%, Net margin 25.5%)
-- **Technical**: RSI overbought (74.3); Price above rising 50/200-day MAs; Outperforming S&P 500 by 3.5pts (20d); New ALL-TIME high -- no overhead resistance from prior sellers
-- ⚠️ **CAUTION**: New 52-week high but on light volume (0.2x average) -- unconfirmed breakout
+- **Technical**: RSI overbought (74.5); Price above rising 50/200-day MAs; Outperforming S&P 500 by 3.8pts (20d); New ALL-TIME high -- no overhead resistance from prior sellers
+- ⚠️ **CAUTION**: New 52-week high but on light volume (0.3x average) -- unconfirmed breakout
 
-## 23. HF Sinclair Corporation (DINO) -- [STRONG] 2 signals, strength 2.97
+## 22. HF Sinclair Corporation (DINO) -- [STRONG] 2 signals, strength 2.97
 - **Fundamentals**: EPS growth 349.6% YoY; Quality checklist passed (D/E 0.31, Current ratio 1.94, ROE 19.9%)
-- **Technical**: RSI overbought (93.0); Price above rising 50/200-day MAs; Outperforming S&P 500 by 10.2pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); New ALL-TIME high -- no overhead resistance from prior sellers
+- **Technical**: RSI overbought (93.0); Price above rising 50/200-day MAs; Outperforming S&P 500 by 10.1pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); New ALL-TIME high -- no overhead resistance from prior sellers
 - ⚠️ **CAUTION**: New 52-week high but on light volume (0.2x average) -- unconfirmed breakout
 
-## 24. Keysight Technologies Inc. (KEYS) -- [STRONG] 2 signals, strength 2.97 · 📅 Day 3
-- **Fundamentals**: Revenue growth 25.5% YoY; EPS growth 131.8% YoY; Quality checklist passed (D/E 0.43, Current ratio 2.35, ROE 20.2%, Net margin 19.1%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 10.5pts (20d)
-
-## 25. PTC Inc. (PTC) -- [STRONG] 2 signals, strength 2.97
+## 23. PTC Inc. (PTC) -- [STRONG] 2 signals, strength 2.97
 - **Fundamentals**: Revenue growth 19.5% YoY; EPS growth 142.5% YoY; Quality checklist passed (D/E 0.31, ROE 32.6%, Net margin 41.4%); Analyst sentiment improving: 17 buy/strongBuy vs. 15 last month
-- **Technical**: RSI overbought (92.0); Outperforming S&P 500 by 45.1pts (20d)
+- **Technical**: RSI overbought (92.2); Outperforming S&P 500 by 45.3pts (20d)
 - ⚠️ **CAUTION**: Extended 27% above 50-day MA -- elevated pullback risk
 
-## 26. Datadog, Inc. (DDOG) -- [STRONG] 2 signals, strength 2.96 · 📅 Day 4
-- **Fundamentals**: Revenue growth 31.5% YoY; EPS growth 40.1% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 15.5pts (20d)
-
-## 27. Analog Devices, Inc. (ADI) -- [STRONG] 2 signals, strength 2.94
+## 24. Analog Devices, Inc. (ADI) -- [STRONG] 2 signals, strength 2.97
 - **Fundamentals**: Revenue growth 33.6% YoY; EPS growth 114.4% YoY; Quality checklist passed (D/E 0.25, Current ratio 2.19, Net margin 29.8%); Analyst sentiment improving: 35 buy/strongBuy vs. 32 last month
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 9.4pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 9.7pts (20d)
 
-## 28. Antelope Enterprise Holdings Limited - Class A (AEHL) -- [STRONG] 2 signals, strength 2.94
+## 25. Datadog, Inc. (DDOG) -- [STRONG] 2 signals, strength 2.96 · 📅 Day 4
+- **Fundamentals**: Revenue growth 31.5% YoY; EPS growth 40.1% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 15.9pts (20d)
+
+## 26. FormFactor, Inc. (FORM) -- [STRONG] 2 signals, strength 2.96
+- **Fundamentals**: Revenue growth 18.0% YoY; EPS growth 156.2% YoY; Quality checklist passed (D/E 0.01, Current ratio 4.50, Net margin 12.8%)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 14.0pts (20d)
+
+## 27. Advanced Micro Devices, Inc. (AMD) -- [STRONG] 2 signals, strength 2.95 · 📅 Day 8
+- **Fundamentals**: Revenue growth 39.5% YoY; EPS growth 124.3% YoY; Quality checklist passed (D/E 0.05, Current ratio 2.85, Net margin 15.6%); Analyst sentiment improving: 49 buy/strongBuy vs. 48 last month
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 10.2pts (20d)
+
+## 28. DHT Holdings, Inc. (DHT) -- [STRONG] 2 signals, strength 2.95 · 📅 Day 6
+- **Fundamentals**: Revenue growth 38.9% YoY; EPS growth 148.7% YoY; Quality checklist passed (D/E 0.38, Current ratio 2.80, ROE 39.6%, Net margin 65.5%)
+- **Technical**: RSI overbought (71.8); Price above rising 50/200-day MAs; Outperforming S&P 500 by 6.1pts (20d)
+
+## 29. Antelope Enterprise Holdings Limited - Class A (AEHL) -- [STRONG] 2 signals, strength 2.94
 - **Fundamentals**: Revenue growth 37.0% YoY
-- **Technical**: RSI overbought (79.2); Volume spike (9.0x average); MACD bullish crossover; Outperforming S&P 500 by 152.3pts (20d)
-- ⚠️ **CAUTION**: Extended 203% above 50-day MA -- elevated pullback risk
+- **Technical**: RSI overbought (80.2); Volume spike (9.6x average); MACD bullish crossover; Outperforming S&P 500 by 165.7pts (20d)
+- ⚠️ **CAUTION**: Extended 218% above 50-day MA -- elevated pullback risk
 - ⚠️ **EARNINGS QUALITY**: Net margin -10.7% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
-
-## 29. Twilio Inc. (TWLO) -- [STRONG] 2 signals, strength 2.92
-- **Fundamentals**: Revenue growth 17.8% YoY; EPS growth 5800.2% YoY; Quality checklist passed (D/E 0.13, Current ratio 4.03, Net margin 20.6%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 13.5pts (20d)
 
 ## 30. Halozyme Therapeutics, Inc. (HALO) -- [STRONG] 2 signals, strength 2.92
 - **Fundamentals**: Revenue growth 41.1% YoY; Quality checklist passed (Current ratio 4.66, ROE 180.6%, Net margin 24.9%); Analyst sentiment improving: 13 buy/strongBuy vs. 12 last month
 - **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 6.3pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); New ALL-TIME high -- no overhead resistance from prior sellers
 - ⚠️ **CAUTION**: New 52-week high but on light volume (0.5x average) -- unconfirmed breakout
 
-## 31. Bending Spoons S.p.A. (BSP) -- [STRONG] 2 signals, strength 2.90
-- **Fundamentals**: Revenue growth 132.2% YoY
-- **Technical**: RSI overbought (81.5); Volume spike (3.4x average); Outperforming S&P 500 by 34.2pts (20d); 52-week high confirmed by volume (3.4x average); New ALL-TIME high -- no overhead resistance from prior sellers
-- ⚠️ **CAUTION**: Extended 35% above 50-day MA -- elevated pullback risk
+## 31. Twilio Inc. (TWLO) -- [STRONG] 2 signals, strength 2.91
+- **Fundamentals**: Revenue growth 17.8% YoY; EPS growth 5800.2% YoY; Quality checklist passed (D/E 0.13, Current ratio 4.03, Net margin 20.6%)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 13.4pts (20d)
 
-## 32. Credo Technology Group Holding Ltd (CRDO) -- [STRONG] 2 signals, strength 2.89 · ↩ Back (was Day 4)
-- **Fundamentals**: Revenue growth 165.1% YoY; EPS growth 312.8% YoY; Quality checklist passed (D/E 0.00, Current ratio 10.15, ROE 27.2%, Net margin 33.8%)
-- **Technical**: Outperforming S&P 500 by 14.0pts (20d)
+## 32. Keysight Technologies Inc. (KEYS) -- [STRONG] 2 signals, strength 2.91 · 📅 Day 3
+- **Fundamentals**: Revenue growth 25.5% YoY; EPS growth 131.8% YoY; Quality checklist passed (D/E 0.43, Current ratio 2.35, ROE 20.2%, Net margin 19.1%)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 9.7pts (20d)
 
 ## 33. Cricut, Inc. (CRCT) -- [STRONG] 2 signals, strength 2.88
 - **Fundamentals**: EPS growth 22.8% YoY; Quality checklist passed (D/E 0.00, Current ratio 2.26, ROE 24.6%, Net margin 12.7%)
-- **Technical**: RSI overbought (77.2); Price above rising 50/200-day MAs; Outperforming S&P 500 by 13.8pts (20d)
+- **Technical**: RSI overbought (76.9); Price above rising 50/200-day MAs; Outperforming S&P 500 by 13.8pts (20d)
 
-## 34. Marvell Technology, Inc. (MRVL) -- [STRONG] 2 signals, strength 2.86 · 📅 Day 8
+## 34. Marvell Technology, Inc. (MRVL) -- [STRONG] 2 signals, strength 2.85 · 📅 Day 8
 - **Fundamentals**: Revenue growth 30.6% YoY; EPS growth 49.4% YoY; Quality checklist passed (D/E 0.31, Current ratio 2.01, ROE 16.2%, Net margin 27.9%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 7.5pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 7.3pts (20d)
 
-## 35. SharkNinja, Inc. (SN) -- [STRONG] 2 signals, strength 2.86
+## 35. Exelixis, Inc. (EXEL) -- [STRONG] 2 signals, strength 2.85
+- **Fundamentals**: EPS growth 52.7% YoY; Quality checklist passed (D/E 0.00, Current ratio 3.56, ROE 42.5%, Net margin 35.3%)
+- **Technical**: RSI overbought (72.0); Price above rising 50/200-day MAs; Outperforming S&P 500 by 3.9pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); 52-week high, but still 0.2% below all-time high ($60.53) -- possible overhead resistance
+- ⚠️ **CAUTION**: New 52-week high but on light volume (0.3x average) -- unconfirmed breakout
+- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 1 sell/strongSell vs. 1 last month
+
+## 36. SharkNinja, Inc. (SN) -- [STRONG] 2 signals, strength 2.85
 - **Fundamentals**: Revenue growth 17.5% YoY; EPS growth 33.4% YoY; Quality checklist passed (D/E 0.28, Current ratio 2.04, ROE 26.0%, Net margin 10.1%)
-- **Technical**: RSI overbought (76.4); Price above rising 50/200-day MAs; Outperforming S&P 500 by 7.6pts (20d)
+- **Technical**: RSI overbought (74.3); Price above rising 50/200-day MAs; Outperforming S&P 500 by 7.3pts (20d)
 
-## 36. TORM plc (TRMD) -- [STRONG] 2 signals, strength 2.85 · 📅 Day 3
-- **Fundamentals**: Revenue growth 33.1% YoY; EPS growth 83.6% YoY; Quality checklist passed (D/E 0.46, ROE 27.2%, Net margin 35.5%)
-- **Technical**: RSI overbought (71.4); Price above rising 50/200-day MAs; Outperforming S&P 500 by 6.0pts (20d)
-
-## 37. Viavi Solutions Inc. (VIAV) -- [STRONG] 2 signals, strength 2.85
-- **Fundamentals**: Revenue growth 40.0% YoY; EPS growth 288.1% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 13.3pts (20d)
-
-## 38. PicS N.V. (PICS) -- [STRONG] 2 signals, strength 2.84
+## 37. PicS N.V. (PICS) -- [STRONG] 2 signals, strength 2.84
 - **Fundamentals**: Revenue growth 68.4% YoY; EPS growth 166.9% YoY
-- **Technical**: RSI overbought (77.2); Outperforming S&P 500 by 31.1pts (20d)
+- **Technical**: RSI overbought (76.3); Outperforming S&P 500 by 30.3pts (20d)
 
-## 39. Shopify Inc. - Class A Subordinate Voting Shares (SHOP) -- [STRONG] 2 signals, strength 2.84 · 📅 Day 3
+## 38. Shopify Inc. - Class A Subordinate Voting Shares (SHOP) -- [STRONG] 2 signals, strength 2.84 · 📅 Day 3
 - **Fundamentals**: Revenue growth 32.5% YoY; Quality checklist passed (D/E 0.00, Current ratio 5.96, ROE 15.1%, Net margin 14.5%)
-- **Technical**: RSI overbought (79.0); Outperforming S&P 500 by 30.8pts (20d)
+- **Technical**: RSI overbought (77.4); Outperforming S&P 500 by 30.1pts (20d)
 
-## 40. Astera Labs, Inc. (ALAB) -- [STRONG] 2 signals, strength 2.81 · 📅 Day 8
+## 39. Astera Labs, Inc. (ALAB) -- [STRONG] 2 signals, strength 2.82 · 📅 Day 8
 - **Fundamentals**: Revenue growth 98.5% YoY; EPS growth 254.9% YoY; Quality checklist passed (D/E 0.00, Current ratio 10.24, ROE 25.2%, Net margin 30.7%)
-- **Technical**: Outperforming S&P 500 by 12.7pts (20d)
+- **Technical**: Outperforming S&P 500 by 12.9pts (20d)
 
-## 41. VTEX (VTEX) -- [STRONG] 2 signals, strength 2.79
-- **Fundamentals**: EPS growth 141.9% YoY; Quality checklist passed (D/E 0.00, Current ratio 3.04, Net margin 12.0%)
-- **Technical**: RSI overbought (83.5); 20/50-day MA bullish crossover; Outperforming S&P 500 by 10.0pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
-
-## 42. Urban Outfitters, Inc. (URBN) -- [STRONG] 2 signals, strength 2.79
+## 40. Urban Outfitters, Inc. (URBN) -- [STRONG] 2 signals, strength 2.79
 - **Fundamentals**: Revenue growth 11.0% YoY; EPS growth 25.4% YoY; Quality checklist passed (D/E 0.00, Current ratio 1.51, ROE 20.7%)
 - **Technical**: RSI overbought (86.7); Outperforming S&P 500 by 7.7pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); New ALL-TIME high -- no overhead resistance from prior sellers
 - ⚠️ **CAUTION**: New 52-week high but on light volume (0.2x average) -- unconfirmed breakout
 
-## 43. Valero Energy Corporation (VLO) -- [STRONG] 2 signals, strength 2.79
-- **Fundamentals**: Revenue growth 12.6% YoY; EPS growth 896.0% YoY; Quality checklist passed (D/E 0.45, Current ratio 1.65, ROE 29.9%)
-- **Technical**: RSI overbought (84.9); Price above rising 50/200-day MAs; Outperforming S&P 500 by 10.3pts (20d)
-
-## 44. Cadence Design Systems, Inc. (CDNS) -- [STRONG] 2 signals, strength 2.78 · 📅 Day 3
+## 41. Cadence Design Systems, Inc. (CDNS) -- [STRONG] 2 signals, strength 2.78 · 📅 Day 3
 - **Fundamentals**: Revenue growth 14.7% YoY; EPS growth 36.0% YoY; Quality checklist passed (D/E 0.45, Current ratio 2.86, ROE 22.9%, Net margin 23.6%)
-- **Technical**: Outperforming S&P 500 by 15.5pts (20d)
+- **Technical**: Outperforming S&P 500 by 15.9pts (20d)
 
-## 45. Hewlett Packard Enterprise Company (HPE) -- [STRONG] 2 signals, strength 2.77 · ↩ Back (was Day 5)
-- **Fundamentals**: Revenue growth 26.6% YoY; EPS growth 128.2% YoY; Analyst sentiment improving: 19 buy/strongBuy vs. 17 last month
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 12.1pts (20d)
-
-## 46. Phillips 66 (PSX) -- [STRONG] 2 signals, strength 2.76
+## 42. Phillips 66 (PSX) -- [STRONG] 2 signals, strength 2.77
 - **Fundamentals**: Revenue growth 14.4% YoY; EPS growth 318.7% YoY
-- **Technical**: RSI overbought (85.8); Price above rising 50/200-day MAs; Outperforming S&P 500 by 8.0pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); New ALL-TIME high -- no overhead resistance from prior sellers
+- **Technical**: RSI overbought (86.5); Price above rising 50/200-day MAs; Outperforming S&P 500 by 8.5pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); New ALL-TIME high -- no overhead resistance from prior sellers
 - ⚠️ **CAUTION**: New 52-week high but on light volume (0.2x average) -- unconfirmed breakout
 
-## 47. BP p.l.c. (BP) -- [STRONG] 2 signals, strength 2.76
+## 43. VTEX (VTEX) -- [STRONG] 2 signals, strength 2.76
+- **Fundamentals**: EPS growth 141.9% YoY; Quality checklist passed (D/E 0.00, Current ratio 3.04, Net margin 12.0%)
+- **Technical**: RSI overbought (80.5); 20/50-day MA bullish crossover; Outperforming S&P 500 by 9.2pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
+
+## 44. BP p.l.c. (BP) -- [STRONG] 2 signals, strength 2.76
 - **Fundamentals**: Revenue growth 16.4% YoY; EPS growth 907.6% YoY
-- **Technical**: RSI overbought (76.0); Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.6pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); New ALL-TIME high -- no overhead resistance from prior sellers
+- **Technical**: RSI overbought (76.2); Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.8pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); New ALL-TIME high -- no overhead resistance from prior sellers
 - ⚠️ **CAUTION**: New 52-week high but on light volume (0.6x average) -- unconfirmed breakout
 
-## 48. International Seaways, Inc. (INSW) -- [STRONG] 2 signals, strength 2.75 · 📅 Day 8
-- **Fundamentals**: Revenue growth 57.4% YoY; EPS growth 225.8% YoY; Quality checklist passed (D/E 0.28, Current ratio 3.71, ROE 37.0%, Net margin 62.0%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.9pts (20d)
-
-## 49. Super Group (SGHC) Limited (SGHC) -- [STRONG] 2 signals, strength 2.75
+## 45. Super Group (SGHC) Limited (SGHC) -- [STRONG] 2 signals, strength 2.75
 - **Fundamentals**: Revenue growth 17.3% YoY; EPS growth 176.4% YoY; Quality checklist passed (D/E 0.10, Current ratio 1.94, ROE 47.6%, Net margin 15.2%)
-- **Technical**: RSI oversold (23.8); MACD bullish crossover
+- **Technical**: RSI oversold (24.6); MACD bullish crossover
 
-## 50. Frontline Plc (FRO) -- [STRONG] 2 signals, strength 2.75 · 📅 Day 6
-- **Fundamentals**: Revenue growth 48.8% YoY; EPS growth 524.5% YoY
-- **Technical**: RSI overbought (75.3); Price above rising 50/200-day MAs; Outperforming S&P 500 by 9.6pts (20d)
+## 46. International Seaways, Inc. (INSW) -- [STRONG] 2 signals, strength 2.75 · 📅 Day 8
+- **Fundamentals**: Revenue growth 57.4% YoY; EPS growth 225.8% YoY; Quality checklist passed (D/E 0.28, Current ratio 3.71, ROE 37.0%, Net margin 62.0%)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.7pts (20d)
 
-## 51. KANZHUN LIMITED - American Depository Shares (BZ) -- [STRONG] 2 signals, strength 2.73
+## 47. KANZHUN LIMITED - American Depository Shares (BZ) -- [STRONG] 2 signals, strength 2.74
 - **Fundamentals**: Revenue growth 12.2% YoY; EPS growth 105.3% YoY; Quality checklist passed (D/E 0.00, Current ratio 4.66, ROE 22.8%, Net margin 52.9%); Analyst sentiment improving: 26 buy/strongBuy vs. 25 last month
-- **Technical**: RSI overbought (90.6); Outperforming S&P 500 by 10.5pts (20d)
+- **Technical**: RSI overbought (90.7); Outperforming S&P 500 by 10.7pts (20d)
 
-## 52. GigaCloud Technology Inc - Class A (GCT) -- [STRONG] 2 signals, strength 2.73 · ↩ Back (was Day 4)
+## 48. Credo Technology Group Holding Ltd (CRDO) -- [STRONG] 2 signals, strength 2.74 · ↩ Back (was Day 4)
+- **Fundamentals**: Revenue growth 165.1% YoY; EPS growth 312.8% YoY; Quality checklist passed (D/E 0.00, Current ratio 10.15, ROE 27.2%, Net margin 33.8%)
+- **Technical**: Outperforming S&P 500 by 11.7pts (20d)
+
+## 49. GigaCloud Technology Inc - Class A (GCT) -- [STRONG] 2 signals, strength 2.72 · ↩ Back (was Day 4)
 - **Fundamentals**: Revenue growth 22.9% YoY; EPS growth 27.1% YoY; Quality checklist passed (D/E 0.00, Current ratio 2.02, ROE 31.4%, Net margin 10.7%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 7.8pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 7.7pts (20d)
 
-## 53. Amphenol Corporation (APH) -- [STRONG] 2 signals, strength 2.72
+## 50. Hewlett Packard Enterprise Company (HPE) -- [STRONG] 2 signals, strength 2.71 · ↩ Back (was Day 5)
+- **Fundamentals**: Revenue growth 26.6% YoY; EPS growth 128.2% YoY; Analyst sentiment improving: 19 buy/strongBuy vs. 17 last month
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 11.2pts (20d)
+
+## 51. Amphenol Corporation (APH) -- [STRONG] 2 signals, strength 2.70
 - **Fundamentals**: Revenue growth 54.2% YoY; EPS growth 59.4% YoY; Quality checklist passed (Current ratio 2.98, ROE 37.1%, Net margin 17.7%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 6.2pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.9pts (20d)
 
-## 54. Ollie's Bargain Outlet Holdings, Inc. (OLLI) -- [STRONG] 2 signals, strength 2.70
+## 52. Ollie's Bargain Outlet Holdings, Inc. (OLLI) -- [STRONG] 2 signals, strength 2.70
 - **Fundamentals**: Revenue growth 14.4% YoY; EPS growth 29.7% YoY
-- **Technical**: MACD bullish crossover; Outperforming S&P 500 by 21.7pts (20d)
+- **Technical**: MACD bullish crossover; Outperforming S&P 500 by 22.0pts (20d)
 
-## 55. Suncor Energy  Inc. (SU) -- [STRONG] 2 signals, strength 2.70
-- **Fundamentals**: Revenue growth 13.8% YoY; EPS growth 65.6% YoY; Quality checklist passed (D/E 0.32, ROE 19.4%, Net margin 15.8%); Analyst sentiment improving: 25 buy/strongBuy vs. 23 last month
-- **Technical**: RSI overbought (74.7); Price above rising 50/200-day MAs; Outperforming S&P 500 by 6.3pts (20d)
-
-## 56. Microsoft Corporation (MSFT) -- [STRONG] 2 signals, strength 2.69 · 📅 Day 4
+## 53. Microsoft Corporation (MSFT) -- [STRONG] 2 signals, strength 2.69 · 📅 Day 4
 - **Fundamentals**: Revenue growth 17.8% YoY; EPS growth 31.6% YoY; Quality checklist passed (D/E 0.24, ROE 33.2%, Net margin 40.3%)
-- **Technical**: RSI overbought (74.5); Price above rising 50/200-day MAs; Outperforming S&P 500 by 7.0pts (20d)
+- **Technical**: RSI overbought (74.3); Price above rising 50/200-day MAs; Outperforming S&P 500 by 7.0pts (20d)
 
-## 57. Victorias Secret & Co. (VSXY) -- [STRONG] 2 signals, strength 2.69
-- **Fundamentals**: Revenue growth 10.3% YoY; EPS growth 167.0% YoY
-- **Technical**: 20/50-day MA bullish crossover; Outperforming S&P 500 by 15.9pts (20d)
+## 54. TORM plc (TRMD) -- [STRONG] 2 signals, strength 2.68 · 📅 Day 3
+- **Fundamentals**: Revenue growth 33.1% YoY; EPS growth 83.6% YoY; Quality checklist passed (D/E 0.46, ROE 27.2%, Net margin 35.5%)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.3pts (20d)
 
-## 58. Fastenal Company (FAST) -- [STRONG] 2 signals, strength 2.67
+## 55. Frontline Plc (FRO) -- [STRONG] 2 signals, strength 2.67 · 📅 Day 6
+- **Fundamentals**: Revenue growth 48.8% YoY; EPS growth 524.5% YoY
+- **Technical**: RSI overbought (71.8); Price above rising 50/200-day MAs; Outperforming S&P 500 by 8.1pts (20d)
+
+## 56. Fastenal Company (FAST) -- [STRONG] 2 signals, strength 2.66
 - **Fundamentals**: Revenue growth 12.5% YoY; EPS growth 13.6% YoY; Quality checklist passed (D/E 0.03, Current ratio 4.85, ROE 34.0%, Net margin 15.4%)
-- **Technical**: 20/50-day MA bullish crossover; Price above rising 50/200-day MAs; Outperforming S&P 500 by 3.6pts (20d)
+- **Technical**: 20/50-day MA bullish crossover; Price above rising 50/200-day MAs; Outperforming S&P 500 by 3.4pts (20d)
 - ⚠️ **EARNINGS QUALITY**: Earnings scheduled today (2026-10-14) -- gap risk on a swing hold
 
-## 59. AbbVie Inc. (ABBV) -- [STRONG] 2 signals, strength 2.66
+## 57. AbbVie Inc. (ABBV) -- [STRONG] 2 signals, strength 2.66
 - **Fundamentals**: Revenue growth 10.4% YoY; EPS growth 67.6% YoY; Analyst sentiment improving: 32 buy/strongBuy vs. 31 last month
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.5pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); New ALL-TIME high -- no overhead resistance from prior sellers
-- ⚠️ **CAUTION**: New 52-week high but on light volume (0.2x average) -- unconfirmed breakout
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.4pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); New ALL-TIME high -- no overhead resistance from prior sellers
+- ⚠️ **CAUTION**: New 52-week high but on light volume (0.3x average) -- unconfirmed breakout
 
-## 60. ASE Technology Holding Co., Ltd. American Depositary Shares (each representing Two (ASX) -- [STRONG] 2 signals, strength 2.65
+## 58. Victorias Secret & Co. (VSXY) -- [STRONG] 2 signals, strength 2.66
+- **Fundamentals**: Revenue growth 10.3% YoY; EPS growth 167.0% YoY
+- **Technical**: 20/50-day MA bullish crossover; Outperforming S&P 500 by 14.6pts (20d)
+
+## 59. ASE Technology Holding Co., Ltd. American Depositary Shares (each representing Two (ASX) -- [STRONG] 2 signals, strength 2.65
 - **Fundamentals**: Revenue growth 14.5% YoY; EPS growth 74.8% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 16.6pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 15.8pts (20d)
+
+## 60. Eli Lilly and Company (LLY) -- [STRONG] 2 signals, strength 2.65
+- **Fundamentals**: Revenue growth 49.6% YoY; EPS growth 94.6% YoY; Quality checklist passed (Current ratio 1.58, ROE 92.6%, Net margin 33.5%)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.4pts (20d)
 
 ## 61. Apple Inc. (AAPL) -- [STRONG] 2 signals, strength 2.64
 - **Fundamentals**: Revenue growth 14.2% YoY; EPS growth 32.6% YoY
-- **Technical**: MACD bullish crossover; Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.5pts (20d); New ALL-TIME high -- no overhead resistance from prior sellers
-- ⚠️ **CAUTION**: New 52-week high but on light volume (0.4x average) -- unconfirmed breakout
+- **Technical**: MACD bullish crossover; Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.2pts (20d); New ALL-TIME high -- no overhead resistance from prior sellers
+- ⚠️ **CAUTION**: New 52-week high but on light volume (0.5x average) -- unconfirmed breakout
 - ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 4 sell/strongSell vs. 3 last month
 
-## 62. AvePoint, Inc. (AVPT) -- [STRONG] 2 signals, strength 2.64
+## 62. AvePoint, Inc. (AVPT) -- [STRONG] 2 signals, strength 2.63
 - **Fundamentals**: Revenue growth 24.9% YoY; EPS growth 957.6% YoY; Quality checklist passed (D/E 0.00, Current ratio 2.28, ROE 15.7%, Net margin 15.3%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 3.5pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 3.2pts (20d)
 
-## 63. Eli Lilly and Company (LLY) -- [STRONG] 2 signals, strength 2.63
-- **Fundamentals**: Revenue growth 49.6% YoY; EPS growth 94.6% YoY; Quality checklist passed (Current ratio 1.58, ROE 92.6%, Net margin 33.5%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.1pts (20d)
+## 63. People Incorporated (PPLI) -- [STRONG] 2 signals, strength 2.62
+- **Fundamentals**: EPS growth 159.5% YoY; Quality checklist passed (D/E 0.30, Current ratio 2.75, Net margin 16.1%)
+- **Technical**: RSI overbought (70.5); 20/50-day MA bullish crossover; Outperforming S&P 500 by 5.4pts (20d)
 
-## 64. TAL Education Group American Depositary Shares (TAL) -- [STRONG] 2 signals, strength 2.63
+## 64. TAL Education Group American Depositary Shares (TAL) -- [STRONG] 2 signals, strength 2.62
 - **Fundamentals**: Revenue growth 32.4% YoY; EPS growth 846.5% YoY; Quality checklist passed (D/E 0.00, Current ratio 2.17, ROE 24.5%, Net margin 28.4%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.7pts (20d)
-
-## 65. Hafnia Limited (HAFN) -- [STRONG] 2 signals, strength 2.62 · 📅 Day 5
-- **Fundamentals**: Revenue growth 13.3% YoY; EPS growth 52.0% YoY; Quality checklist passed (D/E 0.48, ROE 26.7%, Net margin 24.7%)
-- **Technical**: RSI overbought (79.6); Price above rising 50/200-day MAs; Outperforming S&P 500 by 6.7pts (20d)
-
-## 66. Taiwan Semiconductor Manufacturing Company Ltd. (TSM) -- [STRONG] 2 signals, strength 2.62
-- **Fundamentals**: Revenue growth 31.4% YoY; EPS growth 55.2% YoY; Quality checklist passed (D/E 0.20, Current ratio 2.62, ROE 39.9%, Net margin 50.7%)
 - **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.4pts (20d)
 
-## 67. People Incorporated (PPLI) -- [STRONG] 2 signals, strength 2.61
-- **Fundamentals**: EPS growth 159.5% YoY; Quality checklist passed (D/E 0.30, Current ratio 2.75, Net margin 16.1%)
-- **Technical**: RSI overbought (70.1); 20/50-day MA bullish crossover; Outperforming S&P 500 by 5.2pts (20d)
+## 65. Hafnia Limited (HAFN) -- [STRONG] 2 signals, strength 2.60 · 📅 Day 5
+- **Fundamentals**: Revenue growth 13.3% YoY; EPS growth 52.0% YoY; Quality checklist passed (D/E 0.48, ROE 26.7%, Net margin 24.7%)
+- **Technical**: RSI overbought (77.9); Price above rising 50/200-day MAs; Outperforming S&P 500 by 6.2pts (20d)
 
-## 68. Verastem, Inc. (VSTM) -- [STRONG] 2 signals, strength 2.60
-- **Fundamentals**: Revenue growth 3995.7% YoY
-- **Technical**: Volume spike (8.5x average); Outperforming S&P 500 by 15.4pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Net margin -231.6% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
-
-## 69. Shoals Technologies Group, Inc. (SHLS) -- [STRONG] 2 signals, strength 2.60
+## 66. Shoals Technologies Group, Inc. (SHLS) -- [STRONG] 2 signals, strength 2.60
 - **Fundamentals**: Revenue growth 46.9% YoY; EPS growth 48.7% YoY
-- **Technical**: Outperforming S&P 500 by 16.1pts (20d)
+- **Technical**: Outperforming S&P 500 by 16.0pts (20d)
 
-## 70. Cisco Systems, Inc. (CSCO) -- [STRONG] 2 signals, strength 2.59
-- **Fundamentals**: Revenue growth 11.8% YoY; EPS growth 30.8% YoY; Quality checklist passed (D/E 0.59, ROE 27.4%, Net margin 20.9%); Analyst sentiment improving: 24 buy/strongBuy vs. 23 last month
-- **Technical**: RSI overbought (70.1); Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.0pts (20d)
-
-## 71. NetApp, Inc. (NTAP) -- [STRONG] 2 signals, strength 2.59
-- **Fundamentals**: Revenue growth 12.2% YoY; EPS growth 25.2% YoY
-- **Technical**: RSI overbought (72.4); Price above rising 50/200-day MAs; Outperforming S&P 500 by 16.5pts (20d)
-
-## 72. Shake Shack, Inc. (SHAK) -- [STRONG] 2 signals, strength 2.59
+## 67. Shake Shack, Inc. (SHAK) -- [STRONG] 2 signals, strength 2.59
 - **Fundamentals**: Revenue growth 17.3% YoY; EPS growth 109.5% YoY
-- **Technical**: RSI overbought (73.7); Outperforming S&P 500 by 17.4pts (20d)
+- **Technical**: RSI overbought (73.4); Outperforming S&P 500 by 17.3pts (20d)
 
-## 73. Avnet, Inc. (AVT) -- [STRONG] 2 signals, strength 2.57 · ↩ Back (was Day 3)
-- **Fundamentals**: Revenue growth 24.5% YoY; EPS growth 46.1% YoY; Analyst sentiment improving: 5 buy/strongBuy vs. 2 last month
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 2.0pts (20d)
+## 68. Bending Spoons S.p.A. (BSP) -- [STRONG] 2 signals, strength 2.58
+- **Fundamentals**: Revenue growth 132.2% YoY
+- **Technical**: RSI overbought (81.0); Volume spike (3.6x average); Outperforming S&P 500 by 32.1pts (20d)
+- ⚠️ **CAUTION**: Extended 33% above 50-day MA -- elevated pullback risk
 
-## 74. Visa Inc. (V) -- [STRONG] 2 signals, strength 2.57
+## 69. Visa Inc. (V) -- [STRONG] 2 signals, strength 2.57
 - **Fundamentals**: Revenue growth 14.4% YoY; EPS growth 14.7% YoY; Quality checklist passed (D/E 0.66, ROE 61.3%, Net margin 50.8%)
-- **Technical**: RSI overbought (75.7); 20/50-day MA bullish crossover; Price above rising 50/200-day MAs; Outperforming S&P 500 by 3.4pts (20d)
+- **Technical**: RSI overbought (75.8); 20/50-day MA bullish crossover; Price above rising 50/200-day MAs; Outperforming S&P 500 by 3.5pts (20d)
 - ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
 
-## 75. e.l.f. Beauty, Inc. (ELF) -- [STRONG] 2 signals, strength 2.57
-- **Fundamentals**: Revenue growth 31.2% YoY; Analyst sentiment improving: 16 buy/strongBuy vs. 14 last month
-- **Technical**: RSI overbought (70.3); Price above rising 50/200-day MAs; Outperforming S&P 500 by 13.2pts (20d)
+## 70. Okta, Inc. (OKTA) -- [STRONG] 2 signals, strength 2.57
+- **Fundamentals**: Revenue growth 11.2% YoY; EPS growth 79.2% YoY; Analyst sentiment improving: 43 buy/strongBuy vs. 40 last month
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 11.6pts (20d)
 
-## 76. Dorian LPG Ltd. (LPG) -- [STRONG] 2 signals, strength 2.56
+## 71. Dorian LPG Ltd. (LPG) -- [STRONG] 2 signals, strength 2.56
 - **Fundamentals**: Revenue growth 81.1% YoY; EPS growth 557.4% YoY; Quality checklist passed (D/E 0.49, Current ratio 2.67, ROE 28.4%, Net margin 55.0%)
 - **Technical**: Price above rising 50/200-day MAs
 
-## 77. Scorpio Tankers Inc. (STNG) -- [STRONG] 2 signals, strength 2.56
+## 72. Scorpio Tankers Inc. (STNG) -- [STRONG] 2 signals, strength 2.56
 - **Fundamentals**: Revenue growth 32.7% YoY; EPS growth 116.1% YoY; Quality checklist passed (D/E 0.19, Current ratio 9.33, ROE 24.5%, Net margin 67.2%)
 - **Technical**: Price above rising 50/200-day MAs
 
-## 78. Nordic American Tankers Limited (NAT) -- [STRONG] 2 signals, strength 2.56 · 📅 Day 8
+## 73. Nordic American Tankers Limited (NAT) -- [STRONG] 2 signals, strength 2.56 · 📅 Day 8
 - **Fundamentals**: Revenue growth 48.0% YoY; EPS growth 814.3% YoY; Quality checklist passed (D/E 0.95, Current ratio 2.24, ROE 26.9%, Net margin 47.3%)
 - **Technical**: Price above rising 50/200-day MAs
 
-## 79. Semtech Corporation (SMTC) -- [STRONG] 2 signals, strength 2.55 · 📅 Day 8
+## 74. Avnet, Inc. (AVT) -- [STRONG] 2 signals, strength 2.56 · ↩ Back (was Day 3)
+- **Fundamentals**: Revenue growth 24.5% YoY; EPS growth 46.1% YoY; Analyst sentiment improving: 5 buy/strongBuy vs. 2 last month
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.6pts (20d)
+
+## 75. Veeva Systems Inc. (VEEV) -- [STRONG] 2 signals, strength 2.55
+- **Fundamentals**: Revenue growth 16.5% YoY; EPS growth 25.6% YoY; Quality checklist passed (D/E 0.00, Current ratio 4.89, Net margin 29.3%)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 10.4pts (20d)
+
+## 76. Semtech Corporation (SMTC) -- [STRONG] 2 signals, strength 2.55 · 📅 Day 8
 - **Fundamentals**: Revenue growth 25.4% YoY; EPS growth 1063.4% YoY; Quality checklist passed (D/E 0.89, Current ratio 2.37, ROE 51.2%, Net margin 26.9%); Analyst sentiment improving: 21 buy/strongBuy vs. 19 last month
 - **Technical**: Price above rising 50/200-day MAs
 
-## 80. Kinder Morgan, Inc. (KMI) -- [STRONG] 2 signals, strength 2.55
+## 77. Kinder Morgan, Inc. (KMI) -- [STRONG] 2 signals, strength 2.55
 - **Fundamentals**: Revenue growth 12.5% YoY; EPS growth 27.1% YoY
-- **Technical**: RSI overbought (71.3); 20/50-day MA bullish crossover; Price above rising 50/200-day MAs; Outperforming S&P 500 by 6.2pts (20d)
+- **Technical**: RSI overbought (71.0); 20/50-day MA bullish crossover; Price above rising 50/200-day MAs; Outperforming S&P 500 by 6.2pts (20d)
 
-## 81. MSC Industrial Direct Company, Inc. (MSM) -- [STRONG] 2 signals, strength 2.55
-- **Fundamentals**: EPS growth 16.6% YoY; Quality checklist passed (D/E 0.35, Current ratio 1.68, ROE 16.6%)
-- **Technical**: RSI overbought (82.7); Price above rising 50/200-day MAs; Outperforming S&P 500 by 7.5pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); New ALL-TIME high -- no overhead resistance from prior sellers
-- ⚠️ **CAUTION**: New 52-week high but on light volume (0.2x average) -- unconfirmed breakout
-
-## 82. CF Industries Holdings, Inc. (CF) -- [STRONG] 2 signals, strength 2.54
+## 78. CF Industries Holdings, Inc. (CF) -- [STRONG] 2 signals, strength 2.54
 - **Fundamentals**: Revenue growth 20.0% YoY; EPS growth 76.3% YoY; Quality checklist passed (D/E 0.66, Current ratio 3.37, ROE 40.4%, Net margin 27.1%)
 - **Technical**: MACD bullish crossover
 
-## 83. Adamas Trust, Inc. (ADAM) -- [STRONG] 2 signals, strength 2.54
+## 79. AEVEX Corp. (AVEX) -- [STRONG] 2 signals, strength 2.54
+- **Fundamentals**: Revenue growth 143.4% YoY; EPS growth 697.3% YoY
+- **Technical**: RSI oversold (29.1); MACD bullish crossover
+- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
+
+## 80. Adamas Trust, Inc. (ADAM) -- [STRONG] 2 signals, strength 2.54
 - **Fundamentals**: Revenue growth 48.3% YoY; EPS growth 219.1% YoY
-- **Technical**: RSI oversold (21.1); MACD bullish crossover
+- **Technical**: RSI oversold (21.0); MACD bullish crossover
 
-## 84. Veeva Systems Inc. (VEEV) -- [STRONG] 2 signals, strength 2.53
-- **Fundamentals**: Revenue growth 16.5% YoY; EPS growth 25.6% YoY; Quality checklist passed (D/E 0.00, Current ratio 4.89, Net margin 29.3%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 10.1pts (20d)
-
-## 85. Synopsys, Inc. (SNPS) -- [STRONG] 2 signals, strength 2.52
-- **Fundamentals**: Revenue growth 46.3% YoY; Quality checklist passed (D/E 0.48, Current ratio 1.62, Net margin 11.4%); Analyst sentiment improving: 26 buy/strongBuy vs. 25 last month
-- **Technical**: Outperforming S&P 500 by 24.3pts (20d)
-
-## 86. Canadian Natural Resources Limited (CNQ) -- [STRONG] 2 signals, strength 2.52
+## 81. Canadian Natural Resources Limited (CNQ) -- [STRONG] 2 signals, strength 2.53
 - **Fundamentals**: Revenue growth 17.6% YoY; EPS growth 42.9% YoY; Quality checklist passed (D/E 0.44, ROE 26.7%, Net margin 26.3%)
-- **Technical**: RSI overbought (73.0); Price above rising 50/200-day MAs; Outperforming S&P 500 by 0.9pts (20d)
+- **Technical**: RSI overbought (73.5); Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.1pts (20d)
 
-## 87. Okta, Inc. (OKTA) -- [STRONG] 2 signals, strength 2.51
-- **Fundamentals**: Revenue growth 11.2% YoY; EPS growth 79.2% YoY; Analyst sentiment improving: 43 buy/strongBuy vs. 40 last month
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 10.7pts (20d)
+## 82. Synopsys, Inc. (SNPS) -- [STRONG] 2 signals, strength 2.52
+- **Fundamentals**: Revenue growth 46.3% YoY; Quality checklist passed (D/E 0.48, Current ratio 1.62, Net margin 11.4%); Analyst sentiment improving: 26 buy/strongBuy vs. 25 last month
+- **Technical**: Outperforming S&P 500 by 25.3pts (20d)
 
-## 88. Vera Bradley, Inc. (VRA) -- [STRONG] 2 signals, strength 2.50
+## 83. Vera Bradley, Inc. (VRA) -- [STRONG] 2 signals, strength 2.50
 - **Fundamentals**: Analyst sentiment improving: 4 buy/strongBuy vs. 0 last month
-- **Technical**: RSI overbought (88.8); Price above rising 50/200-day MAs; Outperforming S&P 500 by 40.8pts (20d)
-- ⚠️ **CAUTION**: Extended 49% above 50-day MA -- elevated pullback risk
+- **Technical**: RSI overbought (84.7); Price above rising 50/200-day MAs; Outperforming S&P 500 by 38.3pts (20d)
+- ⚠️ **CAUTION**: Extended 46% above 50-day MA -- elevated pullback risk
 
-## 89. Iovance Biotherapeutics, Inc. (IOVA) -- [STRONG] 2 signals, strength 2.50
+## 84. Iovance Biotherapeutics, Inc. (IOVA) -- [STRONG] 2 signals, strength 2.50
 - **Fundamentals**: Revenue growth 34.5% YoY
-- **Technical**: RSI overbought (73.0); Price above rising 50/200-day MAs; Outperforming S&P 500 by 43.5pts (20d)
-- ⚠️ **CAUTION**: Extended 48% above 50-day MA -- elevated pullback risk
+- **Technical**: RSI overbought (71.9); Price above rising 50/200-day MAs; Outperforming S&P 500 by 42.3pts (20d)
+- ⚠️ **CAUTION**: Extended 46% above 50-day MA -- elevated pullback risk
 - ⚠️ **EARNINGS QUALITY**: Net margin -89.1% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 90. HighPeak Energy, Inc. (HPK) -- [STRONG] 2 signals, strength 2.50
+## 85. HighPeak Energy, Inc. (HPK) -- [STRONG] 2 signals, strength 2.50
 - **Fundamentals**: EPS growth 213.5% YoY
-- **Technical**: RSI overbought (86.5); Price above rising 50/200-day MAs; Outperforming S&P 500 by 25.3pts (20d)
+- **Technical**: RSI overbought (86.9); Price above rising 50/200-day MAs; Outperforming S&P 500 by 25.6pts (20d)
 - ⚠️ **EARNINGS QUALITY**: Net margin -9.9% despite 213.5% adjusted EPS growth -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 91. Laureate Education, Inc. (LAUR) -- [STRONG] 2 signals, strength 2.49
+## 86. Laureate Education, Inc. (LAUR) -- [STRONG] 2 signals, strength 2.50
 - **Fundamentals**: Revenue growth 17.9% YoY; EPS growth 31.4% YoY; Quality checklist passed (D/E 0.11, ROE 28.6%, Net margin 17.6%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.7pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.8pts (20d)
 
-## 92. Banco Bradesco Sa American Depositary Shares (BBD) -- [STRONG] 2 signals, strength 2.49
+## 87. Banco Bradesco Sa American Depositary Shares (BBD) -- [STRONG] 2 signals, strength 2.49
 - **Fundamentals**: Revenue growth 54.7% YoY; EPS growth 12.5% YoY
-- **Technical**: RSI overbought (70.6); Outperforming S&P 500 by 15.1pts (20d)
+- **Technical**: RSI overbought (71.0); Outperforming S&P 500 by 15.5pts (20d)
 
-## 93. New Oriental Education & Technology Group, Inc. Sponsored ADR representing 10 Ordinary Share (Cayman Islands) (EDU) -- [STRONG] 2 signals, strength 2.48
+## 88. Verastem, Inc. (VSTM) -- [STRONG] 2 signals, strength 2.48
+- **Fundamentals**: Revenue growth 3995.7% YoY
+- **Technical**: Volume spike (9.0x average); Outperforming S&P 500 by 12.0pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Net margin -231.6% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+
+## 89. Ralph Lauren Corporation (RL) -- [STRONG] 2 signals, strength 2.48
+- **Fundamentals**: Revenue growth 14.7% YoY; EPS growth 26.6% YoY; Quality checklist passed (D/E 0.52, Current ratio 2.13, ROE 35.6%, Net margin 11.8%)
+- **Technical**: RSI overbought (75.1); Outperforming S&P 500 by 7.9pts (20d)
+
+## 90. New Oriental Education & Technology Group, Inc. Sponsored ADR representing 10 Ordinary Share (Cayman Islands) (EDU) -- [STRONG] 2 signals, strength 2.47
 - **Fundamentals**: Revenue growth 15.5% YoY; EPS growth 33.6% YoY
-- **Technical**: 20/50-day MA bullish crossover; Price above rising 50/200-day MAs; Outperforming S&P 500 by 0.5pts (20d)
+- **Technical**: 20/50-day MA bullish crossover; Price above rising 50/200-day MAs; Outperforming S&P 500 by 0.0pts (20d)
 
-## 94. Caris Life Sciences, Inc. (CAI) -- [STRONG] 2 signals, strength 2.48
-- **Fundamentals**: Revenue growth 38.5% YoY; Quality checklist passed (D/E 0.66, Current ratio 7.85, ROE 18.8%, Net margin 10.6%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 7.0pts (20d)
-
-## 95. Solaris Energy Infrastructure, Inc. (SEI) -- [STRONG] 2 signals, strength 2.48
-- **Fundamentals**: Revenue growth 70.5% YoY; EPS growth 27.3% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 8.3pts (20d)
-
-## 96. TG Therapeutics, Inc. (TGTX) -- [STRONG] 2 signals, strength 2.47
+## 91. TG Therapeutics, Inc. (TGTX) -- [STRONG] 2 signals, strength 2.47
 - **Fundamentals**: Revenue growth 76.1% YoY; EPS growth 633.7% YoY; Quality checklist passed (Current ratio 6.25, ROE 72.3%, Net margin 55.2%)
 - **Technical**: Price above rising 50/200-day MAs
 
-## 97. Slide Insurance Holdings, Inc. (SLDE) -- [STRONG] 2 signals, strength 2.47
+## 92. Slide Insurance Holdings, Inc. (SLDE) -- [STRONG] 2 signals, strength 2.47
 - **Fundamentals**: Revenue growth 41.5% YoY; EPS growth 101.5% YoY; Quality checklist passed (D/E 0.03, ROE 50.7%, Net margin 40.0%)
 - **Technical**: Price above rising 50/200-day MAs
 
-## 98. Priority Technology Holdings, Inc. (PRTH) -- [STRONG] 2 signals, strength 2.47
+## 93. Priority Technology Holdings, Inc. (PRTH) -- [STRONG] 2 signals, strength 2.47
 - **Fundamentals**: EPS growth 46.4% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 30.1pts (20d); 52-week high, but still 36.4% below all-time high ($12.29) -- possible overhead resistance
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 30.2pts (20d); 52-week high, but still 36.4% below all-time high ($12.29) -- possible overhead resistance
 - ⚠️ **CAUTION**: New 52-week high but on light volume (0.1x average) -- unconfirmed breakout
 
-## 99. Ralph Lauren Corporation (RL) -- [STRONG] 2 signals, strength 2.47
-- **Fundamentals**: Revenue growth 14.7% YoY; EPS growth 26.6% YoY; Quality checklist passed (D/E 0.52, Current ratio 2.13, ROE 35.6%, Net margin 11.8%)
-- **Technical**: RSI overbought (74.6); Outperforming S&P 500 by 7.8pts (20d)
-
-## 100. Range Resources Corporation (RRC) -- [STRONG] 2 signals, strength 2.46
+## 94. Range Resources Corporation (RRC) -- [STRONG] 2 signals, strength 2.46
 - **Fundamentals**: Revenue growth 16.9% YoY; EPS growth 82.0% YoY; Quality checklist passed (D/E 0.28, ROE 19.3%, Net margin 26.3%)
 - **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.3pts (20d)
 
-## 101. Meta Platforms, Inc. (META) -- [STRONG] 2 signals, strength 2.46
-- **Fundamentals**: Revenue growth 27.6% YoY; Quality checklist passed (D/E 0.28, Current ratio 2.60, ROE 29.7%, Net margin 29.8%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 7.6pts (20d)
-
-## 102. APA Corporation (APA) -- [STRONG] 2 signals, strength 2.46
-- **Fundamentals**: EPS growth 58.7% YoY; Quality checklist passed (D/E 0.74, ROE 26.3%, Net margin 19.0%); Analyst sentiment improving: 12 buy/strongBuy vs. 11 last month
-- **Technical**: RSI overbought (71.1); Price above rising 50/200-day MAs; Outperforming S&P 500 by 3.9pts (20d)
-
-## 103. Chevron Corporation (CVX) -- [STRONG] 2 signals, strength 2.45
+## 95. Chevron Corporation (CVX) -- [STRONG] 2 signals, strength 2.45
 - **Fundamentals**: Revenue growth 11.2% YoY; EPS growth 34.6% YoY
-- **Technical**: RSI overbought (76.9); Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.7pts (20d); New ALL-TIME high -- no overhead resistance from prior sellers
-- ⚠️ **CAUTION**: New 52-week high but on light volume (0.3x average) -- unconfirmed breakout
+- **Technical**: RSI overbought (77.1); Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.9pts (20d); New ALL-TIME high -- no overhead resistance from prior sellers
+- ⚠️ **CAUTION**: New 52-week high but on light volume (0.4x average) -- unconfirmed breakout
 - ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 1 sell/strongSell vs. 1 last month
 
-## 104. American Eagle Outfitters, Inc. (AEO) -- [STRONG] 2 signals, strength 2.45
+## 96. APA Corporation (APA) -- [STRONG] 2 signals, strength 2.45
+- **Fundamentals**: EPS growth 58.7% YoY; Quality checklist passed (D/E 0.74, ROE 26.3%, Net margin 19.0%); Analyst sentiment improving: 12 buy/strongBuy vs. 11 last month
+- **Technical**: RSI overbought (70.3); Price above rising 50/200-day MAs; Outperforming S&P 500 by 3.8pts (20d)
+
+## 97. American Eagle Outfitters, Inc. (AEO) -- [STRONG] 2 signals, strength 2.45
 - **Fundamentals**: EPS growth 86.4% YoY; Quality checklist passed (D/E 0.02, Current ratio 1.51, ROE 20.0%)
-- **Technical**: Outperforming S&P 500 by 17.5pts (20d)
+- **Technical**: Outperforming S&P 500 by 15.8pts (20d)
 
-## 105. SK hynix Inc. - American Depositary Shares (SKHY) -- [STRONG] 2 signals, strength 2.45
+## 98. SK hynix Inc. - American Depositary Shares (SKHY) -- [STRONG] 2 signals, strength 2.45
 - **Fundamentals**: Revenue growth 145.0% YoY; EPS growth 451.8% YoY; Quality checklist passed (D/E 0.21, Current ratio 1.86, ROE 100.1%, Net margin 85.6%); Analyst sentiment improving: 46 buy/strongBuy vs. 44 last month
-- **Technical**: RSI oversold (26.9)
+- **Technical**: RSI oversold (26.6)
 
-## 106. Shell PLC American Depositary Shares (each representing two (2) (SHEL) -- [STRONG] 2 signals, strength 2.44
+## 99. NetApp, Inc. (NTAP) -- [STRONG] 2 signals, strength 2.44
+- **Fundamentals**: Revenue growth 12.2% YoY; EPS growth 25.2% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 15.3pts (20d)
+
+## 100. Shell PLC American Depositary Shares (each representing two (2) (SHEL) -- [STRONG] 2 signals, strength 2.44
 - **Fundamentals**: EPS growth 104.5% YoY
-- **Technical**: RSI overbought (81.7); Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.3pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); New ALL-TIME high -- no overhead resistance from prior sellers
-- ⚠️ **CAUTION**: New 52-week high but on light volume (0.4x average) -- unconfirmed breakout
+- **Technical**: RSI overbought (82.1); Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.7pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); New ALL-TIME high -- no overhead resistance from prior sellers
+- ⚠️ **CAUTION**: New 52-week high but on light volume (0.5x average) -- unconfirmed breakout
 - ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
 
-## 107. Aurinia Pharmaceuticals Inc (AUPH) -- [STRONG] 2 signals, strength 2.44
+## 101. Meta Platforms, Inc. (META) -- [STRONG] 2 signals, strength 2.44
+- **Fundamentals**: Revenue growth 27.6% YoY; Quality checklist passed (D/E 0.28, Current ratio 2.60, ROE 29.7%, Net margin 29.8%)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 7.2pts (20d)
+
+## 102. Aurinia Pharmaceuticals Inc (AUPH) -- [STRONG] 2 signals, strength 2.44
 - **Fundamentals**: Revenue growth 19.8% YoY; EPS growth 435.8% YoY; Quality checklist passed (D/E 0.12, Current ratio 5.25, ROE 59.0%, Net margin 100.8%)
 - **Technical**: Price above rising 50/200-day MAs
 
-## 108. Texas Instruments Incorporated (TXN) -- [STRONG] 2 signals, strength 2.43
+## 103. Itau Unibanco Banco Holding SA American Depositary Shares (Each repstg 500 Preferred shares) (ITUB) -- [STRONG] 2 signals, strength 2.43
+- **Fundamentals**: Revenue growth 47.2% YoY
+- **Technical**: RSI overbought (70.6); Price above rising 50/200-day MAs; Outperforming S&P 500 by 13.9pts (20d)
+
+## 104. Freshpet, Inc. (FRPT) -- [STRONG] 2 signals, strength 2.43
+- **Fundamentals**: Revenue growth 12.8% YoY; EPS growth 449.7% YoY; Quality checklist passed (D/E 0.35, Current ratio 5.54, ROE 16.7%, Net margin 17.3%)
+- **Technical**: RSI overbought (83.7); Outperforming S&P 500 by 6.6pts (20d)
+
+## 105. Texas Instruments Incorporated (TXN) -- [STRONG] 2 signals, strength 2.43
 - **Fundamentals**: Revenue growth 16.7% YoY; EPS growth 20.3% YoY; Quality checklist passed (D/E 0.86, Current ratio 4.35, ROE 35.8%, Net margin 31.1%)
 - **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.7pts (20d)
 
-## 109. Agilent Technologies, Inc. (A) -- [STRONG] 2 signals, strength 2.41
-- **Fundamentals**: EPS growth 18.7% YoY; Quality checklist passed (D/E 0.50, Current ratio 1.96, ROE 20.5%, Net margin 19.5%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 10.1pts (20d)
+## 106. Cisco Systems, Inc. (CSCO) -- [STRONG] 2 signals, strength 2.42
+- **Fundamentals**: Revenue growth 11.8% YoY; EPS growth 30.8% YoY; Quality checklist passed (D/E 0.59, ROE 27.4%, Net margin 20.9%); Analyst sentiment improving: 24 buy/strongBuy vs. 23 last month
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.6pts (20d)
 
-## 110. Micron Technology, Inc. (MU) -- [STRONG] 2 signals, strength 2.40
+## 107. e.l.f. Beauty, Inc. (ELF) -- [STRONG] 2 signals, strength 2.42
+- **Fundamentals**: Revenue growth 31.2% YoY; Analyst sentiment improving: 16 buy/strongBuy vs. 14 last month
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 13.2pts (20d)
+
+## 108. Micron Technology, Inc. (MU) -- [STRONG] 2 signals, strength 2.40
 - **Fundamentals**: Revenue growth 256.3% YoY; EPS growth 878.8% YoY; Quality checklist passed (D/E 0.04, Current ratio 3.31, ROE 91.8%, Net margin 63.8%); Analyst sentiment improving: 53 buy/strongBuy vs. 51 last month
-- **Technical**: RSI oversold (27.2)
+- **Technical**: RSI oversold (26.6)
 
-## 111. Ardmore Shipping Corporation (ASC) -- [STRONG] 2 signals, strength 2.40
-- **Fundamentals**: Revenue growth 13.6% YoY; EPS growth 137.3% YoY; Quality checklist passed (D/E 0.20, Current ratio 4.33, ROE 16.5%, Net margin 29.7%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 0.9pts (20d)
+## 109. Solaris Energy Infrastructure, Inc. (SEI) -- [STRONG] 2 signals, strength 2.40
+- **Fundamentals**: Revenue growth 70.5% YoY; EPS growth 27.3% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 6.3pts (20d)
 
-## 112. Teekay Corporation Ltd. (TK) -- [STRONG] 2 signals, strength 2.39
+## 110. Caris Life Sciences, Inc. (CAI) -- [STRONG] 2 signals, strength 2.39
+- **Fundamentals**: Revenue growth 38.5% YoY; Quality checklist passed (D/E 0.66, Current ratio 7.85, ROE 18.8%, Net margin 10.6%)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.9pts (20d)
+
+## 111. Teekay Corporation Ltd. (TK) -- [STRONG] 2 signals, strength 2.39
 - **Fundamentals**: Revenue growth 15.6% YoY; EPS growth 133.4% YoY; Quality checklist passed (D/E 0.00, Current ratio 8.89, ROE 24.5%, Net margin 15.8%)
 - **Technical**: Price above rising 50/200-day MAs
 
-## 113. AAR Corp. (AIR) -- [STRONG] 2 signals, strength 2.38
-- **Fundamentals**: Revenue growth 22.0% YoY; EPS growth 548.9% YoY
-- **Technical**: RSI oversold (18.5); MACD bullish crossover
+## 112. Viavi Solutions Inc. (VIAV) -- [STRONG] 2 signals, strength 2.38
+- **Fundamentals**: Revenue growth 40.0% YoY; EPS growth 288.1% YoY
+- **Technical**: Outperforming S&P 500 by 11.7pts (20d)
 
-## 114. Freshpet, Inc. (FRPT) -- [STRONG] 2 signals, strength 2.38
-- **Fundamentals**: Revenue growth 12.8% YoY; EPS growth 449.7% YoY; Quality checklist passed (D/E 0.35, Current ratio 5.54, ROE 16.7%, Net margin 17.3%)
-- **Technical**: RSI overbought (83.0); Outperforming S&P 500 by 5.6pts (20d)
+## 113. Agilent Technologies, Inc. (A) -- [STRONG] 2 signals, strength 2.38
+- **Fundamentals**: EPS growth 18.7% YoY; Quality checklist passed (D/E 0.50, Current ratio 1.96, ROE 20.5%, Net margin 19.5%)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 9.7pts (20d)
 
-## 115. Quanta Services, Inc. (PWR) -- [STRONG] 2 signals, strength 2.38
+## 114. Cboe Global Markets, Inc. (CBOE) -- [STRONG] 2 signals, strength 2.37
+- **Fundamentals**: Revenue growth 11.7% YoY; EPS growth 50.4% YoY; Quality checklist passed (D/E 0.28, Current ratio 1.87, ROE 25.8%, Net margin 26.7%)
+- **Technical**: Outperforming S&P 500 by 9.4pts (20d)
+
+## 115. Quanta Services, Inc. (PWR) -- [STRONG] 2 signals, strength 2.36
 - **Fundamentals**: Revenue growth 26.3% YoY; EPS growth 35.4% YoY; Analyst sentiment improving: 28 buy/strongBuy vs. 26 last month
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.5pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.1pts (20d)
 
-## 116. Figure Technology Solutions, Inc. (FIGR) -- [STRONG] 2 signals, strength 2.36
+## 116. Ardmore Shipping Corporation (ASC) -- [STRONG] 2 signals, strength 2.36
+- **Fundamentals**: Revenue growth 13.6% YoY; EPS growth 137.3% YoY; Quality checklist passed (D/E 0.20, Current ratio 4.33, ROE 16.5%, Net margin 29.7%)
+- **Technical**: Price above rising 50/200-day MAs
+
+## 117. Figure Technology Solutions, Inc. (FIGR) -- [STRONG] 2 signals, strength 2.36
 - **Fundamentals**: Revenue growth 112.7% YoY; EPS growth 146.6% YoY; Quality checklist passed (D/E 0.45, Current ratio 2.20, ROE 18.6%, Net margin 33.5%)
 - **Technical**: RSI oversold (12.7)
 
-## 117. Wheaton Precious Metals Corp (WPM) -- [STRONG] 2 signals, strength 2.36
+## 118. Wheaton Precious Metals Corp (WPM) -- [STRONG] 2 signals, strength 2.36
 - **Fundamentals**: Revenue growth 90.8% YoY; EPS growth 159.7% YoY; Quality checklist passed (D/E 0.00, Current ratio 7.78, ROE 23.0%, Net margin 64.7%)
-- **Technical**: RSI oversold (28.5)
+- **Technical**: RSI oversold (27.6)
 
-## 118. ImmunityBio, Inc. (IBRX) -- [STRONG] 2 signals, strength 2.36
+## 119. ImmunityBio, Inc. (IBRX) -- [STRONG] 2 signals, strength 2.36
 - **Fundamentals**: Revenue growth 192.9% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 19.8pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 20.3pts (20d)
 - ⚠️ **EARNINGS QUALITY**: Net margin -598.6% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 119. Kinross Gold Corporation (KGC) -- [STRONG] 2 signals, strength 2.36
+## 120. Kinross Gold Corporation (KGC) -- [STRONG] 2 signals, strength 2.36
 - **Fundamentals**: Revenue growth 39.5% YoY; EPS growth 112.4% YoY; Quality checklist passed (D/E 0.09, Current ratio 2.35, ROE 36.0%, Net margin 37.5%)
-- **Technical**: RSI oversold (29.6)
-
-## 120. Cohu, Inc. (COHU) -- [STRONG] 2 signals, strength 2.36
-- **Fundamentals**: Revenue growth 32.7% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 15.2pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Net margin -7.4% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+- **Technical**: RSI oversold (28.6)
 
 ## 121. Avino Silver & Gold Mines Ltd. (ASM) -- [STRONG] 2 signals, strength 2.36
 - **Fundamentals**: Revenue growth 47.9% YoY; EPS growth 168.1% YoY; Quality checklist passed (D/E 0.03, Current ratio 4.06, ROE 18.5%, Net margin 38.2%)
-- **Technical**: RSI oversold (20.9)
+- **Technical**: RSI oversold (20.6)
 
 ## 122. Evernorth Holdings Inc. - Class A (XRPN) -- [STRONG] 2 signals, strength 2.36
 - **Fundamentals**: EPS growth 83.3% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 36.2pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 35.7pts (20d)
 
-## 123. MaxLinear, Inc (MXL) -- [STRONG] 2 signals, strength 2.36
-- **Fundamentals**: Revenue growth 50.5% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 16.3pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Net margin -18.2% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
-
-## 124. Aris Mining Corporation (ARIS) -- [STRONG] 2 signals, strength 2.36
+## 123. Aris Mining Corporation (ARIS) -- [STRONG] 2 signals, strength 2.36
 - **Fundamentals**: Revenue growth 96.3% YoY; EPS growth 4106.4% YoY; Quality checklist passed (D/E 0.36, Current ratio 1.76, ROE 19.3%, Net margin 22.4%)
-- **Technical**: RSI oversold (27.5)
+- **Technical**: RSI oversold (27.1)
 
-## 125. Illumina, Inc. (ILMN) -- [STRONG] 2 signals, strength 2.36
-- **Fundamentals**: Quality checklist passed (D/E 0.73, Current ratio 2.08, ROE 31.1%, Net margin 18.4%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 15.4pts (20d)
-
-## 126. Xeris Biopharma Holdings, Inc. (XERS) -- [STRONG] 2 signals, strength 2.36
+## 124. Xeris Biopharma Holdings, Inc. (XERS) -- [STRONG] 2 signals, strength 2.36
 - **Fundamentals**: Revenue growth 36.3% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 28.8pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 28.1pts (20d)
 - ⚠️ **EARNINGS QUALITY**: Net margin -5.1% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 127. Silicon Motion Technology Corporation - American Depositary Shares, each representing four (SIMO) -- [STRONG] 2 signals, strength 2.36
+## 125. Silicon Motion Technology Corporation - American Depositary Shares, each representing four (SIMO) -- [STRONG] 2 signals, strength 2.36
 - **Fundamentals**: Revenue growth 70.9% YoY; EPS growth 267.9% YoY; Quality checklist passed (D/E 0.06, Current ratio 2.78, ROE 32.0%, Net margin 22.1%)
-- **Technical**: RSI oversold (23.3)
+- **Technical**: RSI oversold (22.7)
 
-## 128. ACADIA Pharmaceuticals Inc. (ACAD) -- [STRONG] 2 signals, strength 2.36
+## 126. ACADIA Pharmaceuticals Inc. (ACAD) -- [STRONG] 2 signals, strength 2.36
 - **Fundamentals**: Revenue growth 47.0% YoY; EPS growth 96.5% YoY; Quality checklist passed (D/E 0.00, Current ratio 3.83, ROE 32.4%, Net margin 33.4%)
-- **Technical**: RSI oversold (18.1)
+- **Technical**: RSI oversold (16.0)
 
-## 129. OR Royalties Inc. (OR) -- [STRONG] 2 signals, strength 2.36
+## 127. OR Royalties Inc. (OR) -- [STRONG] 2 signals, strength 2.36
 - **Fundamentals**: Revenue growth 58.2% YoY; EPS growth 259.2% YoY; Quality checklist passed (D/E 0.00, Current ratio 4.53, ROE 19.6%, Net margin 78.0%)
-- **Technical**: RSI oversold (29.3)
+- **Technical**: RSI oversold (28.4)
 
-## 130. Pan American Silver Corp. (PAAS) -- [STRONG] 2 signals, strength 2.36
+## 128. Pan American Silver Corp. (PAAS) -- [STRONG] 2 signals, strength 2.36
 - **Fundamentals**: Revenue growth 38.4% YoY; EPS growth 130.1% YoY; Quality checklist passed (D/E 0.12, Current ratio 2.69, ROE 19.5%, Net margin 32.0%)
-- **Technical**: RSI oversold (30.0)
+- **Technical**: RSI oversold (29.4)
 
-## 131. Cboe Global Markets, Inc. (CBOE) -- [STRONG] 2 signals, strength 2.36
-- **Fundamentals**: Revenue growth 11.7% YoY; EPS growth 50.4% YoY; Quality checklist passed (D/E 0.28, Current ratio 1.87, ROE 25.8%, Net margin 26.7%)
-- **Technical**: Outperforming S&P 500 by 9.3pts (20d)
-
-## 132. AngloGold Ashanti PLC (AU) -- [STRONG] 2 signals, strength 2.35
+## 129. AngloGold Ashanti PLC (AU) -- [STRONG] 2 signals, strength 2.35
 - **Fundamentals**: Revenue growth 29.4% YoY; EPS growth 73.2% YoY; Quality checklist passed (D/E 0.28, Current ratio 2.87, ROE 45.8%, Net margin 32.2%)
-- **Technical**: RSI oversold (29.9)
+- **Technical**: RSI oversold (29.4)
 
-## 133. AAON, Inc. (AAON) -- [STRONG] 2 signals, strength 2.35
+## 130. AAON, Inc. (AAON) -- [STRONG] 2 signals, strength 2.34
 - **Fundamentals**: Revenue growth 53.5% YoY; EPS growth 29.7% YoY; Quality checklist passed (D/E 0.46, Current ratio 2.63, ROE 17.2%)
 - **Technical**: Outperforming S&P 500 by 7.2pts (20d)
 
-## 134. Celestica, Inc. (CLS) -- [STRONG] 2 signals, strength 2.33
-- **Fundamentals**: Revenue growth 47.3% YoY; EPS growth 109.1% YoY; Analyst sentiment improving: 12 buy/strongBuy vs. 11 last month
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.4pts (20d)
+## 131. Mastercard Incorporated (MA) -- [STRONG] 2 signals, strength 2.34
+- **Fundamentals**: Revenue growth 16.0% YoY; EPS growth 22.6% YoY
+- **Technical**: RSI overbought (76.3); Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.3pts (20d); New ALL-TIME high -- no overhead resistance from prior sellers
+- ⚠️ **CAUTION**: New 52-week high but on light volume (0.5x average) -- unconfirmed breakout
 
-## 135. Valaris Limited (VAL) -- [STRONG] 2 signals, strength 2.33
+## 132. Cohu, Inc. (COHU) -- [STRONG] 2 signals, strength 2.33
+- **Fundamentals**: Revenue growth 32.7% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 14.6pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Net margin -7.4% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+
+## 133. Valaris Limited (VAL) -- [STRONG] 2 signals, strength 2.33
 - **Fundamentals**: EPS growth 248.3% YoY; Quality checklist passed (D/E 0.34, Current ratio 1.77, ROE 31.3%, Net margin 44.0%); Analyst sentiment improving: 0 buy/strongBuy vs. 0 last month
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.4pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.5pts (20d)
 
-## 136. Incyte Corporation (INCY) -- [STRONG] 2 signals, strength 2.32
+## 134. Illumina, Inc. (ILMN) -- [STRONG] 2 signals, strength 2.33
+- **Fundamentals**: Quality checklist passed (D/E 0.73, Current ratio 2.08, ROE 31.1%, Net margin 18.4%)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 14.6pts (20d)
+
+## 135. Incyte Corporation (INCY) -- [STRONG] 2 signals, strength 2.32
 - **Fundamentals**: Revenue growth 26.9% YoY; EPS growth 80.3% YoY; Quality checklist passed (D/E 0.01, Current ratio 3.32, ROE 29.6%, Net margin 27.7%)
-- **Technical**: RSI oversold (18.5)
+- **Technical**: RSI oversold (19.2)
 
-## 137. Forward Industries, Inc. (FWDI) -- [STRONG] 2 signals, strength 2.32
-- **Fundamentals**: Revenue growth 171.6% YoY
-- **Technical**: RSI oversold (23.0); Price above rising 50/200-day MAs; Outperforming S&P 500 by 12.2pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Net margin -2073.8% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
-
-## 138. Veracyte, Inc. (VCYT) -- [STRONG] 2 signals, strength 2.32
-- **Fundamentals**: Revenue growth 17.3% YoY; EPS growth 323.9% YoY; Quality checklist passed (D/E 0.00, Current ratio 8.15, Net margin 20.4%)
-- **Technical**: Outperforming S&P 500 by 9.9pts (20d)
-
-## 139. W.R. Berkley Corporation (WRB) -- [STRONG] 2 signals, strength 2.32
+## 136. W.R. Berkley Corporation (WRB) -- [STRONG] 2 signals, strength 2.32
 - **Fundamentals**: EPS growth 10.7% YoY; Quality checklist passed (D/E 0.29, Current ratio 16.71, ROE 19.7%, Net margin 12.9%)
-- **Technical**: RSI overbought (83.5); 20/50-day MA bullish crossover; Outperforming S&P 500 by 2.6pts (20d)
+- **Technical**: RSI overbought (84.4); 20/50-day MA bullish crossover; Outperforming S&P 500 by 2.8pts (20d)
 - ⚠️ **EARNINGS QUALITY**: Earnings scheduled in 5d (2026-10-19) -- gap risk on a swing hold
 
-## 140. Expeditors International of Washington, Inc. (EXPD) -- [STRONG] 2 signals, strength 2.32
+## 137. Expeditors International of Washington, Inc. (EXPD) -- [STRONG] 2 signals, strength 2.32
 - **Fundamentals**: EPS growth 12.2% YoY; Quality checklist passed (D/E 0.00, Current ratio 1.81, ROE 40.7%); Analyst sentiment improving: 3 buy/strongBuy vs. 2 last month
-- **Technical**: RSI overbought (71.5); Price above rising 50/200-day MAs; Outperforming S&P 500 by 0.7pts (20d); New ALL-TIME high -- no overhead resistance from prior sellers
+- **Technical**: RSI overbought (71.7); Price above rising 50/200-day MAs; Outperforming S&P 500 by 0.9pts (20d); New ALL-TIME high -- no overhead resistance from prior sellers
 - ⚠️ **CAUTION**: New 52-week high but on light volume (0.1x average) -- unconfirmed breakout
 
-## 141. Johnson Controls International plc Ordinary Share (JCI) -- [STRONG] 2 signals, strength 2.31
-- **Fundamentals**: EPS growth 70.9% YoY; Quality checklist passed (D/E 0.76, ROE 26.9%, Net margin 17.0%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 6.6pts (20d)
-
-## 142. Curbline Properties Corp. (CURB) -- [STRONG] 2 signals, strength 2.31
+## 138. Curbline Properties Corp. (CURB) -- [STRONG] 2 signals, strength 2.31
 - **Fundamentals**: Revenue growth 54.8% YoY; EPS growth 67.9% YoY; Quality checklist passed (D/E 0.22, Current ratio 2.51, Net margin 13.1%); Analyst sentiment improving: 12 buy/strongBuy vs. 11 last month
 - **Technical**: RSI oversold (25.2)
 
-## 143. American Superconductor Corporation (AMSC) -- [STRONG] 2 signals, strength 2.31
+## 139. American Superconductor Corporation (AMSC) -- [STRONG] 2 signals, strength 2.31
 - **Fundamentals**: Revenue growth 25.9% YoY; EPS growth 666.6% YoY; Quality checklist passed (D/E 0.00, Current ratio 2.39, ROE 27.2%, Net margin 42.6%)
-- **Technical**: RSI oversold (28.8)
+- **Technical**: RSI oversold (28.5)
 
-## 144. Newmont Corporation (NEM) -- [STRONG] 2 signals, strength 2.30
+## 140. Par Pacific Holdings, Inc. (PARR) -- [STRONG] 2 signals, strength 2.31
+- **Fundamentals**: Revenue growth 13.2% YoY; EPS growth 699.1% YoY; Quality checklist passed (D/E 0.54, Current ratio 1.61, ROE 53.5%)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 2.5pts (20d)
+
+## 141. Forward Industries, Inc. (FWDI) -- [STRONG] 2 signals, strength 2.30
+- **Fundamentals**: Revenue growth 171.6% YoY
+- **Technical**: RSI oversold (22.9); Price above rising 50/200-day MAs; Outperforming S&P 500 by 12.0pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Net margin -2073.8% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+
+## 142. Johnson Controls International plc Ordinary Share (JCI) -- [STRONG] 2 signals, strength 2.30
+- **Fundamentals**: EPS growth 70.9% YoY; Quality checklist passed (D/E 0.76, ROE 26.9%, Net margin 17.0%)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 6.3pts (20d)
+
+## 143. Newmont Corporation (NEM) -- [STRONG] 2 signals, strength 2.30
 - **Fundamentals**: Revenue growth 25.2% YoY; EPS growth 42.2% YoY; Quality checklist passed (D/E 0.17, Current ratio 2.29, ROE 25.1%, Net margin 33.4%)
-- **Technical**: RSI oversold (29.7)
+- **Technical**: RSI oversold (29.0)
 
-## 145. Arrow Electronics, Inc. (ARW) -- [STRONG] 2 signals, strength 2.30
-- **Fundamentals**: Revenue growth 26.1% YoY; EPS growth 76.4% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.5pts (20d)
+## 144. Clear Secure, Inc. (YOU) -- [STRONG] 2 signals, strength 2.30
+- **Fundamentals**: Revenue growth 19.8% YoY; EPS growth 31.1% YoY; Quality checklist passed (D/E 0.00, ROE 82.4%, Net margin 14.8%)
+- **Technical**: RSI overbought (80.7); Outperforming S&P 500 by 5.4pts (20d)
 
-## 146. Dynex Capital, Inc. (DX) -- [STRONG] 2 signals, strength 2.30
+## 145. Dynex Capital, Inc. (DX) -- [STRONG] 2 signals, strength 2.30
 - **Fundamentals**: Revenue growth 136.4% YoY; EPS growth 205.5% YoY
 - **Technical**: MACD bullish crossover
 - ⚠️ **EARNINGS QUALITY**: Earnings scheduled in 5d (2026-10-19) -- gap risk on a swing hold
 
-## 147. Sunoco LP Common Units representing limited partner interests (SUN) -- [STRONG] 2 signals, strength 2.30
+## 146. Sunoco LP Common Units representing limited partner interests (SUN) -- [STRONG] 2 signals, strength 2.30
 - **Fundamentals**: Revenue growth 83.3% YoY; EPS growth 165.2% YoY
 - **Technical**: MACD bullish crossover
 
-## 148. AEVEX Corp. (AVEX) -- [STRONG] 2 signals, strength 2.30
-- **Fundamentals**: Revenue growth 143.4% YoY; EPS growth 697.3% YoY
+## 147. Provident Financial Services, Inc (PFS) -- [STRONG] 2 signals, strength 2.30
+- **Fundamentals**: Revenue growth 36.7% YoY; EPS growth 35.2% YoY
 - **Technical**: MACD bullish crossover
-- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
 
-## 149. CarGurus, Inc. (CARG) -- [STRONG] 2 signals, strength 2.30
+## 148. CarGurus, Inc. (CARG) -- [STRONG] 2 signals, strength 2.30
 - **Fundamentals**: EPS growth 50.6% YoY; Quality checklist passed (D/E 0.00, Current ratio 2.81, ROE 56.2%, Net margin 18.7%)
 - **Technical**: MACD bullish crossover
 
-## 150. Doximity, Inc. (DOCS) -- [STRONG] 2 signals, strength 2.30
-- **Fundamentals**: Revenue growth 11.2% YoY; Quality checklist passed (D/E 0.00, Current ratio 6.09, ROE 17.0%, Net margin 25.5%)
-- **Technical**: RSI overbought (72.5); Outperforming S&P 500 by 12.5pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 2 sell/strongSell vs. 1 last month
+## 149. Sasol Ltd. American Depositary Shares (SSL) -- [STRONG] 2 signals, strength 2.29
+- **Fundamentals**: EPS growth 78.3% YoY
+- **Technical**: RSI overbought (75.5); Price above rising 50/200-day MAs; Outperforming S&P 500 by 6.6pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); 52-week high, but still 65.0% below all-time high ($44.59) -- possible overhead resistance
+- ⚠️ **CAUTION**: New 52-week high but on light volume (0.2x average) -- unconfirmed breakout
+
+## 150. UL Solutions Inc. (ULS) -- [STRONG] 2 signals, strength 2.29
+- **Fundamentals**: EPS growth 53.4% YoY; Quality checklist passed (D/E 0.39, ROE 37.6%, Net margin 16.1%)
+- **Technical**: RSI overbought (71.7); Outperforming S&P 500 by 9.0pts (20d)
 
 ## 151. Adeia Inc. (ADEA) -- [STRONG] 2 signals, strength 2.29
 - **Fundamentals**: Revenue growth 24.4% YoY; EPS growth 45.9% YoY; Quality checklist passed (D/E 0.87, Current ratio 3.81, ROE 26.7%, Net margin 26.1%)
-- **Technical**: RSI oversold (29.4)
+- **Technical**: RSI oversold (29.3)
 
-## 152. Par Pacific Holdings, Inc. (PARR) -- [STRONG] 2 signals, strength 2.29
-- **Fundamentals**: Revenue growth 13.2% YoY; EPS growth 699.1% YoY; Quality checklist passed (D/E 0.54, Current ratio 1.61, ROE 53.5%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 2.1pts (20d)
+## 152. Doximity, Inc. (DOCS) -- [STRONG] 2 signals, strength 2.29
+- **Fundamentals**: Revenue growth 11.2% YoY; Quality checklist passed (D/E 0.00, Current ratio 6.09, ROE 17.0%, Net margin 25.5%)
+- **Technical**: RSI overbought (72.1); Outperforming S&P 500 by 12.4pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 2 sell/strongSell vs. 1 last month
 
 ## 153. Tenet Healthcare Corporation (THC) -- [STRONG] 2 signals, strength 2.29
 - **Fundamentals**: EPS growth 66.2% YoY; Quality checklist passed (Current ratio 1.76, ROE 50.6%, Net margin 10.1%)
-- **Technical**: RSI overbought (78.1); Price above rising 50/200-day MAs
+- **Technical**: RSI overbought (78.2); Price above rising 50/200-day MAs
 
-## 154. Sasol Ltd. American Depositary Shares (SSL) -- [STRONG] 2 signals, strength 2.29
-- **Fundamentals**: EPS growth 78.3% YoY
-- **Technical**: RSI overbought (75.0); Price above rising 50/200-day MAs; Outperforming S&P 500 by 6.3pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); 52-week high, but still 65.1% below all-time high ($44.59) -- possible overhead resistance
-- ⚠️ **CAUTION**: New 52-week high but on light volume (0.2x average) -- unconfirmed breakout
+## 154. Arrow Electronics, Inc. (ARW) -- [STRONG] 2 signals, strength 2.29
+- **Fundamentals**: Revenue growth 26.1% YoY; EPS growth 76.4% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.2pts (20d)
 
-## 155. First Watch Restaurant Group, Inc. (FWRG) -- [STRONG] 2 signals, strength 2.28
-- **Fundamentals**: Revenue growth 19.3% YoY; EPS growth 331.4% YoY
-- **Technical**: RSI overbought (74.8); Outperforming S&P 500 by 9.9pts (20d)
+## 155. MaxLinear, Inc (MXL) -- [STRONG] 2 signals, strength 2.28
+- **Fundamentals**: Revenue growth 50.5% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 13.8pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Net margin -18.2% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
 ## 156. EZCORP, Inc. - Class A Non-Voting (EZPW) -- [STRONG] 2 signals, strength 2.28
 - **Fundamentals**: Revenue growth 28.6% YoY; EPS growth 61.2% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 2.7pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 2.6pts (20d)
 
-## 157. Nutanix, Inc. (NTNX) -- [STRONG] 2 signals, strength 2.28
+## 157. First Watch Restaurant Group, Inc. (FWRG) -- [STRONG] 2 signals, strength 2.28
+- **Fundamentals**: Revenue growth 19.3% YoY; EPS growth 331.4% YoY
+- **Technical**: RSI overbought (74.3); Outperforming S&P 500 by 9.8pts (20d)
+
+## 158. Nutanix, Inc. (NTNX) -- [STRONG] 2 signals, strength 2.27
 - **Fundamentals**: Revenue growth 12.4% YoY; EPS growth 705.4% YoY; Quality checklist passed (Current ratio 1.80, ROE 180.7%, Net margin 52.8%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 2.0pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.8pts (20d)
 
-## 158. IDEX Corporation (IEX) -- [STRONG] 2 signals, strength 2.28
+## 159. IDEX Corporation (IEX) -- [STRONG] 2 signals, strength 2.27
 - **Fundamentals**: EPS growth 12.4% YoY; Quality checklist passed (D/E 0.45, Current ratio 2.86, Net margin 14.5%)
-- **Technical**: 20/50-day MA bullish crossover; Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.9pts (20d)
-
-## 159. UL Solutions Inc. (ULS) -- [STRONG] 2 signals, strength 2.27
-- **Fundamentals**: EPS growth 53.4% YoY; Quality checklist passed (D/E 0.39, ROE 37.6%, Net margin 16.1%)
-- **Technical**: RSI overbought (71.4); Outperforming S&P 500 by 8.8pts (20d)
+- **Technical**: 20/50-day MA bullish crossover; Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.8pts (20d)
 
 ## 160. United Microelectronics Corporation (NEW) (UMC) -- [STRONG] 2 signals, strength 2.27
 - **Fundamentals**: EPS growth 111.0% YoY; Quality checklist passed (D/E 0.21, Current ratio 2.34, ROE 21.0%, Net margin 33.3%); Analyst sentiment improving: 20 buy/strongBuy vs. 19 last month
@@ -725,89 +730,88 @@ _Run: 2026-10-14_1136 ET_
 - **Fundamentals**: Revenue growth 59.8% YoY; EPS growth 49.4% YoY; Analyst sentiment improving: 6 buy/strongBuy vs. 4 last month
 - **Technical**: Price above rising 50/200-day MAs
 
-## 162. Lam Research Corporation (LRCX) -- [STRONG] 2 signals, strength 2.27
-- **Fundamentals**: Revenue growth 26.0% YoY; EPS growth 38.6% YoY; Quality checklist passed (D/E 0.30, Current ratio 2.63, ROE 67.0%, Net margin 31.3%)
-- **Technical**: Outperforming S&P 500 by 5.4pts (20d)
-
-## 163. McEwen Inc. (MUX) -- [STRONG] 2 signals, strength 2.27
+## 162. McEwen Inc. (MUX) -- [STRONG] 2 signals, strength 2.27
 - **Fundamentals**: Revenue growth 47.7% YoY; EPS growth 128.8% YoY; Quality checklist passed (D/E 0.23, Current ratio 1.69, Net margin 32.5%)
-- **Technical**: RSI oversold (26.5)
+- **Technical**: RSI oversold (25.7)
 
-## 164. First Majestic Silver Corp. (AG) -- [STRONG] 2 signals, strength 2.27
+## 163. First Majestic Silver Corp. (AG) -- [STRONG] 2 signals, strength 2.27
 - **Fundamentals**: Revenue growth 98.5% YoY; EPS growth 102.9% YoY; Quality checklist passed (D/E 0.18, Current ratio 2.56, Net margin 21.2%)
-- **Technical**: RSI oversold (19.3)
+- **Technical**: RSI oversold (18.9)
 
-## 165. eToro Group Ltd. (ETOR) -- [STRONG] 2 signals, strength 2.27
+## 164. eToro Group Ltd. (ETOR) -- [STRONG] 2 signals, strength 2.27
 - **Fundamentals**: Revenue growth 105.5% YoY; EPS growth 141.9% YoY; Quality checklist passed (D/E 0.04, Current ratio 4.89, ROE 19.0%)
-- **Technical**: RSI oversold (29.4)
+- **Technical**: RSI oversold (29.2)
+
+## 165. SSR Mining Inc. (SSRM) -- [STRONG] 2 signals, strength 2.27
+- **Fundamentals**: Revenue growth 48.4% YoY; EPS growth 41.5% YoY; Quality checklist passed (D/E 0.11, Current ratio 2.08, Net margin 12.3%)
+- **Technical**: RSI oversold (29.8)
 
 ## 166. Hecla Mining Company (HL) -- [STRONG] 2 signals, strength 2.27
 - **Fundamentals**: Revenue growth 51.2% YoY; EPS growth 214.4% YoY; Quality checklist passed (D/E 0.11, Current ratio 2.72, Net margin 20.8%)
-- **Technical**: RSI oversold (25.2)
+- **Technical**: RSI oversold (24.4)
 
 ## 167. Seagate Technology Holdings PLC (STX) -- [STRONG] 2 signals, strength 2.27
 - **Fundamentals**: Revenue growth 34.1% YoY; EPS growth 104.5% YoY; Quality checklist passed (Current ratio 1.67, ROE 212.4%, Net margin 26.1%)
-- **Technical**: RSI oversold (26.2)
+- **Technical**: RSI oversold (25.9)
 
 ## 168. Western Digital Corporation (WDC) -- [STRONG] 2 signals, strength 2.27
 - **Fundamentals**: Revenue growth 35.7% YoY; EPS growth 363.8% YoY; Quality checklist passed (D/E 0.12, ROE 117.8%, Net margin 73.0%)
-- **Technical**: RSI oversold (27.1)
+- **Technical**: RSI oversold (26.7)
 
 ## 169. Coeur Mining, Inc. (CDE) -- [STRONG] 2 signals, strength 2.27
 - **Fundamentals**: Revenue growth 117.3% YoY; EPS growth 211.8% YoY; Quality checklist passed (D/E 0.10, Current ratio 2.47, Net margin 26.8%)
-- **Technical**: RSI oversold (19.0)
+- **Technical**: RSI oversold (18.5)
 
 ## 170. Iamgold Corporation (IAG) -- [STRONG] 2 signals, strength 2.27
 - **Fundamentals**: Revenue growth 87.2% YoY; EPS growth 42.5% YoY; Quality checklist passed (D/E 0.35, ROE 28.1%, Net margin 31.4%)
-- **Technical**: RSI oversold (28.7)
+- **Technical**: RSI oversold (27.4)
 
 ## 171. Royal Gold, Inc. (RGLD) -- [STRONG] 2 signals, strength 2.27
 - **Fundamentals**: Revenue growth 93.5% YoY; EPS growth 34.3% YoY; Quality checklist passed (D/E 0.13, Current ratio 3.12, Net margin 47.7%)
-- **Technical**: RSI oversold (25.2)
+- **Technical**: RSI oversold (24.7)
 
 ## 172. Applovin Corporation (APP) -- [STRONG] 2 signals, strength 2.27
 - **Fundamentals**: Revenue growth 60.6% YoY; EPS growth 84.7% YoY; Quality checklist passed (Current ratio 3.32, ROE 193.1%, Net margin 64.6%)
-- **Technical**: RSI oversold (21.6)
+- **Technical**: RSI oversold (21.7)
 - ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
 
-## 173. Natera, Inc. (NTRA) -- [STRONG] 2 signals, strength 2.27
-- **Fundamentals**: Revenue growth 37.8% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 13.6pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Net margin -7.1% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
-
-## 174. Clear Secure, Inc. (YOU) -- [STRONG] 2 signals, strength 2.27
-- **Fundamentals**: Revenue growth 19.8% YoY; EPS growth 31.1% YoY; Quality checklist passed (D/E 0.00, ROE 82.4%, Net margin 14.8%)
-- **Technical**: RSI overbought (79.9); Outperforming S&P 500 by 4.5pts (20d)
-
-## 175. Loar Holdings Inc. (LOAR) -- [STRONG] 2 signals, strength 2.27
+## 173. Loar Holdings Inc. (LOAR) -- [STRONG] 2 signals, strength 2.27
 - **Fundamentals**: Revenue growth 29.8% YoY; EPS growth 52.1% YoY; Quality checklist passed (D/E 0.61, Current ratio 4.70, Net margin 11.6%)
-- **Technical**: RSI oversold (25.7)
+- **Technical**: RSI oversold (25.8)
 
-## 176. SiriusPoint Ltd. (SPNT) -- [STRONG] 2 signals, strength 2.26
+## 174. Veracyte, Inc. (VCYT) -- [STRONG] 2 signals, strength 2.26
+- **Fundamentals**: Revenue growth 17.3% YoY; EPS growth 323.9% YoY; Quality checklist passed (D/E 0.00, Current ratio 8.15, Net margin 20.4%)
+- **Technical**: Outperforming S&P 500 by 9.1pts (20d)
+
+## 175. SiriusPoint Ltd. (SPNT) -- [STRONG] 2 signals, strength 2.26
 - **Fundamentals**: Revenue growth 17.4% YoY; EPS growth 307.2% YoY; Quality checklist passed (D/E 0.28, ROE 21.8%, Net margin 15.5%)
 - **Technical**: Price above rising 50/200-day MAs
 
-## 177. Itau Unibanco Banco Holding SA American Depositary Shares (Each repstg 500 Preferred shares) (ITUB) -- [STRONG] 2 signals, strength 2.26
-- **Fundamentals**: Revenue growth 47.2% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 13.4pts (20d)
+## 176. Tradeweb Markets Inc. (TW) -- [STRONG] 2 signals, strength 2.25
+- **Fundamentals**: Revenue growth 14.0% YoY; EPS growth 61.4% YoY; Quality checklist passed (D/E 0.00, Current ratio 4.12, Net margin 40.7%)
+- **Technical**: RSI overbought (81.4); Outperforming S&P 500 by 5.9pts (20d)
 
-## 178. Eldorado Gold Corporation (EGO) -- [STRONG] 2 signals, strength 2.25
+## 177. Eldorado Gold Corporation (EGO) -- [STRONG] 2 signals, strength 2.25
 - **Fundamentals**: Revenue growth 29.1% YoY; EPS growth 41.8% YoY; Quality checklist passed (D/E 0.30, Current ratio 1.83, Net margin 29.8%)
-- **Technical**: RSI oversold (18.5)
+- **Technical**: RSI oversold (17.9)
+
+## 178. Lam Research Corporation (LRCX) -- [STRONG] 2 signals, strength 2.24
+- **Fundamentals**: Revenue growth 26.0% YoY; EPS growth 38.6% YoY; Quality checklist passed (D/E 0.30, Current ratio 2.63, ROE 67.0%, Net margin 31.3%)
+- **Technical**: Outperforming S&P 500 by 5.0pts (20d)
 
 ## 179. Inter & Co. Inc. (INTR) -- [STRONG] 2 signals, strength 2.24
 - **Fundamentals**: EPS growth 35.6% YoY
-- **Technical**: RSI overbought (77.5); Outperforming S&P 500 by 26.6pts (20d)
+- **Technical**: RSI overbought (77.8); Outperforming S&P 500 by 27.0pts (20d)
 
 ## 180. Talen Energy Corporation (TLN) -- [STRONG] 2 signals, strength 2.24
 - **Fundamentals**: Revenue growth 60.8% YoY
-- **Technical**: RSI overbought (70.6); Outperforming S&P 500 by 23.3pts (20d)
+- **Technical**: RSI overbought (70.4); Outperforming S&P 500 by 23.3pts (20d)
 - ⚠️ **EARNINGS QUALITY**: Net margin -5.4% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
 ## 181. San Juan Basin Royalty Trust (SJT) -- [STRONG] 2 signals, strength 2.24
 - **Fundamentals**: Revenue growth 9693.6% YoY
-- **Technical**: RSI overbought (86.3); Outperforming S&P 500 by 44.1pts (20d)
-- ⚠️ **CAUTION**: Extended 42% above 50-day MA -- elevated pullback risk
+- **Technical**: RSI overbought (86.1); Outperforming S&P 500 by 43.6pts (20d)
+- ⚠️ **CAUTION**: Extended 41% above 50-day MA -- elevated pullback risk
 - ⚠️ **EARNINGS QUALITY**: Net margin -18.7% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
 ## 182. Aethlon Medical, Inc. (AEMD) -- [STRONG] 2 signals, strength 2.24
@@ -818,798 +822,795 @@ _Run: 2026-10-14_1136 ET_
 
 ## 183. ServisFirst Bancshares, Inc. (SFBS) -- [STRONG] 2 signals, strength 2.24
 - **Fundamentals**: Revenue growth 51.5% YoY; EPS growth 28.4% YoY; Quality checklist passed (D/E 0.81, ROE 17.1%, Net margin 50.4%)
-- **Technical**: RSI oversold (22.5)
+- **Technical**: RSI oversold (22.6)
 - ⚠️ **EARNINGS QUALITY**: Earnings scheduled in 5d (2026-10-19) -- gap risk on a swing hold
 
-## 184. Tradeweb Markets Inc. (TW) -- [STRONG] 2 signals, strength 2.23
-- **Fundamentals**: Revenue growth 14.0% YoY; EPS growth 61.4% YoY; Quality checklist passed (D/E 0.00, Current ratio 4.12, Net margin 40.7%)
-- **Technical**: RSI overbought (80.9); Outperforming S&P 500 by 5.4pts (20d)
+## 184. Liquidia Corporation (LQDA) -- [STRONG] 2 signals, strength 2.23
+- **Fundamentals**: Revenue growth 2233.7% YoY; Quality checklist passed (Current ratio 4.40, ROE 149.6%, Net margin 30.7%)
+- **Technical**: RSI oversold (22.2); Volume spike (2.7x average)
 
 ## 185. CCC Intelligent Solutions Holdings Inc. (CCC) -- [STRONG] 2 signals, strength 2.23
 - **Fundamentals**: Revenue growth 11.6% YoY; EPS growth 3180.9% YoY
-- **Technical**: Outperforming S&P 500 by 17.5pts (20d)
+- **Technical**: Outperforming S&P 500 by 17.3pts (20d)
 
 ## 186. Kimbell Royalty Partners Common Units Representing Limited Partner Interests (KRP) -- [STRONG] 2 signals, strength 2.22
 - **Fundamentals**: EPS growth 300.7% YoY; Quality checklist passed (D/E 0.64, Current ratio 8.64, Net margin 26.1%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.4pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.3pts (20d)
 
-## 187. Trane Technologies plc (TT) -- [STRONG] 2 signals, strength 2.21
-- **Fundamentals**: Quality checklist passed (D/E 0.54, ROE 34.6%, Net margin 13.3%)
-- **Technical**: RSI overbought (70.9); 20/50-day MA bullish crossover; Price above rising 50/200-day MAs; Outperforming S&P 500 by 9.1pts (20d)
+## 187. Natera, Inc. (NTRA) -- [STRONG] 2 signals, strength 2.22
+- **Fundamentals**: Revenue growth 37.8% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 12.9pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Net margin -7.1% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 188. Rambus, Inc. (RMBS) -- [STRONG] 2 signals, strength 2.21
+## 188. Rambus, Inc. (RMBS) -- [STRONG] 2 signals, strength 2.22
 - **Fundamentals**: Revenue growth 17.2% YoY; Quality checklist passed (D/E 0.00, Current ratio 8.20, ROE 17.4%, Net margin 31.7%)
-- **Technical**: Outperforming S&P 500 by 13.0pts (20d)
+- **Technical**: Outperforming S&P 500 by 13.1pts (20d)
 
-## 189. Ero Copper Corp. (ERO) -- [STRONG] 2 signals, strength 2.20
-- **Fundamentals**: Revenue growth 94.9% YoY; EPS growth 116.5% YoY; Quality checklist passed (D/E 0.68, ROE 30.1%, Net margin 29.8%)
-- **Technical**: Outperforming S&P 500 by 5.0pts (20d)
-
-## 190. CMB.TECH NV (CMBT) -- [STRONG] 2 signals, strength 2.20
+## 189. CMB.TECH NV (CMBT) -- [STRONG] 2 signals, strength 2.20
 - **Fundamentals**: Revenue growth 82.4% YoY; EPS growth 116.5% YoY
 - **Technical**: Price above rising 50/200-day MAs
 
-## 191. Cenovus Energy Inc (CVE) -- [STRONG] 2 signals, strength 2.20
+## 190. Cenovus Energy Inc (CVE) -- [STRONG] 2 signals, strength 2.20
 - **Fundamentals**: EPS growth 146.7% YoY; Quality checklist passed (D/E 0.45, Current ratio 1.57, ROE 21.0%, Net margin 12.4%)
 - **Technical**: Price above rising 50/200-day MAs
 
-## 192. Accelerant Holdings (ARX) -- [STRONG] 2 signals, strength 2.20
+## 191. Accelerant Holdings (ARX) -- [STRONG] 2 signals, strength 2.20
 - **Fundamentals**: Revenue growth 50.0% YoY; EPS growth 738.9% YoY
 - **Technical**: Price above rising 50/200-day MAs
 - ⚠️ **EARNINGS QUALITY**: Net margin -119.9% despite 738.9% adjusted EPS growth -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing; Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
 
-## 193. Kiniksa Pharmaceuticals International, plc - Class A (KNSA) -- [STRONG] 2 signals, strength 2.20
+## 192. Kiniksa Pharmaceuticals International, plc - Class A (KNSA) -- [STRONG] 2 signals, strength 2.20
 - **Fundamentals**: Revenue growth 58.9% YoY; EPS growth 2297.1% YoY
 - **Technical**: Price above rising 50/200-day MAs
 
-## 194. Dell Technologies Inc. (DELL) -- [STRONG] 2 signals, strength 2.20
+## 193. Dell Technologies Inc. (DELL) -- [STRONG] 2 signals, strength 2.20
 - **Fundamentals**: Revenue growth 49.0% YoY; EPS growth 145.2% YoY
 - **Technical**: Price above rising 50/200-day MAs
 
-## 195. Archer-Daniels-Midland Company (ADM) -- [STRONG] 2 signals, strength 2.20
+## 194. Archer-Daniels-Midland Company (ADM) -- [STRONG] 2 signals, strength 2.20
 - **Fundamentals**: EPS growth 60.3% YoY; Analyst sentiment improving: 5 buy/strongBuy vs. 2 last month
 - **Technical**: Price above rising 50/200-day MAs
 
-## 196. Aura Minerals Inc. (AUGO) -- [STRONG] 2 signals, strength 2.20
+## 195. Aura Minerals Inc. (AUGO) -- [STRONG] 2 signals, strength 2.20
 - **Fundamentals**: Revenue growth 89.5% YoY; EPS growth 2271.6% YoY
 - **Technical**: Price above rising 50/200-day MAs
 
-## 197. Arcosa, Inc. (ACA) -- [STRONG] 2 signals, strength 2.20
+## 196. Arcosa, Inc. (ACA) -- [STRONG] 2 signals, strength 2.20
 - **Fundamentals**: EPS growth 431.7% YoY; Quality checklist passed (D/E 0.58, Current ratio 2.20, ROE 18.1%, Net margin 17.9%)
 - **Technical**: Price above rising 50/200-day MAs
 - ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
 
-## 198. Liquidia Corporation (LQDA) -- [STRONG] 2 signals, strength 2.20
-- **Fundamentals**: Revenue growth 2233.7% YoY; Quality checklist passed (Current ratio 4.40, ROE 149.6%, Net margin 30.7%)
-- **Technical**: RSI oversold (22.7); Volume spike (2.5x average)
-
-## 199. Keurig Dr Pepper Inc. (KDP) -- [STRONG] 2 signals, strength 2.19
-- **Fundamentals**: Revenue growth 27.5% YoY; Analyst sentiment improving: 16 buy/strongBuy vs. 14 last month
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 2.8pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); 52-week high, but still 6.7% below all-time high ($35.64) -- possible overhead resistance
-- ⚠️ **CAUTION**: New 52-week high but on light volume (0.2x average) -- unconfirmed breakout
-
-## 200. Ironwood Pharmaceuticals, Inc. (IRWD) -- [STRONG] 2 signals, strength 2.19
+## 197. Ironwood Pharmaceuticals, Inc. (IRWD) -- [STRONG] 2 signals, strength 2.19
 - **Fundamentals**: Revenue growth 26.2% YoY; EPS growth 129.8% YoY; Quality checklist passed (D/E 0.61, ROE 29.3%, Net margin 33.4%)
-- **Technical**: RSI oversold (25.8)
+- **Technical**: RSI oversold (25.5)
 
-## 201. Kulicke and Soffa Industries, Inc. (KLIC) -- [STRONG] 2 signals, strength 2.19 · ↩ Back (was Day 3)
-- **Fundamentals**: Revenue growth 44.4% YoY; EPS growth 2583.7% YoY; Quality checklist passed (D/E 0.00, Current ratio 4.79, Net margin 12.2%)
-- **Technical**: Outperforming S&P 500 by 4.9pts (20d)
-
-## 202. Teradyne, Inc. (TER) -- [STRONG] 2 signals, strength 2.18
-- **Fundamentals**: Revenue growth 57.9% YoY; EPS growth 152.8% YoY; Quality checklist passed (D/E 0.07, Current ratio 1.75, ROE 38.0%, Net margin 25.8%)
-- **Technical**: Outperforming S&P 500 by 3.4pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
-
-## 203. Elastic N.V. (ESTC) -- [STRONG] 2 signals, strength 2.18
+## 198. Elastic N.V. (ESTC) -- [STRONG] 2 signals, strength 2.18
 - **Fundamentals**: Revenue growth 16.2% YoY; Quality checklist passed (D/E 0.61, Current ratio 1.92, ROE 35.3%, Net margin 20.8%)
 - **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 6.5pts (20d)
 
-## 204. V.F. Corporation (VFC) -- [STRONG] 2 signals, strength 2.18
+## 199. V.F. Corporation (VFC) -- [STRONG] 2 signals, strength 2.18
 - **Fundamentals**: EPS growth 28.2% YoY
-- **Technical**: RSI overbought (79.3); Outperforming S&P 500 by 22.6pts (20d)
+- **Technical**: RSI overbought (79.8); Outperforming S&P 500 by 22.8pts (20d)
 
-## 205. Arm Holdings plc - American Depositary Shares (ARM) -- [STRONG] 2 signals, strength 2.17
+## 200. Ero Copper Corp. (ERO) -- [STRONG] 2 signals, strength 2.18
+- **Fundamentals**: Revenue growth 94.9% YoY; EPS growth 116.5% YoY; Quality checklist passed (D/E 0.68, ROE 30.1%, Net margin 29.8%)
+- **Technical**: Outperforming S&P 500 by 4.7pts (20d)
+
+## 201. Arm Holdings plc - American Depositary Shares (ARM) -- [STRONG] 2 signals, strength 2.17
 - **Fundamentals**: Revenue growth 25.1% YoY; EPS growth 48.5% YoY; Quality checklist passed (D/E 0.00, Current ratio 6.00, Net margin 20.2%)
 - **Technical**: RSI oversold (25.2)
 
-## 206. SFL Corporation Ltd (SFL) -- [STRONG] 2 signals, strength 2.17
+## 202. SFL Corporation Ltd (SFL) -- [STRONG] 2 signals, strength 2.17
 - **Fundamentals**: Revenue growth 28.3% YoY; EPS growth 84.9% YoY
 - **Technical**: Price above rising 50/200-day MAs
 
-## 207. Southern Copper Corporation (SCCO) -- [STRONG] 2 signals, strength 2.16
-- **Fundamentals**: Revenue growth 32.8% YoY; EPS growth 50.4% YoY; Quality checklist passed (D/E 0.61, Current ratio 3.89, ROE 49.3%, Net margin 35.9%)
-- **Technical**: Outperforming S&P 500 by 3.1pts (20d)
+## 203. Intuitive Surgical, Inc. (ISRG) -- [STRONG] 2 signals, strength 2.16
+- **Fundamentals**: Revenue growth 20.7% YoY; EPS growth 21.8% YoY; Quality checklist passed (D/E 0.00, Current ratio 4.87, ROE 17.8%, Net margin 28.4%); Analyst sentiment improving: 29 buy/strongBuy vs. 28 last month
+- **Technical**: Outperforming S&P 500 by 6.5pts (20d)
 
-## 208. SM Energy Company (SM) -- [STRONG] 2 signals, strength 2.16
+## 204. SM Energy Company (SM) -- [STRONG] 2 signals, strength 2.16
 - **Fundamentals**: Revenue growth 67.0% YoY; Quality checklist passed (D/E 0.56, ROE 16.5%, Net margin 19.1%); Analyst sentiment improving: 18 buy/strongBuy vs. 16 last month
 - **Technical**: Price above rising 50/200-day MAs
 
-## 209. Autodesk, Inc. (ADSK) -- [STRONG] 2 signals, strength 2.16
+## 205. Autodesk, Inc. (ADSK) -- [STRONG] 2 signals, strength 2.16
 - **Fundamentals**: Revenue growth 17.9% YoY; EPS growth 59.9% YoY; Quality checklist passed (D/E 0.82, ROE 52.5%, Net margin 21.1%)
-- **Technical**: RSI overbought (70.2); Outperforming S&P 500 by 2.3pts (20d)
+- **Technical**: RSI overbought (70.1); Outperforming S&P 500 by 2.3pts (20d)
 
-## 210. ACM Research, Inc. (ACMR) -- [STRONG] 2 signals, strength 2.16
+## 206. ACM Research, Inc. (ACMR) -- [STRONG] 2 signals, strength 2.16
 - **Fundamentals**: Revenue growth 27.3% YoY; EPS growth 26.6% YoY; Quality checklist passed (D/E 0.20, Current ratio 3.27, Net margin 14.5%); Analyst sentiment improving: 13 buy/strongBuy vs. 12 last month
-- **Technical**: RSI oversold (29.1)
+- **Technical**: RSI oversold (28.9)
 
-## 211. First American Corporation (New) (FAF) -- [STRONG] 2 signals, strength 2.15
-- **Fundamentals**: Revenue growth 22.5% YoY; EPS growth 299.0% YoY
-- **Technical**: MACD bullish crossover
-
-## 212. Philip Morris International Inc (PM) -- [STRONG] 2 signals, strength 2.15
+## 207. Philip Morris International Inc (PM) -- [STRONG] 2 signals, strength 2.15
 - **Fundamentals**: EPS growth 32.0% YoY
 - **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 3.8pts (20d); New ALL-TIME high -- no overhead resistance from prior sellers
 - ⚠️ **CAUTION**: New 52-week high but on light volume (0.2x average) -- unconfirmed breakout
 
-## 213. Lifecore Biomedical, Inc. (LFCR) -- [STRONG] 2 signals, strength 2.15
+## 208. First American Corporation (New) (FAF) -- [STRONG] 2 signals, strength 2.15
+- **Fundamentals**: Revenue growth 22.5% YoY; EPS growth 299.0% YoY
+- **Technical**: MACD bullish crossover
+
+## 209. Kulicke and Soffa Industries, Inc. (KLIC) -- [STRONG] 2 signals, strength 2.15 · ↩ Back (was Day 3)
+- **Fundamentals**: Revenue growth 44.4% YoY; EPS growth 2583.7% YoY; Quality checklist passed (D/E 0.00, Current ratio 4.79, Net margin 12.2%)
+- **Technical**: Outperforming S&P 500 by 4.2pts (20d)
+
+## 210. Lifecore Biomedical, Inc. (LFCR) -- [STRONG] 2 signals, strength 2.15
 - **Fundamentals**: Revenue growth 27.3% YoY
-- **Technical**: RSI overbought (89.3); Outperforming S&P 500 by 52.0pts (20d)
+- **Technical**: RSI overbought (89.3); Outperforming S&P 500 by 51.9pts (20d)
 - ⚠️ **CAUTION**: Extended 29% above 50-day MA -- elevated pullback risk
 - ⚠️ **EARNINGS QUALITY**: Net margin -29.9% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 214. Sandisk Corporation (SNDK) -- [STRONG] 2 signals, strength 2.14
+## 211. Sandisk Corporation (SNDK) -- [STRONG] 2 signals, strength 2.14
 - **Fundamentals**: Revenue growth 175.3% YoY; Quality checklist passed (D/E 0.20, Current ratio 2.29, ROE 93.1%, Net margin 56.5%); Analyst sentiment improving: 28 buy/strongBuy vs. 26 last month
-- **Technical**: RSI oversold (22.3)
+- **Technical**: RSI oversold (22.2)
 
-## 215. Intuitive Surgical, Inc. (ISRG) -- [STRONG] 2 signals, strength 2.14
-- **Fundamentals**: Revenue growth 20.7% YoY; EPS growth 21.8% YoY; Quality checklist passed (D/E 0.00, Current ratio 4.87, ROE 17.8%, Net margin 28.4%); Analyst sentiment improving: 29 buy/strongBuy vs. 28 last month
-- **Technical**: Outperforming S&P 500 by 6.3pts (20d)
+## 212. Teradyne, Inc. (TER) -- [STRONG] 2 signals, strength 2.14
+- **Fundamentals**: Revenue growth 57.9% YoY; EPS growth 152.8% YoY; Quality checklist passed (D/E 0.07, Current ratio 1.75, ROE 38.0%, Net margin 25.8%)
+- **Technical**: Outperforming S&P 500 by 2.7pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
 
-## 216. West Pharmaceutical Services, Inc. (WST) -- [STRONG] 2 signals, strength 2.14
+## 213. Guidewire Software, Inc. (GWRE) -- [STRONG] 2 signals, strength 2.14
+- **Fundamentals**: Revenue growth 22.7% YoY; EPS growth 104.6% YoY
+- **Technical**: Outperforming S&P 500 by 10.2pts (20d)
+
+## 214. Southern Copper Corporation (SCCO) -- [STRONG] 2 signals, strength 2.14
+- **Fundamentals**: Revenue growth 32.8% YoY; EPS growth 50.4% YoY; Quality checklist passed (D/E 0.61, Current ratio 3.89, ROE 49.3%, Net margin 35.9%)
+- **Technical**: Outperforming S&P 500 by 2.6pts (20d)
+
+## 215. West Pharmaceutical Services, Inc. (WST) -- [STRONG] 2 signals, strength 2.13
 - **Fundamentals**: Revenue growth 12.4% YoY; EPS growth 17.2% YoY; Quality checklist passed (D/E 0.07, Current ratio 3.02, ROE 18.5%, Net margin 17.0%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.2pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.0pts (20d)
 
-## 217. Maplebear Inc. (CART) -- [STRONG] 2 signals, strength 2.14
-- **Fundamentals**: Revenue growth 12.6% YoY; Quality checklist passed (D/E 0.00, Current ratio 2.40, ROE 16.7%, Net margin 12.0%)
-- **Technical**: RSI overbought (81.5); Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.8pts (20d)
-
-## 218. JIADE LIMITED - Class A (JDZG) -- [STRONG] 2 signals, strength 2.13
+## 216. JIADE LIMITED - Class A (JDZG) -- [STRONG] 2 signals, strength 2.13
 - **Fundamentals**: Revenue growth 26.8% YoY
-- **Technical**: RSI overbought (84.4); Outperforming S&P 500 by 37.3pts (20d)
+- **Technical**: RSI overbought (84.7); Outperforming S&P 500 by 37.6pts (20d)
 - ⚠️ **CAUTION**: Extended 45% above 50-day MA -- elevated pullback risk
 - ⚠️ **EARNINGS QUALITY**: Net margin -43.0% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 219. Guidewire Software, Inc. (GWRE) -- [STRONG] 2 signals, strength 2.13
-- **Fundamentals**: Revenue growth 22.7% YoY; EPS growth 104.6% YoY
-- **Technical**: Outperforming S&P 500 by 10.1pts (20d)
-
-## 220. Kohl's Corporation (KSS) -- [STRONG] 2 signals, strength 2.13
+## 217. Kohl's Corporation (KSS) -- [STRONG] 2 signals, strength 2.13
 - **Fundamentals**: EPS growth 26.7% YoY
-- **Technical**: RSI overbought (85.3); Outperforming S&P 500 by 22.5pts (20d)
+- **Technical**: RSI overbought (85.3); Outperforming S&P 500 by 22.6pts (20d)
 
-## 221. GRAIL, Inc. (GRAL) -- [STRONG] 2 signals, strength 2.13
+## 218. GRAIL, Inc. (GRAL) -- [STRONG] 2 signals, strength 2.13
 - **Fundamentals**: Revenue growth 23.1% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 86.3pts (20d)
-- ⚠️ **CAUTION**: Extended 47% above 50-day MA -- elevated pullback risk
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 83.2pts (20d)
+- ⚠️ **CAUTION**: Extended 45% above 50-day MA -- elevated pullback risk
 - ⚠️ **EARNINGS QUALITY**: Net margin -236.9% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 222. Boot Barn Holdings, Inc. (BOOT) -- [STRONG] 2 signals, strength 2.11
+## 219. Maplebear Inc. (CART) -- [STRONG] 2 signals, strength 2.13
+- **Fundamentals**: Revenue growth 12.6% YoY; Quality checklist passed (D/E 0.00, Current ratio 2.40, ROE 16.7%, Net margin 12.0%)
+- **Technical**: RSI overbought (79.5); Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.4pts (20d)
+
+## 220. Trane Technologies plc (TT) -- [STRONG] 2 signals, strength 2.12
+- **Fundamentals**: Quality checklist passed (D/E 0.54, ROE 34.6%, Net margin 13.3%)
+- **Technical**: 20/50-day MA bullish crossover; Price above rising 50/200-day MAs; Outperforming S&P 500 by 8.9pts (20d)
+
+## 221. Boot Barn Holdings, Inc. (BOOT) -- [STRONG] 2 signals, strength 2.11
 - **Fundamentals**: Revenue growth 17.6% YoY; EPS growth 25.1% YoY; Quality checklist passed (D/E 0.01, Current ratio 2.65, ROE 18.8%, Net margin 10.3%)
-- **Technical**: RSI oversold (26.0)
+- **Technical**: RSI oversold (24.7)
 
-## 223. NVIDIA Corporation (NVDA) -- [STRONG] 2 signals, strength 2.11
-- **Fundamentals**: Revenue growth 83.4% YoY; EPS growth 125.2% YoY; Quality checklist passed (D/E 0.05, Current ratio 3.91, ROE 110.1%, Net margin 63.7%); Analyst sentiment improving: 65 buy/strongBuy vs. 64 last month
-- **Technical**: Outperforming S&P 500 by 1.6pts (20d)
-
-## 224. Lindblad Expeditions Holdings Inc. (LIND) -- [STRONG] 2 signals, strength 2.11
+## 222. Lindblad Expeditions Holdings Inc. (LIND) -- [STRONG] 2 signals, strength 2.11
 - **Fundamentals**: Revenue growth 18.3% YoY
-- **Technical**: RSI overbought (84.5); Price above rising 50/200-day MAs; Outperforming S&P 500 by 27.4pts (20d)
+- **Technical**: RSI overbought (83.7); Price above rising 50/200-day MAs; Outperforming S&P 500 by 27.0pts (20d)
 
-## 225. Surrozen, Inc. (SRZN) -- [STRONG] 2 signals, strength 2.11
+## 223. Surrozen, Inc. (SRZN) -- [STRONG] 2 signals, strength 2.11
 - **Fundamentals**: Quality checklist passed (D/E 0.00, Current ratio 9.22, ROE 58.2%); Analyst sentiment improving: 11 buy/strongBuy vs. 10 last month
-- **Technical**: RSI oversold (29.0); Outperforming S&P 500 by 35.1pts (20d)
+- **Technical**: RSI oversold (28.9); Outperforming S&P 500 by 34.5pts (20d)
 - ⚠️ **EARNINGS QUALITY**: Net margin -2885.3% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 226. TD SYNNEX Corporation (SNX) -- [STRONG] 2 signals, strength 2.11
-- **Fundamentals**: Revenue growth 24.1% YoY; EPS growth 78.3% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 0.7pts (20d)
-
-## 227. Accenture plc Class A (ACN) -- [STRONG] 2 signals, strength 2.10
-- **Fundamentals**: EPS growth 11.7% YoY; Quality checklist passed (D/E 0.32, ROE 26.7%, Net margin 11.3%)
-- **Technical**: RSI overbought (74.6); Outperforming S&P 500 by 13.2pts (20d)
-
-## 228. Fortinet, Inc. (FTNT) -- [STRONG] 2 signals, strength 2.10
-- **Fundamentals**: Revenue growth 18.8% YoY; EPS growth 13.3% YoY; Quality checklist passed (D/E 0.81, ROE 187.9%, Net margin 28.2%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.4pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 6 sell/strongSell vs. 6 last month
-
-## 229. Occidental Petroleum Corporation (OXY) -- [STRONG] 2 signals, strength 2.10
+## 224. Occidental Petroleum Corporation (OXY) -- [STRONG] 2 signals, strength 2.11
 - **Fundamentals**: EPS growth 195.8% YoY; Quality checklist passed (D/E 0.62, ROE 19.0%, Net margin 33.5%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.2pts (20d)
-
-## 230. Viant Technology Inc. (DSP) -- [STRONG] 2 signals, strength 2.10
-- **Fundamentals**: Revenue growth 22.0% YoY; EPS growth 110.1% YoY
 - **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.4pts (20d)
 
-## 231. Freshworks Inc. (FRSH) -- [STRONG] 2 signals, strength 2.09
+## 225. NVIDIA Corporation (NVDA) -- [STRONG] 2 signals, strength 2.10
+- **Fundamentals**: Revenue growth 83.4% YoY; EPS growth 125.2% YoY; Quality checklist passed (D/E 0.05, Current ratio 3.91, ROE 110.1%, Net margin 63.7%); Analyst sentiment improving: 65 buy/strongBuy vs. 64 last month
+- **Technical**: Outperforming S&P 500 by 1.5pts (20d)
+
+## 226. Freshworks Inc. (FRSH) -- [STRONG] 2 signals, strength 2.10
 - **Fundamentals**: Revenue growth 15.6% YoY; Quality checklist passed (D/E 0.00, Current ratio 2.20, ROE 19.5%, Net margin 20.5%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.6pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.7pts (20d)
 
-## 232. Global-E Online Ltd. (GLBE) -- [STRONG] 2 signals, strength 2.09
-- **Fundamentals**: Revenue growth 69.6% YoY; EPS growth 356.4% YoY; Quality checklist passed (D/E 0.00, Current ratio 1.93, ROE 16.7%, Net margin 13.9%)
-- **Technical**: Outperforming S&P 500 by 2.0pts (20d)
+## 227. Fortinet, Inc. (FTNT) -- [STRONG] 2 signals, strength 2.10
+- **Fundamentals**: Revenue growth 18.8% YoY; EPS growth 13.3% YoY; Quality checklist passed (D/E 0.81, ROE 187.9%, Net margin 28.2%)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.3pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 6 sell/strongSell vs. 6 last month
 
-## 233. MINISO Group Holding Limited American Depositary Shares, each representing four (MNSO) -- [STRONG] 2 signals, strength 2.09
-- **Fundamentals**: Revenue growth 26.4% YoY
-- **Technical**: RSI overbought (76.2); Outperforming S&P 500 by 14.5pts (20d)
+## 228. MSC Industrial Direct Company, Inc. (MSM) -- [STRONG] 2 signals, strength 2.10
+- **Fundamentals**: EPS growth 16.6% YoY; Quality checklist passed (D/E 0.35, Current ratio 1.68, ROE 16.6%)
+- **Technical**: RSI overbought (80.1); Price above rising 50/200-day MAs; Outperforming S&P 500 by 6.8pts (20d)
 
-## 234. CoreCivic, Inc. (CXW) -- [STRONG] 2 signals, strength 2.09
-- **Fundamentals**: Revenue growth 24.4% YoY; EPS growth 33.3% YoY
-- **Technical**: Price above rising 50/200-day MAs
+## 229. Viant Technology Inc. (DSP) -- [STRONG] 2 signals, strength 2.09
+- **Fundamentals**: Revenue growth 22.0% YoY; EPS growth 110.1% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.3pts (20d)
 
-## 235. Magnite, Inc. (MGNI) -- [STRONG] 2 signals, strength 2.08
-- **Fundamentals**: EPS growth 299.6% YoY; Quality checklist passed (D/E 0.60, ROE 18.6%, Net margin 22.5%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 0.9pts (20d)
-
-## 236. Remitly Global, Inc. (RELY) -- [STRONG] 2 signals, strength 2.08
-- **Fundamentals**: Revenue growth 23.8% YoY; EPS growth 2130.0% YoY; Quality checklist passed (D/E 0.18, Current ratio 3.30, ROE 33.0%, Net margin 16.9%)
-- **Technical**: Outperforming S&P 500 by 3.0pts (20d)
-
-## 237. Pediatrix Medical Group, Inc. (MD) -- [STRONG] 2 signals, strength 2.08
+## 230. Pediatrix Medical Group, Inc. (MD) -- [STRONG] 2 signals, strength 2.08
 - **Fundamentals**: EPS growth 60.6% YoY; Quality checklist passed (D/E 0.69, Current ratio 1.66, ROE 19.9%)
 - **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 0.8pts (20d)
 - ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
 
-## 238. Amgen Inc. (AMGN) -- [STRONG] 2 signals, strength 2.08
-- **Fundamentals**: EPS growth 31.7% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 10.8pts (20d)
+## 231. TD SYNNEX Corporation (SNX) -- [STRONG] 2 signals, strength 2.08
+- **Fundamentals**: Revenue growth 24.1% YoY; EPS growth 78.3% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 0.0pts (20d)
 
-## 239. Deutsche Bank AG (DB) -- [STRONG] 2 signals, strength 2.07
+## 232. Deutsche Bank AG (DB) -- [STRONG] 2 signals, strength 2.07
 - **Fundamentals**: Revenue growth 96.6% YoY; EPS growth 32.4% YoY; Analyst sentiment improving: 14 buy/strongBuy vs. 13 last month
 - **Technical**: RSI oversold (24.2)
 
-## 240. Cardinal Infrastructure Group Inc. (CDNL) -- [STRONG] 2 signals, strength 2.07
+## 233. Cardinal Infrastructure Group Inc. (CDNL) -- [STRONG] 2 signals, strength 2.07
 - **Fundamentals**: Revenue growth 71.7% YoY; EPS growth 65.8% YoY; Analyst sentiment improving: 9 buy/strongBuy vs. 8 last month
-- **Technical**: RSI oversold (22.8)
+- **Technical**: RSI oversold (22.0)
 
-## 241. Gap, Inc. (The) (GAP) -- [STRONG] 2 signals, strength 2.07
-- **Fundamentals**: EPS growth 43.8% YoY; Quality checklist passed (D/E 0.39, Current ratio 1.75, ROE 33.1%)
-- **Technical**: Outperforming S&P 500 by 9.3pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
+## 234. Remitly Global, Inc. (RELY) -- [STRONG] 2 signals, strength 2.07
+- **Fundamentals**: Revenue growth 23.8% YoY; EPS growth 2130.0% YoY; Quality checklist passed (D/E 0.18, Current ratio 3.30, ROE 33.0%, Net margin 16.9%)
+- **Technical**: Outperforming S&P 500 by 2.8pts (20d)
 
-## 242. Sociedad Quimica y Minera S.A. (SQM) -- [STRONG] 2 signals, strength 2.07
+## 235. Sociedad Quimica y Minera S.A. (SQM) -- [STRONG] 2 signals, strength 2.07
 - **Fundamentals**: Revenue growth 18.3% YoY; EPS growth 35.3% YoY; Quality checklist passed (D/E 0.83, Current ratio 3.27, Net margin 15.4%)
-- **Technical**: RSI oversold (28.9)
+- **Technical**: RSI oversold (28.3)
 
-## 243. Tsakos Energy Navigation Ltd (TEN) -- [STRONG] 2 signals, strength 2.06
+## 236. MINISO Group Holding Limited American Depositary Shares, each representing four (MNSO) -- [STRONG] 2 signals, strength 2.07
+- **Fundamentals**: Revenue growth 26.4% YoY
+- **Technical**: RSI overbought (75.8); Outperforming S&P 500 by 14.2pts (20d)
+
+## 237. Tsakos Energy Navigation Ltd (TEN) -- [STRONG] 2 signals, strength 2.06
 - **Fundamentals**: Revenue growth 23.2% YoY; EPS growth 193.0% YoY
 - **Technical**: Price above rising 50/200-day MAs
 
-## 244. Advanced Energy Industries, Inc. (AEIS) -- [STRONG] 2 signals, strength 2.06
-- **Fundamentals**: Revenue growth 24.6% YoY; EPS growth 142.8% YoY; Quality checklist passed (D/E 0.42, Current ratio 1.59, ROE 15.9%, Net margin 10.8%)
-- **Technical**: Outperforming S&P 500 by 2.5pts (20d)
+## 238. Accenture plc Class A (ACN) -- [STRONG] 2 signals, strength 2.06
+- **Fundamentals**: EPS growth 11.7% YoY; Quality checklist passed (D/E 0.32, ROE 26.7%, Net margin 11.3%)
+- **Technical**: RSI overbought (74.2); Outperforming S&P 500 by 12.6pts (20d)
 
-## 245. YPF Sociedad Anonima American Depositary Shares (YPF) -- [STRONG] 2 signals, strength 2.06
+## 239. YPF Sociedad Anonima American Depositary Shares (YPF) -- [STRONG] 2 signals, strength 2.06
 - **Fundamentals**: Revenue growth 90.8% YoY
 - **Technical**: MACD bullish crossover; Price above rising 50/200-day MAs
 
-## 246. F5, Inc. (FFIV) -- [STRONG] 2 signals, strength 2.05
-- **Fundamentals**: EPS growth 10.7% YoY; Quality checklist passed (D/E 0.00, Current ratio 1.56, ROE 19.9%, Net margin 21.9%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.9pts (20d)
+## 240. Amgen Inc. (AMGN) -- [STRONG] 2 signals, strength 2.06
+- **Fundamentals**: EPS growth 31.7% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 10.5pts (20d)
 
-## 247. Bio-Techne Corp (TECH) -- [STRONG] 2 signals, strength 2.05
+## 241. Gap, Inc. (The) (GAP) -- [STRONG] 2 signals, strength 2.06
+- **Fundamentals**: EPS growth 43.8% YoY; Quality checklist passed (D/E 0.39, Current ratio 1.75, ROE 33.1%)
+- **Technical**: Outperforming S&P 500 by 9.1pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
+
+## 242. Advanced Energy Industries, Inc. (AEIS) -- [STRONG] 2 signals, strength 2.06
+- **Fundamentals**: Revenue growth 24.6% YoY; EPS growth 142.8% YoY; Quality checklist passed (D/E 0.42, Current ratio 1.59, ROE 15.9%, Net margin 10.8%)
+- **Technical**: Outperforming S&P 500 by 2.4pts (20d)
+
+## 243. F5, Inc. (FFIV) -- [STRONG] 2 signals, strength 2.05
+- **Fundamentals**: EPS growth 10.7% YoY; Quality checklist passed (D/E 0.00, Current ratio 1.56, ROE 19.9%, Net margin 21.9%)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 6.0pts (20d)
+
+## 244. Bio-Techne Corp (TECH) -- [STRONG] 2 signals, strength 2.05
 - **Fundamentals**: EPS growth 158.9% YoY; Quality checklist passed (D/E 0.09, Current ratio 4.55, Net margin 15.0%)
 - **Technical**: Price above rising 50/200-day MAs
 - ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
 
-## 248. Geopark Ltd (GPRK) -- [STRONG] 2 signals, strength 2.05
+## 245. Geopark Ltd (GPRK) -- [STRONG] 2 signals, strength 2.05
 - **Fundamentals**: EPS growth 75.5% YoY; Quality checklist passed (Current ratio 1.60, ROE 29.2%, Net margin 16.0%)
 - **Technical**: Price above rising 50/200-day MAs
 
-## 249. Match Group, Inc. (MTCH) -- [STRONG] 2 signals, strength 2.05
+## 246. Match Group, Inc. (MTCH) -- [STRONG] 2 signals, strength 2.05
 - **Fundamentals**: EPS growth 41.0% YoY; Quality checklist passed (D/E 0.99, ROE 17.7%, Net margin 20.2%)
 - **Technical**: Price above rising 50/200-day MAs
 
-## 250. Ziff Davis, Inc. (ZD) -- [STRONG] 2 signals, strength 2.05
+## 247. Magnite, Inc. (MGNI) -- [STRONG] 2 signals, strength 2.05
+- **Fundamentals**: EPS growth 299.6% YoY; Quality checklist passed (D/E 0.60, ROE 18.6%, Net margin 22.5%)
+- **Technical**: Price above rising 50/200-day MAs
+
+## 248. Ziff Davis, Inc. (ZD) -- [STRONG] 2 signals, strength 2.05
 - **Fundamentals**: EPS growth 1040.2% YoY; Quality checklist passed (D/E 0.49, ROE 34.3%, Net margin 48.6%)
 - **Technical**: Price above rising 50/200-day MAs
 
-## 251. Privia Health Group, Inc. (PRVA) -- [STRONG] 2 signals, strength 2.04
-- **Fundamentals**: Revenue growth 24.1% YoY; EPS growth 84.3% YoY
-- **Technical**: RSI overbought (84.4); Outperforming S&P 500 by 4.1pts (20d)
+## 249. Global-E Online Ltd. (GLBE) -- [STRONG] 2 signals, strength 2.05
+- **Fundamentals**: Revenue growth 69.6% YoY; EPS growth 356.4% YoY; Quality checklist passed (D/E 0.00, Current ratio 1.93, ROE 16.7%, Net margin 13.9%)
+- **Technical**: Outperforming S&P 500 by 1.3pts (20d)
 
-## 252. Monolithic Power Systems, Inc. (MPWR) -- [STRONG] 2 signals, strength 2.03
+## 250. Taiwan Semiconductor Manufacturing Company Ltd. (TSM) -- [STRONG] 2 signals, strength 2.04
+- **Fundamentals**: Revenue growth 31.4% YoY; EPS growth 55.2% YoY; Quality checklist passed (D/E 0.20, Current ratio 2.62, ROE 39.9%, Net margin 50.7%)
+- **Technical**: Outperforming S&P 500 by 1.2pts (20d)
+
+## 251. CVR Energy Inc. (CVI) -- [STRONG] 2 signals, strength 2.04
+- **Fundamentals**: Revenue growth 17.9% YoY
+- **Technical**: RSI overbought (79.1); Price above rising 50/200-day MAs; Outperforming S&P 500 by 14.1pts (20d)
+- ⚠️ **CAUTION**: Extended 34% above 50-day MA -- elevated pullback risk
+
+## 252. Companhia Paranaense de Energia (COPEL) American Depositary Shares (each representing four (4) (ELPC) -- [STRONG] 2 signals, strength 2.04
+- **Fundamentals**: EPS growth 204.1% YoY
+- **Technical**: RSI overbought (78.3); Price above rising 50/200-day MAs; Outperforming S&P 500 by 7.3pts (20d)
+
+## 253. Diageo plc (DEO) -- [STRONG] 2 signals, strength 2.03
+- **Fundamentals**: Revenue growth 48.7% YoY; EPS growth 58.3% YoY; Quality checklist passed (Current ratio 1.60, ROE 33.2%, Net margin 12.4%)
+- **Technical**: Outperforming S&P 500 by 2.5pts (20d)
+
+## 254. Privia Health Group, Inc. (PRVA) -- [STRONG] 2 signals, strength 2.03
+- **Fundamentals**: Revenue growth 24.1% YoY; EPS growth 84.3% YoY
+- **Technical**: RSI overbought (84.0); Outperforming S&P 500 by 3.8pts (20d)
+
+## 255. Monolithic Power Systems, Inc. (MPWR) -- [STRONG] 2 signals, strength 2.03
 - **Fundamentals**: Revenue growth 28.7% YoY; Quality checklist passed (D/E 0.00, Current ratio 5.91, ROE 21.9%, Net margin 24.6%)
 - **Technical**: Outperforming S&P 500 by 6.9pts (20d)
 
-## 253. McKesson Corporation (MCK) -- [STRONG] 2 signals, strength 2.03
+## 256. McKesson Corporation (MCK) -- [STRONG] 2 signals, strength 2.02
 - **Fundamentals**: EPS growth 49.1% YoY
-- **Technical**: RSI overbought (79.8); Price above rising 50/200-day MAs; Outperforming S&P 500 by 7.2pts (20d)
+- **Technical**: RSI overbought (79.5); Price above rising 50/200-day MAs; Outperforming S&P 500 by 7.0pts (20d)
 - ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
-
-## 254. Diageo plc (DEO) -- [STRONG] 2 signals, strength 2.03
-- **Fundamentals**: Revenue growth 48.7% YoY; EPS growth 58.3% YoY; Quality checklist passed (Current ratio 1.60, ROE 33.2%, Net margin 12.4%)
-- **Technical**: Outperforming S&P 500 by 2.4pts (20d)
-
-## 255. Host Hotels & Resorts, Inc. (HST) -- [STRONG] 2 signals, strength 2.02
-- **Fundamentals**: EPS growth 57.8% YoY; Quality checklist passed (D/E 0.77, ROE 15.5%, Net margin 16.5%)
-- **Technical**: RSI overbought (70.9); Outperforming S&P 500 by 4.4pts (20d)
-
-## 256. Companhia Paranaense de Energia (COPEL) American Depositary Shares (each representing four (4) (ELPC) -- [STRONG] 2 signals, strength 2.02
-- **Fundamentals**: EPS growth 204.1% YoY
-- **Technical**: RSI overbought (77.3); Price above rising 50/200-day MAs; Outperforming S&P 500 by 6.9pts (20d)
 
 ## 257. Nu Holdings Ltd. Class A (NU) -- [STRONG] 2 signals, strength 2.02
 - **Fundamentals**: Revenue growth 50.5% YoY; EPS growth 56.4% YoY
 - **Technical**: Outperforming S&P 500 by 6.3pts (20d)
 
-## 258. CVR Energy Inc. (CVI) -- [STRONG] 2 signals, strength 2.01
-- **Fundamentals**: Revenue growth 17.9% YoY
-- **Technical**: RSI overbought (78.5); Price above rising 50/200-day MAs; Outperforming S&P 500 by 13.7pts (20d)
-- ⚠️ **CAUTION**: Extended 33% above 50-day MA -- elevated pullback risk
-
-## 259. Applied Materials, Inc. (AMAT) -- [STRONG] 2 signals, strength 2.01
-- **Fundamentals**: EPS growth 38.4% YoY; Quality checklist passed (D/E 0.32, Current ratio 2.61, ROE 40.4%, Net margin 30.1%)
-- **Technical**: Outperforming S&P 500 by 6.2pts (20d)
-
-## 260. Genmab A/S - American Depositary Shares (GMAB) -- [STRONG] 2 signals, strength 2.01
+## 258. Genmab A/S - American Depositary Shares (GMAB) -- [STRONG] 2 signals, strength 2.01
 - **Fundamentals**: Revenue growth 22.3% YoY; Quality checklist passed (D/E 0.93, Current ratio 2.02, Net margin 19.1%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.4pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.3pts (20d)
 
-## 261. Ingersoll Rand Inc. (IR) -- [STRONG] 2 signals, strength 2.01
-- **Fundamentals**: EPS growth 91.1% YoY; Quality checklist passed (D/E 0.47, Current ratio 2.06, Net margin 12.1%); Analyst sentiment improving: 14 buy/strongBuy vs. 13 last month
-- **Technical**: Outperforming S&P 500 by 7.3pts (20d)
-
-## 262. Mastercard Incorporated (MA) -- [STRONG] 2 signals, strength 2.01
-- **Fundamentals**: Revenue growth 16.0% YoY; EPS growth 22.6% YoY
-- **Technical**: RSI overbought (75.1); Price above rising 50/200-day MAs; Outperforming S&P 500 by 3.9pts (20d)
-
-## 263. Hinge Health, Inc. (HNGE) -- [STRONG] 2 signals, strength 2.01
-- **Fundamentals**: Revenue growth 10.2% YoY; Quality checklist passed (D/E 0.00, ROE 30.2%, Net margin 15.2%)
-- **Technical**: RSI overbought (75.0); Price above rising 50/200-day MAs; Outperforming S&P 500 by 7.7pts (20d)
-
-## 264. ServiceTitan, Inc. (TTAN) -- [STRONG] 2 signals, strength 2.00
+## 259. ServiceTitan, Inc. (TTAN) -- [STRONG] 2 signals, strength 2.00
 - **Fundamentals**: Revenue growth 22.9% YoY
-- **Technical**: RSI overbought (71.3); Outperforming S&P 500 by 18.6pts (20d)
+- **Technical**: RSI overbought (71.7); Outperforming S&P 500 by 19.0pts (20d)
 - ⚠️ **EARNINGS QUALITY**: Net margin -12.1% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 265. Texas Capital Bancshares, Inc. (TCBI) -- [STRONG] 2 signals, strength 2.00
-- **Fundamentals**: Revenue growth 62.2% YoY; EPS growth 184.5% YoY
-- **Technical**: RSI oversold (29.2)
+## 260. Applied Materials, Inc. (AMAT) -- [STRONG] 2 signals, strength 2.00
+- **Fundamentals**: EPS growth 38.4% YoY; Quality checklist passed (D/E 0.32, Current ratio 2.61, ROE 40.4%, Net margin 30.1%)
+- **Technical**: Outperforming S&P 500 by 6.0pts (20d)
 
-## 266. Jaguar Health, Inc. (JAGX) -- [STRONG] 2 signals, strength 2.00
+## 261. Texas Capital Bancshares, Inc. (TCBI) -- [STRONG] 2 signals, strength 2.00
+- **Fundamentals**: Revenue growth 62.2% YoY; EPS growth 184.5% YoY
+- **Technical**: RSI oversold (28.8)
+
+## 262. Jaguar Health, Inc. (JAGX) -- [STRONG] 2 signals, strength 2.00
 - **Fundamentals**: Revenue growth 135.5% YoY
-- **Technical**: Outperforming S&P 500 by 18.9pts (20d)
+- **Technical**: Outperforming S&P 500 by 18.5pts (20d)
 - ⚠️ **EARNINGS QUALITY**: Net margin -130.8% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 267. INVESCO MORTGAGE CAPITAL INC (IVR) -- [STRONG] 2 signals, strength 2.00
+## 263. INVESCO MORTGAGE CAPITAL INC (IVR) -- [STRONG] 2 signals, strength 2.00
 - **Fundamentals**: Revenue growth 30.8% YoY; EPS growth 121.6% YoY
 - **Technical**: RSI oversold (14.5)
 
-## 268. KKR & Co. Inc. (KKR) -- [STRONG] 2 signals, strength 2.00
+## 264. KKR & Co. Inc. (KKR) -- [STRONG] 2 signals, strength 2.00
 - **Fundamentals**: Revenue growth 30.5% YoY; EPS growth 54.5% YoY
-- **Technical**: RSI oversold (19.8)
+- **Technical**: RSI oversold (20.6)
 
-## 269. Golar LNG Limited (GLNG) -- [STRONG] 2 signals, strength 2.00
+## 265. Golar LNG Limited (GLNG) -- [STRONG] 2 signals, strength 2.00
 - **Fundamentals**: Revenue growth 94.6% YoY; EPS growth 128.0% YoY
-- **Technical**: RSI oversold (29.5)
+- **Technical**: RSI oversold (28.9)
 
-## 270. Annaly Capital Management Inc. (NLY) -- [STRONG] 2 signals, strength 2.00
+## 266. Annaly Capital Management Inc. (NLY) -- [STRONG] 2 signals, strength 2.00
 - **Fundamentals**: Revenue growth 50.9% YoY; EPS growth 231.1% YoY
 - **Technical**: RSI oversold (19.2)
 
-## 271. ING Group, N.V. (ING) -- [STRONG] 2 signals, strength 2.00
+## 267. ING Group, N.V. (ING) -- [STRONG] 2 signals, strength 2.00
 - **Fundamentals**: Revenue growth 92.9% YoY; EPS growth 40.1% YoY
-- **Technical**: RSI oversold (25.3)
+- **Technical**: RSI oversold (25.1)
 
-## 272. Z Squared Inc. (ZSQR) -- [STRONG] 2 signals, strength 2.00
+## 268. Z Squared Inc. (ZSQR) -- [STRONG] 2 signals, strength 2.00
 - **Fundamentals**: Revenue growth 961.2% YoY
-- **Technical**: Outperforming S&P 500 by 111.8pts (20d)
-- ⚠️ **CAUTION**: Extended 31% above 50-day MA -- elevated pullback risk
+- **Technical**: Outperforming S&P 500 by 104.9pts (20d)
+- ⚠️ **CAUTION**: Extended 27% above 50-day MA -- elevated pullback risk
 - ⚠️ **EARNINGS QUALITY**: Net margin -785.1% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 273. Innodata Inc. (INOD) -- [STRONG] 2 signals, strength 2.00
+## 269. Innodata Inc. (INOD) -- [STRONG] 2 signals, strength 2.00
 - **Fundamentals**: Revenue growth 39.0% YoY; Quality checklist passed (D/E 0.00, Current ratio 2.68, ROE 37.8%, Net margin 14.7%)
-- **Technical**: RSI oversold (23.1)
+- **Technical**: RSI oversold (22.8)
 
-## 274. Duos Technologies Group, Inc. (DUOT) -- [STRONG] 2 signals, strength 2.00
+## 270. Duos Technologies Group, Inc. (DUOT) -- [STRONG] 2 signals, strength 2.00
 - **Fundamentals**: Revenue growth 64.0% YoY; Quality checklist passed (D/E 0.00, Current ratio 2.08, ROE 38.9%, Net margin 159.0%)
-- **Technical**: RSI oversold (9.1)
+- **Technical**: RSI oversold (9.0)
 
-## 275. ADMA Biologics Inc (ADMA) -- [STRONG] 2 signals, strength 2.00
-- **Fundamentals**: Quality checklist passed (D/E 0.15, Current ratio 6.71, ROE 39.6%, Net margin 33.0%)
-- **Technical**: Outperforming S&P 500 by 15.8pts (20d)
-
-## 276. AGNC Investment Corp. (AGNC) -- [STRONG] 2 signals, strength 2.00
+## 271. AGNC Investment Corp. (AGNC) -- [STRONG] 2 signals, strength 2.00
 - **Fundamentals**: Revenue growth 56.3% YoY; EPS growth 329.1% YoY
-- **Technical**: RSI oversold (18.9)
+- **Technical**: RSI oversold (19.0)
 
-## 277. First Interstate BancSystem, Inc. (FIBK) -- [STRONG] 2 signals, strength 2.00
+## 272. First Interstate BancSystem, Inc. (FIBK) -- [STRONG] 2 signals, strength 2.00
 - **Fundamentals**: Revenue growth 104.2% YoY; EPS growth 45.9% YoY
-- **Technical**: RSI oversold (26.2)
-
-## 278. Ondas Inc (ONDS) -- [STRONG] 2 signals, strength 2.00
-- **Fundamentals**: Revenue growth 979.3% YoY; Quality checklist passed (D/E 0.03, Current ratio 4.84, ROE 18.8%, Net margin 96.2%)
-- **Technical**: RSI oversold (20.5)
-
-## 279. Gold.com, Inc. (GOLD) -- [STRONG] 2 signals, strength 2.00
-- **Fundamentals**: Revenue growth 132.4% YoY; EPS growth 321.5% YoY
 - **Technical**: RSI oversold (26.4)
 
-## 280. Century Aluminum Company (CENX) -- [STRONG] 2 signals, strength 2.00
+## 273. Ondas Inc (ONDS) -- [STRONG] 2 signals, strength 2.00
+- **Fundamentals**: Revenue growth 979.3% YoY; Quality checklist passed (D/E 0.03, Current ratio 4.84, ROE 18.8%, Net margin 96.2%)
+- **Technical**: RSI oversold (20.3)
+
+## 274. Gold.com, Inc. (GOLD) -- [STRONG] 2 signals, strength 2.00
+- **Fundamentals**: Revenue growth 132.4% YoY; EPS growth 321.5% YoY
+- **Technical**: RSI oversold (26.5)
+
+## 275. Century Aluminum Company (CENX) -- [STRONG] 2 signals, strength 2.00
 - **Fundamentals**: EPS growth 383.8% YoY; Quality checklist passed (D/E 0.72, Current ratio 1.97, ROE 58.9%, Net margin 22.6%)
-- **Technical**: RSI oversold (26.2)
+- **Technical**: RSI oversold (26.0)
 
-## 281. Uniti Group Inc. (UNIT) -- [STRONG] 2 signals, strength 2.00
+## 276. Uniti Group Inc. (UNIT) -- [STRONG] 2 signals, strength 2.00
 - **Fundamentals**: Revenue growth 199.7% YoY; EPS growth 1267.9% YoY
-- **Technical**: RSI oversold (7.3)
+- **Technical**: RSI oversold (7.4)
 
-## 282. PennyMac Mortgage Investment Trust (PMT) -- [STRONG] 2 signals, strength 2.00
+## 277. PennyMac Mortgage Investment Trust (PMT) -- [STRONG] 2 signals, strength 2.00
 - **Fundamentals**: Revenue growth 33.9% YoY; EPS growth 57.7% YoY
-- **Technical**: RSI oversold (15.3)
+- **Technical**: RSI oversold (15.1)
 
-## 283. Arbutus Biopharma Corporation (ABUS) -- [STRONG] 2 signals, strength 2.00
+## 278. Arbutus Biopharma Corporation (ABUS) -- [STRONG] 2 signals, strength 2.00
 - **Fundamentals**: Revenue growth 1078.8% YoY; Quality checklist passed (D/E 0.04, Current ratio 15.73, ROE 91.0%, Net margin 84.2%)
-- **Technical**: RSI oversold (26.6)
+- **Technical**: RSI oversold (26.1)
 
-## 284. Orchid Island Capital, Inc. (ORC) -- [STRONG] 2 signals, strength 2.00
+## 279. Orchid Island Capital, Inc. (ORC) -- [STRONG] 2 signals, strength 2.00
 - **Fundamentals**: Revenue growth 127.5% YoY; EPS growth 661.6% YoY
 - **Technical**: RSI oversold (21.7)
 
-## 285. Neostellar Capital Corp. - Closed End Fund (NSLR) -- [STRONG] 2 signals, strength 2.00
+## 280. Neostellar Capital Corp. - Closed End Fund (NSLR) -- [STRONG] 2 signals, strength 2.00
 - **Fundamentals**: EPS growth 100.8% YoY; Quality checklist passed (D/E 0.34, Current ratio 53.79, ROE 43.0%, Net margin 6055.0%)
-- **Technical**: RSI oversold (8.3)
+- **Technical**: RSI oversold (7.9)
 
-## 286. Ally Financial Inc. (ALLY) -- [STRONG] 2 signals, strength 2.00
+## 281. Ally Financial Inc. (ALLY) -- [STRONG] 2 signals, strength 2.00
 - **Fundamentals**: Revenue growth 37.4% YoY; EPS growth 325.8% YoY
-- **Technical**: RSI oversold (26.0)
+- **Technical**: RSI oversold (26.4)
 
-## 287. Dynatrace, Inc. (DT) -- [STRONG] 2 signals, strength 2.00
-- **Fundamentals**: Revenue growth 17.9% YoY
-- **Technical**: RSI overbought (71.2); Price above rising 50/200-day MAs; Outperforming S&P 500 by 13.4pts (20d)
+## 282. Ingersoll Rand Inc. (IR) -- [STRONG] 2 signals, strength 2.00
+- **Fundamentals**: EPS growth 91.1% YoY; Quality checklist passed (D/E 0.47, Current ratio 2.06, Net margin 12.1%); Analyst sentiment improving: 14 buy/strongBuy vs. 13 last month
+- **Technical**: Outperforming S&P 500 by 7.1pts (20d)
 
-## 288. Maze Therapeutics, Inc. (MAZE) -- [STRONG] 2 signals, strength 2.00
-- **Fundamentals**: Revenue growth 700.0% YoY; Quality checklist passed (D/E 0.09, Current ratio 15.50, Net margin 11.0%)
-- **Technical**: Outperforming S&P 500 by 8.2pts (20d)
-
-## 289. Lyft, Inc. (LYFT) -- [STRONG] 2 signals, strength 2.00
-- **Fundamentals**: Revenue growth 10.8% YoY; EPS growth 3178.5% YoY; Quality checklist passed (D/E 0.34, ROE 115.8%, Net margin 42.3%)
-- **Technical**: RSI overbought (77.9); Outperforming S&P 500 by 0.4pts (20d)
-
-## 290. Basel Medical Group Ltd (BMGL) -- [STRONG] 2 signals, strength 1.99
+## 283. Basel Medical Group Ltd (BMGL) -- [STRONG] 2 signals, strength 1.99
 - **Fundamentals**: Revenue growth 29.8% YoY
 - **Technical**: Volume spike (5.6x average)
 - ⚠️ **EARNINGS QUALITY**: Net margin -53.5% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 291. Sezzle Inc. (SEZL) -- [STRONG] 2 signals, strength 1.99
-- **Fundamentals**: Revenue growth 43.1% YoY; EPS growth 56.6% YoY; Quality checklist passed (D/E 0.82, Current ratio 3.92, ROE 85.5%, Net margin 30.4%)
-- **Technical**: Outperforming S&P 500 by 0.5pts (20d)
-
-## 292. Wingstop Inc. (WING) -- [STRONG] 2 signals, strength 1.99
+## 284. Wingstop Inc. (WING) -- [STRONG] 2 signals, strength 1.99
 - **Fundamentals**: Quality checklist passed (Current ratio 3.26, ROE 18.1%, Net margin 16.1%)
-- **Technical**: RSI overbought (79.2); Outperforming S&P 500 by 17.9pts (20d)
+- **Technical**: RSI overbought (78.3); Outperforming S&P 500 by 17.6pts (20d)
 
-## 293. Option Care Health, Inc. (OPCH) -- [STRONG] 2 signals, strength 1.99
+## 285. Option Care Health, Inc. (OPCH) -- [STRONG] 2 signals, strength 1.99
 - **Fundamentals**: Quality checklist passed (D/E 0.88, Current ratio 1.53, ROE 15.8%)
 - **Technical**: RSI overbought (93.8); Outperforming S&P 500 by 24.6pts (20d)
 - ⚠️ **CAUTION**: Extended 26% above 50-day MA -- elevated pullback risk
 
-## 294. Companhia de saneamento Basico Do Estado De Sao Paulo - Sabesp American Depositary Shares (Each repstg 250 (SBS) -- [STRONG] 2 signals, strength 1.99
+## 286. Companhia de saneamento Basico Do Estado De Sao Paulo - Sabesp American Depositary Shares (Each repstg 250 (SBS) -- [STRONG] 2 signals, strength 1.99
 - **Fundamentals**: Quality checklist passed (D/E 0.95, ROE 18.3%, Net margin 28.0%)
-- **Technical**: RSI overbought (76.6); Outperforming S&P 500 by 17.6pts (20d)
+- **Technical**: RSI overbought (77.5); Outperforming S&P 500 by 18.1pts (20d)
 
-## 295. Caseys General Stores, Inc. (CASY) -- [STRONG] 2 signals, strength 1.99
-- **Fundamentals**: Revenue growth 13.8% YoY; EPS growth 33.4% YoY
-- **Technical**: RSI overbought (81.8); Outperforming S&P 500 by 7.1pts (20d)
+## 287. Lyft, Inc. (LYFT) -- [STRONG] 2 signals, strength 1.99
+- **Fundamentals**: Revenue growth 10.8% YoY; EPS growth 3178.5% YoY; Quality checklist passed (D/E 0.34, ROE 115.8%, Net margin 42.3%)
+- **Technical**: RSI overbought (76.9); Outperforming S&P 500 by 0.2pts (20d)
 
-## 296. NerdWallet, Inc. (NRDS) -- [STRONG] 2 signals, strength 1.99
+## 288. NerdWallet, Inc. (NRDS) -- [STRONG] 2 signals, strength 1.99
 - **Fundamentals**: Revenue growth 11.5% YoY; EPS growth 54.6% YoY; Quality checklist passed (D/E 0.02, Current ratio 3.45, ROE 18.1%)
-- **Technical**: RSI overbought (74.6)
+- **Technical**: RSI overbought (74.2)
 
-## 297. Kennametal Inc. (KMT) -- [STRONG] 2 signals, strength 1.99
+## 289. Kennametal Inc. (KMT) -- [STRONG] 2 signals, strength 1.99
 - **Fundamentals**: Revenue growth 19.8% YoY; EPS growth 268.2% YoY; Quality checklist passed (D/E 0.46, Current ratio 2.62, ROE 24.8%, Net margin 14.5%)
 - **Technical**: Outperforming S&P 500 by 2.2pts (20d)
 
-## 298. Broadcom Inc. (AVGO) -- [STRONG] 2 signals, strength 1.99
-- **Fundamentals**: Revenue growth 48.7% YoY; EPS growth 100.1% YoY; Quality checklist passed (D/E 0.80, Current ratio 1.71, ROE 43.9%, Net margin 42.9%)
-- **Technical**: Outperforming S&P 500 by 0.4pts (20d)
+## 290. Hesai Group - American Depositary Share (HSAI) -- [STRONG] 2 signals, strength 1.98
+- **Fundamentals**: Revenue growth 11.2% YoY; EPS growth 281.6% YoY; Quality checklist passed (D/E 0.10, Current ratio 3.73, Net margin 14.9%)
+- **Technical**: RSI oversold (29.9)
 
-## 299. Church & Dwight Company, Inc. (CHD) -- [STRONG] 2 signals, strength 1.99
-- **Fundamentals**: EPS growth 46.6% YoY; Quality checklist passed (D/E 0.55, ROE 17.8%, Net margin 12.0%)
-- **Technical**: RSI overbought (78.3); Outperforming S&P 500 by 3.4pts (20d)
-
-## 300. Chord Energy Corporation (CHRD) -- [STRONG] 2 signals, strength 1.98
+## 291. Chord Energy Corporation (CHRD) -- [STRONG] 2 signals, strength 1.98
 - **Fundamentals**: Revenue growth 19.2% YoY; EPS growth 248.8% YoY
 - **Technical**: Price above rising 50/200-day MAs
 
-## 301. BrightSpring Health Services, Inc. (BTSG) -- [STRONG] 2 signals, strength 1.98
+## 292. Church & Dwight Company, Inc. (CHD) -- [STRONG] 2 signals, strength 1.98
+- **Fundamentals**: EPS growth 46.6% YoY; Quality checklist passed (D/E 0.55, ROE 17.8%, Net margin 12.0%)
+- **Technical**: RSI overbought (77.8); Outperforming S&P 500 by 3.3pts (20d)
+
+## 293. Broadcom Inc. (AVGO) -- [STRONG] 2 signals, strength 1.98
+- **Fundamentals**: Revenue growth 48.7% YoY; EPS growth 100.1% YoY; Quality checklist passed (D/E 0.80, Current ratio 1.71, ROE 43.9%, Net margin 42.9%)
+- **Technical**: Outperforming S&P 500 by 0.3pts (20d)
+
+## 294. Sezzle Inc. (SEZL) -- [STRONG] 2 signals, strength 1.98
+- **Fundamentals**: Revenue growth 43.1% YoY; EPS growth 56.6% YoY; Quality checklist passed (D/E 0.82, Current ratio 3.92, ROE 85.5%, Net margin 30.4%)
+- **Technical**: Outperforming S&P 500 by 0.2pts (20d)
+
+## 295. BrightSpring Health Services, Inc. (BTSG) -- [STRONG] 2 signals, strength 1.98
 - **Fundamentals**: Revenue growth 19.9% YoY; EPS growth 440.8% YoY
-- **Technical**: RSI overbought (81.4); Outperforming S&P 500 by 4.6pts (20d)
+- **Technical**: RSI overbought (81.1); Outperforming S&P 500 by 4.4pts (20d)
 
-## 302. Steven Madden, Ltd. (SHOO) -- [STRONG] 2 signals, strength 1.98
+## 296. Steven Madden, Ltd. (SHOO) -- [STRONG] 2 signals, strength 1.97
 - **Fundamentals**: Revenue growth 18.1% YoY; EPS growth 57.0% YoY; Quality checklist passed (D/E 0.27, Current ratio 1.90, ROE 16.1%)
-- **Technical**: Outperforming S&P 500 by 4.7pts (20d)
+- **Technical**: Outperforming S&P 500 by 4.6pts (20d)
 
-## 303. Federated Hermes, Inc. (FHI) -- [STRONG] 2 signals, strength 1.97
+## 297. Federated Hermes, Inc. (FHI) -- [STRONG] 2 signals, strength 1.97
 - **Fundamentals**: Revenue growth 15.2% YoY; EPS growth 19.6% YoY; Quality checklist passed (D/E 0.29, Current ratio 2.75, ROE 34.0%, Net margin 21.2%)
-- **Technical**: RSI oversold (24.6)
+- **Technical**: RSI oversold (26.3)
 
-## 304. Intuit Inc. (INTU) -- [STRONG] 2 signals, strength 1.97
+## 298. Intuit Inc. (INTU) -- [STRONG] 2 signals, strength 1.97
 - **Fundamentals**: Revenue growth 13.9% YoY; EPS growth 20.4% YoY; Quality checklist passed (D/E 0.40, Current ratio 1.51, ROE 23.4%, Net margin 21.3%)
-- **Technical**: RSI overbought (73.4)
+- **Technical**: RSI overbought (73.9)
 - ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 2 sell/strongSell vs. 2 last month
 
-## 305. BNB Standard Corporation (BNC) -- [STRONG] 2 signals, strength 1.97
-- **Fundamentals**: Revenue growth 195.9% YoY; Quality checklist passed (D/E 0.01, ROE 30.4%, Net margin 378.3%)
-- **Technical**: RSI oversold (27.1); Outperforming S&P 500 by 3.1pts (20d)
+## 299. Caseys General Stores, Inc. (CASY) -- [STRONG] 2 signals, strength 1.97
+- **Fundamentals**: Revenue growth 13.8% YoY; EPS growth 33.4% YoY
+- **Technical**: RSI overbought (81.3); Outperforming S&P 500 by 6.8pts (20d)
 
-## 306. Cirrus Logic, Inc. (CRUS) -- [STRONG] 2 signals, strength 1.96
-- **Fundamentals**: EPS growth 28.2% YoY; Quality checklist passed (D/E 0.00, Current ratio 7.37, ROE 20.3%, Net margin 21.0%)
-- **Technical**: RSI oversold (25.2)
+## 300. Hinge Health, Inc. (HNGE) -- [STRONG] 2 signals, strength 1.97
+- **Fundamentals**: Revenue growth 10.2% YoY; Quality checklist passed (D/E 0.00, ROE 30.2%, Net margin 15.2%)
+- **Technical**: RSI overbought (72.2); Price above rising 50/200-day MAs; Outperforming S&P 500 by 6.8pts (20d)
 
-## 307. Atour Lifestyle Holdings Limited - American Depositary Shares (ATAT) -- [STRONG] 2 signals, strength 1.96
+## 301. Atour Lifestyle Holdings Limited - American Depositary Shares (ATAT) -- [STRONG] 2 signals, strength 1.97
 - **Fundamentals**: Revenue growth 40.2% YoY; EPS growth 43.2% YoY; Quality checklist passed (D/E 0.07, Current ratio 1.97, ROE 54.8%, Net margin 16.8%)
-- **Technical**: Outperforming S&P 500 by 0.0pts (20d)
+- **Technical**: Outperforming S&P 500 by 0.1pts (20d)
 
-## 308. Moderna, Inc. (MRNA) -- [STRONG] 2 signals, strength 1.96
+## 302. Cirrus Logic, Inc. (CRUS) -- [STRONG] 2 signals, strength 1.96
+- **Fundamentals**: EPS growth 28.2% YoY; Quality checklist passed (D/E 0.00, Current ratio 7.37, ROE 20.3%, Net margin 21.0%)
+- **Technical**: RSI oversold (25.0)
+
+## 303. Moderna, Inc. (MRNA) -- [STRONG] 2 signals, strength 1.96
 - **Fundamentals**: Analyst sentiment improving: 11 buy/strongBuy vs. 9 last month
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 47.7pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 47.5pts (20d)
 - ⚠️ **CAUTION**: Extended 48% above 50-day MA -- elevated pullback risk
 - ⚠️ **EARNINGS QUALITY**: Net margin -141.4% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 309. PBF Energy Inc. (PBF) -- [STRONG] 2 signals, strength 1.96
+## 304. Harmony Biosciences Holdings, Inc. (HRMY) -- [STRONG] 2 signals, strength 1.96
+- **Fundamentals**: Revenue growth 24.2% YoY; Quality checklist passed (D/E 0.19, Current ratio 3.60, ROE 20.1%, Net margin 18.9%); Analyst sentiment improving: 12 buy/strongBuy vs. 11 last month
+- **Technical**: RSI oversold (28.7)
+
+## 305. PBF Energy Inc. (PBF) -- [STRONG] 2 signals, strength 1.96
 - **Fundamentals**: Revenue growth 13.5% YoY
-- **Technical**: RSI overbought (73.6); Price above rising 50/200-day MAs; Outperforming S&P 500 by 15.1pts (20d)
+- **Technical**: RSI overbought (73.4); Price above rising 50/200-day MAs; Outperforming S&P 500 by 15.0pts (20d)
 
-## 310. Woodward, Inc. (WWD) -- [STRONG] 2 signals, strength 1.95
-- **Fundamentals**: Revenue growth 22.4% YoY; EPS growth 42.3% YoY; Quality checklist passed (D/E 0.27, Current ratio 2.08, ROE 21.8%, Net margin 13.2%)
-- **Technical**: Outperforming S&P 500 by 1.2pts (20d)
+## 306. ADMA Biologics Inc (ADMA) -- [STRONG] 2 signals, strength 1.95
+- **Fundamentals**: Quality checklist passed (D/E 0.15, Current ratio 6.71, ROE 39.6%, Net margin 33.0%)
+- **Technical**: Outperforming S&P 500 by 14.3pts (20d)
 
-## 311. PayPay Corporation - American Depository Shares (PAYP) -- [STRONG] 2 signals, strength 1.95
+## 307. Wabash National Corporation (WNC) -- [STRONG] 2 signals, strength 1.95
+- **Fundamentals**: EPS growth 31.1% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 8.7pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Net margin -5.5% despite 31.1% adjusted EPS growth -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+
+## 308. PayPay Corporation - American Depository Shares (PAYP) -- [STRONG] 2 signals, strength 1.95
 - **Fundamentals**: Revenue growth 27.4% YoY; EPS growth 71.9% YoY
 - **Technical**: RSI oversold (26.0)
 
-## 312. Integer Holdings Corporation (ITGR) -- [STRONG] 2 signals, strength 1.95
+## 309. Integer Holdings Corporation (ITGR) -- [STRONG] 2 signals, strength 1.95
 - **Fundamentals**: EPS growth 62.0% YoY
-- **Technical**: RSI overbought (78.3); Price above rising 50/200-day MAs; 52-week high, but still 12.3% below all-time high ($144.36) -- possible overhead resistance
-- ⚠️ **CAUTION**: New 52-week high but on light volume (0.1x average) -- unconfirmed breakout
+- **Technical**: RSI overbought (78.4); Price above rising 50/200-day MAs; 52-week high, but still 12.3% below all-time high ($144.36) -- possible overhead resistance
+- ⚠️ **CAUTION**: New 52-week high but on light volume (0.2x average) -- unconfirmed breakout
 - ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 3 sell/strongSell vs. 0 last month
 
-## 313. BBB Foods Inc. (TBBB) -- [STRONG] 2 signals, strength 1.94
-- **Fundamentals**: Revenue growth 35.9% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 8.6pts (20d)
+## 310. BNB Standard Corporation (BNC) -- [STRONG] 2 signals, strength 1.95
+- **Fundamentals**: Revenue growth 195.9% YoY; Quality checklist passed (D/E 0.01, ROE 30.4%, Net margin 378.3%)
+- **Technical**: RSI oversold (26.8); Outperforming S&P 500 by 2.4pts (20d)
+
+## 311. Maze Therapeutics, Inc. (MAZE) -- [STRONG] 2 signals, strength 1.95
+- **Fundamentals**: Revenue growth 700.0% YoY; Quality checklist passed (D/E 0.09, Current ratio 15.50, Net margin 11.0%)
+- **Technical**: Outperforming S&P 500 by 7.4pts (20d)
+
+## 312. CAVA Group, Inc. (CAVA) -- [STRONG] 2 signals, strength 1.94
+- **Fundamentals**: Revenue growth 68.0% YoY; EPS growth 81.5% YoY; Quality checklist passed (Current ratio 2.42, ROE 35.3%, Net margin 10.1%); Analyst sentiment improving: 23 buy/strongBuy vs. 23 last month
+- **Technical**: Outperforming S&P 500 by 0.4pts (20d)
+
+## 313. Paylocity Holding Corporation (PCTY) -- [STRONG] 2 signals, strength 1.94
+- **Fundamentals**: Revenue growth 11.0% YoY; EPS growth 23.0% YoY; Quality checklist passed (D/E 0.07, ROE 23.4%, Net margin 15.2%)
+- **Technical**: RSI overbought (79.8); Outperforming S&P 500 by 4.8pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
 
 ## 314. DocuSign, Inc. (DOCU) -- [STRONG] 2 signals, strength 1.94
 - **Fundamentals**: EPS growth 23.6% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 2.4pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); 52-week high, but still 76.2% below all-time high ($310.05) -- possible overhead resistance
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 2.5pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); 52-week high, but still 76.2% below all-time high ($310.05) -- possible overhead resistance
 - ⚠️ **CAUTION**: New 52-week high but on light volume (0.3x average) -- unconfirmed breakout
 
-## 315. ON Semiconductor Corporation (ON) -- [STRONG] 2 signals, strength 1.93
-- **Fundamentals**: EPS growth 44.7% YoY; Quality checklist passed (D/E 0.39, Current ratio 4.52, Net margin 10.2%)
-- **Technical**: Outperforming S&P 500 by 7.3pts (20d)
+## 315. Ovintiv Inc. (DE) (OVV) -- [STRONG] 2 signals, strength 1.93
+- **Fundamentals**: EPS growth 56.3% YoY
+- **Technical**: RSI overbought (76.8); Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.0pts (20d)
 
-## 316. Wabash National Corporation (WNC) -- [STRONG] 2 signals, strength 1.93
-- **Fundamentals**: EPS growth 31.1% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 8.3pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Net margin -5.5% despite 31.1% adjusted EPS growth -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
-
-## 317. Paylocity Holding Corporation (PCTY) -- [STRONG] 2 signals, strength 1.93
-- **Fundamentals**: Revenue growth 11.0% YoY; EPS growth 23.0% YoY; Quality checklist passed (D/E 0.07, ROE 23.4%, Net margin 15.2%)
-- **Technical**: RSI overbought (79.1); Outperforming S&P 500 by 4.5pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
-
-## 318. State Street Corporation (STT) -- [STRONG] 2 signals, strength 1.93
+## 316. State Street Corporation (STT) -- [STRONG] 2 signals, strength 1.93
 - **Fundamentals**: Revenue growth 181.2% YoY; EPS growth 26.6% YoY
-- **Technical**: RSI oversold (15.6)
+- **Technical**: RSI oversold (15.8)
 - ⚠️ **EARNINGS QUALITY**: Earnings scheduled today (2026-10-14) -- gap risk on a swing hold
 
-## 319. Ovintiv Inc. (DE) (OVV) -- [STRONG] 2 signals, strength 1.93
-- **Fundamentals**: EPS growth 56.3% YoY
-- **Technical**: RSI overbought (76.6); Price above rising 50/200-day MAs; Outperforming S&P 500 by 3.7pts (20d)
+## 317. Nuveen California Quality Municipal Income Fund (NAC) -- [STRONG] 2 signals, strength 1.93
+- **Fundamentals**: Revenue growth 26.4% YoY; EPS growth 37.0% YoY
+- **Technical**: RSI oversold (26.0)
+- ⚠️ **EARNINGS QUALITY**: Net margin -43.7% despite 37.0% adjusted EPS growth -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 320. The Vita Coco Company, Inc. (COCO) -- [STRONG] 2 signals, strength 1.93
+## 318. BBB Foods Inc. (TBBB) -- [STRONG] 2 signals, strength 1.93
+- **Fundamentals**: Revenue growth 35.9% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 8.2pts (20d)
+
+## 319. The Vita Coco Company, Inc. (COCO) -- [STRONG] 2 signals, strength 1.93
 - **Fundamentals**: Revenue growth 26.1% YoY; EPS growth 67.8% YoY; Quality checklist passed (D/E 0.00, Current ratio 3.62, ROE 31.1%, Net margin 15.5%)
 - **Technical**: Outperforming S&P 500 by 0.2pts (20d)
 
-## 321. Nuveen California Quality Municipal Income Fund (NAC) -- [STRONG] 2 signals, strength 1.93
-- **Fundamentals**: Revenue growth 26.4% YoY; EPS growth 37.0% YoY
-- **Technical**: RSI oversold (26.6)
-- ⚠️ **EARNINGS QUALITY**: Net margin -43.7% despite 37.0% adjusted EPS growth -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+## 320. Woodward, Inc. (WWD) -- [STRONG] 2 signals, strength 1.93
+- **Fundamentals**: Revenue growth 22.4% YoY; EPS growth 42.3% YoY; Quality checklist passed (D/E 0.27, Current ratio 2.08, ROE 21.8%, Net margin 13.2%)
+- **Technical**: Outperforming S&P 500 by 0.9pts (20d)
 
-## 322. Amplitude, Inc. (AMPL) -- [STRONG] 2 signals, strength 1.93
-- **Fundamentals**: Revenue growth 18.3% YoY
-- **Technical**: RSI overbought (76.4); Price above rising 50/200-day MAs; Outperforming S&P 500 by 12.2pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Net margin -26.6% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
-
-## 323. OneSpan Inc. (OSPN) -- [STRONG] 2 signals, strength 1.93
+## 321. OneSpan Inc. (OSPN) -- [STRONG] 2 signals, strength 1.93
 - **Fundamentals**: EPS growth 16.3% YoY; Quality checklist passed (D/E 0.02, Current ratio 1.50, ROE 25.9%, Net margin 27.8%)
 - **Technical**: Price above rising 50/200-day MAs
 
-## 324. CAVA Group, Inc. (CAVA) -- [STRONG] 2 signals, strength 1.92
-- **Fundamentals**: Revenue growth 68.0% YoY; EPS growth 81.5% YoY; Quality checklist passed (Current ratio 2.42, ROE 35.3%, Net margin 10.1%); Analyst sentiment improving: 23 buy/strongBuy vs. 23 last month
-- **Technical**: Outperforming S&P 500 by 0.2pts (20d)
-
-## 325. Charles Schwab Corporation (The) (SCHW) -- [STRONG] 2 signals, strength 1.92
-- **Fundamentals**: Revenue growth 11.2% YoY; EPS growth 43.2% YoY
-- **News**: [MarketWatch Top Stories] Charles Schwab and DoorDash ranked among bargain stocks that could lead the market higher
-- **News (context, not scored)**: [MarketWatch Top Stories] Charles Schwab and DoorDash ranked among bargain stocks that could lead the market higher
-- ⚠️ **EARNINGS QUALITY**: Earnings scheduled in 1d (2026-10-15) -- gap risk on a swing hold
-
-## 326. KLA Corporation (KLAC) -- [STRONG] 2 signals, strength 1.92
-- **Fundamentals**: Revenue growth 11.7% YoY; EPS growth 20.6% YoY; Quality checklist passed (D/E 0.93, Current ratio 2.88, ROE 85.4%, Net margin 35.6%)
-- **Technical**: Outperforming S&P 500 by 5.6pts (20d)
-
-## 327. KE Holdings Inc American Depositary Shares (each representing three Class A (BEKE) -- [STRONG] 2 signals, strength 1.92
+## 322. KE Holdings Inc American Depositary Shares (each representing three Class A (BEKE) -- [STRONG] 2 signals, strength 1.92
 - **Fundamentals**: EPS growth 25.9% YoY; Analyst sentiment improving: 24 buy/strongBuy vs. 22 last month
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 7.0pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 6.9pts (20d)
 
-## 328. Braze, Inc. (BRZE) -- [STRONG] 2 signals, strength 1.91
-- **Fundamentals**: Revenue growth 27.4% YoY
-- **Technical**: RSI overbought (70.1); Outperforming S&P 500 by 11.4pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Net margin -13.6% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+## 323. Home BancShares, Inc. (HOMB) -- [STRONG] 2 signals, strength 1.92
+- **Fundamentals**: Revenue growth 51.1% YoY; EPS growth 10.8% YoY
+- **Technical**: MACD bullish crossover
+- ⚠️ **EARNINGS QUALITY**: Earnings scheduled today (2026-10-14) -- gap risk on a swing hold
 
-## 329. Abercrombie & Fitch Company (ANF) -- [STRONG] 2 signals, strength 1.91
-- **Fundamentals**: EPS growth 10.5% YoY; Quality checklist passed (D/E 0.00, ROE 39.6%, Net margin 10.0%)
-- **Technical**: RSI overbought (79.6); Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.6pts (20d)
+## 324. ON Semiconductor Corporation (ON) -- [STRONG] 2 signals, strength 1.92
+- **Fundamentals**: EPS growth 44.7% YoY; Quality checklist passed (D/E 0.39, Current ratio 4.52, Net margin 10.2%)
+- **Technical**: Outperforming S&P 500 by 7.0pts (20d)
 
-## 330. Kratos Defense & Security Solutions, Inc. (KTOS) -- [STRONG] 2 signals, strength 1.91
+## 325. Kratos Defense & Security Solutions, Inc. (KTOS) -- [STRONG] 2 signals, strength 1.91
 - **Fundamentals**: Revenue growth 25.5% YoY; EPS growth 88.1% YoY
-- **Technical**: RSI oversold (20.8)
+- **Technical**: RSI oversold (20.3)
 
-## 331. Rubrik, Inc. (RBRK) -- [STRONG] 2 signals, strength 1.91
-- **Fundamentals**: Revenue growth 42.5% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 7.7pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Net margin -16.5% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
-
-## 332. Waters Corporation (WAT) -- [STRONG] 2 signals, strength 1.90
-- **Fundamentals**: Revenue growth 52.5% YoY; Analyst sentiment improving: 20 buy/strongBuy vs. 17 last month
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.5pts (20d)
-
-## 333. Williams-Sonoma, Inc. (WSM) -- [STRONG] 2 signals, strength 1.90
-- **Fundamentals**: EPS growth 11.1% YoY; Quality checklist passed (D/E 0.00, ROE 57.8%, Net margin 14.7%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 8.2pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 2 sell/strongSell vs. 0 last month
-
-## 334. First Commonwealth Financial Corporation (FCF) -- [STRONG] 2 signals, strength 1.90
-- **Fundamentals**: Revenue growth 56.9% YoY; EPS growth 24.9% YoY
-- **Technical**: RSI oversold (28.9)
-
-## 335. Northern Oil and Gas, Inc. (NOG) -- [STRONG] 2 signals, strength 1.89
+## 326. Northern Oil and Gas, Inc. (NOG) -- [STRONG] 2 signals, strength 1.91
 - **Fundamentals**: EPS growth 118.5% YoY
-- **Technical**: RSI overbought (76.5); Price above rising 50/200-day MAs; Outperforming S&P 500 by 2.2pts (20d)
+- **Technical**: RSI overbought (78.1); Price above rising 50/200-day MAs; Outperforming S&P 500 by 2.7pts (20d)
 - ⚠️ **EARNINGS QUALITY**: Net margin -25.4% despite 118.5% adjusted EPS growth -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 336. Atlassian Corporation (TEAM) -- [STRONG] 2 signals, strength 1.89
-- **Fundamentals**: Revenue growth 26.0% YoY; Analyst sentiment improving: 34 buy/strongBuy vs. 32 last month
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 6.1pts (20d)
+## 327. Abercrombie & Fitch Company (ANF) -- [STRONG] 2 signals, strength 1.90
+- **Fundamentals**: EPS growth 10.5% YoY; Quality checklist passed (D/E 0.00, ROE 39.6%, Net margin 10.0%)
+- **Technical**: RSI overbought (78.1); Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.4pts (20d)
 
-## 337. TE Connectivity plc (TEL) -- [STRONG] 2 signals, strength 1.89
+## 328. TE Connectivity plc (TEL) -- [STRONG] 2 signals, strength 1.90
 - **Fundamentals**: Revenue growth 16.5% YoY; EPS growth 111.1% YoY; Quality checklist passed (D/E 0.45, Current ratio 1.56, ROE 23.2%, Net margin 15.6%)
-- **Technical**: Outperforming S&P 500 by 1.4pts (20d)
+- **Technical**: Outperforming S&P 500 by 1.5pts (20d)
 
-## 338. Alphabet Inc. (GOOGL) -- [STRONG] 2 signals, strength 1.89
-- **Fundamentals**: Revenue growth 20.1% YoY; EPS growth 115.3% YoY; Quality checklist passed (D/E 0.12, Current ratio 2.01, ROE 50.8%, Net margin 54.8%)
-- **Technical**: Outperforming S&P 500 by 0.7pts (20d)
+## 329. TJX Companies, Inc. (The) (TJX) -- [STRONG] 2 signals, strength 1.90
+- **Fundamentals**: EPS growth 23.3% YoY
+- **Technical**: RSI overbought (77.1); Outperforming S&P 500 by 13.2pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 1 sell/strongSell vs. 1 last month
 
-## 339. Kinetik Holdings Inc. (KNTK) -- [STRONG] 2 signals, strength 1.88
+## 330. First Commonwealth Financial Corporation (FCF) -- [STRONG] 2 signals, strength 1.90
+- **Fundamentals**: Revenue growth 56.9% YoY; EPS growth 24.9% YoY
+- **Technical**: RSI oversold (29.5)
+
+## 331. Rubrik, Inc. (RBRK) -- [STRONG] 2 signals, strength 1.90
+- **Fundamentals**: Revenue growth 42.5% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 7.4pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Net margin -16.5% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+
+## 332. Williams-Sonoma, Inc. (WSM) -- [STRONG] 2 signals, strength 1.89
+- **Fundamentals**: EPS growth 11.1% YoY; Quality checklist passed (D/E 0.00, ROE 57.8%, Net margin 14.7%)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 8.1pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 2 sell/strongSell vs. 0 last month
+
+## 333. Waters Corporation (WAT) -- [STRONG] 2 signals, strength 1.89
+- **Fundamentals**: Revenue growth 52.5% YoY; Analyst sentiment improving: 20 buy/strongBuy vs. 17 last month
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.3pts (20d)
+
+## 334. Amplitude, Inc. (AMPL) -- [STRONG] 2 signals, strength 1.89
+- **Fundamentals**: Revenue growth 18.3% YoY
+- **Technical**: RSI overbought (74.4); Price above rising 50/200-day MAs; Outperforming S&P 500 by 11.6pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Net margin -26.6% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+
+## 335. KLA Corporation (KLAC) -- [STRONG] 2 signals, strength 1.89
+- **Fundamentals**: Revenue growth 11.7% YoY; EPS growth 20.6% YoY; Quality checklist passed (D/E 0.93, Current ratio 2.88, ROE 85.4%, Net margin 35.6%)
+- **Technical**: Outperforming S&P 500 by 5.0pts (20d)
+
+## 336. Kinetik Holdings Inc. (KNTK) -- [STRONG] 2 signals, strength 1.88
 - **Fundamentals**: Revenue growth 14.2% YoY; EPS growth 195.5% YoY
 - **Technical**: Price above rising 50/200-day MAs
+
+## 337. Victory Capital Holdings, Inc. (VCTR) -- [STRONG] 2 signals, strength 1.88
+- **Fundamentals**: Revenue growth 51.5% YoY; EPS growth 68.3% YoY; Quality checklist passed (D/E 0.40, ROE 19.3%, Net margin 29.6%)
+- **Technical**: Outperforming S&P 500 by 0.2pts (20d)
+
+## 338. Atlassian Corporation (TEAM) -- [STRONG] 2 signals, strength 1.88
+- **Fundamentals**: Revenue growth 26.0% YoY; Analyst sentiment improving: 34 buy/strongBuy vs. 32 last month
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.8pts (20d)
+
+## 339. Concentra Group Holdings Parent, Inc. (CON) -- [STRONG] 2 signals, strength 1.88
+- **Fundamentals**: Revenue growth 14.0% YoY
+- **Technical**: RSI overbought (82.5); Price above rising 50/200-day MAs; Outperforming S&P 500 by 2.3pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); New ALL-TIME high -- no overhead resistance from prior sellers
+- ⚠️ **CAUTION**: New 52-week high but on light volume (0.3x average) -- unconfirmed breakout
 
 ## 340. Universal Health Services, Inc. (UHS) -- [STRONG] 2 signals, strength 1.88
 - **Fundamentals**: Revenue growth 10.1% YoY; EPS growth 29.4% YoY
 - **Technical**: MACD bullish crossover
 
-## 341. TJX Companies, Inc. (The) (TJX) -- [STRONG] 2 signals, strength 1.88
-- **Fundamentals**: EPS growth 23.3% YoY
-- **Technical**: RSI overbought (76.8); Outperforming S&P 500 by 12.9pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 1 sell/strongSell vs. 1 last month
+## 341. Wise Group plc - Class A (WSE) -- [STRONG] 2 signals, strength 1.88
+- **Fundamentals**: Revenue growth 105.8% YoY; Quality checklist passed (D/E 0.13, ROE 42.4%, Net margin 22.2%)
+- **Technical**: RSI overbought (73.5); Outperforming S&P 500 by 0.7pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Earnings scheduled in 1d (2026-10-15) -- gap risk on a swing hold
 
-## 342. Concentra Group Holdings Parent, Inc. (CON) -- [STRONG] 2 signals, strength 1.88
-- **Fundamentals**: Revenue growth 14.0% YoY
-- **Technical**: RSI overbought (82.2); Price above rising 50/200-day MAs; Outperforming S&P 500 by 2.0pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); New ALL-TIME high -- no overhead resistance from prior sellers
-- ⚠️ **CAUTION**: New 52-week high but on light volume (0.3x average) -- unconfirmed breakout
+## 342. Oscar Health, Inc. (OSCR) -- [STRONG] 2 signals, strength 1.88
+- **Fundamentals**: Revenue growth 42.8% YoY
+- **Technical**: RSI overbought (81.4); Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.5pts (20d)
 
-## 343. Alphabet Inc. - Class C Capital Stock (GOOG) -- [STRONG] 2 signals, strength 1.88
+## 343. Alphabet Inc. (GOOGL) -- [STRONG] 2 signals, strength 1.87
 - **Fundamentals**: Revenue growth 20.1% YoY; EPS growth 115.3% YoY; Quality checklist passed (D/E 0.12, Current ratio 2.01, ROE 50.8%, Net margin 54.8%)
 - **Technical**: Outperforming S&P 500 by 0.5pts (20d)
 
-## 344. Oscar Health, Inc. (OSCR) -- [STRONG] 2 signals, strength 1.87
-- **Fundamentals**: Revenue growth 42.8% YoY
-- **Technical**: RSI overbought (81.6); Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.4pts (20d)
-
-## 345. XP Inc. (XP) -- [STRONG] 2 signals, strength 1.87
+## 344. XP Inc. (XP) -- [STRONG] 2 signals, strength 1.87
 - **Fundamentals**: EPS growth 11.1% YoY
-- **Technical**: RSI overbought (80.3); Price above rising 50/200-day MAs; Outperforming S&P 500 by 49.3pts (20d)
-- ⚠️ **CAUTION**: Extended 46% above 50-day MA -- elevated pullback risk
+- **Technical**: RSI overbought (82.2); Price above rising 50/200-day MAs; Outperforming S&P 500 by 51.2pts (20d)
+- ⚠️ **CAUTION**: Extended 48% above 50-day MA -- elevated pullback risk
 
-## 346. Ellington Financial Inc. (EFC) -- [STRONG] 2 signals, strength 1.87
+## 345. Ellington Financial Inc. (EFC) -- [STRONG] 2 signals, strength 1.87
 - **Fundamentals**: Revenue growth 31.0% YoY; EPS growth 23.4% YoY
 - **Technical**: RSI oversold (29.8)
 - ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
 
-## 347. Wise Group plc - Class A (WSE) -- [STRONG] 2 signals, strength 1.86
-- **Fundamentals**: Revenue growth 105.8% YoY; Quality checklist passed (D/E 0.13, ROE 42.4%, Net margin 22.2%)
-- **Technical**: RSI overbought (72.4); Outperforming S&P 500 by 0.4pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Earnings scheduled in 1d (2026-10-15) -- gap risk on a swing hold
+## 346. Carnival Corporation Ltd. (CCL) -- [STRONG] 2 signals, strength 1.87
+- **Fundamentals**: EPS growth 21.0% YoY
+- **Technical**: RSI overbought (75.4); Outperforming S&P 500 by 13.9pts (20d)
+
+## 347. Dollar Tree, Inc. (DLTR) -- [STRONG] 2 signals, strength 1.87
+- **Fundamentals**: Revenue growth 48.1% YoY; EPS growth 197.3% YoY; Analyst sentiment improving: 15 buy/strongBuy vs. 15 last month
+- **Technical**: Outperforming S&P 500 by 2.9pts (20d)
 
 ## 348. Burlington Stores, Inc. (BURL) -- [STRONG] 2 signals, strength 1.86
 - **Fundamentals**: Revenue growth 10.9% YoY; EPS growth 31.4% YoY
-- **Technical**: Outperforming S&P 500 by 9.6pts (20d)
+- **Technical**: Outperforming S&P 500 by 9.7pts (20d)
 
-## 349. Carnival Corporation Ltd. (CCL) -- [STRONG] 2 signals, strength 1.85
-- **Fundamentals**: EPS growth 21.0% YoY
-- **Technical**: RSI overbought (75.1); Outperforming S&P 500 by 13.7pts (20d)
+## 349. Alphabet Inc. - Class C Capital Stock (GOOG) -- [STRONG] 2 signals, strength 1.86
+- **Fundamentals**: Revenue growth 20.1% YoY; EPS growth 115.3% YoY; Quality checklist passed (D/E 0.12, Current ratio 2.01, ROE 50.8%, Net margin 54.8%)
+- **Technical**: Outperforming S&P 500 by 0.3pts (20d)
 
 ## 350. Hello Group Inc.  - American Depositary Shares (MOMO) -- [STRONG] 2 signals, strength 1.85
 - **Fundamentals**: EPS growth 47.1% YoY; Quality checklist passed (D/E 0.00, Current ratio 4.68, Net margin 11.0%)
-- **Technical**: RSI oversold (29.4)
+- **Technical**: RSI oversold (29.2)
 
 ## 351. AnaptysBio, Inc. (ANAB) -- [STRONG] 2 signals, strength 1.85
 - **Fundamentals**: Revenue growth 92.9% YoY; Quality checklist passed (Current ratio 5.61, ROE 895.0%, Net margin 82.4%)
-- **Technical**: RSI oversold (24.5)
+- **Technical**: RSI oversold (23.0)
 
-## 352. Piper Sandler Companies (PIPR) -- [STRONG] 2 signals, strength 1.85
+## 352. The Travelers Companies, Inc. (TRV) -- [STRONG] 2 signals, strength 1.85
+- **Fundamentals**: EPS growth 65.1% YoY; Quality checklist passed (D/E 0.28, ROE 25.6%, Net margin 16.9%)
+- **Technical**: RSI overbought (70.3)
+- ⚠️ **EARNINGS QUALITY**: Earnings scheduled in 2d (2026-10-16) -- gap risk on a swing hold
+
+## 353. Piper Sandler Companies (PIPR) -- [STRONG] 2 signals, strength 1.85
 - **Fundamentals**: Revenue growth 32.1% YoY; Quality checklist passed (D/E 0.04, ROE 22.9%, Net margin 14.5%)
-- **Technical**: RSI oversold (24.7)
+- **Technical**: RSI oversold (24.6)
 
-## 353. Acadia Realty Trust (AKR) -- [STRONG] 2 signals, strength 1.85
+## 354. Acadia Realty Trust (AKR) -- [STRONG] 2 signals, strength 1.85
 - **Fundamentals**: EPS growth 134.2% YoY; Quality checklist passed (D/E 0.85, Current ratio 1.70, Net margin 13.6%)
-- **Technical**: RSI oversold (19.7)
-
-## 354. Endeavour Silver Corporation (EXK) -- [STRONG] 2 signals, strength 1.85
-- **Fundamentals**: Revenue growth 139.9% YoY; Quality checklist passed (D/E 0.42, Current ratio 1.53, Net margin 18.1%)
-- **Technical**: RSI oversold (25.3)
-
-## 355. TSS, Inc. (TSSI) -- [STRONG] 2 signals, strength 1.85
-- **Fundamentals**: EPS growth 38.0% YoY; Quality checklist passed (D/E 0.24, Current ratio 1.63, ROE 19.2%)
-- **Technical**: RSI oversold (24.2)
-
-## 356. Cerebras Systems Inc. (CBRS) -- [STRONG] 2 signals, strength 1.85
-- **Fundamentals**: Revenue growth 174.6% YoY; Quality checklist passed (D/E 0.10, Current ratio 2.15, Net margin 46.6%)
-- **Technical**: RSI oversold (18.4)
-
-## 357. Smith & Nephew SNATS, Inc. (SNN) -- [STRONG] 2 signals, strength 1.85
-- **Fundamentals**: EPS growth 31.7% YoY; Quality checklist passed (D/E 0.63, Current ratio 2.57, Net margin 10.1%)
-- **Technical**: RSI overbought (72.7)
-- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 1 sell/strongSell vs. 0 last month
-
-## 358. WisdomTree, Inc. (WT) -- [STRONG] 2 signals, strength 1.85
-- **Fundamentals**: Revenue growth 37.1% YoY; Quality checklist passed (Current ratio 1.75, ROE 19.2%, Net margin 13.3%)
 - **Technical**: RSI oversold (20.2)
 
-## 359. Hut 8 Corp. (HUT) -- [STRONG] 2 signals, strength 1.85
+## 355. Endeavour Silver Corporation (EXK) -- [STRONG] 2 signals, strength 1.85
+- **Fundamentals**: Revenue growth 139.9% YoY; Quality checklist passed (D/E 0.42, Current ratio 1.53, Net margin 18.1%)
+- **Technical**: RSI oversold (24.8)
+
+## 356. TSS, Inc. (TSSI) -- [STRONG] 2 signals, strength 1.85
+- **Fundamentals**: EPS growth 38.0% YoY; Quality checklist passed (D/E 0.24, Current ratio 1.63, ROE 19.2%)
+- **Technical**: RSI oversold (23.9)
+
+## 357. Cerebras Systems Inc. (CBRS) -- [STRONG] 2 signals, strength 1.85
+- **Fundamentals**: Revenue growth 174.6% YoY; Quality checklist passed (D/E 0.10, Current ratio 2.15, Net margin 46.6%)
+- **Technical**: RSI oversold (18.1)
+
+## 358. Smith & Nephew SNATS, Inc. (SNN) -- [STRONG] 2 signals, strength 1.85
+- **Fundamentals**: EPS growth 31.7% YoY; Quality checklist passed (D/E 0.63, Current ratio 2.57, Net margin 10.1%)
+- **Technical**: RSI overbought (75.0)
+- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 1 sell/strongSell vs. 0 last month
+
+## 359. WisdomTree, Inc. (WT) -- [STRONG] 2 signals, strength 1.85
+- **Fundamentals**: Revenue growth 37.1% YoY; Quality checklist passed (Current ratio 1.75, ROE 19.2%, Net margin 13.3%)
+- **Technical**: RSI oversold (20.8)
+
+## 360. Hut 8 Corp. (HUT) -- [STRONG] 2 signals, strength 1.85
 - **Fundamentals**: Revenue growth 120.2% YoY; Quality checklist passed (D/E 0.33, Current ratio 1.67, Net margin 112.2%)
 - **Technical**: RSI oversold (24.0)
 
-## 360. Okeanis Eco Tankers Corp. (ECO) -- [STRONG] 2 signals, strength 1.85
-- **Fundamentals**: Quality checklist passed (Current ratio 1.63, ROE 16.4%, Net margin 29.6%)
-- **Technical**: RSI overbought (74.8); Price above rising 50/200-day MAs; Outperforming S&P 500 by 8.8pts (20d)
-- ⚠️ **CAUTION**: Extended 27% above 50-day MA -- elevated pullback risk
+## 361. PagerDuty, Inc. (PD) -- [STRONG] 2 signals, strength 1.85
+- **Fundamentals**: Quality checklist passed (Current ratio 2.01, ROE 72.6%, Net margin 37.5%)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 11.1pts (20d)
 
-## 361. OmniAb, Inc. (OABI) -- [STRONG] 2 signals, strength 1.85
-- **Fundamentals**: Revenue growth 67.0% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 6.2pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Net margin -115.1% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+## 362. Xometry, Inc. (XMTR) -- [STRONG] 2 signals, strength 1.84
+- **Fundamentals**: Revenue growth 33.8% YoY; Analyst sentiment improving: 13 buy/strongBuy vs. 11 last month
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 3.1pts (20d)
 
-## 362. ReNew Energy Global plc - Class A Shares (RNW) -- [STRONG] 2 signals, strength 1.84
+## 363. ReNew Energy Global plc - Class A Shares (RNW) -- [STRONG] 2 signals, strength 1.84
 - **Fundamentals**: Revenue growth 21.7% YoY; EPS growth 24.2% YoY
 - **Technical**: Price above rising 50/200-day MAs
 
-## 363. The AES Corporation (AES) -- [STRONG] 2 signals, strength 1.84
+## 364. The AES Corporation (AES) -- [STRONG] 2 signals, strength 1.84
 - **Fundamentals**: EPS growth 84.8% YoY
-- **Technical**: RSI overbought (73.9); Price above rising 50/200-day MAs
+- **Technical**: RSI overbought (70.8); Price above rising 50/200-day MAs
 
-## 364. Strive, Inc. (ASST) -- [STRONG] 2 signals, strength 1.84
+## 365. Strive, Inc. (ASST) -- [STRONG] 2 signals, strength 1.84
 - **Fundamentals**: Revenue growth 1019.0% YoY
-- **Technical**: RSI oversold (18.6); Price above rising 50/200-day MAs
+- **Technical**: RSI oversold (18.0); Price above rising 50/200-day MAs
 - ⚠️ **EARNINGS QUALITY**: Net margin -10957.2% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 365. Dollar Tree, Inc. (DLTR) -- [STRONG] 2 signals, strength 1.84
-- **Fundamentals**: Revenue growth 48.1% YoY; EPS growth 197.3% YoY; Analyst sentiment improving: 15 buy/strongBuy vs. 15 last month
-- **Technical**: Outperforming S&P 500 by 2.5pts (20d)
+## 366. AAR Corp. (AIR) -- [STRONG] 2 signals, strength 1.84
+- **Fundamentals**: Revenue growth 22.0% YoY; EPS growth 548.9% YoY
+- **Technical**: RSI oversold (18.2)
 
-## 366. NetSTREIT Corp. (NTST) -- [STRONG] 2 signals, strength 1.84
+## 367. NetSTREIT Corp. (NTST) -- [STRONG] 2 signals, strength 1.84
 - **Fundamentals**: Revenue growth 21.9% YoY; EPS growth 53.9% YoY
-- **Technical**: RSI oversold (27.4)
+- **Technical**: RSI oversold (27.3)
 
-## 367. Albemarle Corporation (ALB) -- [STRONG] 2 signals, strength 1.84
+## 368. Albemarle Corporation (ALB) -- [STRONG] 2 signals, strength 1.84
 - **Fundamentals**: Revenue growth 18.3% YoY; EPS growth 1710.7% YoY; Analyst sentiment improving: 18 buy/strongBuy vs. 16 last month
-- **Technical**: RSI oversold (27.4)
-
-## 368. Acco Brands Corporation (ACCO) -- [STRONG] 2 signals, strength 1.84
-- **Fundamentals**: EPS growth 27.2% YoY
-- **Technical**: RSI overbought (70.1); Price above rising 50/200-day MAs; Outperforming S&P 500 by 3.9pts (20d)
+- **Technical**: RSI oversold (26.5)
 
 ## 369. DigitalOcean Holdings, Inc. (DOCN) -- [STRONG] 2 signals, strength 1.83
 - **Fundamentals**: Revenue growth 21.4% YoY; EPS growth 70.6% YoY
@@ -1617,1880 +1618,1870 @@ _Run: 2026-10-14_1136 ET_
 
 ## 370. Mattel, Inc. (MAT) -- [STRONG] 2 signals, strength 1.82
 - **Fundamentals**: Analyst sentiment improving: 13 buy/strongBuy vs. 12 last month
-- **Technical**: RSI overbought (82.4); 20/50-day MA bullish crossover; Outperforming S&P 500 by 23.8pts (20d)
+- **Technical**: RSI overbought (82.8); 20/50-day MA bullish crossover; Outperforming S&P 500 by 24.1pts (20d)
 
-## 371. AbCellera Biologics Inc. (ABCL) -- [STRONG] 2 signals, strength 1.82
-- **Fundamentals**: Revenue growth 101.3% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.6pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Net margin -248.8% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
-
-## 372. Xometry, Inc. (XMTR) -- [STRONG] 2 signals, strength 1.82
-- **Fundamentals**: Revenue growth 33.8% YoY; Analyst sentiment improving: 13 buy/strongBuy vs. 11 last month
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 2.5pts (20d)
-
-## 373. Amneal Pharmaceuticals, Inc. (AMRX) -- [STRONG] 2 signals, strength 1.82
-- **Fundamentals**: EPS growth 7506.4% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.5pts (20d)
-
-## 374. Pershing Square Inc. (PS) -- [STRONG] 2 signals, strength 1.82
-- **Fundamentals**: Revenue growth 98.0% YoY
-- **Technical**: Outperforming S&P 500 by 12.3pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
-
-## 375. Zoom Communications, Inc. (ZM) -- [STRONG] 2 signals, strength 1.82
+## 371. Zoom Communications, Inc. (ZM) -- [STRONG] 2 signals, strength 1.82
 - **Fundamentals**: EPS growth 184.3% YoY; Quality checklist passed (D/E 0.00, Current ratio 4.33, ROE 32.2%, Net margin 65.2%); Analyst sentiment improving: 24 buy/strongBuy vs. 23 last month
-- **Technical**: Outperforming S&P 500 by 2.2pts (20d)
+- **Technical**: Outperforming S&P 500 by 2.3pts (20d)
 
-## 376. PagerDuty, Inc. (PD) -- [STRONG] 2 signals, strength 1.82
-- **Fundamentals**: Quality checklist passed (Current ratio 2.01, ROE 72.6%, Net margin 37.5%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 10.6pts (20d)
+## 372. Dynatrace, Inc. (DT) -- [STRONG] 2 signals, strength 1.82
+- **Fundamentals**: Revenue growth 17.9% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 12.9pts (20d)
 
-## 377. Amer Sports, Inc. (AS) -- [STRONG] 2 signals, strength 1.82
-- **Fundamentals**: Revenue growth 30.5% YoY; EPS growth 131.5% YoY
-- **Technical**: Outperforming S&P 500 by 3.2pts (20d)
+## 373. The Descartes Systems Group Inc. (DSGX) -- [STRONG] 2 signals, strength 1.82
+- **Fundamentals**: Revenue growth 13.2% YoY; EPS growth 26.6% YoY; Quality checklist passed (D/E 0.00, Current ratio 2.16, Net margin 24.2%)
+- **Technical**: Outperforming S&P 500 by 4.9pts (20d)
 
-## 378. Honda Motor Company, Ltd. (HMC) -- [STRONG] 2 signals, strength 1.81
+## 374. Okeanis Eco Tankers Corp. (ECO) -- [STRONG] 2 signals, strength 1.82
+- **Fundamentals**: Quality checklist passed (Current ratio 1.63, ROE 16.4%, Net margin 29.6%)
+- **Technical**: RSI overbought (73.2); Price above rising 50/200-day MAs; Outperforming S&P 500 by 8.1pts (20d)
+- ⚠️ **CAUTION**: Extended 26% above 50-day MA -- elevated pullback risk
+
+## 375. Zscaler, Inc. (ZS) -- [STRONG] 2 signals, strength 1.82
+- **Fundamentals**: Revenue growth 25.4% YoY
+- **Technical**: Outperforming S&P 500 by 14.5pts (20d)
+
+## 376. Honda Motor Company, Ltd. (HMC) -- [STRONG] 2 signals, strength 1.81
 - **Fundamentals**: EPS growth 147.5% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.5pts (20d); 52-week high, but still 6.3% below all-time high ($35.67) -- possible overhead resistance
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.4pts (20d); 52-week high, but still 6.5% below all-time high ($35.67) -- possible overhead resistance
 - ⚠️ **CAUTION**: New 52-week high but on light volume (0.2x average) -- unconfirmed breakout
 
-## 379. MNTN, Inc. (MNTN) -- [STRONG] 2 signals, strength 1.81
+## 377. MNTN, Inc. (MNTN) -- [STRONG] 2 signals, strength 1.81
 - **Fundamentals**: Revenue growth 20.6% YoY; Quality checklist passed (D/E 0.00, Current ratio 4.18, ROE 18.4%, Net margin 18.0%)
-- **Technical**: RSI oversold (29.8)
+- **Technical**: RSI oversold (29.4)
 
-## 380. EQT Corporation (EQT) -- [STRONG] 2 signals, strength 1.80
-- **Fundamentals**: Revenue growth 30.2% YoY; EPS growth 134.0% YoY
-- **Technical**: Outperforming S&P 500 by 3.1pts (20d)
+## 378. Amneal Pharmaceuticals, Inc. (AMRX) -- [STRONG] 2 signals, strength 1.81
+- **Fundamentals**: EPS growth 7506.4% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.3pts (20d)
 
-## 381. Newmark Group, Inc. (NMRK) -- [STRONG] 2 signals, strength 1.80
+## 379. Qualys, Inc. (QLYS) -- [STRONG] 2 signals, strength 1.80
+- **Fundamentals**: Revenue growth 10.3% YoY; EPS growth 15.0% YoY; Quality checklist passed (D/E 0.00, ROE 37.2%, Net margin 29.4%)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 0.7pts (20d)
+
+## 380. Newmark Group, Inc. (NMRK) -- [STRONG] 2 signals, strength 1.80
 - **Fundamentals**: Revenue growth 20.2% YoY; EPS growth 58.6% YoY
-- **Technical**: RSI oversold (23.5)
+- **Technical**: RSI oversold (23.2)
 
-## 382. The Descartes Systems Group Inc. (DSGX) -- [STRONG] 2 signals, strength 1.80
-- **Fundamentals**: Revenue growth 13.2% YoY; EPS growth 26.6% YoY; Quality checklist passed (D/E 0.00, Current ratio 2.16, Net margin 24.2%)
-- **Technical**: Outperforming S&P 500 by 4.6pts (20d)
-
-## 383. Southwest Airlines Company (LUV) -- [STRONG] 2 signals, strength 1.80
+## 381. Southwest Airlines Company (LUV) -- [STRONG] 2 signals, strength 1.80
 - **Fundamentals**: EPS growth 141.5% YoY
 - **Technical**: 20/50-day MA bullish crossover
 
-## 384. SolarEdge Technologies, Inc. (SEDG) -- [STRONG] 2 signals, strength 1.80
+## 382. SolarEdge Technologies, Inc. (SEDG) -- [STRONG] 2 signals, strength 1.80
 - **Fundamentals**: Revenue growth 37.9% YoY
 - **Technical**: 20/50-day MA bullish crossover
 - ⚠️ **EARNINGS QUALITY**: Net margin -20.3% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 385. Carter's, Inc. (CRI) -- [STRONG] 2 signals, strength 1.79
-- **Fundamentals**: EPS growth 42.6% YoY; Quality checklist passed (D/E 0.61, Current ratio 2.51, ROE 20.8%)
-- **Technical**: Outperforming S&P 500 by 5.1pts (20d)
+## 383. Amer Sports, Inc. (AS) -- [STRONG] 2 signals, strength 1.80
+- **Fundamentals**: Revenue growth 30.5% YoY; EPS growth 131.5% YoY
+- **Technical**: Outperforming S&P 500 by 3.0pts (20d)
 
-## 386. Qualys, Inc. (QLYS) -- [STRONG] 2 signals, strength 1.79
-- **Fundamentals**: Revenue growth 10.3% YoY; EPS growth 15.0% YoY; Quality checklist passed (D/E 0.00, ROE 37.2%, Net margin 29.4%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 0.4pts (20d)
+## 384. OmniAb, Inc. (OABI) -- [STRONG] 2 signals, strength 1.79
+- **Fundamentals**: Revenue growth 67.0% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.9pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Net margin -115.1% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+
+## 385. EQT Corporation (EQT) -- [STRONG] 2 signals, strength 1.78
+- **Fundamentals**: Revenue growth 30.2% YoY; EPS growth 134.0% YoY
+- **Technical**: Outperforming S&P 500 by 2.7pts (20d)
+
+## 386. ExxonMobil Holdings Corporation (XOM) -- [STRONG] 2 signals, strength 1.78
+- **Fundamentals**: EPS growth 10.2% YoY
+- **Technical**: RSI overbought (84.7); Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.5pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); New ALL-TIME high -- no overhead resistance from prior sellers
+- ⚠️ **CAUTION**: New 52-week high but on light volume (0.3x average) -- unconfirmed breakout
 
 ## 387. Toro Company (The) (TTC) -- [STRONG] 2 signals, strength 1.78
 - **Fundamentals**: EPS growth 13.3% YoY; Quality checklist passed (D/E 0.63, Current ratio 1.87, ROE 26.1%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.1pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.0pts (20d)
 
-## 388. Oportun Financial Corporation (OPRT) -- [STRONG] 2 signals, strength 1.78
-- **Fundamentals**: EPS growth 20.3% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 11.1pts (20d)
+## 388. Carter's, Inc. (CRI) -- [STRONG] 2 signals, strength 1.78
+- **Fundamentals**: EPS growth 42.6% YoY; Quality checklist passed (D/E 0.61, Current ratio 2.51, ROE 20.8%)
+- **Technical**: Outperforming S&P 500 by 4.9pts (20d)
 
-## 389. Zscaler, Inc. (ZS) -- [STRONG] 2 signals, strength 1.78
-- **Fundamentals**: Revenue growth 25.4% YoY
-- **Technical**: Outperforming S&P 500 by 13.9pts (20d)
+## 389. Pershing Square Inc. (PS) -- [STRONG] 2 signals, strength 1.77
+- **Fundamentals**: Revenue growth 98.0% YoY
+- **Technical**: Outperforming S&P 500 by 11.6pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
 
-## 390. ExxonMobil Holdings Corporation (XOM) -- [STRONG] 2 signals, strength 1.78
-- **Fundamentals**: EPS growth 10.2% YoY
-- **Technical**: RSI overbought (84.3); Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.1pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); New ALL-TIME high -- no overhead resistance from prior sellers
-- ⚠️ **CAUTION**: New 52-week high but on light volume (0.3x average) -- unconfirmed breakout
+## 390. Mistras Group Inc (MG) -- [STRONG] 2 signals, strength 1.77
+- **Fundamentals**: EPS growth 133.3% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.3pts (20d)
 
-## 391. Northrop Grumman Corporation (NOC) -- [STRONG] 2 signals, strength 1.77
+## 391. AbCellera Biologics Inc. (ABCL) -- [STRONG] 2 signals, strength 1.77
+- **Fundamentals**: Revenue growth 101.3% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.3pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Net margin -248.8% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+
+## 392. Northrop Grumman Corporation (NOC) -- [STRONG] 2 signals, strength 1.77
 - **Fundamentals**: EPS growth 15.9% YoY; Quality checklist passed (D/E 0.94, ROE 26.6%, Net margin 10.5%)
 - **Technical**: MACD bullish crossover
 
-## 392. Mistras Group Inc (MG) -- [STRONG] 2 signals, strength 1.77
-- **Fundamentals**: EPS growth 133.3% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.2pts (20d)
-
-## 393. Legend Biotech Corporation - American Depositary Shares (LEGN) -- [STRONG] 2 signals, strength 1.77
-- **Fundamentals**: Revenue growth 59.6% YoY
-- **Technical**: Outperforming S&P 500 by 11.5pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Net margin -7.2% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing; Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
-
-## 394. Miami International Holdings, Inc. (MIAX) -- [STRONG] 2 signals, strength 1.77
+## 393. Miami International Holdings, Inc. (MIAX) -- [STRONG] 2 signals, strength 1.77
 - **Fundamentals**: Revenue growth 18.3% YoY; EPS growth 3870.9% YoY
-- **Technical**: RSI oversold (24.7)
+- **Technical**: RSI oversold (25.5)
 
-## 395. APi Group Corporation (APG) -- [STRONG] 2 signals, strength 1.76
+## 394. APi Group Corporation (APG) -- [STRONG] 2 signals, strength 1.76
 - **Fundamentals**: Revenue growth 14.1% YoY; EPS growth 36.4% YoY
-- **Technical**: Outperforming S&P 500 by 7.2pts (20d)
+- **Technical**: Outperforming S&P 500 by 7.1pts (20d)
 
-## 396. YD Bio Limited (YDES) -- [STRONG] 2 signals, strength 1.75
+## 395. YD Bio Limited (YDES) -- [STRONG] 2 signals, strength 1.75
 - **Fundamentals**: Quality checklist passed (D/E 0.01, Current ratio 5.88, ROE 149.8%)
-- **Technical**: Outperforming S&P 500 by 66.3pts (20d)
-- ⚠️ **CAUTION**: Extended 40% above 50-day MA -- elevated pullback risk
+- **Technical**: Outperforming S&P 500 by 69.0pts (20d)
+- ⚠️ **CAUTION**: Extended 42% above 50-day MA -- elevated pullback risk
 - ⚠️ **EARNINGS QUALITY**: Net margin -1392.6% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 397. Pinterest, Inc. (PINS) -- [STRONG] 2 signals, strength 1.75
+## 396. Pinterest, Inc. (PINS) -- [STRONG] 2 signals, strength 1.74
 - **Fundamentals**: Revenue growth 16.6% YoY
-- **Technical**: RSI overbought (77.1); Outperforming S&P 500 by 14.3pts (20d)
+- **Technical**: RSI overbought (76.8); Outperforming S&P 500 by 14.2pts (20d)
 
-## 398. Amazon.com, Inc. (AMZN) -- [STRONG] 2 signals, strength 1.75
-- **Fundamentals**: Revenue growth 15.8% YoY; EPS growth 89.7% YoY; Quality checklist passed (D/E 0.22, ROE 30.5%, Net margin 17.4%)
-- **Technical**: Outperforming S&P 500 by 1.6pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
+## 397. Stagwell Inc. (STGW) -- [STRONG] 2 signals, strength 1.74
+- **Fundamentals**: EPS growth 630.9% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 3.6pts (20d)
 
-## 399. BlackBerry Limited (BB) -- [STRONG] 2 signals, strength 1.75
-- **Fundamentals**: EPS growth 346.9% YoY; Quality checklist passed (D/E 0.26, Current ratio 2.12, Net margin 10.3%)
-- **Technical**: Outperforming S&P 500 by 4.4pts (20d)
-
-## 400. Edwards Lifesciences Corporation (EW) -- [STRONG] 2 signals, strength 1.74
+## 398. Edwards Lifesciences Corporation (EW) -- [STRONG] 2 signals, strength 1.74
 - **Fundamentals**: Revenue growth 14.6% YoY; Quality checklist passed (D/E 0.06, Current ratio 3.72, Net margin 15.4%)
 - **Technical**: MACD bullish crossover
 
-## 401. CNX Resources Corporation (CNX) -- [STRONG] 2 signals, strength 1.74
-- **Fundamentals**: Revenue growth 18.7% YoY; EPS growth 968.1% YoY; Quality checklist passed (D/E 0.57, ROE 21.2%, Net margin 46.6%)
-- **Technical**: Outperforming S&P 500 by 1.0pts (20d)
+## 399. Keurig Dr Pepper Inc. (KDP) -- [STRONG] 2 signals, strength 1.74
+- **Fundamentals**: Revenue growth 27.5% YoY; Analyst sentiment improving: 16 buy/strongBuy vs. 14 last month
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 2.5pts (20d)
 
-## 402. Stagwell Inc. (STGW) -- [STRONG] 2 signals, strength 1.73
-- **Fundamentals**: EPS growth 630.9% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 3.4pts (20d)
+## 400. BlackBerry Limited (BB) -- [STRONG] 2 signals, strength 1.74
+- **Fundamentals**: EPS growth 346.9% YoY; Quality checklist passed (D/E 0.26, Current ratio 2.12, Net margin 10.3%)
+- **Technical**: Outperforming S&P 500 by 4.3pts (20d)
 
-## 403. SunCoke Energy, Inc. (SXC) -- [STRONG] 2 signals, strength 1.73
+## 401. SunCoke Energy, Inc. (SXC) -- [STRONG] 2 signals, strength 1.73
 - **Fundamentals**: EPS growth 587.8% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 3.4pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 3.3pts (20d)
 
-## 404. PACS Group, Inc. (PACS) -- [STRONG] 2 signals, strength 1.73
+## 402. CNX Resources Corporation (CNX) -- [STRONG] 2 signals, strength 1.73
+- **Fundamentals**: Revenue growth 18.7% YoY; EPS growth 968.1% YoY; Quality checklist passed (D/E 0.57, ROE 21.2%, Net margin 46.6%)
+- **Technical**: Outperforming S&P 500 by 0.9pts (20d)
+
+## 403. Amazon.com, Inc. (AMZN) -- [STRONG] 2 signals, strength 1.73
+- **Fundamentals**: Revenue growth 15.8% YoY; EPS growth 89.7% YoY; Quality checklist passed (D/E 0.22, ROE 30.5%, Net margin 17.4%)
+- **Technical**: Outperforming S&P 500 by 1.3pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
+
+## 404. PACS Group, Inc. (PACS) -- [STRONG] 2 signals, strength 1.72
 - **Fundamentals**: Revenue growth 114.6% YoY; EPS growth 248.3% YoY
-- **Technical**: Outperforming S&P 500 by 2.0pts (20d)
+- **Technical**: Outperforming S&P 500 by 1.8pts (20d)
 
-## 405. Vital Farms, Inc. (VITL) -- [STRONG] 2 signals, strength 1.73
-- **Fundamentals**: Revenue growth 16.4% YoY; EPS growth 263.9% YoY
-- **Technical**: RSI oversold (29.7)
+## 405. Host Hotels & Resorts, Inc. (HST) -- [STRONG] 2 signals, strength 1.72
+- **Fundamentals**: EPS growth 57.8% YoY; Quality checklist passed (D/E 0.77, ROE 15.5%, Net margin 16.5%)
+- **Technical**: Outperforming S&P 500 by 4.0pts (20d)
 
-## 406. Yum! Brands, Inc. (YUM) -- [STRONG] 2 signals, strength 1.73
+## 406. Oportun Financial Corporation (OPRT) -- [STRONG] 2 signals, strength 1.72
+- **Fundamentals**: EPS growth 20.3% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 10.2pts (20d)
+
+## 407. Yum! Brands, Inc. (YUM) -- [STRONG] 2 signals, strength 1.71
 - **Fundamentals**: Revenue growth 10.3% YoY; EPS growth 57.2% YoY
-- **Technical**: RSI overbought (74.7); Outperforming S&P 500 by 3.0pts (20d)
+- **Technical**: RSI overbought (72.5); Outperforming S&P 500 by 2.7pts (20d)
 
-## 407. nVent Electric plc (NVT) -- [STRONG] 2 signals, strength 1.73
-- **Fundamentals**: Revenue growth 46.2% YoY; Quality checklist passed (D/E 0.42, Current ratio 1.63, ROE 15.8%, Net margin 12.4%)
-- **Technical**: Outperforming S&P 500 by 1.9pts (20d)
-
-## 408. Clover Health Investments, Corp. (CLOV) -- [STRONG] 2 signals, strength 1.72
-- **Fundamentals**: Revenue growth 54.0% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 3.1pts (20d)
-
-## 409. Constellation Energy Corporation (CEG) -- [STRONG] 2 signals, strength 1.72
-- **Fundamentals**: Revenue growth 26.0% YoY; Quality checklist passed (D/E 0.62, Current ratio 1.53, Net margin 11.1%)
-- **Technical**: Outperforming S&P 500 by 6.0pts (20d)
-
-## 410. Ball Corporation (BALL) -- [STRONG] 2 signals, strength 1.71
+## 408. Ball Corporation (BALL) -- [STRONG] 2 signals, strength 1.71
 - **Fundamentals**: Revenue growth 15.6% YoY; EPS growth 82.3% YoY
-- **Technical**: RSI overbought (77.6)
+- **Technical**: RSI overbought (75.5)
 
-## 411. Cerence Inc. (CRNC) -- [STRONG] 2 signals, strength 1.71
-- **Fundamentals**: Revenue growth 25.8% YoY
-- **Technical**: RSI overbought (72.8); Outperforming S&P 500 by 9.1pts (20d)
-
-## 412. Nextpower Inc. (NXT) -- [STRONG] 2 signals, strength 1.71
-- **Fundamentals**: Revenue growth 17.0% YoY; Quality checklist passed (D/E 0.00, Current ratio 2.45, ROE 26.3%, Net margin 16.4%)
-- **Technical**: Outperforming S&P 500 by 5.6pts (20d)
-
-## 413. Birkenstock Holding plc (BIRK) -- [STRONG] 2 signals, strength 1.71
+## 409. Birkenstock Holding plc (BIRK) -- [STRONG] 2 signals, strength 1.71
 - **Fundamentals**: Revenue growth 11.8% YoY; EPS growth 11.9% YoY; Quality checklist passed (D/E 0.51, Current ratio 2.60, Net margin 14.8%)
 - **Technical**: Outperforming S&P 500 by 8.7pts (20d)
 
-## 414. Summit Hotel Properties, Inc. (INN) -- [STRONG] 2 signals, strength 1.71
+## 410. Clover Health Investments, Corp. (CLOV) -- [STRONG] 2 signals, strength 1.71
+- **Fundamentals**: Revenue growth 54.0% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 2.7pts (20d)
+
+## 411. Summit Hotel Properties, Inc. (INN) -- [STRONG] 2 signals, strength 1.71
 - **Fundamentals**: EPS growth 185.7% YoY
-- **Technical**: RSI overbought (80.5); Outperforming S&P 500 by 7.0pts (20d)
+- **Technical**: RSI overbought (80.0); Outperforming S&P 500 by 7.0pts (20d)
 
-## 415. Robinhood Markets, Inc. (HOOD) -- [STRONG] 2 signals, strength 1.71
+## 412. Robinhood Markets, Inc. (HOOD) -- [STRONG] 2 signals, strength 1.71
 - **Fundamentals**: Revenue growth 38.3% YoY; EPS growth 15.3% YoY
-- **Technical**: RSI oversold (21.0)
+- **Technical**: RSI oversold (20.8)
 
-## 416. Enerflex Ltd (EFXT) -- [STRONG] 2 signals, strength 1.70
-- **Fundamentals**: Revenue growth 10.3% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 15.7pts (20d)
+## 413. nVent Electric plc (NVT) -- [STRONG] 2 signals, strength 1.70
+- **Fundamentals**: Revenue growth 46.2% YoY; Quality checklist passed (D/E 0.42, Current ratio 1.63, ROE 15.8%, Net margin 12.4%)
+- **Technical**: Outperforming S&P 500 by 1.6pts (20d)
 
-## 417. Zeta Global Holdings Corp. (ZETA) -- [STRONG] 2 signals, strength 1.70
+## 414. Zeta Global Holdings Corp. (ZETA) -- [STRONG] 2 signals, strength 1.70
 - **Fundamentals**: Revenue growth 35.9% YoY
 - **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 2.6pts (20d)
 
-## 418. Northern Trust Corporation (NTRS) -- [STRONG] 2 signals, strength 1.70
+## 415. Constellation Energy Corporation (CEG) -- [STRONG] 2 signals, strength 1.70
+- **Fundamentals**: Revenue growth 26.0% YoY; Quality checklist passed (D/E 0.62, Current ratio 1.53, Net margin 11.1%)
+- **Technical**: Outperforming S&P 500 by 5.8pts (20d)
+
+## 416. Nextpower Inc. (NXT) -- [STRONG] 2 signals, strength 1.70
+- **Fundamentals**: Revenue growth 17.0% YoY; Quality checklist passed (D/E 0.00, Current ratio 2.45, ROE 26.3%, Net margin 16.4%)
+- **Technical**: Outperforming S&P 500 by 5.4pts (20d)
+
+## 417. Northern Trust Corporation (NTRS) -- [STRONG] 2 signals, strength 1.70
 - **Fundamentals**: Revenue growth 15.1% YoY; EPS growth 36.1% YoY
-- **Technical**: RSI oversold (22.3)
+- **Technical**: RSI oversold (22.1)
 
-## 419. Howard Hughes Holdings Inc. (HHH) -- [STRONG] 2 signals, strength 1.70
-- **Fundamentals**: Revenue growth 34.0% YoY
-- **Technical**: Outperforming S&P 500 by 10.5pts (20d)
-
-## 420. PDF Solutions, Inc. (PDFS) -- [STRONG] 2 signals, strength 1.70
-- **Fundamentals**: Revenue growth 23.1% YoY; EPS growth 1057.8% YoY; Analyst sentiment improving: 10 buy/strongBuy vs. 9 last month
-- **Technical**: Outperforming S&P 500 by 2.5pts (20d)
-
-## 421. Bank OZK (OZK) -- [STRONG] 2 signals, strength 1.70
+## 418. Bank OZK (OZK) -- [STRONG] 2 signals, strength 1.70
 - **Fundamentals**: Revenue growth 67.4% YoY
 - **Technical**: MACD bullish crossover
 
-## 422. Tetra Tech, Inc. (TTEK) -- [STRONG] 2 signals, strength 1.70
+## 419. Tetra Tech, Inc. (TTEK) -- [STRONG] 2 signals, strength 1.70
 - **Fundamentals**: EPS growth 106.1% YoY
 - **Technical**: MACD bullish crossover
 
-## 423. Bank Of Montreal (BMO) -- [STRONG] 2 signals, strength 1.70
+## 420. Bank Of Montreal (BMO) -- [STRONG] 2 signals, strength 1.70
 - **Fundamentals**: Revenue growth 115.3% YoY
 - **News**: [MarketWatch Top Stories] Bank of America adds a profit miss to the misery of a $1.2 billion government fine
 - **News (context, not scored)**: [MarketWatch Top Stories] Bank of America adds a profit miss to the misery of a $1.2 billion government fine
 
-## 424. Bunge Limited (BG) -- [STRONG] 2 signals, strength 1.70
+## 421. Bunge Limited (BG) -- [STRONG] 2 signals, strength 1.70
 - **Fundamentals**: Revenue growth 80.5% YoY
 - **Technical**: MACD bullish crossover
 
-## 425. EPR Properties (EPR) -- [STRONG] 2 signals, strength 1.70
+## 422. EPR Properties (EPR) -- [STRONG] 2 signals, strength 1.70
 - **Fundamentals**: EPS growth 45.9% YoY
 - **Technical**: MACD bullish crossover
 
-## 426. DoorDash, Inc. (DASH) -- [STRONG] 2 signals, strength 1.70
+## 423. DoorDash, Inc. (DASH) -- [STRONG] 2 signals, strength 1.70
 - **Fundamentals**: Revenue growth 33.6% YoY
 - **News**: [MarketWatch Top Stories] Charles Schwab and DoorDash ranked among bargain stocks that could lead the market higher
 - **News (context, not scored)**: [MarketWatch Top Stories] Charles Schwab and DoorDash ranked among bargain stocks that could lead the market higher
 
-## 427. Rogers Communication, Inc. (RCI) -- [STRONG] 2 signals, strength 1.70
+## 424. Rogers Communication, Inc. (RCI) -- [STRONG] 2 signals, strength 1.70
 - **Fundamentals**: EPS growth 302.1% YoY
 - **Technical**: MACD bullish crossover
 
-## 428. Toronto Dominion Bank (The) (TD) -- [STRONG] 2 signals, strength 1.70
+## 425. Toronto Dominion Bank (The) (TD) -- [STRONG] 2 signals, strength 1.70
 - **Fundamentals**: Revenue growth 116.1% YoY
 - **Technical**: MACD bullish crossover
 
-## 429. Astronics Corporation (ATRO) -- [STRONG] 2 signals, strength 1.69
+## 426. Enerflex Ltd (EFXT) -- [STRONG] 2 signals, strength 1.70
+- **Fundamentals**: Revenue growth 10.3% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 14.9pts (20d)
+
+## 427. Astronics Corporation (ATRO) -- [STRONG] 2 signals, strength 1.69
 - **Fundamentals**: Revenue growth 14.5% YoY; EPS growth 1987.0% YoY
-- **Technical**: RSI oversold (19.6)
+- **Technical**: RSI oversold (19.1)
 
-## 430. Nexa Resources S.A. (NEXA) -- [STRONG] 2 signals, strength 1.69
-- **Fundamentals**: Revenue growth 24.3% YoY; EPS growth 6217.1% YoY
-- **Technical**: Outperforming S&P 500 by 3.0pts (20d)
-
-## 431. Coca-Cola Company (The) (KO) -- [STRONG] 2 signals, strength 1.68
+## 428. Coca-Cola Company (The) (KO) -- [STRONG] 2 signals, strength 1.69
 - **Fundamentals**: EPS growth 17.6% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.5pts (20d); New ALL-TIME high -- no overhead resistance from prior sellers
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.7pts (20d); New ALL-TIME high -- no overhead resistance from prior sellers
 - ⚠️ **CAUTION**: New 52-week high but on light volume (0.2x average) -- unconfirmed breakout
 
-## 432. Morgan Stanley (MS) -- [STRONG] 2 signals, strength 1.68
+## 429. Arcos Dorados Holdings Inc. Class A Shares (ARCO) -- [STRONG] 2 signals, strength 1.68
+- **Fundamentals**: Revenue growth 86.6% YoY; EPS growth 97.4% YoY
+- **Technical**: Outperforming S&P 500 by 1.3pts (20d)
+
+## 430. Morgan Stanley (MS) -- [STRONG] 2 signals, strength 1.68
 - **Fundamentals**: Revenue growth 14.0% YoY; EPS growth 38.6% YoY
-- **Technical**: RSI oversold (21.1)
+- **Technical**: RSI oversold (21.5)
 - ⚠️ **EARNINGS QUALITY**: Earnings scheduled today (2026-10-14) -- gap risk on a swing hold
 
-## 433. Maximus, Inc. (MMS) -- [STRONG] 2 signals, strength 1.67
+## 431. Maximus, Inc. (MMS) -- [STRONG] 2 signals, strength 1.67
 - **Fundamentals**: EPS growth 24.8% YoY; Quality checklist passed (D/E 0.80, Current ratio 1.64, ROE 21.7%)
 - **Technical**: RSI overbought (71.4)
 
-## 434. Heartflow, Inc. (HTFL) -- [STRONG] 2 signals, strength 1.67
-- **Fundamentals**: Revenue growth 47.6% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.7pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Net margin -55.8% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+## 432. Centene Corporation (CNC) -- [STRONG] 2 signals, strength 1.67
+- **Fundamentals**: Revenue growth 17.0% YoY; Analyst sentiment improving: 12 buy/strongBuy vs. 11 last month
+- **Technical**: RSI overbought (82.1); Price above rising 50/200-day MAs; Outperforming S&P 500 by 2.6pts (20d); 52-week high, but still 28.6% below all-time high ($97.22) -- possible overhead resistance
+- ⚠️ **CAUTION**: New 52-week high but on light volume (0.3x average) -- unconfirmed breakout
 
-## 435. Expand Energy Corporation (EXE) -- [STRONG] 2 signals, strength 1.67
+## 433. Expand Energy Corporation (EXE) -- [STRONG] 2 signals, strength 1.67
 - **Fundamentals**: Revenue growth 60.7% YoY; EPS growth 2866.7% YoY
-- **Technical**: Outperforming S&P 500 by 1.0pts (20d)
+- **Technical**: Outperforming S&P 500 by 1.1pts (20d)
 
-## 436. Arcos Dorados Holdings Inc. Class A Shares (ARCO) -- [STRONG] 2 signals, strength 1.66
-- **Fundamentals**: Revenue growth 86.6% YoY; EPS growth 97.4% YoY
-- **Technical**: Outperforming S&P 500 by 0.9pts (20d)
+## 434. Legend Biotech Corporation - American Depositary Shares (LEGN) -- [STRONG] 2 signals, strength 1.66
+- **Fundamentals**: Revenue growth 59.6% YoY
+- **Technical**: Outperforming S&P 500 by 9.9pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Net margin -7.2% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing; Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
 
-## 437. Entegris, Inc. (ENTG) -- [STRONG] 2 signals, strength 1.66
-- **Fundamentals**: Analyst sentiment improving: 14 buy/strongBuy vs. 12 last month
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 15.7pts (20d)
+## 435. Signet Jewelers Limited (SIG) -- [STRONG] 2 signals, strength 1.66
+- **Fundamentals**: EPS growth 186.7% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.5pts (20d)
 
-## 438. V2X, Inc. (VVX) -- [STRONG] 2 signals, strength 1.66
+## 436. V2X, Inc. (VVX) -- [STRONG] 2 signals, strength 1.66
 - **Fundamentals**: Revenue growth 13.0% YoY; EPS growth 31.6% YoY
-- **Technical**: RSI oversold (22.3)
+- **Technical**: RSI oversold (22.7)
 - ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 1 sell/strongSell vs. 1 last month
 
-## 439. JFrog Ltd. (FROG) -- [STRONG] 2 signals, strength 1.66
-- **Fundamentals**: Revenue growth 26.4% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.5pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Net margin -7.3% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
-
-## 440. LXP Industrial Trust (LXP) -- [STRONG] 2 signals, strength 1.66
+## 437. LXP Industrial Trust (LXP) -- [STRONG] 2 signals, strength 1.66
 - **Fundamentals**: EPS growth 15.4% YoY; Quality checklist passed (D/E 0.66, Current ratio 2.20, Net margin 18.7%)
 - **Technical**: Price above rising 50/200-day MAs
 - ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
 
-## 441. Signet Jewelers Limited (SIG) -- [STRONG] 2 signals, strength 1.65
-- **Fundamentals**: EPS growth 186.7% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.4pts (20d)
+## 438. Braze, Inc. (BRZE) -- [STRONG] 2 signals, strength 1.66
+- **Fundamentals**: Revenue growth 27.4% YoY
+- **Technical**: Outperforming S&P 500 by 11.2pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Net margin -13.6% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 442. Logitech International S.A. - Registered Shares (LOGI) -- [STRONG] 2 signals, strength 1.65
-- **Fundamentals**: EPS growth 29.6% YoY; Quality checklist passed (D/E 0.00, Current ratio 2.22, ROE 35.7%, Net margin 16.3%)
-- **Technical**: Outperforming S&P 500 by 0.9pts (20d)
-
-## 443. StandardAero, Inc. (SARO) -- [STRONG] 2 signals, strength 1.65
+## 439. StandardAero, Inc. (SARO) -- [STRONG] 2 signals, strength 1.65
 - **Fundamentals**: Revenue growth 12.6% YoY; EPS growth 140.4% YoY
-- **Technical**: RSI oversold (17.7)
+- **Technical**: RSI oversold (17.4)
 
-## 444. Nasdaq, Inc. (NDAQ) -- [STRONG] 2 signals, strength 1.65
-- **Fundamentals**: EPS growth 31.8% YoY; Quality checklist passed (D/E 0.74, ROE 16.3%, Net margin 22.5%)
-- **Technical**: Outperforming S&P 500 by 3.0pts (20d)
+## 440. Acco Brands Corporation (ACCO) -- [STRONG] 2 signals, strength 1.65
+- **Fundamentals**: EPS growth 27.2% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 3.6pts (20d)
 
-## 445. Gilat Satellite Networks Ltd. (GILT) -- [STRONG] 2 signals, strength 1.65
+## 441. Entegris, Inc. (ENTG) -- [STRONG] 2 signals, strength 1.65
+- **Fundamentals**: Analyst sentiment improving: 14 buy/strongBuy vs. 12 last month
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 14.8pts (20d)
+
+## 442. Gilat Satellite Networks Ltd. (GILT) -- [STRONG] 2 signals, strength 1.65
 - **Fundamentals**: Revenue growth 12.3% YoY; EPS growth 531.9% YoY
 - **Technical**: RSI oversold (14.5)
 
-## 446. RingCentral, Inc. (RNG) -- [STRONG] 2 signals, strength 1.64
-- **Fundamentals**: EPS growth 215.1% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.1pts (20d)
+## 443. BCE, Inc. (BCE) -- [STRONG] 2 signals, strength 1.64
+- **Fundamentals**: EPS growth 976.6% YoY; Analyst sentiment improving: 13 buy/strongBuy vs. 11 last month
+- **Technical**: RSI oversold (28.3)
+
+## 444. Logitech International S.A. - Registered Shares (LOGI) -- [STRONG] 2 signals, strength 1.64
+- **Fundamentals**: EPS growth 29.6% YoY; Quality checklist passed (D/E 0.00, Current ratio 2.22, ROE 35.7%, Net margin 16.3%)
+- **Technical**: Outperforming S&P 500 by 0.7pts (20d)
+
+## 445. Hayward Holdings, Inc. (HAYW) -- [STRONG] 2 signals, strength 1.64
+- **Fundamentals**: EPS growth 23.6% YoY; Quality checklist passed (D/E 0.60, Current ratio 2.94, Net margin 13.8%)
+- **Technical**: RSI oversold (25.1)
+
+## 446. Envista Holdings Corporation (NVST) -- [STRONG] 2 signals, strength 1.64
+- **Fundamentals**: Revenue growth 11.9% YoY; EPS growth 83.6% YoY
+- **Technical**: RSI oversold (27.7)
 
 ## 447. Tower Semiconductor Ltd. (TSEM) -- [STRONG] 2 signals, strength 1.64
 - **Fundamentals**: EPS growth 133.9% YoY; Quality checklist passed (D/E 0.05, Current ratio 6.48, Net margin 37.6%)
-- **Technical**: Outperforming S&P 500 by 2.9pts (20d)
+- **Technical**: Outperforming S&P 500 by 2.8pts (20d)
 
-## 448. BCE, Inc. (BCE) -- [STRONG] 2 signals, strength 1.64
-- **Fundamentals**: EPS growth 976.6% YoY; Analyst sentiment improving: 13 buy/strongBuy vs. 11 last month
-- **Technical**: RSI oversold (28.6)
+## 448. Heartflow, Inc. (HTFL) -- [STRONG] 2 signals, strength 1.64
+- **Fundamentals**: Revenue growth 47.6% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 0.9pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Net margin -55.8% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 449. Hayward Holdings, Inc. (HAYW) -- [STRONG] 2 signals, strength 1.64
-- **Fundamentals**: EPS growth 23.6% YoY; Quality checklist passed (D/E 0.60, Current ratio 2.94, Net margin 13.8%)
-- **Technical**: RSI oversold (25.2)
+## 449. Nasdaq, Inc. (NDAQ) -- [STRONG] 2 signals, strength 1.63
+- **Fundamentals**: EPS growth 31.8% YoY; Quality checklist passed (D/E 0.74, ROE 16.3%, Net margin 22.5%)
+- **Technical**: Outperforming S&P 500 by 2.8pts (20d)
 
-## 450. Envista Holdings Corporation (NVST) -- [STRONG] 2 signals, strength 1.64
-- **Fundamentals**: Revenue growth 11.9% YoY; EPS growth 83.6% YoY
-- **Technical**: RSI oversold (29.1)
+## 450. Omeros Corporation (OMER) -- [STRONG] 2 signals, strength 1.63
+- **Fundamentals**: Quality checklist passed (Current ratio 2.76, ROE 107.5%, Net margin 180.3%)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 7.1pts (20d)
 
-## 451. Ralliant Corporation (RAL) -- [STRONG] 2 signals, strength 1.63
-- **Fundamentals**: Revenue growth 12.8% YoY; EPS growth 20.3% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 2.5pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Net margin -56.4% despite 20.3% adjusted EPS growth -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
-
-## 452. The Cheesecake Factory Incorporated (CAKE) -- [STRONG] 2 signals, strength 1.63
-- **Fundamentals**: EPS growth 13.4% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 12.4pts (20d)
-
-## 453. Snowflake Inc. (SNOW) -- [STRONG] 2 signals, strength 1.63
+## 451. Snowflake Inc. (SNOW) -- [STRONG] 2 signals, strength 1.63
 - **Fundamentals**: Revenue growth 32.0% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 0.7pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 0.8pts (20d)
 - ⚠️ **EARNINGS QUALITY**: Net margin -20.1% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 454. Prudential Financial, Inc. (PRU) -- [STRONG] 2 signals, strength 1.63
+## 452. Prudential Financial, Inc. (PRU) -- [STRONG] 2 signals, strength 1.63
 - **Fundamentals**: Revenue growth 11.3% YoY; EPS growth 144.2% YoY
-- **Technical**: RSI oversold (25.8)
+- **Technical**: RSI oversold (26.2)
 
-## 455. Cardinal Health, Inc. (CAH) -- [STRONG] 2 signals, strength 1.62
-- **Fundamentals**: Revenue growth 14.2% YoY; EPS growth 12.4% YoY
-- **Technical**: RSI overbought (78.3); Price above rising 50/200-day MAs; Outperforming S&P 500 by 2.5pts (20d)
-
-## 456. Academy Sports and Outdoors, Inc. (ASO) -- [STRONG] 2 signals, strength 1.62
+## 453. Academy Sports and Outdoors, Inc. (ASO) -- [STRONG] 2 signals, strength 1.63
 - **Fundamentals**: EPS growth 12.5% YoY; Quality checklist passed (D/E 0.22, Current ratio 1.89, ROE 18.4%)
-- **Technical**: RSI overbought (81.3); Outperforming S&P 500 by 5.5pts (20d)
+- **Technical**: RSI overbought (81.7); Outperforming S&P 500 by 5.7pts (20d)
 
-## 457. Lattice Semiconductor Corporation (LSCC) -- [STRONG] 2 signals, strength 1.62
-- **Fundamentals**: Revenue growth 33.2% YoY; EPS growth 13.1% YoY
-- **Technical**: Outperforming S&P 500 by 5.4pts (20d)
+## 454. Cardinal Health, Inc. (CAH) -- [STRONG] 2 signals, strength 1.62
+- **Fundamentals**: Revenue growth 14.2% YoY; EPS growth 12.4% YoY
+- **Technical**: RSI overbought (78.1); Price above rising 50/200-day MAs; Outperforming S&P 500 by 2.4pts (20d)
 
-## 458. Yext, Inc. (YEXT) -- [STRONG] 2 signals, strength 1.62
-- **Fundamentals**: EPS growth 333.4% YoY
-- **Technical**: RSI overbought (70.1); Outperforming S&P 500 by 5.4pts (20d)
-
-## 459. Precigen, Inc. (PGEN) -- [STRONG] 2 signals, strength 1.61
-- **Fundamentals**: Revenue growth 1875.0% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 0.2pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Net margin -184.0% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
-
-## 460. Antero Resources Corporation (AR) -- [STRONG] 2 signals, strength 1.60
-- **Fundamentals**: Revenue growth 25.8% YoY; EPS growth 153.2% YoY
+## 455. PDF Solutions, Inc. (PDFS) -- [STRONG] 2 signals, strength 1.62
+- **Fundamentals**: Revenue growth 23.1% YoY; EPS growth 1057.8% YoY; Analyst sentiment improving: 10 buy/strongBuy vs. 9 last month
 - **Technical**: Outperforming S&P 500 by 1.3pts (20d)
 
-## 461. Diversified Energy Company (DEC) -- [STRONG] 2 signals, strength 1.60
+## 456. JFrog Ltd. (FROG) -- [STRONG] 2 signals, strength 1.62
+- **Fundamentals**: Revenue growth 26.4% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 3.4pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Net margin -7.3% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+
+## 457. Diversified Energy Company (DEC) -- [STRONG] 2 signals, strength 1.62
 - **Fundamentals**: Revenue growth 60.6% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 0.1pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 0.4pts (20d)
 - ⚠️ **EARNINGS QUALITY**: Net margin -11.4% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 462. OppFi Inc. (OPFI) -- [STRONG] 2 signals, strength 1.60
-- **Fundamentals**: Revenue growth 10.2% YoY; EPS growth 127.6% YoY
-- **Technical**: RSI oversold (25.3)
+## 458. Precigen, Inc. (PGEN) -- [STRONG] 2 signals, strength 1.61
+- **Fundamentals**: Revenue growth 1875.0% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 0.3pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Net margin -184.0% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 463. H World Group Limited - American Depositary Shares (HTHT) -- [STRONG] 2 signals, strength 1.60
+## 459. Nexa Resources S.A. (NEXA) -- [STRONG] 2 signals, strength 1.61
+- **Fundamentals**: Revenue growth 24.3% YoY; EPS growth 6217.1% YoY
+- **Technical**: Outperforming S&P 500 by 1.9pts (20d)
+
+## 460. GitLab Inc. (GTLB) -- [STRONG] 2 signals, strength 1.61
+- **Fundamentals**: Revenue growth 23.0% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 6.1pts (20d)
+
+## 461. H World Group Limited - American Depositary Shares (HTHT) -- [STRONG] 2 signals, strength 1.61
 - **Fundamentals**: EPS growth 33.4% YoY; Quality checklist passed (D/E 0.70, ROE 40.5%, Net margin 18.9%); Analyst sentiment improving: 22 buy/strongBuy vs. 20 last month
-- **Technical**: Outperforming S&P 500 by 0.6pts (20d)
+- **Technical**: Outperforming S&P 500 by 0.8pts (20d)
 
-## 464. Five9, Inc. (FIVN) -- [STRONG] 2 signals, strength 1.60
+## 462. Howard Hughes Holdings Inc. (HHH) -- [STRONG] 2 signals, strength 1.61
+- **Fundamentals**: Revenue growth 34.0% YoY
+- **Technical**: Outperforming S&P 500 by 9.1pts (20d)
+
+## 463. Ralliant Corporation (RAL) -- [STRONG] 2 signals, strength 1.61
+- **Fundamentals**: Revenue growth 12.8% YoY; EPS growth 20.3% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.9pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Net margin -56.4% despite 20.3% adjusted EPS growth -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+
+## 464. OppFi Inc. (OPFI) -- [STRONG] 2 signals, strength 1.60
+- **Fundamentals**: Revenue growth 10.2% YoY; EPS growth 127.6% YoY
+- **Technical**: RSI oversold (24.7)
+
+## 465. Lattice Semiconductor Corporation (LSCC) -- [STRONG] 2 signals, strength 1.60
+- **Fundamentals**: Revenue growth 33.2% YoY; EPS growth 13.1% YoY
+- **Technical**: Outperforming S&P 500 by 5.1pts (20d)
+
+## 466. Ambev S.A. American Depositary Shares (Each representing 1 Common Share) (ABEV) -- [STRONG] 2 signals, strength 1.60
+- **Fundamentals**: EPS growth 10.8% YoY; Quality checklist passed (D/E 0.04, ROE 18.1%, Net margin 18.4%)
+- **Technical**: RSI overbought (74.0); Outperforming S&P 500 by 5.9pts (20d)
+
+## 467. Five9, Inc. (FIVN) -- [STRONG] 2 signals, strength 1.60
 - **Fundamentals**: EPS growth 505.9% YoY
 - **Technical**: Price above rising 50/200-day MAs
 
-## 465. Navigator Holdings Ltd. (NVGS) -- [STRONG] 2 signals, strength 1.60
+## 468. Navigator Holdings Ltd. (NVGS) -- [STRONG] 2 signals, strength 1.60
 - **Fundamentals**: EPS growth 72.5% YoY
 - **Technical**: Price above rising 50/200-day MAs
 
-## 466. Greenfire Resources Ltd. (GFR) -- [STRONG] 2 signals, strength 1.60
+## 469. Greenfire Resources Ltd. (GFR) -- [STRONG] 2 signals, strength 1.60
 - **Fundamentals**: EPS growth 458.1% YoY
 - **Technical**: Price above rising 50/200-day MAs
 
-## 467. Best Buy Co., Inc. (BBY) -- [STRONG] 2 signals, strength 1.60
+## 470. Best Buy Co., Inc. (BBY) -- [STRONG] 2 signals, strength 1.60
 - **Fundamentals**: EPS growth 65.8% YoY
 - **Technical**: Price above rising 50/200-day MAs
 - ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 2 sell/strongSell vs. 1 last month
 
-## 468. LifeStance Health Group, Inc. (LFST) -- [STRONG] 2 signals, strength 1.60
+## 471. LifeStance Health Group, Inc. (LFST) -- [STRONG] 2 signals, strength 1.60
 - **Fundamentals**: Revenue growth 61.1% YoY
 - **Technical**: Price above rising 50/200-day MAs
 
-## 469. Starling Oncology, Inc. (STLN) -- [STRONG] 2 signals, strength 1.60
+## 472. Starling Oncology, Inc. (STLN) -- [STRONG] 2 signals, strength 1.60
 - **Fundamentals**: Revenue growth 38.4% YoY
 - **Technical**: Price above rising 50/200-day MAs
 - ⚠️ **EARNINGS QUALITY**: Net margin -6.2% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 470. Corebridge Financial Inc. (CRBG) -- [STRONG] 2 signals, strength 1.60
+## 473. Corebridge Financial Inc. (CRBG) -- [STRONG] 2 signals, strength 1.60
 - **Fundamentals**: Revenue growth 33.2% YoY
 - **Technical**: Price above rising 50/200-day MAs
 
-## 471. TotalEnergies SE (TTE) -- [STRONG] 2 signals, strength 1.60
+## 474. RingCentral, Inc. (RNG) -- [STRONG] 2 signals, strength 1.60
+- **Fundamentals**: EPS growth 215.1% YoY
+- **Technical**: Price above rising 50/200-day MAs
+
+## 475. TotalEnergies SE (TTE) -- [STRONG] 2 signals, strength 1.60
 - **Fundamentals**: EPS growth 44.5% YoY
 - **Technical**: Price above rising 50/200-day MAs
 
-## 472. Obsidian Energy Ltd. (OBE) -- [STRONG] 2 signals, strength 1.60
+## 476. Obsidian Energy Ltd. (OBE) -- [STRONG] 2 signals, strength 1.60
 - **Fundamentals**: EPS growth 190.8% YoY
 - **Technical**: Price above rising 50/200-day MAs
 
-## 473. VAALCO Energy, Inc. (EGY) -- [STRONG] 2 signals, strength 1.60
+## 477. VAALCO Energy, Inc. (EGY) -- [STRONG] 2 signals, strength 1.60
 - **Fundamentals**: EPS growth 403.2% YoY
 - **Technical**: Price above rising 50/200-day MAs
 - ⚠️ **EARNINGS QUALITY**: Net margin -31.1% despite 403.2% adjusted EPS growth -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 474. Targa Resources, Inc. (TRGP) -- [STRONG] 2 signals, strength 1.60
+## 478. Targa Resources, Inc. (TRGP) -- [STRONG] 2 signals, strength 1.60
 - **Fundamentals**: EPS growth 40.4% YoY
 - **Technical**: Price above rising 50/200-day MAs
 
-## 475. Cloudflare, Inc. (NET) -- [STRONG] 2 signals, strength 1.60
+## 479. Cloudflare, Inc. (NET) -- [STRONG] 2 signals, strength 1.60
 - **Fundamentals**: Revenue growth 33.5% YoY
 - **Technical**: Price above rising 50/200-day MAs
 - ⚠️ **EARNINGS QUALITY**: Net margin -8.2% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing; Analyst sentiment deteriorating: 3 sell/strongSell vs. 2 last month
 
-## 476. Vir Biotechnology, Inc. (VIR) -- [STRONG] 2 signals, strength 1.60
-- **Fundamentals**: Revenue growth 1496.1% YoY
-- **Technical**: Price above rising 50/200-day MAs
-- ⚠️ **EARNINGS QUALITY**: Net margin -41.5% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
-
-## 477. Tempus AI, Inc. (TEM) -- [STRONG] 2 signals, strength 1.60
+## 480. Tempus AI, Inc. (TEM) -- [STRONG] 2 signals, strength 1.60
 - **Fundamentals**: Revenue growth 50.4% YoY
 - **Technical**: Price above rising 50/200-day MAs
 - ⚠️ **EARNINGS QUALITY**: Net margin -17.8% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 478. Plains All American Pipeline, L.P. - Common Units representing Limited Partner Interests (PAA) -- [STRONG] 2 signals, strength 1.60
+## 481. Plains All American Pipeline, L.P. - Common Units representing Limited Partner Interests (PAA) -- [STRONG] 2 signals, strength 1.60
 - **Fundamentals**: EPS growth 203.2% YoY
 - **Technical**: Price above rising 50/200-day MAs
 
-## 479. Plains GP Holdings, L.P. - Class A Shares representing limited partner interests (PAGP) -- [STRONG] 2 signals, strength 1.60
+## 482. Plains GP Holdings, L.P. - Class A Shares representing limited partner interests (PAGP) -- [STRONG] 2 signals, strength 1.60
 - **Fundamentals**: EPS growth 291.0% YoY
 - **Technical**: Price above rising 50/200-day MAs
 
-## 480. Adaptive Biotechnologies Corporation (ADPT) -- [STRONG] 2 signals, strength 1.60
-- **Fundamentals**: Revenue growth 50.1% YoY
-- **Technical**: Price above rising 50/200-day MAs
-- ⚠️ **EARNINGS QUALITY**: Net margin -20.7% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+## 483. Antero Resources Corporation (AR) -- [STRONG] 2 signals, strength 1.59
+- **Fundamentals**: Revenue growth 25.8% YoY; EPS growth 153.2% YoY
+- **Technical**: Outperforming S&P 500 by 1.1pts (20d)
 
-## 481. GitLab Inc. (GTLB) -- [STRONG] 2 signals, strength 1.59
-- **Fundamentals**: Revenue growth 23.0% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.6pts (20d)
-
-## 482. Omeros Corporation (OMER) -- [STRONG] 2 signals, strength 1.59
-- **Fundamentals**: Quality checklist passed (Current ratio 2.76, ROE 107.5%, Net margin 180.3%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 6.0pts (20d)
-
-## 483. Ambev S.A. American Depositary Shares (Each representing 1 Common Share) (ABEV) -- [STRONG] 2 signals, strength 1.59
-- **Fundamentals**: EPS growth 10.8% YoY; Quality checklist passed (D/E 0.04, ROE 18.1%, Net margin 18.4%)
-- **Technical**: RSI overbought (73.8); Outperforming S&P 500 by 5.6pts (20d)
-
-## 484. Automatic Data Processing, Inc. (ADP) -- [STRONG] 2 signals, strength 1.59
-- **Fundamentals**: Quality checklist passed (D/E 0.82, ROE 70.2%, Net margin 20.1%)
-- **Technical**: RSI overbought (70.2); Price above rising 50/200-day MAs
-
-## 485. National Energy Services Reunited Corp (NESR) -- [STRONG] 2 signals, strength 1.59
+## 484. National Energy Services Reunited Corp (NESR) -- [STRONG] 2 signals, strength 1.59
 - **Fundamentals**: Revenue growth 23.6% YoY; EPS growth 20.2% YoY
-- **Technical**: RSI oversold (4.0)
+- **Technical**: RSI oversold (4.1)
 
-## 486. Ultragenyx Pharmaceutical Inc. (RARE) -- [STRONG] 2 signals, strength 1.58
-- **Fundamentals**: Revenue growth 17.5% YoY; Analyst sentiment improving: 23 buy/strongBuy vs. 22 last month
-- **Technical**: Outperforming S&P 500 by 13.2pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Net margin -81.7% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+## 485. The Cheesecake Factory Incorporated (CAKE) -- [STRONG] 2 signals, strength 1.59
+- **Fundamentals**: EPS growth 13.4% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 11.7pts (20d)
 
-## 487. Samsara Inc. (IOT) -- [STRONG] 2 signals, strength 1.58
+## 486. Samsara Inc. (IOT) -- [STRONG] 2 signals, strength 1.58
 - **Fundamentals**: Revenue growth 29.5% YoY
 - **Technical**: Price above rising 50/200-day MAs
 
-## 488. Moelis & Company (MC) -- [STRONG] 2 signals, strength 1.58
-- **Fundamentals**: Revenue growth 13.7% YoY; EPS growth 13.2% YoY; Quality checklist passed (D/E 0.00, ROE 43.5%, Net margin 14.5%)
-- **Technical**: RSI oversold (29.7)
-
-## 489. Centene Corporation (CNC) -- [STRONG] 2 signals, strength 1.58
-- **Fundamentals**: Revenue growth 17.0% YoY; Analyst sentiment improving: 12 buy/strongBuy vs. 11 last month
-- **Technical**: RSI overbought (81.8); Price above rising 50/200-day MAs; Outperforming S&P 500 by 2.3pts (20d)
-
-## 490. Gorilla Technology Group Inc. (GRRR) -- [STRONG] 2 signals, strength 1.58
-- **Fundamentals**: Revenue growth 80.9% YoY; Analyst sentiment improving: 10 buy/strongBuy vs. 8 last month
-- **Technical**: RSI oversold (5.4)
-- ⚠️ **EARNINGS QUALITY**: Net margin -24.1% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
-
-## 491. Arteris, Inc. (AIP) -- [STRONG] 2 signals, strength 1.58
-- **Fundamentals**: Revenue growth 33.8% YoY; Analyst sentiment improving: 9 buy/strongBuy vs. 7 last month
-- **Technical**: RSI oversold (22.4)
-- ⚠️ **EARNINGS QUALITY**: Net margin -46.7% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
-
-## 492. UBS Asset Management High Yield Credit Fund (DHY) -- [STRONG] 2 signals, strength 1.58
+## 487. UBS Asset Management High Yield Credit Fund (DHY) -- [STRONG] 2 signals, strength 1.58
 - **Fundamentals**: Revenue growth 18.5% YoY
-- **Technical**: RSI overbought (96.8); Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.0pts (20d)
+- **Technical**: RSI overbought (97.0); Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.3pts (20d)
 - ⚠️ **CAUTION**: Extended 192% above 50-day MA -- elevated pullback risk
 - ⚠️ **EARNINGS QUALITY**: Net margin -7.0% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 493. Paycom Software, Inc. (PAYC) -- [STRONG] 2 signals, strength 1.58
+## 488. Gorilla Technology Group Inc. (GRRR) -- [STRONG] 2 signals, strength 1.58
+- **Fundamentals**: Revenue growth 80.9% YoY; Analyst sentiment improving: 10 buy/strongBuy vs. 8 last month
+- **Technical**: RSI oversold (5.2)
+- ⚠️ **EARNINGS QUALITY**: Net margin -24.1% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+
+## 489. Arteris, Inc. (AIP) -- [STRONG] 2 signals, strength 1.58
+- **Fundamentals**: Revenue growth 33.8% YoY; Analyst sentiment improving: 9 buy/strongBuy vs. 7 last month
+- **Technical**: RSI oversold (21.9)
+- ⚠️ **EARNINGS QUALITY**: Net margin -46.7% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+
+## 490. Paycom Software, Inc. (PAYC) -- [STRONG] 2 signals, strength 1.58
 - **Fundamentals**: EPS growth 27.1% YoY
 - **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.8pts (20d)
 
-## 494. Leonardo DRS, Inc. (DRS) -- [STRONG] 2 signals, strength 1.57
+## 491. Leonardo DRS, Inc. (DRS) -- [STRONG] 2 signals, strength 1.57
 - **Fundamentals**: Revenue growth 10.5% YoY; EPS growth 29.0% YoY
-- **Technical**: RSI oversold (21.0)
+- **Technical**: RSI oversold (20.2)
 
-## 495. Fastly, Inc. (FSLY) -- [STRONG] 2 signals, strength 1.57
-- **Fundamentals**: Revenue growth 20.4% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 7.3pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Net margin -11.8% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+## 492. SAP  SE ADS (SAP) -- [STRONG] 2 signals, strength 1.57
+- **Fundamentals**: EPS growth 20.3% YoY; Quality checklist passed (D/E 0.17, ROE 17.6%, Net margin 20.4%)
+- **Technical**: RSI overbought (70.5); Outperforming S&P 500 by 0.4pts (20d)
 
-## 496. ExlService Holdings, Inc. (EXLS) -- [STRONG] 2 signals, strength 1.56
-- **Fundamentals**: Revenue growth 13.6% YoY; EPS growth 10.1% YoY; Quality checklist passed (D/E 0.33, Current ratio 2.56, ROE 28.5%, Net margin 11.2%)
-- **Technical**: Outperforming S&P 500 by 2.6pts (20d)
-
-## 497. Pebblebrook Hotel Trust (PEB) -- [STRONG] 2 signals, strength 1.55
-- **Fundamentals**: EPS growth 21.6% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.8pts (20d)
-
-## 498. Arxis, Inc. (ARXS) -- [STRONG] 2 signals, strength 1.55
+## 493. Arxis, Inc. (ARXS) -- [STRONG] 2 signals, strength 1.56
 - **Fundamentals**: Revenue growth 25.0% YoY
-- **Technical**: MACD bullish crossover; Outperforming S&P 500 by 0.3pts (20d)
+- **Technical**: MACD bullish crossover; Outperforming S&P 500 by 0.7pts (20d)
 
-## 499. Lear Corporation (LEA) -- [STRONG] 2 signals, strength 1.54
-- **Fundamentals**: EPS growth 25.3% YoY
-- **Technical**: MACD bullish crossover
+## 494. Ultragenyx Pharmaceutical Inc. (RARE) -- [STRONG] 2 signals, strength 1.56
+- **Fundamentals**: Revenue growth 17.5% YoY; Analyst sentiment improving: 23 buy/strongBuy vs. 22 last month
+- **Technical**: Outperforming S&P 500 by 12.9pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Net margin -81.7% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 500. OUTFRONT Media Inc. (OUT) -- [STRONG] 2 signals, strength 1.54
-- **Fundamentals**: EPS growth 118.5% YoY
-- **Technical**: RSI overbought (73.9); Outperforming S&P 500 by 3.4pts (20d)
-
-## 501. Humana Inc. (HUM) -- [STRONG] 2 signals, strength 1.54
+## 495. Humana Inc. (HUM) -- [STRONG] 2 signals, strength 1.55
 - **Fundamentals**: Revenue growth 18.3% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 8.1pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 8.4pts (20d)
 
-## 502. Open Text Corporation (OTEX) -- [STRONG] 2 signals, strength 1.53
-- **Fundamentals**: EPS growth 56.6% YoY
-- **Technical**: RSI overbought (78.1); Outperforming S&P 500 by 3.3pts (20d)
+## 496. ExlService Holdings, Inc. (EXLS) -- [STRONG] 2 signals, strength 1.54
+- **Fundamentals**: Revenue growth 13.6% YoY; EPS growth 10.1% YoY; Quality checklist passed (D/E 0.33, Current ratio 2.56, ROE 28.5%, Net margin 11.2%)
+- **Technical**: Outperforming S&P 500 by 2.2pts (20d)
 
-## 503. Airbnb, Inc. (ABNB) -- [STRONG] 2 signals, strength 1.53
-- **Fundamentals**: Revenue growth 13.6% YoY; Quality checklist passed (D/E 0.24, ROE 33.4%, Net margin 20.4%); Analyst sentiment improving: 30 buy/strongBuy vs. 28 last month
-- **Technical**: RSI overbought (75.0)
-
-## 504. Parker-Hannifin Corporation (PH) -- [STRONG] 2 signals, strength 1.53
-- **Fundamentals**: Quality checklist passed (D/E 0.55, ROE 25.1%, Net margin 17.0%)
-- **Technical**: MACD bullish crossover; Outperforming S&P 500 by 2.0pts (20d)
-
-## 505. Williams Companies, Inc. (The) (WMB) -- [STRONG] 2 signals, strength 1.53
+## 497. Williams Companies, Inc. (The) (WMB) -- [STRONG] 2 signals, strength 1.54
 - **Fundamentals**: EPS growth 26.3% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.3pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.5pts (20d)
 - ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 1 sell/strongSell vs. 1 last month
 
-## 506. IHS Holding Limited (IHS) -- [STRONG] 2 signals, strength 1.53
+## 498. Ultrapar Participacoes S.A. (New) American Depositary Shares (Each representing one Common Share) (UGP) -- [STRONG] 2 signals, strength 1.54
+- **Fundamentals**: Revenue growth 10.9% YoY; EPS growth 21.1% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 0.3pts (20d)
+
+## 499. Pebblebrook Hotel Trust (PEB) -- [STRONG] 2 signals, strength 1.53
+- **Fundamentals**: EPS growth 21.6% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.3pts (20d)
+
+## 500. Open Text Corporation (OTEX) -- [STRONG] 2 signals, strength 1.53
+- **Fundamentals**: EPS growth 56.6% YoY
+- **Technical**: RSI overbought (77.8); Outperforming S&P 500 by 3.3pts (20d)
+
+## 501. Airbnb, Inc. (ABNB) -- [STRONG] 2 signals, strength 1.53
+- **Fundamentals**: Revenue growth 13.6% YoY; Quality checklist passed (D/E 0.24, ROE 33.4%, Net margin 20.4%); Analyst sentiment improving: 30 buy/strongBuy vs. 28 last month
+- **Technical**: RSI overbought (75.1)
+
+## 502. IHS Holding Limited (IHS) -- [STRONG] 2 signals, strength 1.53
 - **Fundamentals**: EPS growth 27.8% YoY
 - **Technical**: Price above rising 50/200-day MAs
 
-## 507. Strata Critical Medical, Inc. (SRTA) -- [STRONG] 2 signals, strength 1.53
+## 503. Strata Critical Medical, Inc. (SRTA) -- [STRONG] 2 signals, strength 1.53
 - **Fundamentals**: Revenue growth 18.8% YoY; Quality checklist passed (D/E 0.00, Current ratio 6.38, Net margin 15.7%)
-- **Technical**: RSI oversold (15.9)
+- **Technical**: RSI oversold (15.6)
 
-## 508. Bloomin' Brands, Inc. (BLMN) -- [STRONG] 2 signals, strength 1.52
-- **Fundamentals**: EPS growth 21.7% YoY
-- **Technical**: Outperforming S&P 500 by 12.0pts (20d)
-
-## 509. Ultrapar Participacoes S.A. (New) American Depositary Shares (Each representing one Common Share) (UGP) -- [STRONG] 2 signals, strength 1.52
-- **Fundamentals**: Revenue growth 10.9% YoY; EPS growth 21.1% YoY
-- **Technical**: Price above rising 50/200-day MAs
-
-## 510. Sunstone Hotel Investors, Inc. Sunstone Hotel Investors, Inc. (SHO) -- [STRONG] 2 signals, strength 1.52
-- **Fundamentals**: EPS growth 180.2% YoY
-- **Technical**: RSI overbought (70.0); Outperforming S&P 500 by 3.0pts (20d)
-
-## 511. Etsy, Inc. (ETSY) -- [STRONG] 2 signals, strength 1.52
-- **Fundamentals**: EPS growth 19.5% YoY; Analyst sentiment improving: 17 buy/strongBuy vs. 15 last month
-- **Technical**: RSI overbought (85.4); Outperforming S&P 500 by 7.7pts (20d)
-
-## 512. ResMed Inc. (RMD) -- [STRONG] 2 signals, strength 1.52
+## 504. ResMed Inc. (RMD) -- [STRONG] 2 signals, strength 1.53
 - **Fundamentals**: Quality checklist passed (D/E 0.10, Current ratio 3.10, ROE 23.9%, Net margin 26.9%); Analyst sentiment improving: 13 buy/strongBuy vs. 12 last month
-- **Technical**: RSI overbought (73.4); Outperforming S&P 500 by 0.0pts (20d)
+- **Technical**: RSI overbought (73.5); Outperforming S&P 500 by 0.1pts (20d)
 
-## 513. Red Cat Holdings, Inc. (RCAT) -- [STRONG] 2 signals, strength 1.52
+## 505. Janus Living, Inc. Class A-1 (JAN) -- [STRONG] 2 signals, strength 1.52
+- **Fundamentals**: Revenue growth 272.6% YoY; Analyst sentiment improving: 14 buy/strongBuy vs. 13 last month
+- **Technical**: RSI oversold (29.9)
+
+## 506. Red Cat Holdings, Inc. (RCAT) -- [STRONG] 2 signals, strength 1.52
 - **Fundamentals**: Revenue growth 933.5% YoY; Analyst sentiment improving: 13 buy/strongBuy vs. 11 last month
 - **Technical**: RSI oversold (3.9)
 - ⚠️ **EARNINGS QUALITY**: Net margin -136.3% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 514. ITG, Inc. (ITG) -- [STRONG] 2 signals, strength 1.52
+## 507. ITG, Inc. (ITG) -- [STRONG] 2 signals, strength 1.52
 - **Fundamentals**: Revenue growth 48.1% YoY; Analyst sentiment improving: 12 buy/strongBuy vs. 11 last month
-- **Technical**: RSI oversold (29.0)
+- **Technical**: RSI oversold (28.7)
 
-## 515. Nuvation Bio Inc. (NUVB) -- [STRONG] 2 signals, strength 1.52
+## 508. Nuvation Bio Inc. (NUVB) -- [STRONG] 2 signals, strength 1.52
 - **Fundamentals**: Revenue growth 1083.6% YoY; Analyst sentiment improving: 16 buy/strongBuy vs. 14 last month
-- **Technical**: RSI oversold (14.2)
+- **Technical**: RSI oversold (12.6)
 - ⚠️ **EARNINGS QUALITY**: Net margin -88.2% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 516. GXO Logistics, Inc. (GXO) -- [STRONG] 2 signals, strength 1.52
-- **Fundamentals**: EPS growth 114.0% YoY; Analyst sentiment improving: 20 buy/strongBuy vs. 19 last month
-- **Technical**: RSI overbought (70.0)
-
-## 517. QXO, Inc. (QXO) -- [STRONG] 2 signals, strength 1.52
+## 509. QXO, Inc. (QXO) -- [STRONG] 2 signals, strength 1.52
 - **Fundamentals**: Revenue growth 408.2% YoY; Analyst sentiment improving: 21 buy/strongBuy vs. 19 last month
 - **Technical**: RSI oversold (27.5)
 - ⚠️ **EARNINGS QUALITY**: Net margin -5.2% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 518. Intuitive Machines, Inc. (LUNR) -- [STRONG] 2 signals, strength 1.52
+## 510. Intuitive Machines, Inc. (LUNR) -- [STRONG] 2 signals, strength 1.52
 - **Fundamentals**: Revenue growth 116.9% YoY; Analyst sentiment improving: 15 buy/strongBuy vs. 14 last month
-- **Technical**: RSI oversold (20.0)
+- **Technical**: RSI oversold (19.8)
 - ⚠️ **EARNINGS QUALITY**: Net margin -26.6% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 519. Unusual Machines, Inc. (UMAC) -- [STRONG] 2 signals, strength 1.52
+## 511. Unusual Machines, Inc. (UMAC) -- [STRONG] 2 signals, strength 1.52
 - **Fundamentals**: Revenue growth 313.6% YoY; Analyst sentiment improving: 13 buy/strongBuy vs. 11 last month
-- **Technical**: RSI oversold (22.5)
+- **Technical**: RSI oversold (21.7)
 - ⚠️ **EARNINGS QUALITY**: Net margin -20.3% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 520. Bitdeer Technologies Group (BTDR) -- [STRONG] 2 signals, strength 1.52
+## 512. Bitdeer Technologies Group (BTDR) -- [STRONG] 2 signals, strength 1.52
 - **Fundamentals**: Revenue growth 127.7% YoY; Analyst sentiment improving: 18 buy/strongBuy vs. 16 last month
-- **Technical**: RSI oversold (10.9)
+- **Technical**: RSI oversold (10.8)
 - ⚠️ **EARNINGS QUALITY**: Net margin -55.1% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 521. Omnicell, Inc. (OMCL) -- [STRONG] 2 signals, strength 1.52
-- **Fundamentals**: EPS growth 72.2% YoY
-- **Technical**: Outperforming S&P 500 by 7.8pts (20d)
+## 513. Bloomin' Brands, Inc. (BLMN) -- [STRONG] 2 signals, strength 1.52
+- **Fundamentals**: EPS growth 21.7% YoY
+- **Technical**: Outperforming S&P 500 by 11.9pts (20d)
 
-## 522. NICE Ltd - American Depositary Shares each representing one Ordinary Share (NICE) -- [STRONG] 2 signals, strength 1.52
-- **Fundamentals**: Quality checklist passed (D/E 0.00, Current ratio 1.55, Net margin 13.9%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.2pts (20d)
-
-## 523. Porch Group, Inc. (PRCH) -- [STRONG] 2 signals, strength 1.50
-- **Fundamentals**: Revenue growth 19.5% YoY; EPS growth 85.6% YoY
-- **Technical**: Outperforming S&P 500 by 1.7pts (20d)
-
-## 524. Arrowhead Pharmaceuticals, Inc. (ARWR) -- [STRONG] 2 signals, strength 1.50
-- **Fundamentals**: Revenue growth 16.9% YoY
-- **Technical**: RSI oversold (25.9); MACD bullish crossover
-- ⚠️ **EARNINGS QUALITY**: Net margin -47.8% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
-
-## 525. Linde plc (LIN) -- [STRONG] 2 signals, strength 1.50
-- **Fundamentals**: EPS growth 10.1% YoY; Quality checklist passed (D/E 0.71, ROE 18.8%, Net margin 20.4%)
-- **Technical**: RSI overbought (72.3); Outperforming S&P 500 by 3.7pts (20d)
-
-## 526. CrowdStrike Holdings, Inc. (CRWD) -- [MODERATE] 2 signals, strength 1.50
+## 514. CrowdStrike Holdings, Inc. (CRWD) -- [STRONG] 2 signals, strength 1.51
 - **Fundamentals**: Revenue growth 24.3% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 2.2pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 2.5pts (20d)
 
-## 527. Element Solutions Inc. (ESI) -- [MODERATE] 2 signals, strength 1.49
+## 515. OUTFRONT Media Inc. (OUT) -- [STRONG] 2 signals, strength 1.51
+- **Fundamentals**: EPS growth 118.5% YoY
+- **Technical**: RSI overbought (70.0); Outperforming S&P 500 by 2.7pts (20d)
+
+## 516. Linde plc (LIN) -- [STRONG] 2 signals, strength 1.51
+- **Fundamentals**: EPS growth 10.1% YoY; Quality checklist passed (D/E 0.71, ROE 18.8%, Net margin 20.4%)
+- **Technical**: RSI overbought (72.5); Outperforming S&P 500 by 3.8pts (20d)
+
+## 517. Element Solutions Inc. (ESI) -- [STRONG] 2 signals, strength 1.50
 - **Fundamentals**: Revenue growth 26.6% YoY
-- **Technical**: Outperforming S&P 500 by 9.0pts (20d)
+- **Technical**: Outperforming S&P 500 by 9.3pts (20d)
 
-## 528. Cencora, Inc. (COR) -- [MODERATE] 2 signals, strength 1.48
-- **Fundamentals**: EPS growth 38.4% YoY
-- **Technical**: RSI overbought (72.6); Outperforming S&P 500 by 2.0pts (20d)
+## 518. Fastly, Inc. (FSLY) -- [MODERATE] 2 signals, strength 1.50
+- **Fundamentals**: Revenue growth 20.4% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.5pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Net margin -11.8% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 529. Hasbro, Inc. (HAS) -- [MODERATE] 2 signals, strength 1.48
-- **Fundamentals**: Revenue growth 17.0% YoY
-- **Technical**: RSI overbought (70.5); Price above rising 50/200-day MAs; Outperforming S&P 500 by 3.1pts (20d)
+## 519. NICE Ltd - American Depositary Shares each representing one Ordinary Share (NICE) -- [MODERATE] 2 signals, strength 1.49
+- **Fundamentals**: Quality checklist passed (D/E 0.00, Current ratio 1.55, Net margin 13.9%)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 3.6pts (20d)
 
-## 530. HCA Healthcare, Inc. (HCA) -- [MODERATE] 2 signals, strength 1.48
+## 520. Etsy, Inc. (ETSY) -- [MODERATE] 2 signals, strength 1.49
+- **Fundamentals**: EPS growth 19.5% YoY; Analyst sentiment improving: 17 buy/strongBuy vs. 15 last month
+- **Technical**: RSI overbought (85.0); Outperforming S&P 500 by 7.3pts (20d)
+
+## 521. HCA Healthcare, Inc. (HCA) -- [MODERATE] 2 signals, strength 1.49
 - **Fundamentals**: EPS growth 25.5% YoY
-- **Technical**: RSI overbought (79.5); Outperforming S&P 500 by 5.8pts (20d)
+- **Technical**: RSI overbought (79.7); Outperforming S&P 500 by 6.0pts (20d)
 
-## 531. SI-BONE, Inc. (SIBN) -- [MODERATE] 2 signals, strength 1.48
+## 522. Omnicell, Inc. (OMCL) -- [MODERATE] 2 signals, strength 1.49
+- **Fundamentals**: EPS growth 72.2% YoY
+- **Technical**: Outperforming S&P 500 by 7.3pts (20d)
+
+## 523. Hasbro, Inc. (HAS) -- [MODERATE] 2 signals, strength 1.49
+- **Fundamentals**: Revenue growth 17.0% YoY
+- **Technical**: RSI overbought (71.0); Price above rising 50/200-day MAs; Outperforming S&P 500 by 3.3pts (20d)
+
+## 524. AMN Healthcare Services Inc (AMN) -- [MODERATE] 2 signals, strength 1.49
+- **Fundamentals**: Revenue growth 24.0% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 2.1pts (20d)
+
+## 525. Cencora, Inc. (COR) -- [MODERATE] 2 signals, strength 1.48
+- **Fundamentals**: EPS growth 38.4% YoY
+- **Technical**: RSI overbought (72.5); Outperforming S&P 500 by 2.0pts (20d)
+
+## 526. SI-BONE, Inc. (SIBN) -- [MODERATE] 2 signals, strength 1.48
 - **Fundamentals**: Revenue growth 15.3% YoY
 - **Technical**: 20/50-day MA bullish crossover; Outperforming S&P 500 by 4.1pts (20d)
 - ⚠️ **EARNINGS QUALITY**: Net margin -6.8% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 532. Danaher Corporation (DHR) -- [MODERATE] 2 signals, strength 1.47
+## 527. Danaher Corporation (DHR) -- [MODERATE] 2 signals, strength 1.47
 - **Fundamentals**: EPS growth 19.7% YoY; Quality checklist passed (D/E 0.35, Current ratio 1.87, Net margin 15.9%)
-- **Technical**: Outperforming S&P 500 by 5.0pts (20d)
+- **Technical**: Outperforming S&P 500 by 4.9pts (20d)
 
-## 533. AMN Healthcare Services Inc (AMN) -- [MODERATE] 2 signals, strength 1.47
-- **Fundamentals**: Revenue growth 24.0% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.8pts (20d)
+## 528. Dick's Sporting Goods Inc (DKS) -- [MODERATE] 2 signals, strength 1.47
+- **Fundamentals**: Revenue growth 53.5% YoY
+- **Technical**: Outperforming S&P 500 by 7.1pts (20d)
 
-## 534. Royal Caribbean Cruises Ltd. (RCL) -- [MODERATE] 2 signals, strength 1.46
+## 529. Porch Group, Inc. (PRCH) -- [MODERATE] 2 signals, strength 1.47
+- **Fundamentals**: Revenue growth 19.5% YoY; EPS growth 85.6% YoY
+- **Technical**: Outperforming S&P 500 by 1.2pts (20d)
+
+## 530. Royal Caribbean Cruises Ltd. (RCL) -- [MODERATE] 2 signals, strength 1.47
 - **Fundamentals**: EPS growth 22.4% YoY
 - **Technical**: RSI overbought (76.9); Outperforming S&P 500 by 7.2pts (20d)
 
-## 535. Ferguson Enterprises Inc. (FERG) -- [MODERATE] 2 signals, strength 1.46
-- **Fundamentals**: EPS growth 33.6% YoY; Quality checklist passed (D/E 0.70, Current ratio 1.86, ROE 40.6%)
-- **Technical**: Outperforming S&P 500 by 0.2pts (20d)
-
-## 536. eBay Inc. (EBAY) -- [MODERATE] 2 signals, strength 1.46
-- **Fundamentals**: Revenue growth 14.7% YoY
-- **Technical**: RSI overbought (81.6); Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.4pts (20d)
-
-## 537. Exponent, Inc. (EXPO) -- [MODERATE] 2 signals, strength 1.46
-- **Fundamentals**: Quality checklist passed (D/E 0.00, Current ratio 2.40, ROE 27.9%, Net margin 18.1%)
-- **Technical**: RSI overbought (73.3); Outperforming S&P 500 by 1.5pts (20d)
-
-## 538. Bentley Systems, Incorporated (BSY) -- [MODERATE] 2 signals, strength 1.46
+## 531. Bentley Systems, Incorporated (BSY) -- [MODERATE] 2 signals, strength 1.46
 - **Fundamentals**: Revenue growth 12.8% YoY; EPS growth 16.8% YoY
-- **Technical**: Outperforming S&P 500 by 9.6pts (20d)
+- **Technical**: Outperforming S&P 500 by 9.7pts (20d)
 
-## 539. GlobalFoundries Inc. - Ordinary Share (GFS) -- [MODERATE] 2 signals, strength 1.46
-- **Fundamentals**: Quality checklist passed (D/E 0.14, Current ratio 2.62, Net margin 10.3%)
-- **Technical**: Outperforming S&P 500 by 10.6pts (20d)
+## 532. Exponent, Inc. (EXPO) -- [MODERATE] 2 signals, strength 1.46
+- **Fundamentals**: Quality checklist passed (D/E 0.00, Current ratio 2.40, ROE 27.9%, Net margin 18.1%)
+- **Technical**: RSI overbought (72.9); Outperforming S&P 500 by 1.4pts (20d)
 
-## 540. Infosys Limited American Depositary Shares (INFY) -- [MODERATE] 2 signals, strength 1.45
+## 533. Infosys Limited American Depositary Shares (INFY) -- [MODERATE] 2 signals, strength 1.45
 - **Fundamentals**: Revenue growth 11.2% YoY; EPS growth 12.7% YoY; Quality checklist passed (D/E 0.10, Current ratio 1.98, ROE 32.7%, Net margin 16.4%)
 - **Technical**: Outperforming S&P 500 by 1.0pts (20d)
 - ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 4 sell/strongSell vs. 4 last month
 
-## 541. First Financial Bankshares, Inc. (FFIN) -- [MODERATE] 2 signals, strength 1.45
+## 534. First Financial Bankshares, Inc. (FFIN) -- [MODERATE] 2 signals, strength 1.45
 - **Fundamentals**: Revenue growth 24.4% YoY; EPS growth 12.1% YoY
-- **Technical**: RSI oversold (26.3)
+- **Technical**: RSI oversold (27.7)
 - ⚠️ **EARNINGS QUALITY**: Earnings scheduled in 1d (2026-10-15) -- gap risk on a swing hold
 
-## 542. Dick's Sporting Goods Inc (DKS) -- [MODERATE] 2 signals, strength 1.45
-- **Fundamentals**: Revenue growth 53.5% YoY
-- **Technical**: Outperforming S&P 500 by 6.8pts (20d)
-
-## 543. Pop Culture Group Co., Ltd - Class A (CPOP) -- [MODERATE] 2 signals, strength 1.45
+## 535. Pop Culture Group Co., Ltd - Class A (CPOP) -- [MODERATE] 2 signals, strength 1.45
 - **Fundamentals**: Revenue growth 106.7% YoY
 - **Technical**: RSI oversold (19.0); Outperforming S&P 500 by 1.3pts (20d)
 - ⚠️ **CAUTION**: Extended 54% above 50-day MA -- elevated pullback risk
 - ⚠️ **EARNINGS QUALITY**: Net margin -6.8% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 544. 3M Company (MMM) -- [MODERATE] 2 signals, strength 1.45
+## 536. 3M Company (MMM) -- [MODERATE] 2 signals, strength 1.45
 - **Fundamentals**: Quality checklist passed (Current ratio 1.71, ROE 77.1%, Net margin 11.9%)
 - **Technical**: MACD bullish crossover
 
-## 545. Regeneron Pharmaceuticals, Inc. (REGN) -- [MODERATE] 2 signals, strength 1.45
+## 537. Regeneron Pharmaceuticals, Inc. (REGN) -- [MODERATE] 2 signals, strength 1.45
 - **Fundamentals**: Quality checklist passed (D/E 0.09, Current ratio 4.13, Net margin 27.9%)
 - **Technical**: MACD bullish crossover
 
-## 546. Evolent Health, Inc (EVH) -- [MODERATE] 2 signals, strength 1.44
+## 538. eBay Inc. (EBAY) -- [MODERATE] 2 signals, strength 1.44
+- **Fundamentals**: Revenue growth 14.7% YoY
+- **Technical**: RSI overbought (80.5); Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.7pts (20d)
+
+## 539. Evolent Health, Inc (EVH) -- [MODERATE] 2 signals, strength 1.44
 - **Fundamentals**: Analyst sentiment improving: 15 buy/strongBuy vs. 14 last month
-- **Technical**: RSI overbought (78.1); Outperforming S&P 500 by 21.6pts (20d)
+- **Technical**: RSI overbought (78.1); Outperforming S&P 500 by 21.7pts (20d)
 - ⚠️ **EARNINGS QUALITY**: Net margin -24.1% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 547. Marqeta, Inc. (MQ) -- [MODERATE] 2 signals, strength 1.44
+## 540. Marqeta, Inc. (MQ) -- [MODERATE] 2 signals, strength 1.43
 - **Fundamentals**: Revenue growth 22.4% YoY
-- **Technical**: Outperforming S&P 500 by 10.4pts (20d)
+- **Technical**: Outperforming S&P 500 by 10.3pts (20d)
 
-## 548. Twist Bioscience Corporation (TWST) -- [MODERATE] 2 signals, strength 1.44
-- **Fundamentals**: Revenue growth 19.2% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.9pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Net margin -31.7% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+## 541. Medline Inc. (MDLN) -- [MODERATE] 2 signals, strength 1.43
+- **Fundamentals**: Revenue growth 11.6% YoY
+- **Technical**: 20/50-day MA bullish crossover; Outperforming S&P 500 by 6.2pts (20d)
 
-## 549. Gladstone Land Corporation (LAND) -- [MODERATE] 2 signals, strength 1.43
-- **Fundamentals**: Revenue growth 21.6% YoY; EPS growth 39.6% YoY
-- **Technical**: Outperforming S&P 500 by 0.0pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Net margin -7.3% despite 39.6% adjusted EPS growth -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+## 542. CBRE Group Inc (CBRE) -- [MODERATE] 2 signals, strength 1.43
+- **Fundamentals**: Revenue growth 14.5% YoY; EPS growth 22.2% YoY
+- **Technical**: RSI oversold (30.0)
 
-## 550. Sanmina Corporation (SANM) -- [MODERATE] 2 signals, strength 1.43
-- **Fundamentals**: Revenue growth 58.6% YoY; EPS growth 19.6% YoY
-- **Technical**: Outperforming S&P 500 by 0.5pts (20d)
+## 543. Cactus, Inc. (WHD) -- [MODERATE] 2 signals, strength 1.43
+- **Fundamentals**: Revenue growth 21.8% YoY
+- **Technical**: MACD bullish crossover
+- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
 
-## 551. DoubleVerify Holdings, Inc. (DV) -- [MODERATE] 2 signals, strength 1.42
+## 544. DoubleVerify Holdings, Inc. (DV) -- [MODERATE] 2 signals, strength 1.42
 - **Fundamentals**: EPS growth 17.5% YoY
-- **Technical**: RSI overbought (70.3); Price above rising 50/200-day MAs
+- **Technical**: RSI overbought (71.2); Price above rising 50/200-day MAs
 - ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 6 sell/strongSell vs. 1 last month
 
-## 552. Medline Inc. (MDLN) -- [MODERATE] 2 signals, strength 1.42
-- **Fundamentals**: Revenue growth 11.6% YoY
-- **Technical**: 20/50-day MA bullish crossover; Outperforming S&P 500 by 5.9pts (20d)
-
-## 553. Ecolab Inc. (ECL) -- [MODERATE] 2 signals, strength 1.42
+## 545. Ecolab Inc. (ECL) -- [MODERATE] 2 signals, strength 1.42
 - **Fundamentals**: Quality checklist passed (D/E 0.84, ROE 21.4%, Net margin 12.6%)
 - **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.8pts (20d)
 
-## 554. Blackstone Inc. (BX) -- [MODERATE] 2 signals, strength 1.42
+## 546. Blackstone Inc. (BX) -- [MODERATE] 2 signals, strength 1.42
 - **Fundamentals**: Revenue growth 17.2% YoY; EPS growth 20.3% YoY
-- **Technical**: RSI oversold (26.0)
+- **Technical**: RSI oversold (27.2)
 
-## 555. Palo Alto Networks, Inc. (PANW) -- [MODERATE] 2 signals, strength 1.42
+## 547. Palo Alto Networks, Inc. (PANW) -- [MODERATE] 2 signals, strength 1.42
 - **Fundamentals**: Revenue growth 24.5% YoY
 - **Technical**: Price above rising 50/200-day MAs
 
-## 556. Constellation Brands, Inc. (STZ) -- [MODERATE] 2 signals, strength 1.41
+## 548. Constellation Brands, Inc. (STZ) -- [MODERATE] 2 signals, strength 1.41
 - **Fundamentals**: EPS growth 62.7% YoY
-- **Technical**: RSI overbought (83.6); Outperforming S&P 500 by 0.4pts (20d)
+- **Technical**: RSI overbought (82.7); Outperforming S&P 500 by 0.3pts (20d)
 
-## 557. Dole plc (DOLE) -- [MODERATE] 2 signals, strength 1.41
-- **Fundamentals**: EPS growth 150.1% YoY
-- **Technical**: RSI overbought (70.1); Outperforming S&P 500 by 0.2pts (20d)
+## 549. The Cigna Group (CI) -- [MODERATE] 2 signals, strength 1.40
+- **Fundamentals**: EPS growth 31.7% YoY
+- **Technical**: RSI overbought (78.6); Outperforming S&P 500 by 0.0pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
 
-## 558. Bausch Health Companies Inc. (BHC) -- [MODERATE] 2 signals, strength 1.40
-- **Fundamentals**: Revenue growth 10.1% YoY; EPS growth 72.0% YoY
-- **Technical**: Outperforming S&P 500 by 3.0pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Net margin -10.1% despite 72.0% adjusted EPS growth -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
-
-## 559. BitGo Holdings, Inc. (BTGO) -- [MODERATE] 2 signals, strength 1.40
-- **Fundamentals**: Revenue growth 450.9% YoY
-- **Technical**: RSI oversold (17.7); Outperforming S&P 500 by 0.1pts (20d)
-
-## 560. Jazz Pharmaceuticals plc (JAZZ) -- [MODERATE] 2 signals, strength 1.40
+## 550. Jazz Pharmaceuticals plc (JAZZ) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 12.6% YoY; Quality checklist passed (Current ratio 1.86, ROE 21.4%, Net margin 20.4%)
-- **Technical**: RSI oversold (25.8)
+- **Technical**: RSI oversold (25.0)
 
-## 561. Applied Aerospace & Defense, Inc. (AADX) -- [MODERATE] 2 signals, strength 1.40
+## 551. Applied Aerospace & Defense, Inc. (AADX) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 21.0% YoY
 - **Technical**: MACD bullish crossover
 - ⚠️ **EARNINGS QUALITY**: Net margin -23.2% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 562. Serve Robotics Inc. (SERV) -- [MODERATE] 2 signals, strength 1.40
+## 552. Serve Robotics Inc. (SERV) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 649.5% YoY
-- **Technical**: RSI oversold (28.1)
+- **Technical**: RSI oversold (27.5)
 - ⚠️ **EARNINGS QUALITY**: Net margin -2315.8% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 563. Qfin Holdings, Inc.  - American Depositary Shares (QFIN) -- [MODERATE] 2 signals, strength 1.40
+## 553. Qfin Holdings, Inc.  - American Depositary Shares (QFIN) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Quality checklist passed (D/E 0.18, Current ratio 2.43, ROE 15.4%, Net margin 22.3%)
-- **Technical**: RSI oversold (9.1)
+- **Technical**: RSI oversold (8.9)
 - ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 2 sell/strongSell vs. 0 last month
 
-## 564. Prelude Therapeutics Incorporated (PRLD) -- [MODERATE] 2 signals, strength 1.40
+## 554. Prelude Therapeutics Incorporated (PRLD) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 41.0% YoY
 - **Technical**: RSI oversold (24.6)
 - ⚠️ **EARNINGS QUALITY**: Net margin -269.8% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 565. Entravision Communications Corporation (EVC) -- [MODERATE] 2 signals, strength 1.40
+## 555. Entravision Communications Corporation (EVC) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 71.4% YoY
-- **Technical**: RSI oversold (9.6)
+- **Technical**: RSI oversold (9.2)
 
-## 566. SoFi Technologies, Inc. (SOFI) -- [MODERATE] 2 signals, strength 1.40
+## 556. SoFi Technologies, Inc. (SOFI) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 205.5% YoY
-- **Technical**: RSI oversold (13.1)
+- **Technical**: RSI oversold (13.2)
 - ⚠️ **EARNINGS QUALITY**: Net margin -19.8% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 567. James Hardie Industries plc. (JHX) -- [MODERATE] 2 signals, strength 1.40
+## 557. James Hardie Industries plc. (JHX) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 42.9% YoY
-- **Technical**: RSI oversold (29.9)
+- **Technical**: RSI oversold (29.8)
 
-## 568. Invesco Ltd (IVZ) -- [MODERATE] 2 signals, strength 1.40
+## 558. Spire Inc. (SR) -- [MODERATE] 2 signals, strength 1.40
+- **Fundamentals**: EPS growth 89.9% YoY
+- **Technical**: RSI overbought (70.0)
+
+## 559. Invesco Ltd (IVZ) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: EPS growth 87.7% YoY
-- **Technical**: RSI oversold (19.8)
+- **Technical**: RSI oversold (20.1)
 - ⚠️ **EARNINGS QUALITY**: Net margin -7.8% despite 87.7% adjusted EPS growth -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 569. Strive, Inc. - Variable Rate Series A Perpetual Preferred Stock (SATA) -- [MODERATE] 2 signals, strength 1.40
+## 560. Strive, Inc. - Variable Rate Series A Perpetual Preferred Stock (SATA) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 1019.0% YoY
-- **Technical**: RSI oversold (23.5)
+- **Technical**: RSI oversold (22.2)
 - ⚠️ **EARNINGS QUALITY**: Net margin -10957.2% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 570. DeFi Development Corp. (DFDV) -- [MODERATE] 2 signals, strength 1.40
+## 561. DeFi Development Corp. (DFDV) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 328.6% YoY
-- **Technical**: RSI oversold (16.8)
+- **Technical**: RSI oversold (16.6)
 - ⚠️ **EARNINGS QUALITY**: Net margin -1319.5% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 571. Axsome Therapeutics, Inc. (AXSM) -- [MODERATE] 2 signals, strength 1.40
+## 562. Axsome Therapeutics, Inc. (AXSM) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 56.9% YoY
-- **Technical**: RSI oversold (8.8)
+- **Technical**: RSI oversold (10.3)
 - ⚠️ **EARNINGS QUALITY**: Net margin -24.7% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 572. Capstone Energy Plus, Inc. (CEPL) -- [MODERATE] 2 signals, strength 1.40
+## 563. Capstone Energy Plus, Inc. (CEPL) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 37.3% YoY
-- **Technical**: RSI oversold (17.6)
+- **Technical**: RSI oversold (17.4)
 
-## 573. New Mountain Finance Corporation (NMFC) -- [MODERATE] 2 signals, strength 1.40
-- **Fundamentals**: EPS growth 197.7% YoY
-- **Technical**: RSI oversold (28.9)
-- ⚠️ **EARNINGS QUALITY**: Net margin -16.8% despite 197.7% adjusted EPS growth -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
-
-## 574. Quantum Computing Inc. (QUBT) -- [MODERATE] 2 signals, strength 1.40
+## 564. Quantum Computing Inc. (QUBT) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 3635.4% YoY
 - **Technical**: RSI oversold (0.0)
 - ⚠️ **EARNINGS QUALITY**: Net margin -152.4% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 575. Copart, Inc. (CPRT) -- [MODERATE] 2 signals, strength 1.40
+## 565. Copart, Inc. (CPRT) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Quality checklist passed (D/E 0.00, Current ratio 7.91, ROE 15.9%, Net margin 31.8%)
-- **Technical**: RSI oversold (28.6)
+- **Technical**: RSI oversold (29.2)
 
-## 576. Energy Vault Holdings, Inc. (NRGV) -- [MODERATE] 2 signals, strength 1.40
+## 566. Energy Vault Holdings, Inc. (NRGV) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 336.8% YoY
-- **Technical**: RSI oversold (10.2)
+- **Technical**: RSI oversold (10.0)
 - ⚠️ **EARNINGS QUALITY**: Net margin -48.6% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 577. Gemini Space Station, Inc. (GEMI) -- [MODERATE] 2 signals, strength 1.40
+## 567. Gemini Space Station, Inc. (GEMI) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 51.5% YoY
-- **Technical**: RSI oversold (9.2)
+- **Technical**: RSI oversold (9.0)
 - ⚠️ **EARNINGS QUALITY**: Net margin -250.1% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 578. Pony AI Inc. - American Depositary Shares (PONY) -- [MODERATE] 2 signals, strength 1.40
+## 568. Pony AI Inc. - American Depositary Shares (PONY) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 76.2% YoY
-- **Technical**: RSI oversold (15.1)
+- **Technical**: RSI oversold (15.0)
 - ⚠️ **EARNINGS QUALITY**: Net margin -118.5% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 579. AngioDynamics, Inc. (ANGO) -- [MODERATE] 2 signals, strength 1.40
+## 569. AngioDynamics, Inc. (ANGO) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Earnings beat by 65.4% (5d ago)
-- **Technical**: RSI oversold (21.7)
+- **Technical**: RSI oversold (20.4)
 - ⚠️ **EARNINGS QUALITY**: Net margin -11.5% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 580. Sony Group Corporation American Depositary Shares (SONY) -- [MODERATE] 2 signals, strength 1.40
+## 570. Sony Group Corporation American Depositary Shares (SONY) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: EPS growth 47.4% YoY
 - **Technical**: RSI overbought (70.3)
 
-## 581. Rigetti Computing, Inc. (RGTI) -- [MODERATE] 2 signals, strength 1.40
+## 571. Rigetti Computing, Inc. (RGTI) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 68.5% YoY
-- **Technical**: RSI oversold (3.7)
+- **Technical**: RSI oversold (3.6)
 - ⚠️ **EARNINGS QUALITY**: Net margin -1787.4% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 582. Legence Corp. (LGN) -- [MODERATE] 2 signals, strength 1.40
+## 572. Legence Corp. (LGN) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 110.7% YoY
-- **Technical**: RSI oversold (29.9)
+- **Technical**: RSI oversold (29.4)
 
-## 583. SoundHound AI, Inc. (SOUN) -- [MODERATE] 2 signals, strength 1.40
+## 573. SoundHound AI, Inc. (SOUN) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 54.6% YoY
-- **Technical**: RSI oversold (13.3)
+- **Technical**: RSI oversold (13.0)
 - ⚠️ **EARNINGS QUALITY**: Net margin -67.5% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 584. Energy Fuels Inc (UUUU) -- [MODERATE] 2 signals, strength 1.40
+## 574. Energy Fuels Inc (UUUU) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 62.5% YoY
-- **Technical**: RSI oversold (15.2)
+- **Technical**: RSI oversold (15.1)
 - ⚠️ **EARNINGS QUALITY**: Net margin -77.3% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 585. Rocket Companies, Inc. (RKT) -- [MODERATE] 2 signals, strength 1.40
-- **Fundamentals**: Revenue growth 98.8% YoY
-- **Technical**: RSI oversold (28.5)
+## 575. Mirum Pharmaceuticals, Inc. (MIRM) -- [MODERATE] 2 signals, strength 1.40
+- **Fundamentals**: Revenue growth 44.0% YoY
+- **Technical**: RSI oversold (29.7)
+- ⚠️ **EARNINGS QUALITY**: Net margin -139.2% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 586. AST SpaceMobile, Inc. (ASTS) -- [MODERATE] 2 signals, strength 1.40
+## 576. Rocket Companies, Inc. (RKT) -- [MODERATE] 2 signals, strength 1.40
+- **Fundamentals**: Revenue growth 98.8% YoY
+- **Technical**: RSI oversold (28.0)
+
+## 577. AST SpaceMobile, Inc. (ASTS) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 2256.9% YoY
-- **Technical**: RSI oversold (22.7)
+- **Technical**: RSI oversold (22.4)
 - ⚠️ **EARNINGS QUALITY**: Net margin -536.7% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 587. Brighthouse Financial, Inc. (BHF) -- [MODERATE] 2 signals, strength 1.40
+## 578. Brighthouse Financial, Inc. (BHF) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: EPS growth 32.5% YoY
-- **Technical**: RSI oversold (5.6)
+- **Technical**: RSI oversold (8.5)
 
-## 588. WeRide Inc. - American Depositary Shares (WRD) -- [MODERATE] 2 signals, strength 1.40
+## 579. WeRide Inc. - American Depositary Shares (WRD) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 102.4% YoY
-- **Technical**: RSI oversold (18.5)
+- **Technical**: RSI oversold (18.3)
 - ⚠️ **EARNINGS QUALITY**: Net margin -199.0% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 589. Hawaiian Electric Industries, Inc. (HE) -- [MODERATE] 2 signals, strength 1.40
+## 580. Hawaiian Electric Industries, Inc. (HE) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: EPS growth 362.4% YoY
-- **Technical**: RSI oversold (20.5)
+- **Technical**: RSI oversold (20.3)
 
-## 590. National Bank Holdings Corporation (NBHC) -- [MODERATE] 2 signals, strength 1.40
+## 581. National Bank Holdings Corporation (NBHC) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 99.2% YoY
-- **Technical**: RSI oversold (24.2)
+- **Technical**: RSI oversold (24.0)
 
-## 591. Franklin Templeton, Inc. (BEN) -- [MODERATE] 2 signals, strength 1.40
-- **Fundamentals**: EPS growth 152.8% YoY
-- **Technical**: RSI oversold (28.9)
-
-## 592. Banco Bilbao Vizcaya Argentaria S.A. (BBVA) -- [MODERATE] 2 signals, strength 1.40
+## 582. Banco Bilbao Vizcaya Argentaria S.A. (BBVA) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 72.4% YoY
-- **Technical**: RSI oversold (21.6)
+- **Technical**: RSI oversold (21.5)
 - ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 1 sell/strongSell vs. 1 last month
 
-## 593. Principal Financial Group Inc (PFG) -- [MODERATE] 2 signals, strength 1.40
+## 583. Principal Financial Group Inc (PFG) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: EPS growth 42.0% YoY
-- **Technical**: RSI oversold (19.8)
+- **Technical**: RSI oversold (20.3)
 
-## 594. MeiraGTx Holdings plc (MGTX) -- [MODERATE] 2 signals, strength 1.40
+## 584. MeiraGTx Holdings plc (MGTX) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 948.4% YoY
-- **Technical**: RSI oversold (29.7)
+- **Technical**: RSI oversold (29.1)
 
-## 595. FuboTV Inc. (FUBO) -- [MODERATE] 2 signals, strength 1.40
+## 585. FuboTV Inc. (FUBO) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 206.4% YoY
-- **Technical**: RSI oversold (22.3)
+- **Technical**: RSI oversold (22.5)
 
-## 596. PureCycle Technologies, Inc. (PCT) -- [MODERATE] 2 signals, strength 1.40
+## 586. PureCycle Technologies, Inc. (PCT) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 173.4% YoY
-- **Technical**: RSI oversold (16.1)
+- **Technical**: RSI oversold (16.0)
 - ⚠️ **EARNINGS QUALITY**: Net margin -1618.8% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 597. Chewy, Inc. (CHWY) -- [MODERATE] 2 signals, strength 1.40
+## 587. Chewy, Inc. (CHWY) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: EPS growth 84.5% YoY
-- **Technical**: RSI overbought (71.9)
+- **Technical**: RSI overbought (72.3)
 
-## 598. Rocket Lab Corporation (RKLB) -- [MODERATE] 2 signals, strength 1.40
+## 588. Rocket Lab Corporation (RKLB) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 52.5% YoY
-- **Technical**: RSI oversold (25.8)
+- **Technical**: RSI oversold (25.2)
 - ⚠️ **EARNINGS QUALITY**: Net margin -21.5% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 599. TKO Group Holdings, Inc. (TKO) -- [MODERATE] 2 signals, strength 1.40
+## 589. TKO Group Holdings, Inc. (TKO) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: EPS growth 96.4% YoY
 - **Technical**: RSI oversold (29.8)
 
-## 600. CoreWeave, Inc. (CRWV) -- [MODERATE] 2 signals, strength 1.40
+## 590. LightPath Technologies, Inc. (LPTH) -- [MODERATE] 2 signals, strength 1.40
+- **Fundamentals**: Revenue growth 155.8% YoY
+- **Technical**: RSI oversold (30.0)
+- ⚠️ **EARNINGS QUALITY**: Net margin -28.6% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+
+## 591. CoreWeave, Inc. (CRWV) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 115.3% YoY
-- **Technical**: RSI oversold (22.0)
+- **Technical**: RSI oversold (21.7)
 - ⚠️ **EARNINGS QUALITY**: Net margin -25.4% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 601. X-Energy, Inc. (XE) -- [MODERATE] 2 signals, strength 1.40
+## 592. X-Energy, Inc. (XE) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 108.7% YoY
 - **Technical**: RSI oversold (21.8)
 - ⚠️ **EARNINGS QUALITY**: Net margin -714.5% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 602. Palladyne AI Corp. (PDYN) -- [MODERATE] 2 signals, strength 1.40
+## 593. Palladyne AI Corp. (PDYN) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 171.8% YoY
-- **Technical**: RSI oversold (21.6)
+- **Technical**: RSI oversold (20.9)
 - ⚠️ **EARNINGS QUALITY**: Net margin -254.8% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 603. Eversource Energy (D/B/A) (ES) -- [MODERATE] 2 signals, strength 1.40
+## 594. Eversource Energy (D/B/A) (ES) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: EPS growth 66.2% YoY
-- **Technical**: RSI overbought (72.3)
+- **Technical**: RSI overbought (75.9)
 
-## 604. AeroVironment, Inc. (AVAV) -- [MODERATE] 2 signals, strength 1.40
+## 595. AeroVironment, Inc. (AVAV) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 84.4% YoY
-- **Technical**: RSI oversold (10.8)
+- **Technical**: RSI oversold (10.6)
 - ⚠️ **EARNINGS QUALITY**: Net margin -10.1% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 605. Lucid Group, Inc. (LCID) -- [MODERATE] 2 signals, strength 1.40
+## 596. Lucid Group, Inc. (LCID) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 66.5% YoY
-- **Technical**: RSI oversold (20.8)
+- **Technical**: RSI oversold (20.6)
 - ⚠️ **EARNINGS QUALITY**: Net margin -249.2% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 606. BitMine Immersion Technologies, Inc. (BMNR) -- [MODERATE] 2 signals, strength 1.40
+## 597. BitMine Immersion Technologies, Inc. (BMNR) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 1022.3% YoY
-- **Technical**: RSI oversold (11.2)
+- **Technical**: RSI oversold (11.1)
 - ⚠️ **EARNINGS QUALITY**: Net margin -14306.6% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 607. Itron, Inc. (ITRI) -- [MODERATE] 2 signals, strength 1.40
+## 598. Itron, Inc. (ITRI) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Quality checklist passed (D/E 0.73, Current ratio 1.80, ROE 16.5%, Net margin 11.9%)
-- **Technical**: RSI oversold (27.7)
+- **Technical**: RSI oversold (27.4)
 
-## 608. Firefly Aerospace Inc. (FLY) -- [MODERATE] 2 signals, strength 1.40
+## 599. Firefly Aerospace Inc. (FLY) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 117.1% YoY
-- **Technical**: RSI oversold (22.4)
+- **Technical**: RSI oversold (22.0)
 - ⚠️ **EARNINGS QUALITY**: Net margin -126.6% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 609. AT&T Inc. (T) -- [MODERATE] 2 signals, strength 1.40
+## 600. AT&T Inc. (T) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: EPS growth 72.2% YoY
-- **Technical**: RSI oversold (27.5)
+- **Technical**: RSI oversold (27.4)
 
-## 610. Joby Aviation, Inc. (JOBY) -- [MODERATE] 2 signals, strength 1.40
+## 601. Joby Aviation, Inc. (JOBY) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 69860.4% YoY
 - **Technical**: RSI oversold (4.7)
 - ⚠️ **EARNINGS QUALITY**: Net margin -755.1% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 611. Better Home & Finance Holding Company (BETR) -- [MODERATE] 2 signals, strength 1.40
+## 602. Better Home & Finance Holding Company (BETR) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 43.2% YoY
-- **Technical**: RSI oversold (29.4)
+- **Technical**: RSI oversold (28.7)
 - ⚠️ **EARNINGS QUALITY**: Net margin -78.7% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 612. uniQure N.V. (QURE) -- [MODERATE] 2 signals, strength 1.40
+## 603. uniQure N.V. (QURE) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 30.2% YoY
-- **Technical**: RSI oversold (6.8)
+- **Technical**: RSI oversold (6.7)
 - ⚠️ **EARNINGS QUALITY**: Net margin -1350.7% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 613. lululemon athletica inc. (LULU) -- [MODERATE] 2 signals, strength 1.40
+## 604. lululemon athletica inc. (LULU) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Quality checklist passed (D/E 0.00, Current ratio 2.26, ROE 29.7%, Net margin 12.8%)
-- **Technical**: RSI oversold (22.2)
+- **Technical**: RSI oversold (22.3)
 
-## 614. IREN Limited (IREN) -- [MODERATE] 2 signals, strength 1.40
+## 605. IREN Limited (IREN) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 41.1% YoY
-- **Technical**: RSI oversold (10.3)
+- **Technical**: RSI oversold (10.2)
 - ⚠️ **EARNINGS QUALITY**: Net margin -99.4% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 615. Axon Enterprise, Inc. (AXON) -- [MODERATE] 2 signals, strength 1.40
+## 606. Axon Enterprise, Inc. (AXON) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 34.6% YoY
-- **Technical**: RSI oversold (29.3)
+- **Technical**: RSI oversold (28.4)
 
-## 616. Weyerhaeuser Company (WY) -- [MODERATE] 2 signals, strength 1.40
+## 607. Weyerhaeuser Company (WY) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: EPS growth 70.2% YoY
-- **Technical**: RSI oversold (28.0)
+- **Technical**: RSI oversold (27.9)
 
-## 617. MP Materials Corp. (MP) -- [MODERATE] 2 signals, strength 1.40
+## 608. MP Materials Corp. (MP) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 64.7% YoY
 - **Technical**: RSI oversold (24.3)
 - ⚠️ **EARNINGS QUALITY**: Net margin -15.2% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 618. Tonix Pharmaceuticals Holding Corp. (TNXP) -- [MODERATE] 2 signals, strength 1.40
+## 609. Tonix Pharmaceuticals Holding Corp. (TNXP) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 196.0% YoY
-- **Technical**: RSI oversold (17.5)
+- **Technical**: RSI oversold (13.4)
 - ⚠️ **EARNINGS QUALITY**: Net margin -548.6% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 619. IonQ, Inc. (IONQ) -- [MODERATE] 2 signals, strength 1.40
+## 610. IonQ, Inc. (IONQ) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 370.6% YoY
-- **Technical**: RSI oversold (8.8)
+- **Technical**: RSI oversold (8.6)
 - ⚠️ **EARNINGS QUALITY**: Net margin -553.3% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 620. Nebius Group N.V. - Class A (NBIS) -- [MODERATE] 2 signals, strength 1.40
+## 611. Nebius Group N.V. - Class A (NBIS) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 488.1% YoY
-- **Technical**: RSI oversold (27.7)
+- **Technical**: RSI oversold (27.5)
 
-## 621. Aurora Innovation, Inc. (AUR) -- [MODERATE] 2 signals, strength 1.40
+## 612. Aurora Innovation, Inc. (AUR) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 100.0% YoY
-- **Technical**: RSI oversold (26.2)
+- **Technical**: RSI oversold (25.8)
 - ⚠️ **EARNINGS QUALITY**: Net margin -18000.0% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 622. T1 Energy Inc. (TE) -- [MODERATE] 2 signals, strength 1.40
+## 613. T1 Energy Inc. (TE) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 88.4% YoY
-- **Technical**: RSI oversold (29.0)
+- **Technical**: RSI oversold (28.9)
 - ⚠️ **EARNINGS QUALITY**: Net margin -38.5% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 623. KT Corporation (KT) -- [MODERATE] 2 signals, strength 1.40
-- **Fundamentals**: EPS growth 41.4% YoY
-- **Technical**: RSI oversold (26.3)
+## 614. BitGo Holdings, Inc. (BTGO) -- [MODERATE] 2 signals, strength 1.40
+- **Fundamentals**: Revenue growth 450.9% YoY
+- **Technical**: RSI oversold (17.0)
 
-## 624. FBS Global Limited (FBGL) -- [MODERATE] 2 signals, strength 1.40
+## 615. KT Corporation (KT) -- [MODERATE] 2 signals, strength 1.40
+- **Fundamentals**: EPS growth 41.4% YoY
+- **Technical**: RSI oversold (25.1)
+
+## 616. FBS Global Limited (FBGL) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 52.0% YoY
-- **Technical**: RSI oversold (26.9)
+- **Technical**: RSI oversold (27.4)
 - ⚠️ **EARNINGS QUALITY**: Net margin -5.3% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 625. EHang Holdings Limited - ADS (EH) -- [MODERATE] 2 signals, strength 1.40
+## 617. EHang Holdings Limited - ADS (EH) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 158.4% YoY
-- **Technical**: RSI oversold (23.1)
+- **Technical**: RSI oversold (21.7)
 - ⚠️ **EARNINGS QUALITY**: Net margin -84.3% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 626. Melco Resorts & Entertainment Limited - American Depositary Shares (MLCO) -- [MODERATE] 2 signals, strength 1.40
+## 618. Melco Resorts & Entertainment Limited - American Depositary Shares (MLCO) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: EPS growth 337.9% YoY
-- **Technical**: RSI oversold (23.6)
+- **Technical**: RSI oversold (24.1)
 
-## 627. Circle Internet Group, Inc. (CRCL) -- [MODERATE] 2 signals, strength 1.40
+## 619. Circle Internet Group, Inc. (CRCL) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 37.2% YoY
-- **Technical**: RSI oversold (26.7)
+- **Technical**: RSI oversold (26.2)
 
-## 628. Beta Bionics, Inc. (BBNX) -- [MODERATE] 2 signals, strength 1.40
+## 620. Beta Bionics, Inc. (BBNX) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 94.1% YoY
-- **Technical**: RSI oversold (9.6)
+- **Technical**: RSI oversold (9.5)
 - ⚠️ **EARNINGS QUALITY**: Net margin -61.3% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 629. United States Antimony Corporation (UAMY) -- [MODERATE] 2 signals, strength 1.40
+## 621. United States Antimony Corporation (UAMY) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 35.9% YoY
 - **Technical**: RSI oversold (2.2)
 - ⚠️ **EARNINGS QUALITY**: Net margin -44.6% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 630. OceanFirst Financial Corp. (OCFC) -- [MODERATE] 2 signals, strength 1.40
+## 622. Brunswick Corporation (BC) -- [MODERATE] 2 signals, strength 1.40
+- **Fundamentals**: EPS growth 86.6% YoY
+- **Technical**: RSI oversold (30.0)
+
+## 623. OceanFirst Financial Corp. (OCFC) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 48.4% YoY
-- **Technical**: RSI oversold (26.4)
+- **Technical**: RSI oversold (26.6)
 
-## 631. The Cigna Group (CI) -- [MODERATE] 2 signals, strength 1.40
-- **Fundamentals**: EPS growth 31.7% YoY
-- **Technical**: RSI overbought (77.8)
-- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
-
-## 632. Insmed Incorporated (INSM) -- [MODERATE] 2 signals, strength 1.40
+## 624. Insmed Incorporated (INSM) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 185.8% YoY
-- **Technical**: RSI oversold (14.4)
+- **Technical**: RSI oversold (13.4)
 - ⚠️ **EARNINGS QUALITY**: Net margin -76.9% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 633. Gloo Holdings, Inc. (GLOO) -- [MODERATE] 2 signals, strength 1.40
+## 625. Gloo Holdings, Inc. (GLOO) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 63.6% YoY
-- **Technical**: RSI oversold (3.5)
+- **Technical**: RSI oversold (3.4)
 - ⚠️ **EARNINGS QUALITY**: Net margin -81.3% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 634. Amprius Technologies, Inc. (AMPX) -- [MODERATE] 2 signals, strength 1.40
+## 626. Amprius Technologies, Inc. (AMPX) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 143.6% YoY
-- **Technical**: RSI oversold (17.9)
+- **Technical**: RSI oversold (17.5)
 - ⚠️ **EARNINGS QUALITY**: Net margin -33.4% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 635. BRC Group Holdings, Inc. (RILY) -- [MODERATE] 2 signals, strength 1.40
+## 627. BRC Group Holdings, Inc. (RILY) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 81.4% YoY
-- **Technical**: RSI oversold (26.0)
+- **Technical**: RSI oversold (25.6)
 
-## 636. Viridian Therapeutics, Inc. (VRDN) -- [MODERATE] 2 signals, strength 1.40
+## 628. Viridian Therapeutics, Inc. (VRDN) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 23220.3% YoY
-- **Technical**: RSI oversold (28.8)
+- **Technical**: RSI oversold (28.4)
 - ⚠️ **EARNINGS QUALITY**: Net margin -544.1% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 637. Sharplink, Inc. (SBET) -- [MODERATE] 2 signals, strength 1.40
+## 629. Sharplink, Inc. (SBET) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 1496.7% YoY
-- **Technical**: RSI oversold (16.6)
+- **Technical**: RSI oversold (16.5)
 - ⚠️ **EARNINGS QUALITY**: Net margin -3406.3% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 638. Syndax Pharmaceuticals, Inc. (SNDX) -- [MODERATE] 2 signals, strength 1.40
+## 630. Syndax Pharmaceuticals, Inc. (SNDX) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 222.7% YoY
-- **Technical**: RSI oversold (20.7)
+- **Technical**: RSI oversold (20.8)
 - ⚠️ **EARNINGS QUALITY**: Net margin -87.5% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 639. Americas Gold and Silver Corporation (USAS) -- [MODERATE] 2 signals, strength 1.40
+## 631. Americas Gold and Silver Corporation (USAS) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 55.6% YoY
-- **Technical**: RSI oversold (24.8)
+- **Technical**: RSI oversold (23.8)
 - ⚠️ **EARNINGS QUALITY**: Net margin -36.1% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 640. Satellogic Inc. (SATL) -- [MODERATE] 2 signals, strength 1.40
+## 632. Satellogic Inc. (SATL) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 130.1% YoY
-- **Technical**: RSI oversold (24.4)
+- **Technical**: RSI oversold (24.1)
 - ⚠️ **EARNINGS QUALITY**: Net margin -325.6% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 641. AMC Global Media Inc. (AMCX) -- [MODERATE] 2 signals, strength 1.40
+## 633. AMC Global Media Inc. (AMCX) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: EPS growth 108.7% YoY
-- **Technical**: RSI oversold (22.1)
+- **Technical**: RSI oversold (21.9)
 
-## 642. Healthpeak Properties, Inc. (DOC) -- [MODERATE] 2 signals, strength 1.40
+## 634. Healthpeak Properties, Inc. (DOC) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: EPS growth 48.4% YoY
-- **Technical**: RSI oversold (24.4)
+- **Technical**: RSI oversold (24.2)
 
-## 643. QUALCOMM Incorporated (QCOM) -- [MODERATE] 2 signals, strength 1.40
+## 635. QUALCOMM Incorporated (QCOM) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Quality checklist passed (D/E 0.70, Current ratio 2.82, ROE 37.3%, Net margin 21.0%)
-- **Technical**: RSI oversold (27.6)
+- **Technical**: RSI oversold (27.2)
 
-## 644. 4D Molecular Therapeutics, Inc. (FDMT) -- [MODERATE] 2 signals, strength 1.40
+## 636. 4D Molecular Therapeutics, Inc. (FDMT) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 278712.1% YoY
-- **Technical**: RSI oversold (19.5)
+- **Technical**: RSI oversold (20.0)
 - ⚠️ **EARNINGS QUALITY**: Net margin -194.7% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 645. Abeona Therapeutics Inc. (ABEO) -- [MODERATE] 2 signals, strength 1.40
+## 637. Abeona Therapeutics Inc. (ABEO) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 6280.0% YoY
-- **Technical**: RSI oversold (16.6)
+- **Technical**: RSI oversold (16.4)
 - ⚠️ **EARNINGS QUALITY**: Net margin -226.2% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 646. Agios Pharmaceuticals, Inc. (AGIO) -- [MODERATE] 2 signals, strength 1.40
+## 638. Agios Pharmaceuticals, Inc. (AGIO) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 140.6% YoY
-- **Technical**: RSI oversold (26.1)
+- **Technical**: RSI oversold (25.9)
 - ⚠️ **EARNINGS QUALITY**: Net margin -418.2% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 647. Redwire Corporation (RDW) -- [MODERATE] 2 signals, strength 1.40
+## 639. Redwire Corporation (RDW) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 63.1% YoY
-- **Technical**: RSI oversold (15.7)
+- **Technical**: RSI oversold (15.4)
 - ⚠️ **EARNINGS QUALITY**: Net margin -57.3% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 648. POET Technologies Inc. (POET) -- [MODERATE] 2 signals, strength 1.40
+## 640. POET Technologies Inc. (POET) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 202.3% YoY
-- **Technical**: RSI oversold (20.5)
+- **Technical**: RSI oversold (20.0)
 - ⚠️ **EARNINGS QUALITY**: Net margin -4690.9% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 649. Applied Digital Corporation (APLD) -- [MODERATE] 2 signals, strength 1.40
+## 641. Applied Digital Corporation (APLD) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 457.0% YoY
-- **Technical**: RSI oversold (23.2)
+- **Technical**: RSI oversold (22.9)
 - ⚠️ **EARNINGS QUALITY**: Net margin -54.2% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 650. Velo3D, Inc. (VELO) -- [MODERATE] 2 signals, strength 1.40
+## 642. Velo3D, Inc. (VELO) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 31.5% YoY
-- **Technical**: RSI oversold (18.4)
+- **Technical**: RSI oversold (18.1)
 - ⚠️ **EARNINGS QUALITY**: Net margin -88.1% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 651. Travere Therapeutics, Inc. (TVTX) -- [MODERATE] 2 signals, strength 1.40
+## 643. Travere Therapeutics, Inc. (TVTX) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 77.1% YoY
-- **Technical**: RSI oversold (27.4)
+- **Technical**: RSI oversold (24.4)
 - ⚠️ **EARNINGS QUALITY**: Net margin -7.3% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 652. Blue Owl Technology Finance Corp. (OTF) -- [MODERATE] 2 signals, strength 1.40
+## 644. Blue Owl Technology Finance Corp. (OTF) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 55.6% YoY
 - **Technical**: RSI oversold (23.1)
 
-## 653. Evolv Technologies Holdings, Inc. (EVLV) -- [MODERATE] 2 signals, strength 1.40
+## 645. Evolv Technologies Holdings, Inc. (EVLV) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 41.7% YoY
 - **Technical**: RSI oversold (22.5)
 
-## 654. Kura Oncology, Inc. (KURA) -- [MODERATE] 2 signals, strength 1.40
+## 646. Kura Oncology, Inc. (KURA) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 36.5% YoY
-- **Technical**: RSI oversold (21.0)
+- **Technical**: RSI oversold (19.9)
 - ⚠️ **EARNINGS QUALITY**: Net margin -384.3% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 655. Rhythm Pharmaceuticals, Inc. (RYTM) -- [MODERATE] 2 signals, strength 1.40
+## 647. Rhythm Pharmaceuticals, Inc. (RYTM) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 53.5% YoY
-- **Technical**: RSI oversold (18.1)
+- **Technical**: RSI oversold (17.1)
 - ⚠️ **EARNINGS QUALITY**: Net margin -85.6% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 656. nLIGHT, Inc. (LASR) -- [MODERATE] 2 signals, strength 1.40
+## 648. nLIGHT, Inc. (LASR) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 43.2% YoY
-- **Technical**: RSI oversold (29.1)
+- **Technical**: RSI oversold (27.4)
 
-## 657. Aeva Technologies, Inc. (AEVA) -- [MODERATE] 2 signals, strength 1.40
+## 649. Aeva Technologies, Inc. (AEVA) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 56.2% YoY
-- **Technical**: RSI oversold (15.7)
+- **Technical**: RSI oversold (15.5)
 - ⚠️ **EARNINGS QUALITY**: Net margin -150.1% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 658. Senseonics Holdings, Inc. (SENS) -- [MODERATE] 2 signals, strength 1.40
+## 650. Senseonics Holdings, Inc. (SENS) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 90.6% YoY
-- **Technical**: RSI oversold (25.8)
+- **Technical**: RSI oversold (25.4)
 - ⚠️ **EARNINGS QUALITY**: Net margin -225.3% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 659. Octave Specialty Group, Inc. (OSG) -- [MODERATE] 2 signals, strength 1.40
+## 651. Octave Specialty Group, Inc. (OSG) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 123.1% YoY
-- **Technical**: RSI overbought (72.5)
+- **Technical**: RSI overbought (71.6)
 - ⚠️ **EARNINGS QUALITY**: Net margin -53.5% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 660. Silvercorp Metals Inc. (SVM) -- [MODERATE] 2 signals, strength 1.40
+## 652. Silvercorp Metals Inc. (SVM) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 60.8% YoY
-- **Technical**: RSI oversold (17.9)
+- **Technical**: RSI oversold (17.2)
 
-## 661. Swarmer, Inc (SWMR) -- [MODERATE] 2 signals, strength 1.40
+## 653. Swarmer, Inc (SWMR) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 56.6% YoY
 - **Technical**: RSI oversold (11.5)
 - ⚠️ **EARNINGS QUALITY**: Net margin -2752.3% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 662. York Space Systems Inc. (YSS) -- [MODERATE] 2 signals, strength 1.40
+## 654. York Space Systems Inc. (YSS) -- [MODERATE] 2 signals, strength 1.40
 - **Fundamentals**: Revenue growth 37.5% YoY
-- **Technical**: RSI oversold (8.7)
+- **Technical**: RSI oversold (8.6)
 - ⚠️ **EARNINGS QUALITY**: Net margin -58.1% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing; Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
 
-## 663. Graco Inc. (GGG) -- [MODERATE] 2 signals, strength 1.40
+## 655. Graco Inc. (GGG) -- [MODERATE] 2 signals, strength 1.39
 - **Fundamentals**: EPS growth 12.8% YoY; Quality checklist passed (D/E 0.01, Current ratio 3.15, ROE 20.3%, Net margin 23.5%)
-- **Technical**: Outperforming S&P 500 by 2.1pts (20d)
+- **Technical**: Outperforming S&P 500 by 1.9pts (20d)
 
-## 664. Indivior Pharmaceuticals, Inc. (INDV) -- [MODERATE] 2 signals, strength 1.39
-- **Fundamentals**: Revenue growth 13.6% YoY; EPS growth 237.5% YoY
-- **Technical**: Outperforming S&P 500 by 1.8pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
-
-## 665. Thermo Fisher Scientific Inc (TMO) -- [MODERATE] 2 signals, strength 1.39
+## 656. Thermo Fisher Scientific Inc (TMO) -- [MODERATE] 2 signals, strength 1.39
 - **Fundamentals**: Quality checklist passed (D/E 0.74, Current ratio 1.89, Net margin 15.0%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 1.1pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 0.9pts (20d)
 
-## 666. United Therapeutics Corporation (UTHR) -- [MODERATE] 2 signals, strength 1.39
-- **Fundamentals**: Quality checklist passed (D/E 0.00, Current ratio 6.60, ROE 20.2%, Net margin 41.6%)
-- **Technical**: Outperforming S&P 500 by 5.8pts (20d)
-
-## 667. Zebra Technologies Corporation (ZBRA) -- [MODERATE] 2 signals, strength 1.38
-- **Fundamentals**: Revenue growth 12.7% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 9.0pts (20d)
-
-## 668. OPENLANE, Inc. (OPLN) -- [MODERATE] 2 signals, strength 1.38
-- **Fundamentals**: Revenue growth 10.2% YoY; EPS growth 32.1% YoY
-- **Technical**: Outperforming S&P 500 by 2.7pts (20d)
-
-## 669. Ingram Micro Holding Corporation (INGM) -- [MODERATE] 2 signals, strength 1.38
-- **Fundamentals**: Revenue growth 11.5% YoY; EPS growth 61.4% YoY
-- **Technical**: Outperforming S&P 500 by 2.2pts (20d)
-
-## 670. Grocery Outlet Holding Corp. (GO) -- [MODERATE] 2 signals, strength 1.38
-- **Fundamentals**: EPS growth 11.9% YoY
-- **Technical**: RSI overbought (70.8); Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.8pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Net margin -8.0% despite 11.9% adjusted EPS growth -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
-
-## 671. Gilead Sciences, Inc. (GILD) -- [MODERATE] 2 signals, strength 1.37
+## 657. Gilead Sciences, Inc. (GILD) -- [MODERATE] 2 signals, strength 1.38
 - **Fundamentals**: EPS growth 23.1% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 0.1pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 0.4pts (20d)
 - ⚠️ **EARNINGS QUALITY**: Net margin -10.6% despite 23.1% adjusted EPS growth -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 672. Tenaris S.A. American Depositary Shares (TS) -- [MODERATE] 2 signals, strength 1.37
+## 658. Tenaris S.A. American Depositary Shares (TS) -- [MODERATE] 2 signals, strength 1.38
 - **Fundamentals**: Quality checklist passed (D/E 0.03, Current ratio 3.87, Net margin 15.9%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 0.6pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 0.8pts (20d)
 
-## 673. AMETEK, Inc. (AME) -- [MODERATE] 2 signals, strength 1.37
+## 659. Grocery Outlet Holding Corp. (GO) -- [MODERATE] 2 signals, strength 1.38
+- **Fundamentals**: EPS growth 11.9% YoY
+- **Technical**: RSI overbought (70.8); Price above rising 50/200-day MAs; Outperforming S&P 500 by 6.0pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Net margin -8.0% despite 11.9% adjusted EPS growth -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+
+## 660. United Therapeutics Corporation (UTHR) -- [MODERATE] 2 signals, strength 1.38
+- **Fundamentals**: Quality checklist passed (D/E 0.00, Current ratio 6.60, ROE 20.2%, Net margin 41.6%)
+- **Technical**: Outperforming S&P 500 by 5.6pts (20d)
+
+## 661. OPENLANE, Inc. (OPLN) -- [MODERATE] 2 signals, strength 1.37
+- **Fundamentals**: Revenue growth 10.2% YoY; EPS growth 32.1% YoY
+- **Technical**: Outperforming S&P 500 by 2.5pts (20d)
+
+## 662. Zebra Technologies Corporation (ZBRA) -- [MODERATE] 2 signals, strength 1.37
+- **Fundamentals**: Revenue growth 12.7% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 8.6pts (20d)
+
+## 663. AMETEK, Inc. (AME) -- [MODERATE] 2 signals, strength 1.36
 - **Fundamentals**: Revenue growth 12.7% YoY; EPS growth 10.3% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 3.5pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 3.3pts (20d)
 
-## 674. Butterfly Network, Inc. (BFLY) -- [MODERATE] 2 signals, strength 1.37
-- **Fundamentals**: Revenue growth 28.1% YoY
-- **Technical**: Outperforming S&P 500 by 6.4pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Net margin -66.8% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+## 664. Cerence Inc. (CRNC) -- [MODERATE] 2 signals, strength 1.36
+- **Fundamentals**: Revenue growth 25.8% YoY
+- **Technical**: Outperforming S&P 500 by 7.5pts (20d)
 
-## 675. Veralto Corp (VLTO) -- [MODERATE] 2 signals, strength 1.36
+## 665. Prudential Public Limited Company (PUK) -- [MODERATE] 2 signals, strength 1.36
+- **Fundamentals**: EPS growth 10.3% YoY; Quality checklist passed (D/E 0.26, ROE 18.3%, Net margin 28.8%)
+- **Technical**: RSI oversold (19.5)
+
+## 666. Veralto Corp (VLTO) -- [MODERATE] 2 signals, strength 1.36
 - **Fundamentals**: EPS growth 11.1% YoY; Quality checklist passed (D/E 0.86, Current ratio 1.67, ROE 32.8%, Net margin 17.4%)
-- **Technical**: Outperforming S&P 500 by 2.1pts (20d)
+- **Technical**: Outperforming S&P 500 by 2.0pts (20d)
 - ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
 
-## 676. Prudential Public Limited Company (PUK) -- [MODERATE] 2 signals, strength 1.36
-- **Fundamentals**: EPS growth 10.3% YoY; Quality checklist passed (D/E 0.26, ROE 18.3%, Net margin 28.8%)
-- **Technical**: RSI oversold (19.7)
+## 667. Twist Bioscience Corporation (TWST) -- [MODERATE] 2 signals, strength 1.35
+- **Fundamentals**: Revenue growth 19.2% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 2.9pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Net margin -31.7% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 677. Manhattan Associates, Inc. (MANH) -- [MODERATE] 2 signals, strength 1.35
+## 668. Costco Wholesale Corporation (COST) -- [MODERATE] 2 signals, strength 1.35
+- **Fundamentals**: Revenue growth 10.1% YoY; EPS growth 14.0% YoY
+- **Technical**: RSI overbought (83.2); Outperforming S&P 500 by 6.7pts (20d)
+
+## 669. Manhattan Associates, Inc. (MANH) -- [MODERATE] 2 signals, strength 1.35
 - **Fundamentals**: Quality checklist passed (D/E 0.00, ROE 85.2%, Net margin 18.7%)
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 0.1pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 0.0pts (20d)
 
-## 678. VeriSign, Inc. (VRSN) -- [MODERATE] 2 signals, strength 1.35
+## 670. Bausch Health Companies Inc. (BHC) -- [MODERATE] 2 signals, strength 1.35
+- **Fundamentals**: Revenue growth 10.1% YoY; EPS growth 72.0% YoY
+- **Technical**: Outperforming S&P 500 by 2.2pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Net margin -10.1% despite 72.0% adjusted EPS growth -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+
+## 671. VeriSign, Inc. (VRSN) -- [MODERATE] 2 signals, strength 1.35
 - **Fundamentals**: Quality checklist passed (D/E 0.86, ROE 113.5%, Net margin 49.8%)
 - **Technical**: Price above rising 50/200-day MAs
 
-## 679. Woodside Energy Group Limited American Depositary Shares, each representing one Ordinary Share (WDS) -- [MODERATE] 2 signals, strength 1.35
+## 672. Automatic Data Processing, Inc. (ADP) -- [MODERATE] 2 signals, strength 1.35
+- **Fundamentals**: Quality checklist passed (D/E 0.82, ROE 70.2%, Net margin 20.1%)
+- **Technical**: Price above rising 50/200-day MAs
+
+## 673. Woodside Energy Group Limited American Depositary Shares, each representing one Ordinary Share (WDS) -- [MODERATE] 2 signals, strength 1.35
 - **Fundamentals**: Quality checklist passed (D/E 0.38, Current ratio 1.59, Net margin 22.2%)
 - **Technical**: Price above rising 50/200-day MAs
 
-## 680. Redwood Trust, Inc. (RWT) -- [MODERATE] 2 signals, strength 1.35
+## 674. Redwood Trust, Inc. (RWT) -- [MODERATE] 2 signals, strength 1.35
 - **Fundamentals**: Revenue growth 28.5% YoY
-- **Technical**: RSI oversold (19.7)
+- **Technical**: RSI oversold (19.2)
 
-## 681. ITT Inc. (ITT) -- [MODERATE] 2 signals, strength 1.35
-- **Fundamentals**: Revenue growth 28.1% YoY
-- **Technical**: RSI oversold (29.0); Outperforming S&P 500 by 0.3pts (20d)
-
-## 682. Coca-Cola Europacific Partners plc (CCEP) -- [MODERATE] 2 signals, strength 1.35
+## 675. Coca-Cola Europacific Partners plc (CCEP) -- [MODERATE] 2 signals, strength 1.35
 - **Fundamentals**: Revenue growth 11.7% YoY; EPS growth 20.4% YoY
-- **Technical**: RSI overbought (75.1); Outperforming S&P 500 by 0.8pts (20d)
+- **Technical**: RSI overbought (75.0); Outperforming S&P 500 by 0.8pts (20d)
 
-## 683. CME Group Inc. (CME) -- [MODERATE] 2 signals, strength 1.34
+## 676. Ingram Micro Holding Corporation (INGM) -- [MODERATE] 2 signals, strength 1.35
+- **Fundamentals**: Revenue growth 11.5% YoY; EPS growth 61.4% YoY
+- **Technical**: Outperforming S&P 500 by 1.7pts (20d)
+
+## 677. CME Group Inc. (CME) -- [MODERATE] 2 signals, strength 1.34
 - **Fundamentals**: Revenue growth 16.6% YoY; EPS growth 13.4% YoY; Quality checklist passed (D/E 0.12, ROE 15.6%, Net margin 34.0%)
 - **Technical**: Outperforming S&P 500 by 1.5pts (20d)
 
-## 684. Delek US Holdings, Inc. (DK) -- [MODERATE] 2 signals, strength 1.34
-- **Fundamentals**: Revenue growth 11.4% YoY; Analyst sentiment improving: 14 buy/strongBuy vs. 13 last month
-- **Technical**: RSI overbought (80.0); Price above rising 50/200-day MAs
-
-## 685. Phreesia, Inc. (PHR) -- [MODERATE] 2 signals, strength 1.33
-- **Fundamentals**: Revenue growth 12.9% YoY; EPS growth 189.6% YoY
+## 678. Indivior Pharmaceuticals, Inc. (INDV) -- [MODERATE] 2 signals, strength 1.34
+- **Fundamentals**: Revenue growth 13.6% YoY; EPS growth 237.5% YoY
 - **Technical**: Outperforming S&P 500 by 1.1pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
 
-## 686. NorthWestern Energy Group, Inc. (NWE) -- [MODERATE] 2 signals, strength 1.33
+## 679. Delek US Holdings, Inc. (DK) -- [MODERATE] 2 signals, strength 1.34
+- **Fundamentals**: Revenue growth 11.4% YoY; Analyst sentiment improving: 14 buy/strongBuy vs. 13 last month
+- **Technical**: RSI overbought (78.9); Price above rising 50/200-day MAs
+
+## 680. Phreesia, Inc. (PHR) -- [MODERATE] 2 signals, strength 1.34
+- **Fundamentals**: Revenue growth 12.9% YoY; EPS growth 189.6% YoY
+- **Technical**: Outperforming S&P 500 by 1.2pts (20d)
+
+## 681. ITT Inc. (ITT) -- [MODERATE] 2 signals, strength 1.34
+- **Fundamentals**: Revenue growth 28.1% YoY
+- **Technical**: RSI oversold (28.4)
+
+## 682. NorthWestern Energy Group, Inc. (NWE) -- [MODERATE] 2 signals, strength 1.33
 - **Fundamentals**: Revenue growth 10.7% YoY
-- **Technical**: RSI overbought (74.1); Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.6pts (20d)
+- **Technical**: RSI overbought (74.6); Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.8pts (20d)
 
-## 687. Jumia Technologies AG American Depositary Shares, each representing two (JMIA) -- [MODERATE] 2 signals, strength 1.33
-- **Fundamentals**: Revenue growth 27.8% YoY
-- **Technical**: RSI oversold (23.8)
-- ⚠️ **EARNINGS QUALITY**: Net margin -27.5% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+## 683. Yext, Inc. (YEXT) -- [MODERATE] 2 signals, strength 1.33
+- **Fundamentals**: EPS growth 333.4% YoY
+- **Technical**: Outperforming S&P 500 by 5.0pts (20d)
 
-## 688. Corcept Therapeutics Incorporated (CORT) -- [MODERATE] 2 signals, strength 1.33
+## 684. STERIS plc (Ireland) (STE) -- [MODERATE] 2 signals, strength 1.33
+- **Fundamentals**: EPS growth 25.2% YoY; Quality checklist passed (D/E 0.27, Current ratio 2.09, Net margin 13.3%)
+- **Technical**: Outperforming S&P 500 by 0.6pts (20d)
+
+## 685. Corcept Therapeutics Incorporated (CORT) -- [MODERATE] 2 signals, strength 1.33
 - **Fundamentals**: Revenue growth 16.0% YoY
 - **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.8pts (20d)
 
-## 689. STERIS plc (Ireland) (STE) -- [MODERATE] 2 signals, strength 1.32
-- **Fundamentals**: EPS growth 25.2% YoY; Quality checklist passed (D/E 0.27, Current ratio 2.09, Net margin 13.3%)
-- **Technical**: Outperforming S&P 500 by 0.5pts (20d)
+## 686. Jumia Technologies AG American Depositary Shares, each representing two (JMIA) -- [MODERATE] 2 signals, strength 1.33
+- **Fundamentals**: Revenue growth 27.8% YoY
+- **Technical**: RSI oversold (23.4)
+- ⚠️ **EARNINGS QUALITY**: Net margin -27.5% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 690. Costco Wholesale Corporation (COST) -- [MODERATE] 2 signals, strength 1.32
-- **Fundamentals**: Revenue growth 10.1% YoY; EPS growth 14.0% YoY
-- **Technical**: RSI overbought (82.7); Outperforming S&P 500 by 6.2pts (20d)
-
-## 691. Permian Resources Corporation (PR) -- [MODERATE] 2 signals, strength 1.32
-- **Fundamentals**: Revenue growth 12.8% YoY
-- **Technical**: RSI overbought (74.6); Price above rising 50/200-day MAs; Outperforming S&P 500 by 2.2pts (20d)
-
-## 692. Tencent Music Entertainment Group American Depositary Shares, each representing two Class A (TME) -- [MODERATE] 2 signals, strength 1.32
+## 687. Tencent Music Entertainment Group American Depositary Shares, each representing two Class A (TME) -- [MODERATE] 2 signals, strength 1.32
 - **Fundamentals**: Revenue growth 12.1% YoY; Quality checklist passed (D/E 0.05, Current ratio 2.22, Net margin 26.3%)
-- **Technical**: Outperforming S&P 500 by 4.9pts (20d)
+- **Technical**: Outperforming S&P 500 by 5.0pts (20d)
 - ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
 
-## 693. Equinor ASA (EQNR) -- [MODERATE] 2 signals, strength 1.32
+## 688. Permian Resources Corporation (PR) -- [MODERATE] 2 signals, strength 1.32
+- **Fundamentals**: Revenue growth 12.8% YoY
+- **Technical**: RSI overbought (74.7); Price above rising 50/200-day MAs; Outperforming S&P 500 by 2.3pts (20d)
+
+## 689. Equinor ASA (EQNR) -- [MODERATE] 2 signals, strength 1.32
 - **Fundamentals**: EPS growth 21.5% YoY
 - **Technical**: Price above rising 50/200-day MAs
 
-## 694. SentinelOne, Inc. (S) -- [MODERATE] 2 signals, strength 1.30
+## 690. PPL Corporation (PPL) -- [MODERATE] 2 signals, strength 1.31
+- **Fundamentals**: EPS growth 26.4% YoY
+- **Technical**: RSI overbought (90.9); Outperforming S&P 500 by 0.7pts (20d)
+
+## 691. Cheniere Energy, Inc. (LNG) -- [MODERATE] 2 signals, strength 1.31
+- **Fundamentals**: Revenue growth 17.5% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 3.1pts (20d)
+
+## 692. SentinelOne, Inc. (S) -- [MODERATE] 2 signals, strength 1.30
 - **Fundamentals**: Revenue growth 21.1% YoY
 - **Technical**: Price above rising 50/200-day MAs
 - ⚠️ **EARNINGS QUALITY**: Net margin -30.9% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 695. Cheniere Energy, Inc. (LNG) -- [MODERATE] 2 signals, strength 1.30
-- **Fundamentals**: Revenue growth 17.5% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 2.9pts (20d)
+## 693. GlobalFoundries Inc. - Ordinary Share (GFS) -- [MODERATE] 2 signals, strength 1.30
+- **Fundamentals**: Quality checklist passed (D/E 0.14, Current ratio 2.62, Net margin 10.3%)
+- **Technical**: Outperforming S&P 500 by 8.3pts (20d)
 
-## 696. PPL Corporation (PPL) -- [MODERATE] 2 signals, strength 1.30
-- **Fundamentals**: EPS growth 26.4% YoY
-- **Technical**: RSI overbought (89.7); Outperforming S&P 500 by 0.5pts (20d)
-
-## 697. Diamondrock Hospitality Company (DRH) -- [MODERATE] 2 signals, strength 1.29
-- **Fundamentals**: EPS growth 128.9% YoY
-- **Technical**: Outperforming S&P 500 by 4.4pts (20d)
-
-## 698. Zillow Group, Inc. - Class C Capital Stock (Z) -- [MODERATE] 2 signals, strength 1.29
+## 694. Zillow Group, Inc. - Class C Capital Stock (Z) -- [MODERATE] 2 signals, strength 1.29
 - **Fundamentals**: Revenue growth 17.7% YoY
 - **News**: [MarketWatch Top Stories] Gen Z renters are the only group more likely to feel successful by investing than buying a house
 
-## 699. Nu Skin Enterprises, Inc. (NUS) -- [MODERATE] 2 signals, strength 1.29
-- **Fundamentals**: EPS growth 15.3% YoY
-- **Technical**: RSI overbought (78.3); Outperforming S&P 500 by 8.0pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Net margin -15.7% despite 15.3% adjusted EPS growth -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
-
-## 700. IQVIA Holdings, Inc. (IQV) -- [MODERATE] 2 signals, strength 1.28
+## 695. IQVIA Holdings, Inc. (IQV) -- [MODERATE] 2 signals, strength 1.28
 - **Fundamentals**: EPS growth 16.8% YoY; Analyst sentiment improving: 23 buy/strongBuy vs. 22 last month
 - **Technical**: Price above rising 50/200-day MAs
 
-## 701. Core Scientific, Inc. (CORZ) -- [MODERATE] 2 signals, strength 1.28
+## 696. Commvault Systems, Inc. (CVLT) -- [MODERATE] 2 signals, strength 1.28
+- **Fundamentals**: Revenue growth 15.5% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.1pts (20d)
+
+## 697. Janux Therapeutics, Inc. (JANX) -- [MODERATE] 2 signals, strength 1.28
+- **Fundamentals**: Revenue growth 5367.0% YoY; Analyst sentiment improving: 22 buy/strongBuy vs. 21 last month
+- **Technical**: Outperforming S&P 500 by 2.4pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Net margin -294.4% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+
+## 698. Diamondrock Hospitality Company (DRH) -- [MODERATE] 2 signals, strength 1.28
+- **Fundamentals**: EPS growth 128.9% YoY
+- **Technical**: Outperforming S&P 500 by 4.2pts (20d)
+
+## 699. Core Scientific, Inc. (CORZ) -- [MODERATE] 2 signals, strength 1.28
 - **Fundamentals**: Revenue growth 26.4% YoY
-- **Technical**: RSI oversold (18.0)
+- **Technical**: RSI oversold (18.1)
 - ⚠️ **EARNINGS QUALITY**: Net margin -325.9% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+
+## 700. Procter & Gamble Company (The) (PG) -- [MODERATE] 2 signals, strength 1.28
+- **Fundamentals**: Quality checklist passed (D/E 0.63, ROE 29.8%, Net margin 18.4%)
+- **Technical**: RSI overbought (72.7); Outperforming S&P 500 by 3.2pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 1 sell/strongSell vs. 1 last month
+
+## 701. RELX PLC PLC American Depositary Shares (Each representing One Ordinary Share) (RELX) -- [MODERATE] 2 signals, strength 1.28
+- **Fundamentals**: EPS growth 20.7% YoY
+- **Technical**: RSI overbought (86.7); Outperforming S&P 500 by 4.7pts (20d)
 
 ## 702. Draganfly Inc. (DPRO) -- [MODERATE] 2 signals, strength 1.28
 - **Fundamentals**: Revenue growth 26.3% YoY
-- **Technical**: RSI oversold (27.0)
+- **Technical**: RSI oversold (26.9)
 - ⚠️ **EARNINGS QUALITY**: Net margin -358.8% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 703. Procter & Gamble Company (The) (PG) -- [MODERATE] 2 signals, strength 1.28
-- **Fundamentals**: Quality checklist passed (D/E 0.63, ROE 29.8%, Net margin 18.4%)
-- **Technical**: RSI overbought (72.8); Outperforming S&P 500 by 3.1pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 1 sell/strongSell vs. 1 last month
+## 703. Nu Skin Enterprises, Inc. (NUS) -- [MODERATE] 2 signals, strength 1.28
+- **Fundamentals**: EPS growth 15.3% YoY
+- **Technical**: RSI overbought (78.1); Outperforming S&P 500 by 7.9pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Net margin -15.7% despite 15.3% adjusted EPS growth -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
 ## 704. Sabra Health Care REIT, Inc. (SBRA) -- [MODERATE] 2 signals, strength 1.28
 - **Fundamentals**: Revenue growth 17.3% YoY
 - **Technical**: MACD bullish crossover
 
-## 705. Commvault Systems, Inc. (CVLT) -- [MODERATE] 2 signals, strength 1.28
-- **Fundamentals**: Revenue growth 15.5% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.0pts (20d)
-
-## 706. Janux Therapeutics, Inc. (JANX) -- [MODERATE] 2 signals, strength 1.27
-- **Fundamentals**: Revenue growth 5367.0% YoY; Analyst sentiment improving: 22 buy/strongBuy vs. 21 last month
-- **Technical**: Outperforming S&P 500 by 2.3pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Net margin -294.4% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
-
-## 707. Canada Goose Holdings Inc. Subordinate Voting Shares (GOOS) -- [MODERATE] 2 signals, strength 1.27
-- **Fundamentals**: Revenue growth 20.4% YoY; EPS growth 15.8% YoY
-- **Technical**: Outperforming S&P 500 by 4.2pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 9 sell/strongSell vs. 2 last month
-
-## 708. Qnity Electronics, Inc. (Q) -- [MODERATE] 2 signals, strength 1.27
-- **Fundamentals**: Revenue growth 17.6% YoY; Quality checklist passed (D/E 0.57, Current ratio 1.95, Net margin 11.2%)
-- **Technical**: Outperforming S&P 500 by 2.6pts (20d)
-
-## 709. RELX PLC PLC American Depositary Shares (Each representing One Ordinary Share) (RELX) -- [MODERATE] 2 signals, strength 1.27
-- **Fundamentals**: EPS growth 20.7% YoY
-- **Technical**: RSI overbought (86.7); Outperforming S&P 500 by 4.5pts (20d)
-
-## 710. PDD Holdings Inc. - American Depositary Shares (PDD) -- [MODERATE] 2 signals, strength 1.27
-- **Fundamentals**: Revenue growth 10.1% YoY; Quality checklist passed (D/E 0.00, Current ratio 2.43, ROE 22.0%, Net margin 20.4%)
-- **Technical**: Outperforming S&P 500 by 1.0pts (20d)
-
-## 711. PulteGroup, Inc. (PHM) -- [MODERATE] 2 signals, strength 1.27
+## 705. PulteGroup, Inc. (PHM) -- [MODERATE] 2 signals, strength 1.27
 - **Fundamentals**: Quality checklist passed (D/E 0.17, Current ratio 7.34, Net margin 11.6%); Analyst sentiment improving: 13 buy/strongBuy vs. 12 last month
-- **Technical**: RSI oversold (26.6)
+- **Technical**: RSI oversold (26.7)
 
-## 712. Encompass Health Corporation (EHC) -- [MODERATE] 2 signals, strength 1.27
+## 706. Qiagen N.V. (QGEN) -- [MODERATE] 2 signals, strength 1.27
+- **Fundamentals**: EPS growth 13.0% YoY; Quality checklist passed (D/E 0.44, Current ratio 3.90, Net margin 19.5%)
+- **Technical**: Outperforming S&P 500 by 3.9pts (20d)
+
+## 707. Encompass Health Corporation (EHC) -- [MODERATE] 2 signals, strength 1.27
 - **Fundamentals**: EPS growth 20.1% YoY
 - **Technical**: Price above rising 50/200-day MAs
 
-## 713. DPC Holdings PLC (DPC) -- [MODERATE] 2 signals, strength 1.27
+## 708. DPC Holdings PLC (DPC) -- [MODERATE] 2 signals, strength 1.27
 - **Fundamentals**: Revenue growth 26.1% YoY
-- **Technical**: RSI oversold (16.8)
+- **Technical**: RSI oversold (16.1)
 - ⚠️ **EARNINGS QUALITY**: Net margin -20.7% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 714. PayPal Holdings, Inc. (PYPL) -- [MODERATE] 2 signals, strength 1.26
-- **Fundamentals**: EPS growth 13.5% YoY; Quality checklist passed (D/E 0.56, ROE 24.4%, Net margin 14.4%)
-- **Technical**: Outperforming S&P 500 by 3.7pts (20d)
+## 709. PDD Holdings Inc. - American Depositary Shares (PDD) -- [MODERATE] 2 signals, strength 1.27
+- **Fundamentals**: Revenue growth 10.1% YoY; Quality checklist passed (D/E 0.00, Current ratio 2.43, ROE 22.0%, Net margin 20.4%)
+- **Technical**: Outperforming S&P 500 by 1.0pts (20d)
 
-## 715. ClearPoint Neuro Inc. (CLPT) -- [MODERATE] 2 signals, strength 1.26
+## 710. ClearPoint Neuro Inc. (CLPT) -- [MODERATE] 2 signals, strength 1.26
 - **Fundamentals**: Revenue growth 25.9% YoY
-- **Technical**: RSI oversold (20.5)
+- **Technical**: RSI oversold (20.2)
 - ⚠️ **EARNINGS QUALITY**: Net margin -81.8% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 716. Revolve Group, Inc. (RVLV) -- [MODERATE] 2 signals, strength 1.26
-- **Fundamentals**: Revenue growth 10.8% YoY; EPS growth 60.1% YoY
-- **Technical**: Outperforming S&P 500 by 0.7pts (20d)
-
-## 717. Qiagen N.V. (QGEN) -- [MODERATE] 2 signals, strength 1.25
-- **Fundamentals**: EPS growth 13.0% YoY; Quality checklist passed (D/E 0.44, Current ratio 3.90, Net margin 19.5%)
+## 711. PayPal Holdings, Inc. (PYPL) -- [MODERATE] 2 signals, strength 1.26
+- **Fundamentals**: EPS growth 13.5% YoY; Quality checklist passed (D/E 0.56, ROE 24.4%, Net margin 14.4%)
 - **Technical**: Outperforming S&P 500 by 3.6pts (20d)
 
-## 718. GeneDx Holdings Corp. (WGS) -- [MODERATE] 2 signals, strength 1.25
+## 712. Canada Goose Holdings Inc. Subordinate Voting Shares (GOOS) -- [MODERATE] 2 signals, strength 1.26
+- **Fundamentals**: Revenue growth 20.4% YoY; EPS growth 15.8% YoY
+- **Technical**: Outperforming S&P 500 by 4.0pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 9 sell/strongSell vs. 2 last month
+
+## 713. Revolve Group, Inc. (RVLV) -- [MODERATE] 2 signals, strength 1.25
+- **Fundamentals**: Revenue growth 10.8% YoY; EPS growth 60.1% YoY
+- **Technical**: Outperforming S&P 500 by 0.6pts (20d)
+
+## 714. Methanex Corporation (MEOH) -- [MODERATE] 2 signals, strength 1.25
+- **Fundamentals**: Revenue growth 19.2% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 0.2pts (20d)
+
+## 715. GeneDx Holdings Corp. (WGS) -- [MODERATE] 2 signals, strength 1.25
 - **Fundamentals**: Revenue growth 25.4% YoY
-- **Technical**: RSI oversold (23.4)
+- **Technical**: RSI oversold (22.3)
 - ⚠️ **EARNINGS QUALITY**: Net margin -23.4% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 719. Artivion, Inc. (AORT) -- [MODERATE] 2 signals, strength 1.25
+## 716. Artivion, Inc. (AORT) -- [MODERATE] 2 signals, strength 1.25
 - **Fundamentals**: Revenue growth 16.4% YoY
 - **Technical**: MACD bullish crossover
 
-## 720. Amphastar Pharmaceuticals, Inc. (AMPH) -- [MODERATE] 2 signals, strength 1.25
-- **Fundamentals**: Quality checklist passed (D/E 0.77, Current ratio 4.02, Net margin 10.8%)
-- **Technical**: Outperforming S&P 500 by 7.4pts (20d)
+## 717. New Pacific Metals Corp. (NEWP) -- [MODERATE] 2 signals, strength 1.24
+- **Fundamentals**: Quality checklist passed (D/E 0.00, Current ratio 34.54, Net margin 18.9%)
+- **Technical**: RSI oversold (29.9); Outperforming S&P 500 by 2.4pts (20d)
 
-## 721. Charles River Laboratories International, Inc. (CRL) -- [MODERATE] 2 signals, strength 1.24
-- **Fundamentals**: Analyst sentiment improving: 17 buy/strongBuy vs. 15 last month
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 8.6pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Net margin -6.0% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
-
-## 722. Methanex Corporation (MEOH) -- [MODERATE] 2 signals, strength 1.24
-- **Fundamentals**: Revenue growth 19.2% YoY
-- **Technical**: Price above rising 50/200-day MAs
-
-## 723. Crane NXT, Co. (CXT) -- [MODERATE] 2 signals, strength 1.24
+## 718. Crane NXT, Co. (CXT) -- [MODERATE] 2 signals, strength 1.24
 - **Fundamentals**: Revenue growth 17.3% YoY
-- **Technical**: RSI overbought (71.0); Outperforming S&P 500 by 6.4pts (20d)
+- **Technical**: RSI overbought (70.9); Outperforming S&P 500 by 6.4pts (20d)
 
-## 724. Inno Holdings Inc. (INHD) -- [MODERATE] 2 signals, strength 1.23
-- **Fundamentals**: Revenue growth 146.1% YoY
-- **Technical**: Outperforming S&P 500 by 3.5pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Net margin -72.7% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
-
-## 725. Regal Rexnord Corporation (RRX) -- [MODERATE] 2 signals, strength 1.23
-- **Fundamentals**: EPS growth 28.9% YoY
-- **Technical**: Outperforming S&P 500 by 4.0pts (20d)
-
-## 726. The Baldwin Insurance Group, Inc. (BWIN) -- [MODERATE] 2 signals, strength 1.23
+## 719. The Baldwin Insurance Group, Inc. (BWIN) -- [MODERATE] 2 signals, strength 1.23
 - **Fundamentals**: Revenue growth 18.9% YoY
 - **Technical**: Price above rising 50/200-day MAs
 
-## 727. Ameren Corporation (AEE) -- [MODERATE] 2 signals, strength 1.23
-- **Fundamentals**: EPS growth 24.8% YoY
-- **Technical**: RSI overbought (79.8)
+## 720. Qnity Electronics, Inc. (Q) -- [MODERATE] 2 signals, strength 1.23
+- **Fundamentals**: Revenue growth 17.6% YoY; Quality checklist passed (D/E 0.57, Current ratio 1.95, Net margin 11.2%)
+- **Technical**: Outperforming S&P 500 by 1.9pts (20d)
 
-## 728. ACV Auctions Inc. (ACVA) -- [MODERATE] 2 signals, strength 1.22
+## 721. Ameren Corporation (AEE) -- [MODERATE] 2 signals, strength 1.23
+- **Fundamentals**: EPS growth 24.8% YoY
+- **Technical**: RSI overbought (80.1)
+
+## 722. ACV Auctions Inc. (ACVA) -- [MODERATE] 2 signals, strength 1.22
 - **Fundamentals**: Revenue growth 13.3% YoY
 - **Technical**: Price above rising 50/200-day MAs; 52-week high, but still 71.7% below all-time high ($37.04) -- possible overhead resistance
 - ⚠️ **CAUTION**: New 52-week high but on light volume (0.1x average) -- unconfirmed breakout
 - ⚠️ **EARNINGS QUALITY**: Net margin -7.9% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 729. Bath & Body Works, Inc. (BBWI) -- [MODERATE] 2 signals, strength 1.22
-- **Fundamentals**: EPS growth 13.8% YoY; Analyst sentiment improving: 10 buy/strongBuy vs. 8 last month
-- **Technical**: Outperforming S&P 500 by 7.8pts (20d)
+## 723. Inno Holdings Inc. (INHD) -- [MODERATE] 2 signals, strength 1.22
+- **Fundamentals**: Revenue growth 146.1% YoY
+- **Technical**: Outperforming S&P 500 by 3.3pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Net margin -72.7% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 730. Riot Platforms, Inc. (RIOT) -- [MODERATE] 2 signals, strength 1.22
+## 724. Riot Platforms, Inc. (RIOT) -- [MODERATE] 2 signals, strength 1.22
 - **Fundamentals**: Revenue growth 24.5% YoY
-- **Technical**: RSI oversold (4.2)
+- **Technical**: RSI oversold (4.1)
 - ⚠️ **EARNINGS QUALITY**: Net margin -196.3% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 731. Trekor Metals Limited (TGB) -- [MODERATE] 2 signals, strength 1.21
-- **Fundamentals**: Revenue growth 70.3% YoY; Analyst sentiment improving: 10 buy/strongBuy vs. 9 last month
-- **Technical**: Outperforming S&P 500 by 1.3pts (20d)
+## 725. Charles River Laboratories International, Inc. (CRL) -- [MODERATE] 2 signals, strength 1.21
+- **Fundamentals**: Analyst sentiment improving: 17 buy/strongBuy vs. 15 last month
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 7.8pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Net margin -6.0% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 732. SITE Centers Corp. (SITC) -- [MODERATE] 2 signals, strength 1.21
-- **Fundamentals**: Quality checklist passed (D/E 0.00, Current ratio 1.58, ROE 40.6%, Net margin 179.5%)
+## 726. Helen of Troy Limited (HELE) -- [MODERATE] 2 signals, strength 1.21
+- **Fundamentals**: Earnings beat by 53.4% (5d ago)
 - **Technical**: Outperforming S&P 500 by 3.1pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Net margin -22.7% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 733. MidCap Financial Investment Corporation - Closed End Fund (MFIC) -- [MODERATE] 2 signals, strength 1.20
-- **Fundamentals**: EPS growth 24.1% YoY
-- **Technical**: RSI oversold (22.1)
-- ⚠️ **EARNINGS QUALITY**: Net margin -9.8% despite 24.1% adjusted EPS growth -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+## 727. Butterfly Network, Inc. (BFLY) -- [MODERATE] 2 signals, strength 1.21
+- **Fundamentals**: Revenue growth 28.1% YoY
+- **Technical**: Outperforming S&P 500 by 4.0pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Net margin -66.8% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 734. Federal Realty Investment Trust (FRT) -- [MODERATE] 2 signals, strength 1.20
-- **Fundamentals**: EPS growth 24.1% YoY
-- **Technical**: RSI oversold (26.8)
-
-## 735. Baxter International Inc. (BAX) -- [MODERATE] 2 signals, strength 1.20
+## 728. Baxter International Inc. (BAX) -- [MODERATE] 2 signals, strength 1.20
 - **Fundamentals**: EPS growth 37.4% YoY
 - **Technical**: Outperforming S&P 500 by 3.0pts (20d)
 - ⚠️ **EARNINGS QUALITY**: Net margin -9.3% despite 37.4% adjusted EPS growth -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 736. Eaton Corporation, PLC (ETN) -- [MODERATE] 2 signals, strength 1.20
-- **Fundamentals**: Revenue growth 15.5% YoY; Quality checklist passed (D/E 0.51, ROE 19.6%, Net margin 12.8%); Analyst sentiment improving: 27 buy/strongBuy vs. 26 last month
-- **Technical**: Outperforming S&P 500 by 0.9pts (20d)
+## 729. MidCap Financial Investment Corporation - Closed End Fund (MFIC) -- [MODERATE] 2 signals, strength 1.20
+- **Fundamentals**: EPS growth 24.1% YoY
+- **Technical**: RSI oversold (22.6)
+- ⚠️ **EARNINGS QUALITY**: Net margin -9.8% despite 24.1% adjusted EPS growth -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 737. Helen of Troy Limited (HELE) -- [MODERATE] 2 signals, strength 1.19
-- **Fundamentals**: Earnings beat by 53.4% (5d ago)
-- **Technical**: Outperforming S&P 500 by 2.9pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Net margin -22.7% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+## 730. Regal Rexnord Corporation (RRX) -- [MODERATE] 2 signals, strength 1.20
+- **Fundamentals**: EPS growth 28.9% YoY
+- **Technical**: Outperforming S&P 500 by 3.6pts (20d)
 
-## 738. Valvoline Inc. (VVV) -- [MODERATE] 2 signals, strength 1.19
-- **Fundamentals**: Revenue growth 16.1% YoY
-- **Technical**: Outperforming S&P 500 by 9.8pts (20d)
+## 731. Federal Realty Investment Trust (FRT) -- [MODERATE] 2 signals, strength 1.20
+- **Fundamentals**: EPS growth 24.1% YoY
+- **Technical**: RSI oversold (26.7)
 
-## 739. N-able, Inc. (NABL) -- [MODERATE] 2 signals, strength 1.19
-- **Fundamentals**: Revenue growth 10.7% YoY
-- **Technical**: Outperforming S&P 500 by 12.5pts (20d)
+## 732. Amphastar Pharmaceuticals, Inc. (AMPH) -- [MODERATE] 2 signals, strength 1.20
+- **Fundamentals**: Quality checklist passed (D/E 0.77, Current ratio 4.02, Net margin 10.8%)
+- **Technical**: Outperforming S&P 500 by 6.7pts (20d)
 
-## 740. Avista Corporation (AVA) -- [MODERATE] 2 signals, strength 1.19
+## 733. Bath & Body Works, Inc. (BBWI) -- [MODERATE] 2 signals, strength 1.19
+- **Fundamentals**: EPS growth 13.8% YoY; Analyst sentiment improving: 10 buy/strongBuy vs. 8 last month
+- **Technical**: Outperforming S&P 500 by 7.4pts (20d)
+
+## 734. SITE Centers Corp. (SITC) -- [MODERATE] 2 signals, strength 1.19
+- **Fundamentals**: Quality checklist passed (D/E 0.00, Current ratio 1.58, ROE 40.6%, Net margin 179.5%)
+- **Technical**: Outperforming S&P 500 by 2.8pts (20d)
+
+## 735. SOPHiA GENETICS SA (SOPH) -- [MODERATE] 2 signals, strength 1.19
+- **Fundamentals**: Revenue growth 23.6% YoY
+- **Technical**: RSI oversold (27.9)
+- ⚠️ **EARNINGS QUALITY**: Net margin -93.9% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+
+## 736. Avista Corporation (AVA) -- [MODERATE] 2 signals, strength 1.19
 - **Fundamentals**: EPS growth 23.6% YoY
-- **Technical**: RSI overbought (74.7)
+- **Technical**: RSI overbought (75.3)
 
-## 741. Deckers Outdoor Corporation (DECK) -- [MODERATE] 2 signals, strength 1.19
+## 737. Deckers Outdoor Corporation (DECK) -- [MODERATE] 2 signals, strength 1.19
 - **Fundamentals**: Quality checklist passed (D/E 0.00, Current ratio 3.54, ROE 41.1%, Net margin 18.4%)
 - **Technical**: Outperforming S&P 500 by 2.8pts (20d)
 
-## 742. Axogen, Inc. (AXGN) -- [MODERATE] 2 signals, strength 1.19
+## 738. Axogen, Inc. (AXGN) -- [MODERATE] 2 signals, strength 1.19
 - **Fundamentals**: Revenue growth 23.6% YoY
-- **Technical**: RSI oversold (14.0)
+- **Technical**: RSI oversold (13.6)
 - ⚠️ **EARNINGS QUALITY**: Net margin -13.4% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 743. Sphere Entertainment Co. (SPHR) -- [MODERATE] 2 signals, strength 1.18
+## 739. US Foods Holding Corp. (USFD) -- [MODERATE] 2 signals, strength 1.18
+- **Fundamentals**: EPS growth 39.0% YoY
+- **Technical**: Outperforming S&P 500 by 2.8pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
+
+## 740. Sunstone Hotel Investors, Inc. Sunstone Hotel Investors, Inc. (SHO) -- [MODERATE] 2 signals, strength 1.18
+- **Fundamentals**: EPS growth 180.2% YoY
+- **Technical**: Outperforming S&P 500 by 2.7pts (20d)
+
+## 741. Zoetis Inc. (ZTS) -- [MODERATE] 2 signals, strength 1.18
+- **Fundamentals**: Quality checklist passed (Current ratio 3.03, ROE 69.2%, Net margin 27.5%)
+- **Technical**: RSI overbought (70.3); Outperforming S&P 500 by 0.8pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
+
+## 742. Sphere Entertainment Co. (SPHR) -- [MODERATE] 2 signals, strength 1.18
 - **Fundamentals**: Revenue growth 23.4% YoY
-- **Technical**: RSI oversold (12.8)
+- **Technical**: RSI oversold (12.7)
 - ⚠️ **EARNINGS QUALITY**: Net margin -5.2% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 744. WESCO International, Inc. (WCC) -- [MODERATE] 2 signals, strength 1.18
-- **Fundamentals**: Revenue growth 12.5% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.1pts (20d)
+## 743. Eaton Corporation, PLC (ETN) -- [MODERATE] 2 signals, strength 1.18
+- **Fundamentals**: Revenue growth 15.5% YoY; Quality checklist passed (D/E 0.51, ROE 19.6%, Net margin 12.8%); Analyst sentiment improving: 27 buy/strongBuy vs. 26 last month
+- **Technical**: Outperforming S&P 500 by 0.6pts (20d)
 
-## 745. Marex Group Limited (MRX) -- [MODERATE] 2 signals, strength 1.18
-- **Fundamentals**: EPS growth 17.4% YoY
-- **Technical**: Price above rising 50/200-day MAs
+## 744. N-able, Inc. (NABL) -- [MODERATE] 2 signals, strength 1.17
+- **Fundamentals**: Revenue growth 10.7% YoY
+- **Technical**: Outperforming S&P 500 by 12.2pts (20d)
 
-## 746. SAP  SE ADS (SAP) -- [MODERATE] 2 signals, strength 1.17
-- **Fundamentals**: EPS growth 20.3% YoY; Quality checklist passed (D/E 0.17, ROE 17.6%, Net margin 20.4%)
-- **Technical**: Outperforming S&P 500 by 0.2pts (20d)
-
-## 747. Quanterix Corporation (QTRX) -- [MODERATE] 2 signals, strength 1.17
-- **Fundamentals**: Revenue growth 22.0% YoY
-- **Technical**: Outperforming S&P 500 by 6.5pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Net margin -80.2% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
-
-## 748. Peloton Interactive, Inc. (PTON) -- [MODERATE] 2 signals, strength 1.17
-- **Fundamentals**: EPS growth 159.2% YoY
-- **Technical**: Outperforming S&P 500 by 2.5pts (20d)
-
-## 749. Repligen Corporation (RGEN) -- [MODERATE] 2 signals, strength 1.16
-- **Fundamentals**: Revenue growth 16.5% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 0.3pts (20d)
-
-## 750. NetEase, Inc. - American Depositary Shares, each representing 5 (NTES) -- [MODERATE] 2 signals, strength 1.16
+## 745. NetEase, Inc. - American Depositary Shares, each representing 5 (NTES) -- [MODERATE] 2 signals, strength 1.16
 - **Fundamentals**: Quality checklist passed (D/E 0.04, Current ratio 3.45, ROE 20.1%, Net margin 27.9%)
 - **Technical**: Outperforming S&P 500 by 2.4pts (20d)
 
-## 751. Weave Communications, Inc. (WEAV) -- [MODERATE] 2 signals, strength 1.16
+## 746. Weave Communications, Inc. (WEAV) -- [MODERATE] 2 signals, strength 1.16
 - **Fundamentals**: Revenue growth 16.7% YoY
 - **Technical**: Price above rising 50/200-day MAs
 - ⚠️ **EARNINGS QUALITY**: Net margin -8.0% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing; Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
 
-## 752. US Foods Holding Corp. (USFD) -- [MODERATE] 2 signals, strength 1.15
-- **Fundamentals**: EPS growth 39.0% YoY
-- **Technical**: Outperforming S&P 500 by 2.3pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Analyst sentiment deteriorating: 0 sell/strongSell vs. 0 last month
+## 747. Valvoline Inc. (VVV) -- [MODERATE] 2 signals, strength 1.16
+- **Fundamentals**: Revenue growth 16.1% YoY
+- **Technical**: Outperforming S&P 500 by 9.3pts (20d)
 
-## 753. Alaska Air Group, Inc. (ALK) -- [MODERATE] 2 signals, strength 1.15
+## 748. Alaska Air Group, Inc. (ALK) -- [MODERATE] 2 signals, strength 1.15
 - **Fundamentals**: EPS growth 22.5% YoY
-- **Technical**: RSI oversold (29.2)
+- **Technical**: RSI oversold (29.1)
 
-## 754. Artisan Partners Asset Management Inc. (APAM) -- [MODERATE] 2 signals, strength 1.15
+## 749. Artisan Partners Asset Management Inc. (APAM) -- [MODERATE] 2 signals, strength 1.15
 - **Fundamentals**: Quality checklist passed (D/E 0.43, ROE 72.9%, Net margin 24.1%)
-- **Technical**: RSI oversold (21.7)
+- **Technical**: RSI oversold (23.7)
 
-## 755. Beyond Meat, Inc. (BYND) -- [MODERATE] 2 signals, strength 1.15
+## 750. Beyond Meat, Inc. (BYND) -- [MODERATE] 2 signals, strength 1.15
 - **Fundamentals**: Quality checklist passed (Current ratio 4.56, ROE 28.9%, Net margin 111.7%)
-- **Technical**: RSI oversold (9.4)
+- **Technical**: RSI oversold (9.0)
 
-## 756. PROG Holdings, Inc. (PRG) -- [MODERATE] 2 signals, strength 1.15
+## 751. PROG Holdings, Inc. (PRG) -- [MODERATE] 2 signals, strength 1.15
 - **Fundamentals**: Quality checklist passed (D/E 0.80, Current ratio 3.07, ROE 19.4%)
-- **Technical**: RSI oversold (27.2)
+- **Technical**: RSI oversold (26.3)
 
-## 757. Iridium Communications Inc (IRDM) -- [MODERATE] 2 signals, strength 1.15
+## 752. Iridium Communications Inc (IRDM) -- [MODERATE] 2 signals, strength 1.15
 - **Fundamentals**: Quality checklist passed (Current ratio 2.48, ROE 20.1%, Net margin 10.6%)
-- **Technical**: RSI oversold (27.9)
+- **Technical**: RSI oversold (26.6)
 - ⚠️ **EARNINGS QUALITY**: Earnings scheduled in 1d (2026-10-15) -- gap risk on a swing hold
 
-## 758. Watsco, Inc. (WSO) -- [MODERATE] 2 signals, strength 1.15
+## 753. Watsco, Inc. (WSO) -- [MODERATE] 2 signals, strength 1.15
 - **Fundamentals**: Quality checklist passed (D/E 0.01, Current ratio 4.12, ROE 16.8%)
-- **Technical**: RSI oversold (27.9)
+- **Technical**: RSI oversold (26.3)
 
-## 759. Contineum Therapeutics, Inc. (CTNM) -- [MODERATE] 2 signals, strength 1.15
+## 754. Contineum Therapeutics, Inc. (CTNM) -- [MODERATE] 2 signals, strength 1.15
 - **Fundamentals**: Quality checklist passed (D/E 0.00, Current ratio 27.50, Net margin 45.4%)
-- **Technical**: RSI oversold (29.4)
+- **Technical**: RSI oversold (29.3)
 
-## 760. Versant Media Group, Inc. (VSNT) -- [MODERATE] 2 signals, strength 1.15
+## 755. Versant Media Group, Inc. (VSNT) -- [MODERATE] 2 signals, strength 1.15
 - **Fundamentals**: Quality checklist passed (D/E 0.10, Current ratio 4.02, Net margin 11.5%)
-- **Technical**: RSI oversold (27.2)
+- **Technical**: RSI oversold (27.4)
 
-## 761. Lion Group Holding Ltd. - American Depositary Share (LGHL) -- [MODERATE] 2 signals, strength 1.15
+## 756. Lion Group Holding Ltd. - American Depositary Share (LGHL) -- [MODERATE] 2 signals, strength 1.15
 - **Fundamentals**: Quality checklist passed (D/E 0.71, Current ratio 3.45, Net margin 21.3%)
-- **Technical**: RSI oversold (18.1)
+- **Technical**: RSI oversold (18.2)
 
-## 762. BellRing Brands, Inc. (BRBR) -- [MODERATE] 2 signals, strength 1.15
+## 757. BellRing Brands, Inc. (BRBR) -- [MODERATE] 2 signals, strength 1.15
 - **Fundamentals**: Quality checklist passed (D/E 0.00, Current ratio 2.35, ROE 23.7%)
-- **Technical**: RSI overbought (72.5)
+- **Technical**: RSI overbought (72.4)
 
-## 763. Quantum Corporation (QMCO) -- [MODERATE] 2 signals, strength 1.12
-- **Fundamentals**: Revenue growth 10.9% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 3.9pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Net margin -80.8% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+## 758. Repligen Corporation (RGEN) -- [MODERATE] 2 signals, strength 1.15
+- **Fundamentals**: Revenue growth 16.5% YoY
+- **Technical**: Price above rising 50/200-day MAs
 
-## 764. Varonis Systems, Inc. (VRNS) -- [MODERATE] 2 signals, strength 1.12
+## 759. Peloton Interactive, Inc. (PTON) -- [MODERATE] 2 signals, strength 1.14
+- **Fundamentals**: EPS growth 159.2% YoY
+- **Technical**: Outperforming S&P 500 by 2.1pts (20d)
+
+## 760. Trekor Metals Limited (TGB) -- [MODERATE] 2 signals, strength 1.13
+- **Fundamentals**: Revenue growth 70.3% YoY; Analyst sentiment improving: 10 buy/strongBuy vs. 9 last month
+- **Technical**: Outperforming S&P 500 by 0.2pts (20d)
+
+## 761. Klaviyo, Inc. Series A (KVYO) -- [MODERATE] 2 signals, strength 1.13
+- **Fundamentals**: Revenue growth 28.9% YoY
+- **Technical**: Outperforming S&P 500 by 2.6pts (20d)
+
+## 762. Varonis Systems, Inc. (VRNS) -- [MODERATE] 2 signals, strength 1.12
 - **Fundamentals**: Revenue growth 15.6% YoY
 - **Technical**: Price above rising 50/200-day MAs
 - ⚠️ **EARNINGS QUALITY**: Net margin -20.6% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 765. Trump Media & Technology Group Corp. (DJT) -- [MODERATE] 2 signals, strength 1.12
+## 763. Trump Media & Technology Group Corp. (DJT) -- [MODERATE] 2 signals, strength 1.12
 - **Fundamentals**: Revenue growth 21.6% YoY
-- **Technical**: RSI oversold (8.6)
+- **Technical**: RSI oversold (8.3)
 - ⚠️ **EARNINGS QUALITY**: Net margin -28860.4% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 766. Vipshop Holdings Limited American Depositary Shares, each representing two (VIPS) -- [MODERATE] 2 signals, strength 1.12
+## 764. Vipshop Holdings Limited American Depositary Shares, each representing two (VIPS) -- [MODERATE] 2 signals, strength 1.12
 - **Fundamentals**: EPS growth 57.0% YoY
 - **Technical**: Outperforming S&P 500 by 1.8pts (20d)
 
-## 767. Devon Energy Corporation (DVN) -- [MODERATE] 2 signals, strength 1.11
+## 765. Devon Energy Corporation (DVN) -- [MODERATE] 2 signals, strength 1.12
 - **Fundamentals**: Revenue growth 14.6% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 0.6pts (20d)
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 0.8pts (20d)
 
-## 768. REalloys Inc. (ALOY) -- [MODERATE] 2 signals, strength 1.11
+## 766. REalloys Inc. (ALOY) -- [MODERATE] 2 signals, strength 1.11
 - **Fundamentals**: Revenue growth 21.2% YoY
-- **Technical**: RSI oversold (16.9)
+- **Technical**: RSI oversold (16.8)
 - ⚠️ **EARNINGS QUALITY**: Net margin -5144.4% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing; Earnings scheduled today (2026-10-14) -- gap risk on a swing hold
 
-## 769. Cintas Corporation (CTAS) -- [MODERATE] 2 signals, strength 1.11
+## 767. Cintas Corporation (CTAS) -- [MODERATE] 2 signals, strength 1.11
 - **Fundamentals**: EPS growth 12.7% YoY; Quality checklist passed (D/E 0.47, ROE 42.1%, Net margin 17.8%)
-- **Technical**: Outperforming S&P 500 by 1.5pts (20d)
+- **Technical**: Outperforming S&P 500 by 1.6pts (20d)
 
-## 770. Harrow, Inc. (HROW) -- [MODERATE] 2 signals, strength 1.10
+## 768. Quantum Corporation (QMCO) -- [MODERATE] 2 signals, strength 1.10
+- **Fundamentals**: Revenue growth 10.9% YoY
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 3.5pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Net margin -80.8% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+
+## 769. Harrow, Inc. (HROW) -- [MODERATE] 2 signals, strength 1.10
 - **Fundamentals**: Revenue growth 21.1% YoY
-- **Technical**: RSI oversold (6.3)
+- **Technical**: RSI oversold (6.1)
 - ⚠️ **EARNINGS QUALITY**: Net margin -13.5% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 771. Wynn Resorts, Limited (WYNN) -- [MODERATE] 2 signals, strength 1.10
+## 770. Wynn Resorts, Limited (WYNN) -- [MODERATE] 2 signals, strength 1.10
 - **Fundamentals**: EPS growth 21.0% YoY
-- **Technical**: RSI oversold (28.2)
+- **Technical**: RSI oversold (28.6)
 
-## 772. Everspin Technologies, Inc. (MRAM) -- [MODERATE] 2 signals, strength 1.10
+## 771. Everspin Technologies, Inc. (MRAM) -- [MODERATE] 2 signals, strength 1.10
 - **Fundamentals**: Revenue growth 20.9% YoY
-- **Technical**: RSI oversold (22.2)
+- **Technical**: RSI oversold (21.6)
 
-## 773. Klaviyo, Inc. Series A (KVYO) -- [MODERATE] 2 signals, strength 1.10
-- **Fundamentals**: Revenue growth 28.9% YoY
-- **Technical**: Outperforming S&P 500 by 2.0pts (20d)
-
-## 774. JinkoSolar Holding Company Limited American Depositary Shares (each representing 4 (JKS) -- [MODERATE] 2 signals, strength 1.09
+## 772. JinkoSolar Holding Company Limited American Depositary Shares (each representing 4 (JKS) -- [MODERATE] 2 signals, strength 1.09
 - **Fundamentals**: Revenue growth 20.7% YoY
-- **Technical**: RSI oversold (24.4)
+- **Technical**: RSI oversold (25.0)
 - ⚠️ **EARNINGS QUALITY**: Net margin -5.8% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing; Analyst sentiment deteriorating: 7 sell/strongSell vs. 2 last month
 
-## 775. StoneX Group Inc. (SNEX) -- [MODERATE] 2 signals, strength 1.09
+## 773. StoneX Group Inc. (SNEX) -- [MODERATE] 2 signals, strength 1.09
 - **Fundamentals**: Revenue growth 20.6% YoY
-- **Technical**: RSI oversold (22.1)
+- **Technical**: RSI oversold (21.8)
 
-## 776. Hilton Worldwide Holdings Inc. (HLT) -- [MODERATE] 2 signals, strength 1.08
-- **Fundamentals**: Analyst sentiment improving: 21 buy/strongBuy vs. 18 last month
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.5pts (20d)
+## 774. Procore Technologies, Inc. (PCOR) -- [MODERATE] 2 signals, strength 1.08
+- **Fundamentals**: Revenue growth 15.4% YoY
+- **Technical**: RSI overbought (80.0); Outperforming S&P 500 by 4.2pts (20d)
 
-## 777. Cipher Digital Inc. (CIFR) -- [MODERATE] 2 signals, strength 1.08
+## 775. Cipher Digital Inc. (CIFR) -- [MODERATE] 2 signals, strength 1.08
 - **Fundamentals**: Revenue growth 20.3% YoY
-- **Technical**: RSI oversold (3.5)
+- **Technical**: RSI oversold (3.4)
 - ⚠️ **EARNINGS QUALITY**: Net margin -585.8% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 778. Biogen Inc. (BIIB) -- [MODERATE] 2 signals, strength 1.07
-- **Fundamentals**: Analyst sentiment improving: 30 buy/strongBuy vs. 29 last month
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.0pts (20d); 52-week high, but still 51.7% below all-time high ($475.98) -- possible overhead resistance
-- ⚠️ **CAUTION**: New 52-week high but on light volume (0.2x average) -- unconfirmed breakout
+## 776. Hilton Worldwide Holdings Inc. (HLT) -- [MODERATE] 2 signals, strength 1.07
+- **Fundamentals**: Analyst sentiment improving: 21 buy/strongBuy vs. 18 last month
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 4.3pts (20d)
 
-## 779. SailPoint, Inc. (SAIL) -- [MODERATE] 2 signals, strength 1.07
+## 777. SailPoint, Inc. (SAIL) -- [MODERATE] 2 signals, strength 1.07
 - **Fundamentals**: Revenue growth 20.1% YoY
-- **Technical**: RSI oversold (22.8)
+- **Technical**: RSI oversold (23.4)
 - ⚠️ **EARNINGS QUALITY**: Net margin -16.9% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 780. MFA Financial, Inc. (MFA) -- [MODERATE] 2 signals, strength 1.07
+## 778. MFA Financial, Inc. (MFA) -- [MODERATE] 2 signals, strength 1.07
 - **Fundamentals**: EPS growth 16.5% YoY; Analyst sentiment improving: 6 buy/strongBuy vs. 5 last month
-- **Technical**: RSI oversold (8.5)
+- **Technical**: RSI oversold (8.4)
 
-## 781. Symbotic Inc. (SYM) -- [MODERATE] 2 signals, strength 1.07
+## 779. Quanterix Corporation (QTRX) -- [MODERATE] 2 signals, strength 1.07
+- **Fundamentals**: Revenue growth 22.0% YoY
+- **Technical**: Outperforming S&P 500 by 5.1pts (20d)
+- ⚠️ **EARNINGS QUALITY**: Net margin -80.2% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+
+## 780. Symbotic Inc. (SYM) -- [MODERATE] 2 signals, strength 1.07
 - **Fundamentals**: Revenue growth 20.0% YoY
-- **Technical**: RSI oversold (29.1)
+- **Technical**: RSI oversold (28.4)
 
-## 782. AtriCure, Inc. (ATRC) -- [MODERATE] 2 signals, strength 1.06
+## 781. AtriCure, Inc. (ATRC) -- [MODERATE] 2 signals, strength 1.06
 - **Fundamentals**: Revenue growth 13.9% YoY
 - **Technical**: Price above rising 50/200-day MAs
 
-## 783. Procore Technologies, Inc. (PCOR) -- [MODERATE] 2 signals, strength 1.06
-- **Fundamentals**: Revenue growth 15.4% YoY
-- **Technical**: RSI overbought (78.4); Outperforming S&P 500 by 3.8pts (20d)
+## 782. Dollar General Corporation (DG) -- [MODERATE] 2 signals, strength 1.05
+- **Fundamentals**: EPS growth 42.3% YoY
+- **Technical**: Outperforming S&P 500 by 0.7pts (20d)
 
-## 784. PubMatic, Inc. (PUBM) -- [MODERATE] 2 signals, strength 1.06
-- **Fundamentals**: Analyst sentiment improving: 15 buy/strongBuy vs. 13 last month
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 6.4pts (20d)
-
-## 785. A10 Networks, Inc. (ATEN) -- [MODERATE] 2 signals, strength 1.04
-- **Fundamentals**: Revenue growth 12.2% YoY; Quality checklist passed (Current ratio 3.56, ROE 19.6%, Net margin 13.8%)
-- **Technical**: Outperforming S&P 500 by 0.8pts (20d)
-
-## 786. CenterPoint Energy, Inc (Holding Co) (CNP) -- [MODERATE] 2 signals, strength 1.04
+## 783. CenterPoint Energy, Inc (Holding Co) (CNP) -- [MODERATE] 2 signals, strength 1.04
 - **Fundamentals**: EPS growth 18.3% YoY
-- **Technical**: RSI overbought (85.9); Outperforming S&P 500 by 0.7pts (20d)
+- **Technical**: RSI overbought (86.0); Outperforming S&P 500 by 0.8pts (20d)
 
-## 787. Seadrill Limited (SDRL) -- [MODERATE] 2 signals, strength 1.04
+## 784. Seadrill Limited (SDRL) -- [MODERATE] 2 signals, strength 1.04
 - **Fundamentals**: Revenue growth 13.1% YoY
 - **Technical**: Price above rising 50/200-day MAs
 
-## 788. Royalty Pharma plc - Class A (RPRX) -- [MODERATE] 2 signals, strength 1.03
+## 785. Royalty Pharma plc - Class A (RPRX) -- [MODERATE] 2 signals, strength 1.03
 - **Fundamentals**: Revenue growth 10.0% YoY
 - **Technical**: MACD bullish crossover
 
-## 789. Dollar General Corporation (DG) -- [MODERATE] 2 signals, strength 1.03
-- **Fundamentals**: EPS growth 42.3% YoY
-- **Technical**: Outperforming S&P 500 by 0.5pts (20d)
+## 786. ONEOK, Inc. (OKE) -- [MODERATE] 2 signals, strength 1.03
+- **Fundamentals**: EPS growth 12.9% YoY
+- **Technical**: Price above rising 50/200-day MAs
 
-## 790. PAR Technology Corporation (PAR) -- [MODERATE] 2 signals, strength 1.03
+## 787. PAR Technology Corporation (PAR) -- [MODERATE] 2 signals, strength 1.03
 - **Fundamentals**: Revenue growth 18.8% YoY
-- **Technical**: RSI overbought (72.1)
+- **Technical**: RSI overbought (70.4)
 - ⚠️ **EARNINGS QUALITY**: Net margin -14.5% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 791. Calumet, Inc (CLMT) -- [MODERATE] 2 signals, strength 1.03
+## 788. Calumet, Inc (CLMT) -- [MODERATE] 2 signals, strength 1.03
 - **Fundamentals**: Revenue growth 12.8% YoY
 - **Technical**: Price above rising 50/200-day MAs
 
-## 792. VNET Group, Inc. - American Depositary Shares (VNET) -- [MODERATE] 2 signals, strength 1.02
+## 789. VNET Group, Inc. - American Depositary Shares (VNET) -- [MODERATE] 2 signals, strength 1.02
 - **Fundamentals**: Revenue growth 18.7% YoY
-- **Technical**: RSI oversold (20.2)
+- **Technical**: RSI oversold (19.0)
 - ⚠️ **EARNINGS QUALITY**: Net margin -6.2% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 
-## 793. Vistra Corp. (VST) -- [MODERATE] 2 signals, strength 1.02
-- **Fundamentals**: Revenue growth 18.6% YoY
-- **Technical**: Outperforming S&P 500 by 6.0pts (20d)
+## 790. A10 Networks, Inc. (ATEN) -- [MODERATE] 2 signals, strength 1.02
+- **Fundamentals**: Revenue growth 12.2% YoY; Quality checklist passed (Current ratio 3.56, ROE 19.6%, Net margin 13.8%)
+- **Technical**: Outperforming S&P 500 by 0.4pts (20d)
 
-## 794. Prothena Corporation plc (PRTA) -- [MODERATE] 2 signals, strength 1.01
-- **Fundamentals**: Revenue growth 427.3% YoY
-- **Technical**: Outperforming S&P 500 by 0.2pts (20d)
-- ⚠️ **EARNINGS QUALITY**: Net margin -80.7% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+## 791. PubMatic, Inc. (PUBM) -- [MODERATE] 2 signals, strength 1.02
+- **Fundamentals**: Analyst sentiment improving: 15 buy/strongBuy vs. 13 last month
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.4pts (20d)
 
-## 795. Guggenheim Strategic Opportunities Fund (GOF) -- [MODERATE] 2 signals, strength 1.01
-- **Fundamentals**: Revenue growth 33.3% YoY
-- **Technical**: Outperforming S&P 500 by 0.2pts (20d)
-
-## 796. TeraWulf Inc. (WULF) -- [MODERATE] 2 signals, strength 1.01
-- **Fundamentals**: Revenue growth 14.7% YoY; Analyst sentiment improving: 25 buy/strongBuy vs. 24 last month
-- **Technical**: RSI oversold (15.4)
-- ⚠️ **EARNINGS QUALITY**: Net margin -1179.9% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
-
-## 797. Full Truck Alliance Co. Ltd. American Depositary Shares (each representing 20 Class A (YMM) -- [MODERATE] 2 signals, strength 1.01
-- **Fundamentals**: Quality checklist passed (D/E 0.00, Current ratio 8.09, Net margin 35.1%)
-- **Technical**: Outperforming S&P 500 by 3.9pts (20d)
-
-## 798. ASML Holding N.V. - New York Registry Shares (ASML) -- [MODERATE] 2 signals, strength 1.01
+## 792. ASML Holding N.V. - New York Registry Shares (ASML) -- [MODERATE] 2 signals, strength 1.01
 - **Fundamentals**: Quality checklist passed (D/E 0.19, ROE 41.5%, Net margin 29.5%)
 - **Technical**: Outperforming S&P 500 by 3.9pts (20d)
+
+## 793. MSCI Inc. (MSCI) -- [MODERATE] 2 signals, strength 1.01
+- **Fundamentals**: Revenue growth 11.6% YoY; EPS growth 21.1% YoY
+- **Technical**: Outperforming S&P 500 by 1.1pts (20d)
+
+## 794. TeraWulf Inc. (WULF) -- [MODERATE] 2 signals, strength 1.01
+- **Fundamentals**: Revenue growth 14.7% YoY; Analyst sentiment improving: 25 buy/strongBuy vs. 24 last month
+- **Technical**: RSI oversold (15.5)
+- ⚠️ **EARNINGS QUALITY**: Net margin -1179.9% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
+
+## 795. Vistra Corp. (VST) -- [MODERATE] 2 signals, strength 1.01
+- **Fundamentals**: Revenue growth 18.6% YoY
+- **Technical**: Outperforming S&P 500 by 5.8pts (20d)
 
