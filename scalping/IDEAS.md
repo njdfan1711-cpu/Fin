@@ -27,9 +27,9 @@ bot that still finds truly good opportunities, so:
 
 | # | Idea | Why it might help | Risk / what to watch |
 |---|------|-------------------|----------------------|
-| 1 | **Skip the first 15 and last 15 minutes** of the session (9:30-9:45, 3:45-4:00 ET) | Open and close are erratic: wide spreads, sudden swings, unpredictable moves | Some of the best moves happen at the open; the spread logger will show how much wider spreads really are then |
-| 2 | **Avoid entries while SPY is down** (e.g. SPY below its day open/VWAP, or falling over the last N minutes) | Limits losses when the broad market is bearish, since most stocks follow it | "Down" needs a precise definition; too strict and it blocks good trades in stocks moving independently |
-| 3 | **Skip entries that are already too extended** (price already up more than X% over the last N minutes, or far above VWAP) | Avoids buying the top of a move that has mostly played out | Threshold needs testing; too tight kills real breakouts |
+| 1 | **Skip the first 15 and last 15 minutes** *(status 2026-10-13: mixed. Spread tails widen at the edges, but the 38 first-15-min and 14 last-15-min tagged trades did slightly BETTER than average; the worst window was about 1:30-3:45 PM. Keep as a candidate, not a rule.)* of the session (9:30-9:45, 3:45-4:00 ET) | Open and close are erratic: wide spreads, sudden swings, unpredictable moves | Some of the best moves happen at the open; the spread logger will show how much wider spreads really are then |
+| 2 | **Avoid entries while SPY is down** *(status 2026-10-13: deprioritized. In 152 tagged trades, entries with SPY down or below its VWAP did about as well as the rest, so no support so far. SPY tags keep being collected so it can be revisited.)* (e.g. SPY below its day open/VWAP, or falling over the last N minutes) | Limits losses when the broad market is bearish, since most stocks follow it | "Down" needs a precise definition; too strict and it blocks good trades in stocks moving independently |
+| 3 | **Skip entries that are already too extended** *(status 2026-10-13: the most consistent pattern so far; win rate fell from 50% to 29% as the 30-minute run-up grew. Still in-sample, so a hypothesis only.)* (price already up more than X% over the last N minutes, or far above VWAP) | Avoids buying the top of a move that has mostly played out | Threshold needs testing; too tight kills real breakouts |
 
 ## Other filter ideas (lower priority)
 
