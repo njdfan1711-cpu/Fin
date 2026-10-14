@@ -155,6 +155,15 @@ same convention as the main changelog.
   rule until it holds up on fresh data. The workflow now also commits the
   tag file and analysis files. Known limit: the backtest allows one
   position per symbol, while the live bot will hold one position in total.
+- **2026-10-13 housekeeping.** Removed WBD from the core symbol lists
+  (`CANDIDATES` in `scalp_backtest.py`, `CORE_SYMBOLS` in `spread_logger.py`,
+  `ALLOWED_SYMBOLS` in `guardrails.py`): it returned no Schwab quotes in
+  any logger run, so its cost could not be measured. Its single historical
+  trade stays in the CSVs. Core list is now 29 names. `IDEAS.md` updated with
+  status notes after the 514-symbol spread data and 152 tagged trades:
+  skip-open/close = mixed (spread tails widen at the edges, but edge trades
+  did not underperform); avoid-when-SPY-down = deprioritized (no support);
+  skip-over-extended = most consistent pattern, still in-sample.
 - **Pending:** consider removing low-priced tickers (NIO, F, AAL, SOFI, T,
   and similar) from `CANDIDATES`; not yet changed.
 
