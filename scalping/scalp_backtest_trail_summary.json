@@ -1,40 +1,40 @@
 {
-  "generated_at": "2026-10-13T19:31:07.121266+00:00",
+  "generated_at": "2026-10-14T13:30:53.356306+00:00",
   "cost_model": "measured median spread per symbol x1.0 (flat 2.0c fallback)",
   "symbols_without_spread_data": [
     "WBD"
   ],
-  "total_trades": 222,
-  "win_count": 75,
+  "total_trades": 223,
+  "win_count": 76,
   "loss_count": 147,
-  "win_rate_pct": 33.8,
-  "avg_net_pnl_per_trade": -2.22,
-  "avg_win": 6.74,
-  "avg_loss": -6.78,
-  "total_gross_pnl": -89.14,
-  "total_cost": 402.61,
-  "total_net_pnl": -491.75,
-  "total_net_pnl_flat_cost_model": -701.72,
-  "max_drawdown": -539.53,
+  "win_rate_pct": 34.1,
+  "avg_net_pnl_per_trade": -2.15,
+  "avg_win": 6.69,
+  "avg_loss": -6.72,
+  "total_gross_pnl": -85.34,
+  "total_cost": 394.48,
+  "total_net_pnl": -479.82,
+  "total_net_pnl_flat_cost_model": -698.24,
+  "max_drawdown": -528.72,
   "exit_reason_counts": {
     "stop": 115,
-    "trail_stop": 82,
+    "trail_stop": 83,
     "time_stop": 25
   },
   "by_spread_tier": {
     "tight_le_0.03pct": {
       "trades": 119,
       "gross_pnl": -29.75,
-      "cost": 65.55,
-      "net_pnl": -95.3,
-      "avg_net_per_trade": -0.8
+      "cost": 60.49,
+      "net_pnl": -90.24,
+      "avg_net_per_trade": -0.76
     },
     "wide_gt_0.03pct": {
-      "trades": 102,
-      "gross_pnl": -62.16,
-      "cost": 335.12,
-      "net_pnl": -397.28,
-      "avg_net_per_trade": -3.89
+      "trades": 103,
+      "gross_pnl": -58.36,
+      "cost": 332.05,
+      "net_pnl": -390.41,
+      "avg_net_per_trade": -3.79
     },
     "no_spread_data": {
       "trades": 1,
@@ -48,121 +48,121 @@
     "NIO": {
       "trades": 17,
       "gross_pnl": -60.11,
-      "cost": 151.03,
-      "net_pnl": -211.14,
-      "avg_net_per_trade": -12.42
+      "cost": 148.16,
+      "net_pnl": -208.27,
+      "avg_net_per_trade": -12.25
     },
     "SNAP": {
       "trades": 10,
       "gross_pnl": -26.96,
-      "cost": 52.99,
-      "net_pnl": -79.95,
-      "avg_net_per_trade": -8.0
+      "cost": 52.24,
+      "net_pnl": -79.2,
+      "avg_net_per_trade": -7.92
     },
     "SOFI": {
       "trades": 8,
       "gross_pnl": -40.9,
-      "cost": 15.59,
-      "net_pnl": -56.49,
+      "cost": 15.58,
+      "net_pnl": -56.48,
       "avg_net_per_trade": -7.06
     },
     "PATH": {
       "trades": 11,
       "gross_pnl": -16.31,
-      "cost": 25.28,
-      "net_pnl": -41.59,
-      "avg_net_per_trade": -3.78
+      "cost": 25.18,
+      "net_pnl": -41.49,
+      "avg_net_per_trade": -3.77
     },
     "META": {
       "trades": 11,
       "gross_pnl": -27.55,
-      "cost": 8.77,
-      "net_pnl": -36.32,
-      "avg_net_per_trade": -3.3
+      "cost": 8.95,
+      "net_pnl": -36.5,
+      "avg_net_per_trade": -3.32
     },
     "MU": {
       "trades": 9,
       "gross_pnl": -27.52,
-      "cost": 6.67,
-      "net_pnl": -34.19,
-      "avg_net_per_trade": -3.8
+      "cost": 6.29,
+      "net_pnl": -33.81,
+      "avg_net_per_trade": -3.76
     },
     "COIN": {
-      "trades": 6,
-      "gross_pnl": -15.59,
-      "cost": 15.91,
-      "net_pnl": -31.5,
-      "avg_net_per_trade": -5.25
+      "trades": 7,
+      "gross_pnl": -11.79,
+      "cost": 19.29,
+      "net_pnl": -31.08,
+      "avg_net_per_trade": -4.44
     },
     "MSFT": {
       "trades": 9,
       "gross_pnl": -21.5,
-      "cost": 4.96,
-      "net_pnl": -26.46,
-      "avg_net_per_trade": -2.94
-    },
-    "AMZN": {
-      "trades": 6,
-      "gross_pnl": -16.36,
-      "cost": 3.29,
-      "net_pnl": -19.65,
-      "avg_net_per_trade": -3.27
+      "cost": 3.1,
+      "net_pnl": -24.6,
+      "avg_net_per_trade": -2.73
     },
     "BAC": {
       "trades": 3,
       "gross_pnl": -17.93,
-      "cost": 1.69,
-      "net_pnl": -19.62,
-      "avg_net_per_trade": -6.54
+      "cost": 1.66,
+      "net_pnl": -19.59,
+      "avg_net_per_trade": -6.53
+    },
+    "AMZN": {
+      "trades": 6,
+      "gross_pnl": -16.36,
+      "cost": 2.62,
+      "net_pnl": -18.98,
+      "avg_net_per_trade": -3.16
     },
     "GOOGL": {
       "trades": 11,
       "gross_pnl": -13.75,
-      "cost": 4.36,
-      "net_pnl": -18.11,
-      "avg_net_per_trade": -1.65
+      "cost": 4.33,
+      "net_pnl": -18.08,
+      "avg_net_per_trade": -1.64
     },
     "AAL": {
       "trades": 6,
       "gross_pnl": -2.43,
-      "cost": 14.1,
-      "net_pnl": -16.53,
-      "avg_net_per_trade": -2.76
+      "cost": 14.21,
+      "net_pnl": -16.64,
+      "avg_net_per_trade": -2.77
     },
     "UBER": {
       "trades": 6,
       "gross_pnl": -11.27,
-      "cost": 5.12,
-      "net_pnl": -16.39,
-      "avg_net_per_trade": -2.73
+      "cost": 2.58,
+      "net_pnl": -13.85,
+      "avg_net_per_trade": -2.31
     },
     "PLTR": {
       "trades": 13,
       "gross_pnl": 1.44,
-      "cost": 15.6,
-      "net_pnl": -14.16,
-      "avg_net_per_trade": -1.09
+      "cost": 13.23,
+      "net_pnl": -11.79,
+      "avg_net_per_trade": -0.91
     },
     "AVGO": {
       "trades": 4,
       "gross_pnl": -8.27,
-      "cost": 2.52,
-      "net_pnl": -10.79,
-      "avg_net_per_trade": -2.7
+      "cost": 2.45,
+      "net_pnl": -10.72,
+      "avg_net_per_trade": -2.68
     },
     "F": {
       "trades": 6,
       "gross_pnl": 6.72,
-      "cost": 14.87,
-      "net_pnl": -8.15,
-      "avg_net_per_trade": -1.36
+      "cost": 14.84,
+      "net_pnl": -8.12,
+      "avg_net_per_trade": -1.35
     },
     "JPM": {
       "trades": 1,
       "gross_pnl": -5.44,
-      "cost": 0.74,
-      "net_pnl": -6.18,
-      "avg_net_per_trade": -6.18
+      "cost": 0.7,
+      "net_pnl": -6.14,
+      "avg_net_per_trade": -6.14
     },
     "SPY": {
       "trades": 5,
@@ -174,9 +174,9 @@
     "QQQ": {
       "trades": 4,
       "gross_pnl": -2.16,
-      "cost": 0.29,
-      "net_pnl": -2.45,
-      "avg_net_per_trade": -0.61
+      "cost": 0.3,
+      "net_pnl": -2.46,
+      "avg_net_per_trade": -0.62
     },
     "WBD": {
       "trades": 1,
@@ -188,15 +188,15 @@
     "T": {
       "trades": 7,
       "gross_pnl": 11.64,
-      "cost": 8.77,
-      "net_pnl": 2.87,
-      "avg_net_per_trade": 0.41
+      "cost": 9.16,
+      "net_pnl": 2.48,
+      "avg_net_per_trade": 0.35
     },
     "TSLA": {
       "trades": 10,
       "gross_pnl": 8.65,
-      "cost": 5.27,
-      "net_pnl": 3.38,
+      "cost": 5.21,
+      "net_pnl": 3.44,
       "avg_net_per_trade": 0.34
     },
     "NFLX": {
@@ -209,15 +209,15 @@
     "HOOD": {
       "trades": 11,
       "gross_pnl": 24.43,
-      "cost": 11.83,
-      "net_pnl": 12.6,
-      "avg_net_per_trade": 1.15
+      "cost": 11.86,
+      "net_pnl": 12.57,
+      "avg_net_per_trade": 1.14
     },
     "AAPL": {
       "trades": 3,
       "gross_pnl": 15.45,
-      "cost": 1.02,
-      "net_pnl": 14.43,
+      "cost": 1.01,
+      "net_pnl": 14.44,
       "avg_net_per_trade": 4.81
     },
     "XOM": {
@@ -230,8 +230,8 @@
     "INTC": {
       "trades": 5,
       "gross_pnl": 18.78,
-      "cost": 2.76,
-      "net_pnl": 16.02,
+      "cost": 2.77,
+      "net_pnl": 16.01,
       "avg_net_per_trade": 3.2
     },
     "NVDA": {
@@ -244,16 +244,16 @@
     "SMCI": {
       "trades": 9,
       "gross_pnl": 33.8,
-      "cost": 6.42,
-      "net_pnl": 27.38,
-      "avg_net_per_trade": 3.04
+      "cost": 6.83,
+      "net_pnl": 26.97,
+      "avg_net_per_trade": 3.0
     },
     "AMD": {
       "trades": 7,
       "gross_pnl": 55.91,
-      "cost": 9.15,
-      "net_pnl": 46.76,
-      "avg_net_per_trade": 6.68
+      "cost": 8.29,
+      "net_pnl": 47.62,
+      "avg_net_per_trade": 6.8
     }
   }
 }
