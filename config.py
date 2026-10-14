@@ -109,6 +109,7 @@ SIGNAL_VALIDITY_HOURS = {
     "technical": 4,       # RSI/MA/volume -- intraday, goes stale fast
     "news": 8,             # catalyst relevance fades but not instantly
     "news_caution": 8,     # same cadence as "news" -- same underlying data source
+    "news_neutral": 8,
     "fundamentals": EARNINGS_RECENCY_DAYS * 24,
     "earnings_quality": EARNINGS_RECENCY_DAYS * 24,  # same cadence as
                                                       # fundamentals -- tied
