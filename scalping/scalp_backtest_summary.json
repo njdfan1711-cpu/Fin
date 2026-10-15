@@ -1,24 +1,24 @@
 {
-  "generated_at": "2026-10-15T14:31:09.065337+00:00",
+  "generated_at": "2026-10-15T15:31:08.221283+00:00",
   "cost_model": "measured median spread per symbol x1.0 (flat 2.0c fallback)",
   "symbols_without_spread_data": [
     "WBD"
   ],
-  "total_trades": 247,
-  "win_count": 92,
-  "loss_count": 155,
-  "win_rate_pct": 37.2,
-  "avg_net_pnl_per_trade": -1.9,
-  "avg_win": 7.45,
-  "avg_loss": -7.46,
-  "total_gross_pnl": -11.26,
-  "total_cost": 458.75,
-  "total_net_pnl": -470.01,
-  "total_net_pnl_flat_cost_model": -745.98,
+  "total_trades": 249,
+  "win_count": 93,
+  "loss_count": 156,
+  "win_rate_pct": 37.3,
+  "avg_net_pnl_per_trade": -1.88,
+  "avg_win": 7.46,
+  "avg_loss": -7.45,
+  "total_gross_pnl": -6.18,
+  "total_cost": 462.44,
+  "total_net_pnl": -468.62,
+  "total_net_pnl_flat_cost_model": -745.92,
   "max_drawdown": -520.38,
   "exit_reason_counts": {
-    "target": 73,
-    "stop": 135,
+    "target": 74,
+    "stop": 136,
     "time_stop": 39
   },
   "by_spread_tier": {
@@ -30,11 +30,11 @@
       "avg_net_per_trade": -0.58
     },
     "wide_gt_0.03pct": {
-      "trades": 117,
-      "gross_pnl": -8.26,
-      "cost": 391.44,
-      "net_pnl": -399.7,
-      "avg_net_per_trade": -3.42
+      "trades": 119,
+      "gross_pnl": -3.18,
+      "cost": 395.13,
+      "net_pnl": -398.31,
+      "avg_net_per_trade": -3.35
     },
     "no_spread_data": {
       "trades": 1,
@@ -94,19 +94,19 @@
       "net_pnl": -27.07,
       "avg_net_per_trade": -3.87
     },
+    "AMD": {
+      "trades": 8,
+      "gross_pnl": -10.8,
+      "cost": 9.52,
+      "net_pnl": -20.32,
+      "avg_net_per_trade": -2.54
+    },
     "MSFT": {
       "trades": 9,
       "gross_pnl": -16.56,
       "cost": 3.1,
       "net_pnl": -19.66,
       "avg_net_per_trade": -2.18
-    },
-    "AMD": {
-      "trades": 7,
-      "gross_pnl": -5.41,
-      "cost": 8.29,
-      "net_pnl": -13.7,
-      "avg_net_per_trade": -1.96
     },
     "PLTR": {
       "trades": 13,
@@ -121,13 +121,6 @@
       "cost": 0.7,
       "net_pnl": -6.14,
       "avg_net_per_trade": -6.14
-    },
-    "F": {
-      "trades": 9,
-      "gross_pnl": 17.11,
-      "cost": 22.25,
-      "net_pnl": -5.14,
-      "avg_net_per_trade": -0.57
     },
     "AMZN": {
       "trades": 7,
@@ -191,6 +184,13 @@
       "cost": 1.92,
       "net_pnl": 2.74,
       "avg_net_per_trade": 0.34
+    },
+    "F": {
+      "trades": 10,
+      "gross_pnl": 27.58,
+      "cost": 24.71,
+      "net_pnl": 2.87,
+      "avg_net_per_trade": 0.29
     },
     "WBD": {
       "trades": 1,
