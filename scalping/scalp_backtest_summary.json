@@ -1,24 +1,24 @@
 {
-  "generated_at": "2026-10-19T16:31:11.463584+00:00",
+  "generated_at": "2026-10-19T17:31:11.440688+00:00",
   "cost_model": "measured median spread per symbol x1.0 (flat 2.0c fallback)",
   "symbols_without_spread_data": [
     "WBD"
   ],
-  "total_trades": 278,
-  "win_count": 104,
-  "loss_count": 174,
+  "total_trades": 281,
+  "win_count": 105,
+  "loss_count": 176,
   "win_rate_pct": 37.4,
-  "avg_net_pnl_per_trade": -1.86,
-  "avg_win": 7.52,
-  "avg_loss": -7.46,
-  "total_gross_pnl": -0.17,
-  "total_cost": 515.91,
-  "total_net_pnl": -516.08,
-  "total_net_pnl_flat_cost_model": -823.47,
-  "max_drawdown": -557.73,
+  "avg_net_pnl_per_trade": -1.88,
+  "avg_win": 7.5,
+  "avg_loss": -7.48,
+  "total_gross_pnl": -1.66,
+  "total_cost": 527.71,
+  "total_net_pnl": -529.37,
+  "total_net_pnl_flat_cost_model": -848.56,
+  "max_drawdown": -575.62,
   "exit_reason_counts": {
-    "target": 84,
-    "stop": 152,
+    "target": 85,
+    "stop": 154,
     "time_stop": 42
   },
   "by_spread_tier": {
@@ -30,11 +30,11 @@
       "avg_net_per_trade": -0.64
     },
     "wide_gt_0.03pct": {
-      "trades": 130,
-      "gross_pnl": 12.94,
-      "cost": 439.52,
-      "net_pnl": -426.58,
-      "avg_net_per_trade": -3.28
+      "trades": 133,
+      "gross_pnl": 11.45,
+      "cost": 451.32,
+      "net_pnl": -439.87,
+      "avg_net_per_trade": -3.31
     },
     "no_spread_data": {
       "trades": 1,
@@ -53,18 +53,18 @@
       "avg_net_per_trade": -13.66
     },
     "SOFI": {
-      "trades": 10,
-      "gross_pnl": -43.34,
-      "cost": 19.49,
-      "net_pnl": -62.83,
-      "avg_net_per_trade": -6.28
+      "trades": 11,
+      "gross_pnl": -49.32,
+      "cost": 21.55,
+      "net_pnl": -70.87,
+      "avg_net_per_trade": -6.44
     },
     "SNAP": {
-      "trades": 12,
-      "gross_pnl": 10.49,
-      "cost": 62.77,
-      "net_pnl": -52.28,
-      "avg_net_per_trade": -4.36
+      "trades": 14,
+      "gross_pnl": 14.98,
+      "cost": 72.51,
+      "net_pnl": -57.53,
+      "avg_net_per_trade": -4.11
     },
     "UBER": {
       "trades": 8,
