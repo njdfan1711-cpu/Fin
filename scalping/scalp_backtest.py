@@ -151,6 +151,65 @@ MIN_TICK_COST = 0.01               # one-cent minimum tick per share
 SPREAD_COST_MULTIPLIER = 1.0       # e.g. 1.5 to stress-test (stops/fast markets cost more)
 TIGHT_SPREAD_PCT = 0.03            # tier boundary used in the summary
 
+# --- Cost gate (added 2026-10-19) -----------------------------------------
+# A symbol is only traded if its measured round-trip spread is a small
+# fraction of the profit target. Why: through 2026-10-19 the wide-spread
+# names lost money almost entirely to cost (trades costing >0.10% of
+# notional: gross -$105, cost $282, net -$387 over 38 trades), and NIO's
+# spread alone was ~83% of the 0.35% target. This replaces hand-removing
+# tickers one at a time: any symbol that fails the rule is skipped
+# automatically, including ones added to CANDIDATES later.
+#   max spread % = SCALP_TARGET_PCT x MAX_SPREAD_TARGET_RATIO  (0.35 x 0.15 = 0.0525%)
+# Symbols with no measured spread are skipped too (cost unknown), unless
+# SKIP_UNMEASURED_SYMBOLS is False. The gate is a COST rule only -- entry
+# and exit logic are unchanged. SPY is always fetched for market context
+# even if it were gated out. Set COST_GATE_ENABLED = False to restore the
+# old behaviour. NOTE: this is not a profitability fix by itself; the
+# remaining ungated trades were still about break-even-to-negative.
+COST_GATE_ENABLED = True
+MAX_SPREAD_TARGET_RATIO = 0.15
+MAX_SPREAD_PCT = SCALP_TARGET_PCT * MAX_SPREAD_TARGET_RATIO
+SKIP_UNMEASURED_SYMBOLS = True
+
+# --- Day-boundary fixes (added 2026-10-20) ---------------------------------
+# Before this, momentum, the 20-bar volume average and the VWAP-cross check
+# ran straight across the overnight gap, so at 9:30 the "3-minute momentum"
+# was mostly yesterday's close -> today's gap, and the "volume spike" was
+# the opening bar vs yesterday's quiet last minutes. Positions could also
+# roll overnight (16 stored trades "exited" at the next day's 9:30 at the
+# stop/target price, ignoring the gap). Fixes:
+#   * every indicator is computed within one trading day only;
+#   * no entry until MIN_MINUTES_AFTER_OPEN (= a full 20-bar same-day window);
+#   * no entry on the last bar of the day, and any open position is closed
+#     at that bar's close ("eod") -- the live bot is flat at the close.
+# Stored trades that violate these rules are ignored when summarizing and
+# when simulating the account (see row_is_valid); trades that follow them
+# are unchanged, so earlier history stays usable.
+MIN_MINUTES_AFTER_OPEN = 20
+FLATTEN_AT_CLOSE = True
+LAST_BAR_MINUTE = 389              # the 15:59 bar, in minutes after 9:30
+
+# --- Account simulation (added 2026-10-20) ---------------------------------
+# The per-symbol backtest above treats every symbol as its own account, so
+# several symbols can be "in a trade" at once. The live bot holds ONE
+# position at a time. The account simulation replays the stored signals
+# under that rule: when flat, take a signal; ignore signals while a trade is
+# open; if several fire in the same minute, take the best-ranked one.
+# RANK_MODE is a declared hypothesis, not a tuned result:
+#   "least_extended" -- smallest recent run-up first (the 30-minute move,
+#                       or the move since the open when the 30-minute move
+#                       is not available yet), then tighter spread, then
+#                       symbol. Mirrors "avoid names that already ran".
+#   "lowest_spread"  -- tightest measured spread first (for comparison).
+# Do NOT tune this on the existing sample; judge it forward using the
+# picked-vs-outranked numbers in scalp_account_summary.json.
+ACCOUNT_SIM_ENABLED = True
+RANK_MODE = "least_extended"
+ACCOUNT_MAX_ENTRIES_PER_DAY = 40   # live circuit breaker
+ACCOUNT_TRADES_FILE = "scalp_account_trades.csv"
+ACCOUNT_SKIPPED_FILE = "scalp_account_skipped.csv"
+ACCOUNT_SUMMARY_FILE = "scalp_account_summary.json"
+
 # --- Signal tagging (added 2026-10) ---
 # Every entry is recorded with the market conditions at that moment, so
 # candidate rules from IDEAS.md (skip open/close, avoid SPY-down, skip
@@ -167,6 +226,9 @@ TAG_FIELDS = [
     "range20_pct", "ret15_pct", "ext30_pct", "ext_from_open_pct",
     "spy_ret_open_pct", "spy_ret_15m_pct", "spy_vs_vwap_pct", "rs15_vs_spy_pct",
     "spread_pct", "max_up_pct", "max_down_pct",
+    # added 2026-10-20 (blank for older rows until they are re-found):
+    "gap_open_pct", "range_to_stop", "dist_from_day_high_pct", "burst_pct",
+    "minutes_to_close", "weekday",
 ]
 
 TRADES_FILE = "scalp_backtest_trades.csv"
@@ -251,15 +313,37 @@ def find_trades(symbol: str, df: pd.DataFrame, mode: str = "fixed",
     trade dicts -- one per completed trade."""
     df = df.copy()
     df["vwap"] = compute_session_vwap(df)
-    df["avg_vol20"] = df["Volume"].rolling(20).mean()
-    df["mom3"] = df["Close"].pct_change(3) * 100
-    # Extra context columns used only for tagging (no effect on entries/exits).
     day_key = df.index.date
+    # All indicators are computed WITHIN one trading day (see the
+    # day-boundary note near the top of this file).
+    df["avg_vol20"] = df["Volume"].groupby(day_key).transform(
+        lambda s: s.rolling(20, min_periods=20).mean())
+    df["mom3"] = df["Close"].groupby(day_key).pct_change(3, fill_method=None) * 100
+    # Extra context columns used only for tagging (no effect on entries/exits).
     df["ret15"] = df["Close"].groupby(day_key).pct_change(15, fill_method=None) * 100
     df["ret30"] = df["Close"].groupby(day_key).pct_change(30, fill_method=None) * 100
     df["day_open"] = df["Open"].groupby(day_key).transform("first")
-    df["range20"] = ((df["High"] - df["Low"]) / df["Close"] * 100).rolling(20).mean()
+    df["range20"] = (((df["High"] - df["Low"]) / df["Close"] * 100)
+                     .groupby(day_key).transform(lambda s: s.rolling(20, min_periods=10).mean()))
     spreads = spreads or {}
+
+    # True on the final bar of each trading day. The last bar of the data
+    # only counts if it is the 15:59 bar, so a mid-session run does not
+    # invent end-of-day exits for the still-forming day.
+    day_list = list(day_key)
+    n_bars = len(df)
+    last_bar = [
+        (day_list[i + 1] != day_list[i]) if i < n_bars - 1
+        else _minutes_since_open(df.index[i]) >= LAST_BAR_MINUTE
+        for i in range(n_bars)
+    ]
+
+    # More context columns, for tagging only (no effect on entries/exits).
+    prev_close_by_day = df["Close"].groupby(day_key).last().shift(1)
+    df["prev_close"] = [prev_close_by_day.get(d) for d in day_list]
+    df["day_high"] = df["High"].groupby(day_key).cummax()
+    df["low10"] = df["Low"].groupby(day_key).transform(
+        lambda s: s.rolling(10, min_periods=5).min())
 
     trades = []
     entry_tags = {}
@@ -297,12 +381,16 @@ def find_trades(symbol: str, df: pd.DataFrame, mode: str = "fixed",
                             exit_reason, exit_price = "trail_stop", trail_stop
                     if not exit_reason and bars_held >= SCALP_MAX_HOLD_MINUTES:
                         exit_reason, exit_price = "time_stop", row["Close"]
+                    if not exit_reason and FLATTEN_AT_CLOSE and last_bar[i]:
+                        exit_reason, exit_price = "eod", row["Close"]
             elif row["High"] >= target_price:
                 exit_reason, exit_price = "target", target_price
             elif row["Low"] <= stop_price:
                 exit_reason, exit_price = "stop", stop_price
             elif bars_held >= SCALP_MAX_HOLD_MINUTES:
                 exit_reason, exit_price = "time_stop", row["Close"]
+            elif FLATTEN_AT_CLOSE and last_bar[i]:
+                exit_reason, exit_price = "eod", row["Close"]
 
             if exit_reason:
                 shares = int(POSITION_SIZE_USD // entry_price)
@@ -334,6 +422,10 @@ def find_trades(symbol: str, df: pd.DataFrame, mode: str = "fixed",
 
         # Not in a position -- look for an entry.
         if pd.isna(row["vwap"]) or pd.isna(row["avg_vol20"]) or pd.isna(row["mom3"]):
+            continue
+        if _minutes_since_open(df.index[i]) < MIN_MINUTES_AFTER_OPEN:
+            continue
+        if FLATTEN_AT_CLOSE and last_bar[i]:
             continue
         crossed_above_vwap = prev["Close"] <= prev["vwap"] and row["Close"] > row["vwap"]
         momentum_ok = row["mom3"] >= SCALP_MOMENTUM_PCT_MIN
@@ -369,6 +461,18 @@ def find_trades(symbol: str, df: pd.DataFrame, mode: str = "fixed",
                 "spy_vs_vwap_pct": _num(spy_now.get("spy_vs_vwap_pct")),
                 "rs15_vs_spy_pct": _num(rs15),
                 "spread_pct": _num(spreads.get(symbol)),
+                # gap at the open vs yesterday's close (a "gap-and-go" day?)
+                "gap_open_pct": _num((row["day_open"] / row["prev_close"] - 1) * 100),
+                # recent 1-minute range relative to the stop distance
+                # (> 1 = the stop sits inside normal noise)
+                "range_to_stop": _num(row["range20"] / SCALP_STOP_PCT, 3),
+                # 0 = entering at the high of the day so far
+                "dist_from_day_high_pct": _num((row["day_high"] / row["Close"] - 1) * 100),
+                # how far it has already bounced off the last 10 minutes' low
+                # (large = buying after the burst)
+                "burst_pct": _num((row["Close"] / row["low10"] - 1) * 100),
+                "minutes_to_close": (LAST_BAR_MINUTE + 1) - _minutes_since_open(ts),
+                "weekday": ts.weekday(),
             }
 
     return trades
@@ -399,16 +503,60 @@ def measured_cost_per_share(symbol: str, price: float, table: dict):
     return max(MIN_TICK_COST, price * pct / 100) * SPREAD_COST_MULTIPLIER, True
 
 
+def apply_cost_gate(symbols: list[str], spreads: dict):
+    """Splits symbols into (allowed, blocked). blocked is {symbol: reason}.
+    If the spread table is empty (file missing) the gate is skipped with a
+    warning rather than blocking everything."""
+    if not COST_GATE_ENABLED:
+        return list(symbols), {}
+    if not spreads:
+        print("Cost gate skipped: no measured spread data loaded.", file=sys.stderr)
+        return list(symbols), {}
+    allowed, blocked = [], {}
+    for sym in symbols:
+        pct = spreads.get(sym)
+        if pct is None:
+            if SKIP_UNMEASURED_SYMBOLS:
+                blocked[sym] = "no measured spread"
+            else:
+                allowed.append(sym)
+        elif pct > MAX_SPREAD_PCT:
+            blocked[sym] = f"spread {pct:.4f}% > {MAX_SPREAD_PCT:.4f}% limit"
+        else:
+            allowed.append(sym)
+    return allowed, blocked
+
+
+def row_is_valid(row: dict) -> bool:
+    """True if a stored trade follows the current day-boundary rules:
+    entered at/after MIN_MINUTES_AFTER_OPEN, not on the last bar of the day,
+    and closed on the same day. Older rows that break these rules (opening-
+    bar entries that used yesterday's data, overnight holds) are ignored by
+    the summaries and the account simulation, not deleted from the file."""
+    try:
+        e = datetime.fromisoformat(str(row["entry_time"]).strip())
+        x = datetime.fromisoformat(str(row["exit_time"]).strip())
+    except (KeyError, ValueError):
+        return False
+    minutes = e.hour * 60 + e.minute - (9 * 60 + 30)
+    return (minutes >= MIN_MINUTES_AFTER_OPEN and minutes < LAST_BAR_MINUTE
+            and e.date() == x.date())
+
+
 def load_existing_trade_keys(path: str) -> set:
     """(symbol, entry_time) pairs already on file, so re-running this
     script as new days of data become available appends only genuinely
-    new trades instead of duplicating the whole history every time."""
+    new trades instead of duplicating the whole history every time.
+    Rows that are not valid under the current rules are NOT counted as
+    already on file, so a corrected version of the same trade can be
+    appended (the old row is then ignored by row_is_valid)."""
     if not os.path.exists(path):
         return set()
     keys = set()
     with open(path, newline="") as f:
         for row in csv.DictReader(f):
-            keys.add((row["symbol"], row["entry_time"]))
+            if row_is_valid(row):
+                keys.add((row["symbol"], row["entry_time"]))
     return keys
 
 
@@ -437,6 +585,12 @@ def record_and_summarize(all_trades: list[dict], trades_file: str,
 
     with open(trades_file, newline="") as f:
         all_rows = list(csv.DictReader(f))
+    n_before = len(all_rows)
+    all_rows = [r for r in all_rows if row_is_valid(r)]
+    if n_before != len(all_rows):
+        print(f"[{label}] Ignoring {n_before - len(all_rows)} stored trade(s) entered before "
+              f"minute {MIN_MINUTES_AFTER_OPEN}, on the last bar, or held overnight "
+              f"(old rules); {len(all_rows)} valid trade(s) summarized.", file=sys.stderr)
 
     if not all_rows:
         print(f"[{label}] No trades in the accumulated file yet.", file=sys.stderr)
@@ -481,6 +635,11 @@ def record_and_summarize(all_trades: list[dict], trades_file: str,
     tight = [t for t in trades if t["known"] and t["pct"] <= TIGHT_SPREAD_PCT]
     wide = [t for t in trades if t["known"] and t["pct"] > TIGHT_SPREAD_PCT]
     unknown = [t for t in trades if not t["known"]]
+    # What the cost gate would allow vs block, applied to ALL stored trades
+    # (including ones taken before the gate existed) so history stays comparable.
+    gate_pass = [t for t in trades if t["known"] and t["pct"] <= MAX_SPREAD_PCT]
+    gate_pass_ids = {id(t) for t in gate_pass}
+    gate_block = [t for t in trades if id(t) not in gate_pass_ids]
     by_symbol = {}
     for t in trades:
         by_symbol.setdefault(t["symbol"], []).append(t)
@@ -515,6 +674,12 @@ def record_and_summarize(all_trades: list[dict], trades_file: str,
             f"wide_gt_{TIGHT_SPREAD_PCT}pct": bucket(wide),
             "no_spread_data": bucket(unknown),
         },
+        "cost_gate": {
+            "enabled": COST_GATE_ENABLED,
+            "max_spread_pct": round(MAX_SPREAD_PCT, 4),
+            "passing": bucket(gate_pass),
+            "blocked": bucket(gate_block),
+        },
         "by_symbol": by_symbol,
     }
     with open(summary_file, "w") as f:
@@ -525,35 +690,219 @@ def record_and_summarize(all_trades: list[dict], trades_file: str,
         print(f"  {k}: {v}", file=sys.stderr)
 
 
-def record_tags(trades: list[dict], mode: str) -> None:
-    """Appends tagged rows for trades not already in TAGS_FILE."""
-    existing = set()
+def _fnum(x):
+    try:
+        v = float(x)
+        return None if v != v else v
+    except (TypeError, ValueError):
+        return None
+
+
+def load_tag_lookup() -> dict:
+    """(symbol, entry_time) -> tag row, fixed-target mode only."""
+    out = {}
     if os.path.exists(TAGS_FILE):
         with open(TAGS_FILE, newline="") as f:
-            existing = {(r["mode"], r["symbol"], r["entry_time"]) for r in csv.DictReader(f)}
-    new_rows = []
+            for r in csv.DictReader(f):
+                if r.get("mode") == "fixed":
+                    out[(r["symbol"], r["entry_time"])] = r
+    return out
+
+
+def rank_key(sig: dict):
+    """Sort key: the signal that sorts FIRST is taken. See RANK_MODE."""
+    big = 9e9
+    sp = sig["spread_pct"] if sig["spread_pct"] is not None else big
+    if RANK_MODE == "lowest_spread":
+        return (sp, sig["symbol"])
+    ext = sig["ext30_pct"] if sig["ext30_pct"] is not None else sig["ext_from_open_pct"]
+    return (ext if ext is not None else big, sp, sig["symbol"])
+
+
+def simulate_account(signals: list[dict]):
+    """Replays signals under the live rule: ONE open position at a time.
+    Per day, in time order: if flat, take the best-ranked signal at that
+    minute (a signal may start in the same minute the previous trade
+    exited); otherwise skip. Returns (taken, skipped)."""
+    by_day = {}
+    for sg in signals:
+        by_day.setdefault(sg["entry_time"][:10], []).append(sg)
+    taken, skipped = [], []
+    for day in sorted(by_day):
+        free_at, entries = None, 0
+        minutes = {}
+        for sg in sorted(by_day[day], key=lambda x: x["entry_time"]):
+            minutes.setdefault(sg["entry_time"], []).append(sg)
+        for tm in sorted(minutes):
+            group = sorted(minutes[tm], key=rank_key)
+            if free_at is not None and tm < free_at:
+                reason = "position open"
+            elif entries >= ACCOUNT_MAX_ENTRIES_PER_DAY:
+                reason = "daily entry limit"
+            else:
+                pick = group[0]
+                pick["outranked"] = group[1:]
+                taken.append(pick)
+                entries += 1
+                free_at = pick["exit_time"]
+                for other in group[1:]:
+                    skipped.append({**other, "skip_reason": "outranked same minute"})
+                continue
+            for other in group:
+                skipped.append({**other, "skip_reason": reason})
+    return taken, skipped
+
+
+def build_account_simulation() -> None:
+    """Reads the stored (valid) fixed-target trades, keeps symbols that pass
+    the cost gate, replays them one position at a time, and writes the
+    account-level trades, the skipped signals and a summary."""
+    if not os.path.exists(TRADES_FILE):
+        return
+    spreads = load_measured_spreads()
+    tags = load_tag_lookup()
+    signals = []
+    with open(TRADES_FILE, newline="") as f:
+        for r in csv.DictReader(f):
+            if not row_is_valid(r):
+                continue
+            sym = r["symbol"]
+            pct = spreads.get(sym)
+            if COST_GATE_ENABLED and spreads and (pct is None or pct > MAX_SPREAD_PCT):
+                continue
+            price, shares, gross = float(r["entry_price"]), int(float(r["shares"])), float(r["gross_pnl"])
+            cps, _ = measured_cost_per_share(sym, price, spreads)
+            cost = shares * cps + COMMISSION_PER_TRADE
+            tg = tags.get((sym, r["entry_time"]), {})
+            signals.append({
+                "symbol": sym, "entry_time": r["entry_time"], "exit_time": r["exit_time"],
+                "entry_price": price, "exit_price": float(r["exit_price"]),
+                "shares": shares, "exit_reason": r["exit_reason"],
+                "held_minutes": r["held_minutes"], "gross_pnl": gross,
+                "cost": round(cost, 2), "net_pnl": round(gross - cost, 2),
+                "spread_pct": pct,
+                "ext30_pct": _fnum(tg.get("ext30_pct")),
+                "ext_from_open_pct": _fnum(tg.get("ext_from_open_pct")),
+            })
+    if not signals:
+        return
+    taken, skipped = simulate_account(signals)
+
+    cols = ["symbol", "entry_time", "exit_time", "entry_price", "exit_price", "shares",
+            "exit_reason", "held_minutes", "gross_pnl", "cost", "net_pnl",
+            "spread_pct", "ext30_pct", "ext_from_open_pct"]
+    with open(ACCOUNT_TRADES_FILE, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore")
+        w.writeheader()
+        w.writerows(taken)
+    with open(ACCOUNT_SKIPPED_FILE, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=cols + ["skip_reason"], extrasaction="ignore")
+        w.writeheader()
+        w.writerows(skipped)
+
+    nets = [t["net_pnl"] for t in taken]
+    days = sorted({t["entry_time"][:10] for t in signals})
+    by_day = {d: round(sum(t["net_pnl"] for t in taken if t["entry_time"][:10] == d), 2)
+              for d in days}
+    peak = cum = worst = 0.0
+    for x in nets:
+        cum += x
+        peak = max(peak, cum)
+        worst = min(worst, cum - peak)
+    ties = [t for t in taken if t["outranked"]]
+    diffs = [t["net_pnl"] - sum(o["net_pnl"] for o in t["outranked"]) / len(t["outranked"])
+             for t in ties]
+    n = len(diffs)
+    mean_d = sum(diffs) / n if n else None
+    se_d = (((sum((d - mean_d) ** 2 for d in diffs) / (n - 1)) ** 0.5) / n ** 0.5
+            if n > 1 else None)
+    reasons = {}
+    for sk in skipped:
+        reasons[sk["skip_reason"]] = reasons.get(sk["skip_reason"], 0) + 1
+    summary = {
+        "generated_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "rank_mode": RANK_MODE,
+        "rules": "one position at a time; cost gate on; indicators per day; flat at close",
+        "signals_available": len(signals),
+        "trading_days": len(days),
+        "trades_taken": len(taken),
+        "trades_per_day": round(len(taken) / len(days), 2) if days else 0,
+        "gross_pnl": round(sum(t["gross_pnl"] for t in taken), 2),
+        "cost": round(sum(t["cost"] for t in taken), 2),
+        "net_pnl": round(sum(nets), 2),
+        "net_per_trade": round(sum(nets) / len(nets), 2) if nets else None,
+        "win_rate_pct": round(100 * sum(1 for x in nets if x > 0) / len(nets), 1) if nets else None,
+        "max_drawdown": round(worst, 2),
+        "exit_reasons": {k: sum(1 for t in taken if t["exit_reason"] == k)
+                         for k in sorted({t["exit_reason"] for t in taken})},
+        "net_by_day": by_day,
+        "skipped_by_reason": reasons,
+        "picked_vs_outranked": {
+            "same_minute_ties": n,
+            "avg_net_difference": round(mean_d, 2) if mean_d is not None else None,
+            "std_error": round(se_d, 2) if se_d is not None else None,
+            "note": "Positive = the ranking's pick beat the signals it outranked. "
+                    "Judge on NEW data only; need many ties before trusting it.",
+        },
+    }
+    with open(ACCOUNT_SUMMARY_FILE, "w") as f:
+        json.dump(summary, f, indent=2)
+    print(f"\n[account] one position at a time, rank={RANK_MODE}: {len(taken)} trade(s) over "
+          f"{len(days)} day(s) ({summary['trades_per_day']}/day), net ${summary['net_pnl']:.2f} "
+          f"(${summary['net_per_trade']}/trade); {len(skipped)} signal(s) skipped "
+          f"-> {ACCOUNT_TRADES_FILE}", file=sys.stderr)
+
+
+def record_tags(trades: list[dict], mode: str) -> None:
+    """Adds tagged rows for new trades and fills BLANK tag fields on rows that
+    already exist (so columns added later get backfilled when the same signal
+    is found again). Existing non-blank values are never overwritten."""
+    rows, order = {}, []
+    if os.path.exists(TAGS_FILE):
+        with open(TAGS_FILE, newline="") as f:
+            for r in csv.DictReader(f):
+                k = (r["mode"], r["symbol"], r["entry_time"])
+                rows[k] = r
+                order.append(k)
+    added = filled = 0
     for t in trades:
-        if (mode, t["symbol"], t["entry_time"]) in existing:
-            continue
-        row = {"mode": mode, "symbol": t["symbol"], "entry_time": t["entry_time"],
-               "entry_price": t["entry_price"], "shares": t["shares"],
-               "exit_reason": t["exit_reason"], "held_minutes": t["held_minutes"],
-               "gross_pnl": t["gross_pnl"]}
-        row.update(t.get("tags", {}))
-        new_rows.append(row)
-    file_exists = os.path.exists(TAGS_FILE)
-    with open(TAGS_FILE, "a", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=TAG_FIELDS, extrasaction="ignore")
-        if not file_exists:
-            w.writeheader()
-        w.writerows(new_rows)
-    print(f"[tags/{mode}] {len(new_rows)} new tagged signal(s) added to {TAGS_FILE}.",
-          file=sys.stderr)
+        k = (mode, t["symbol"], t["entry_time"])
+        fresh = {"mode": mode, "symbol": t["symbol"], "entry_time": t["entry_time"],
+                 "entry_price": t["entry_price"], "shares": t["shares"],
+                 "exit_reason": t["exit_reason"], "held_minutes": t["held_minutes"],
+                 "gross_pnl": t["gross_pnl"]}
+        fresh.update(t.get("tags", {}))
+        if k in rows:
+            cur, changed = rows[k], False
+            for fld in TAG_FIELDS:
+                if cur.get(fld) in (None, "") and fresh.get(fld) not in (None, ""):
+                    cur[fld] = fresh[fld]
+                    changed = True
+            filled += changed
+        else:
+            rows[k] = fresh
+            order.append(k)
+            added += 1
+    with open(TAGS_FILE, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=TAG_FIELDS, extrasaction="ignore", restval="")
+        w.writeheader()
+        w.writerows(rows[k] for k in order)
+    print(f"[tags/{mode}] {added} new tagged signal(s) added, {filled} existing row(s) "
+          f"back-filled, in {TAGS_FILE}.", file=sys.stderr)
 
 
 def main():
-    print(f"Fetching 1-minute bars for {len(CANDIDATES)} candidate(s)...", file=sys.stderr)
-    bars = fetch_1m_bars(CANDIDATES)
+    spreads = load_measured_spreads()
+    tradable, blocked = apply_cost_gate(CANDIDATES, spreads)
+    for sym, why in blocked.items():
+        print(f"  [{sym}] SKIPPED by cost gate: {why}", file=sys.stderr)
+    print(f"Cost gate: {len(tradable)} of {len(CANDIDATES)} candidate(s) allowed.",
+          file=sys.stderr)
+    # SPY is fetched for market context even if it is not itself traded.
+    to_fetch = list(tradable) + ([] if "SPY" in tradable else ["SPY"])
+
+    print(f"Fetching 1-minute bars for {len(to_fetch)} symbol(s)...", file=sys.stderr)
+    bars = fetch_1m_bars(to_fetch)
     if not bars:
         print("No data fetched for any symbol -- nothing to backtest.", file=sys.stderr)
         return
@@ -561,10 +910,11 @@ def main():
     spy_ctx = build_spy_context(bars.get("SPY"))
     if spy_ctx is None:
         print("SPY data unavailable -- SPY context tags will be blank.", file=sys.stderr)
-    spreads = load_measured_spreads()
 
     fixed_trades, trail_trades = [], []
     for sym, df in bars.items():
+        if sym not in tradable:
+            continue
         f_t = find_trades(sym, df, mode="fixed", spy_ctx=spy_ctx, spreads=spreads)
         t_t = find_trades(sym, df, mode="trail", spy_ctx=spy_ctx, spreads=spreads)
         print(f"  [{sym}] fixed: {len(f_t)} trade(s), trail: {len(t_t)} trade(s)", file=sys.stderr)
@@ -575,6 +925,8 @@ def main():
     record_and_summarize(trail_trades, TRAIL_TRADES_FILE, TRAIL_SUMMARY_FILE, "trailing stop")
     record_tags(fixed_trades, "fixed")
     record_tags(trail_trades, "trail")
+    if ACCOUNT_SIM_ENABLED:
+        build_account_simulation()
 
 
 if __name__ == "__main__":
