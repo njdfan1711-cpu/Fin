@@ -1,33 +1,33 @@
 {
-  "generated_at": "2026-10-21T17:30:50.255538+00:00",
+  "generated_at": "2026-10-21T18:31:04.623698+00:00",
   "cost_model": "measured median spread per symbol x1.0 (flat 2.0c fallback)",
   "symbols_without_spread_data": [
     "WBD"
   ],
-  "total_trades": 194,
+  "total_trades": 195,
   "win_count": 67,
-  "loss_count": 127,
-  "win_rate_pct": 34.5,
-  "avg_net_pnl_per_trade": -2.72,
+  "loss_count": 128,
+  "win_rate_pct": 34.4,
+  "avg_net_pnl_per_trade": -2.74,
   "avg_win": 6.58,
-  "avg_loss": -7.63,
-  "total_gross_pnl": -100.26,
-  "total_cost": 427.25,
-  "total_net_pnl": -527.51,
-  "total_net_pnl_flat_cost_model": -791.76,
-  "max_drawdown": -544.86,
+  "avg_loss": -7.62,
+  "total_gross_pnl": -106.15,
+  "total_cost": 427.68,
+  "total_net_pnl": -533.83,
+  "total_net_pnl_flat_cost_model": -798.51,
+  "max_drawdown": -551.18,
   "exit_reason_counts": {
     "target": 46,
-    "stop": 105,
+    "stop": 106,
     "time_stop": 40
   },
   "by_spread_tier": {
     "tight_le_0.03pct": {
-      "trades": 84,
-      "gross_pnl": -34.11,
-      "cost": 43.03,
-      "net_pnl": -77.14,
-      "avg_net_per_trade": -0.92
+      "trades": 85,
+      "gross_pnl": -40.0,
+      "cost": 43.46,
+      "net_pnl": -83.46,
+      "avg_net_per_trade": -0.98
     },
     "wide_gt_0.03pct": {
       "trades": 109,
@@ -48,11 +48,11 @@
     "enabled": true,
     "max_spread_pct": 0.0525,
     "passing": {
-      "trades": 123,
-      "gross_pnl": -27.88,
-      "cost": 88.56,
-      "net_pnl": -116.44,
-      "avg_net_per_trade": -0.95
+      "trades": 124,
+      "gross_pnl": -33.77,
+      "cost": 88.99,
+      "net_pnl": -122.76,
+      "avg_net_per_trade": -0.99
     },
     "blocked": {
       "trades": 71,
@@ -99,11 +99,11 @@
       "avg_net_per_trade": -4.74
     },
     "UBER": {
-      "trades": 8,
-      "gross_pnl": -21.33,
-      "cost": 3.44,
-      "net_pnl": -24.77,
-      "avg_net_per_trade": -3.1
+      "trades": 9,
+      "gross_pnl": -27.22,
+      "cost": 3.87,
+      "net_pnl": -31.09,
+      "avg_net_per_trade": -3.45
     },
     "MU": {
       "trades": 8,
