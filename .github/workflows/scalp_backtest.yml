@@ -49,11 +49,15 @@ jobs:
           python analyze_tags.py fixed || echo "tag analysis (fixed) skipped"
           python analyze_tags.py trail || echo "tag analysis (trail) skipped"
 
+      - name: Random-entry baseline (is the entry signal better than random timing?)
+        working-directory: scalping
+        run: python scalp_random_baseline.py || echo "random-entry baseline skipped"
+
       - name: Commit updated trade log/summary
         run: |
           git config user.name "stock-scanner-bot"
           git config user.email "actions@users.noreply.github.com"
-          for f in scalping/scalp_backtest_trades.csv scalping/scalp_backtest_summary.json scalping/scalp_backtest_trail_trades.csv scalping/scalp_backtest_trail_summary.json scalping/scalp_signals_tagged.csv scalping/scalp_tag_analysis.md scalping/scalp_tag_analysis_trail.md; do
+          for f in scalping/scalp_backtest_trades.csv scalping/scalp_backtest_summary.json scalping/scalp_backtest_trail_trades.csv scalping/scalp_backtest_trail_summary.json scalping/scalp_signals_tagged.csv scalping/scalp_tag_analysis.md scalping/scalp_tag_analysis_trail.md scalping/scalp_account_trades.csv scalping/scalp_account_skipped.csv scalping/scalp_account_summary.json scalping/scalp_random_baseline.json scalping/scalp_random_baseline.md; do
             if [ -f "$f" ]; then
               git add "$f"
             fi
