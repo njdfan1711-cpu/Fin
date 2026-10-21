@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-21T16:31:21+00:00",
+  "generated_utc": "2026-10-21T17:31:01+00:00",
   "data_window": "2026-10-13 to 2026-10-21",
   "symbols": [
     "AAPL",
@@ -28,35 +28,35 @@
   "draws": 1000,
   "seed": 20261020,
   "real_signals": {
-    "trades": 12,
-    "avg_gross": -1.318,
-    "avg_net": -1.961,
-    "win_rate_pct": 33.3,
-    "target_rate_pct": 0.0,
-    "stop_rate_pct": 41.7
+    "trades": 18,
+    "avg_gross": 0.106,
+    "avg_net": -0.578,
+    "win_rate_pct": 38.9,
+    "target_rate_pct": 22.2,
+    "stop_rate_pct": 38.9
   },
   "random": {
     "A_same_symbol_day": {
-      "avg_gross_mean": -0.121,
+      "avg_gross_mean": -0.391,
       "avg_gross_5th_95th": [
-        -2.665,
-        2.597
+        -2.655,
+        2.039
       ],
-      "avg_net_mean": -0.766,
-      "win_rate_pct_mean": 41.0,
-      "target_rate_pct_mean": 14.2,
-      "p_value_real_gross_beats_random": 0.762
+      "avg_net_mean": -1.073,
+      "win_rate_pct_mean": 38.2,
+      "target_rate_pct_mean": 16.3,
+      "p_value_real_gross_beats_random": 0.347
     },
     "B_within_15_min": {
-      "avg_gross_mean": 2.097,
+      "avg_gross_mean": 1.356,
       "avg_gross_5th_95th": [
-        -0.6,
-        4.573
+        -0.913,
+        3.82
       ],
-      "avg_net_mean": 1.454,
-      "win_rate_pct_mean": 54.5,
-      "target_rate_pct_mean": 28.9,
-      "p_value_real_gross_beats_random": 0.988
+      "avg_net_mean": 0.673,
+      "win_rate_pct_mean": 50.4,
+      "target_rate_pct_mean": 26.8,
+      "p_value_real_gross_beats_random": 0.807
     }
   }
 }
