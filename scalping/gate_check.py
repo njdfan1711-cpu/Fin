@@ -9,7 +9,9 @@ HOW TO RUN (Windows, from the folder that holds this file and your CSVs):
     python gate_check.py
 
 FILES IT LOOKS FOR (same folder as this script):
-    scalp_backtest_trades.csv   from the repo's scalping folder (Gate 1)
+    scalp_account_trades.csv    from the repo's scalping folder (Gate 1, preferred:
+                                one position at a time)
+    scalp_backtest_trades.csv   from the repo's scalping folder (Gate 1 fallback)
     measured_spreads.csv        from the repo's scalping folder (Gate 1 costs)
     paper_trades.csv            optional, Gate 2 (see FORMAT below)
     live_trades.csv             optional, Gates 3 and 4 (see FORMAT below)
@@ -104,9 +106,20 @@ def load_spreads():
     return table
 
 
+TRADE_SOURCE = ""
+
+
 def backtest_trades():
     """Returns list of dicts with date, symbol, notional, net (measured-cost)."""
-    rows = load_csv("scalp_backtest_trades.csv")
+    # Prefer the account-level file (one position at a time, cost gate on,
+    # same rules as the live bot). Fall back to the older per-symbol file.
+    global TRADE_SOURCE
+    rows = load_csv("scalp_account_trades.csv")
+    TRADE_SOURCE = "scalp_account_trades.csv (one position at a time)"
+    if rows is None:
+        rows = load_csv("scalp_backtest_trades.csv")
+        TRADE_SOURCE = ("scalp_backtest_trades.csv (every symbol independently -- "
+                        "NOT the live one-position rule)")
     if rows is None:
         return None
     spreads = load_spreads()
@@ -214,6 +227,7 @@ def gate1():
         p("   NOT STARTED -- scalp_backtest_trades.csv not found in this folder.")
         return None
 
+    p(f"   Trade source: {TRADE_SOURCE}")
     total_days = len({t["date"] for t in trades})
     p(f"   All backtest data on file: {len(trades)} trades over {total_days} trading days "
       f"({trades[0]['date']} to {trades[-1]['date']})")

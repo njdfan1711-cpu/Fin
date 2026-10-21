@@ -31,6 +31,8 @@ FLAT_CENTS = 2.0
 MIN_TICK = 0.01
 TIGHT_PCT = 0.03
 MIN_BUCKET = 10          # buckets smaller than this are labelled insufficient
+MIN_MINUTES_AFTER_OPEN = 20   # must match scalp_backtest.py; earlier signals used
+                              # yesterday's data in their indicators (fixed 2026-10-20)
 
 
 def load_spreads() -> dict:
@@ -62,6 +64,13 @@ def load(mode: str) -> pd.DataFrame:
     df = df[df["mode"] == mode].copy()
     if df.empty:
         raise SystemExit(f"No '{mode}' rows in {TAGS_FILE} yet.")
+    before = len(df)
+    df = df[df["minutes_since_open"] >= MIN_MINUTES_AFTER_OPEN].copy()
+    if len(df) != before:
+        print(f"Ignoring {before - len(df)} tagged signal(s) entered before minute "
+              f"{MIN_MINUTES_AFTER_OPEN} (old day-boundary bug).")
+    if df.empty:
+        raise SystemExit(f"No valid '{mode}' rows in {TAGS_FILE} yet.")
     spreads = load_spreads()
     pct = df["symbol"].map(spreads)
     cps = (df["entry_price"] * pct / 100).clip(lower=MIN_TICK)
@@ -161,6 +170,15 @@ def main():
         out.append(what_if(df, f"skip over-extended (30-min run in top quarter, > {q:.2f}%)",
                            df["ext30_pct"] > q, t, n0))
     out.append(what_if(df, "skip stock not beating SPY over 15 min", df["rs15_vs_spy_pct"] < 0, t, n0))
+    out.append(what_if(df, "skip afternoon entries (2:00-3:45 PM)", (m >= 270) & (m < 375), t, n0))
+    out.append(what_if(df, "skip volume spikes above 5x average", df["volume_ratio"] > 5, t, n0))
+    if "range_to_stop" in df.columns:
+        out.append(what_if(df, "skip when the stop is inside normal noise (range > stop)",
+                           df["range_to_stop"] > 1, t, n0))
+    if "burst_pct" in df.columns and df["burst_pct"].notna().sum() >= 20:
+        qb = df["burst_pct"].quantile(0.75)
+        out.append(what_if(df, f"skip entries after a big burst (10-min bounce in top quarter, > {qb:.2f}%)",
+                           df["burst_pct"] > qb, t, n0))
     out.append(what_if(df, f"trade only tight spreads (<= {TIGHT_PCT}%) -- unmeasured symbols kept",
                        df["spread_pct_used"] > TIGHT_PCT, t, n0))
     out.append("")
@@ -182,6 +200,12 @@ def main():
     out.append(bucket_table(df, "mom3_pct", "3-minute momentum at entry (%)", base))
     out.append(bucket_table(df, "volume_ratio", "Volume vs 20-minute average (x)", base))
     out.append(bucket_table(df, "range20_pct", "Recent volatility (avg 1-min range, % of price)", base))
+    # added 2026-10-20 (filled in as signals are re-found / new ones arrive)
+    if "gap_open_pct" in df.columns:
+        out.append(bucket_table(df, "gap_open_pct", "Gap at the open vs yesterday's close (%)", base))
+        out.append(bucket_table(df, "range_to_stop", "Recent 1-min range / stop distance (x; > 1 = stop inside noise)", base))
+        out.append(bucket_table(df, "dist_from_day_high_pct", "Distance below the day's high so far (%; 0 = at the high)", base))
+        out.append(bucket_table(df, "burst_pct", "Bounce off the last 10 minutes' low (%) -- buying after the burst", base))
 
     # --- exits: what price did the trades do after entry? ---
     d = df[df["max_up_pct"].notna() & df["max_down_pct"].notna()]
