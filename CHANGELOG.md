@@ -1,3 +1,30 @@
+2026-10-21 -- New: swing_backtest.py (what if an API acted on Fin alerts?)
+New files (no existing file changed): swing_backtest.py (repo root),
+.github/workflows/swing_backtest.yml (workflow_dispatch only).
+Outputs: swing_backtest_trades.csv, swing_backtest_summary.json, swing_backtest.md.
+Replays every first-alert-of-the-day per symbol from outcome_history.json (Aug 13 on)
+and daily_pushes.json against real daily bars (yfinance). Rules: Fin's stop
+(STOP_ATR_MULT x ATR below entry); take-profit (TAKE_PROFIT_ATR_MULT x ATR) or the
+full 3-ATR target; INACTIVITY stop (default: after 3 closes, if no close outside
++/-0.25 ATR of entry, sell at the close); 7-trading-day max hold; $3,500 position;
+0.10% round-trip cost (assumption).
+Entry timing: regular-session alert fills at price_at_push with exits checked from the
+NEXT day; pre-open/weekend/after-close alerts fill at the next session's open.
+Conservative conventions: stop counts first if a day touches both; gaps fill at the open.
+Two views per scenario: "all" first-alerts (alert quality) and a "top1" account
+(max 1 new position/day by Fin strength, max 5 open, no duplicate symbols).
+Scenarios: A take-profit+stop+inactivity (base); B full target; C no inactivity stop;
+D no stop (diagnostic for "hold through dips"). Plus an inactivity-rule sensitivity
+grid and a cost sensitivity -- in-sample, do not tune on them.
+Not replayed: your manual screen (Barchart/Google consensus, Snowflake, earnings
+reaction) -- needs point-in-time data to avoid look-ahead.
+Tested offline only (14 unit tests on synthetic bars covering every exit path and
+entry timing, plus an end-to-end run on fake prices). First live run needs watching.
+First read from existing path-tracked outcomes (450 first-alert symbol-days, Fin's own
+tracking, no inactivity rule, no costs): take-profit reached before the stop 64.7% of
+the time vs ~75% break-even; avg -0.91%/trade (about -$32 per $3,500). Top-1/day by
+strength: 9 take-profit / 4 stop over 13 days (about break-even, tiny sample).
+
 # Changelog
 
 Manual code/config changes only — automated data commits (scans, trade log
