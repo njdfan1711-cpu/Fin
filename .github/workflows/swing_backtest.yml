@@ -1,0 +1,58 @@
+name: Swing Backtest (act on Fin alerts)
+
+# workflow_dispatch ONLY, same reasoning as scalp_backtest.yml: GitHub's native
+# `schedule:` trigger is unreliable for this repo. Click "Run workflow" (or point a
+# cron-job.org job at this workflow's workflow_dispatch endpoint if you want it daily).
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: swing-backtest
+  cancel-in-progress: false
+
+jobs:
+  swing-backtest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run swing backtest
+        run: python swing_backtest.py
+
+      - name: Commit results
+        run: |
+          git config user.name "stock-scanner-bot"
+          git config user.email "actions@users.noreply.github.com"
+          for f in swing_backtest_trades.csv swing_backtest_summary.json swing_backtest.md; do
+            if [ -f "$f" ]; then
+              git add "$f"
+            fi
+          done
+          git diff --staged --quiet && echo "No changes to commit" && exit 0
+          git commit -m "Swing backtest update [automated]"
+          for attempt in 1 2 3 4 5; do
+            if git pull --rebase origin main && git push; then
+              break
+            fi
+            echo "Push/rebase attempt $attempt failed, retrying..."
+            git rebase --abort 2>/dev/null || true
+            sleep $((attempt * 5))
+            if [ "$attempt" = "5" ]; then
+              echo "::error::Could not push swing backtest results after 5 attempts"
+              exit 1
+            fi
+          done
