@@ -69,6 +69,8 @@ MAX_OPEN = 5
 
 OUTCOME_FILE = "outcome_history.json"
 PUSHES_FILE = "daily_pushes.json"
+MY_TRADES_FILE = "open_positions.json"     # your Fin Trade Log export
+OUT_MY = "swing_backtest_my_trades.csv"
 OUT_TRADES = "swing_backtest_trades.csv"
 OUT_JSON = "swing_backtest_summary.json"
 OUT_MD = "swing_backtest.md"
@@ -185,6 +187,102 @@ def simulate_trade(bars, alert, target_mult, use_stop=True, inactivity=True,
                     "gross": round(gross, 2), "cost": round(cost, 2), "net": round(gross - cost, 2),
                     "net_pct": round((gross - cost) / (shares * entry) * 100, 3)}
     return None
+
+
+# ---- your own trades, replayed ---------------------------------------------------
+def atr14_before(bars, entry_date):
+    """Simple 14-day average true range ending the day BEFORE entry_date."""
+    dates = list(bars.index)
+    i = next((k for k, d in enumerate(dates) if d >= entry_date), None)
+    if i is None or i < 15:
+        return None
+    trs = []
+    for k in range(i - 14, i):
+        h, l, pc = (float(bars["High"].iloc[k]), float(bars["Low"].iloc[k]),
+                    float(bars["Close"].iloc[k - 1]))
+        trs.append(max(h - l, abs(h - pc), abs(l - pc)))
+    return sum(trs) / len(trs)
+
+
+def replay_my_trades(bars_by_symbol, alerts, a_trades):
+    """Replays each logged trade (your real entry price/date) under the same rules
+    and compares with what you did and with Fin's top alert that day.
+    a_trades: scenario-A trades for ALL alerts, to look up Fin's top pick's result."""
+    if not os.path.exists(MY_TRADES_FILE):
+        return [], {}
+    log = json.load(open(MY_TRADES_FILE)).get("trades", [])
+    by_day = {}
+    for a in alerts:
+        by_day.setdefault(a["day"], []).append(a)
+    a_lookup = {(t["alert_day"], t["symbol"]): t for t in a_trades}
+    rows, skipped = [], []
+    for tr in log:
+        sym, ed = tr.get("symbol"), tr.get("entryDate")
+        b = bars_by_symbol.get(sym)
+        if not ed or b is None or b.empty:
+            skipped.append(f"{sym}: " + ("entry date missing" if not ed else "no price data"))
+            continue
+        edate = pd.Timestamp(ed).date()
+        atr = atr14_before(b, edate)
+        if atr is None:
+            skipped.append(f"{sym}: not enough price history for ATR")
+            continue
+        entry = float(tr["entryPrice"])
+        pushed = datetime(edate.year, edate.month, edate.day, 12, 0, tzinfo=NY).astimezone(timezone.utc)
+        pseudo = {"symbol": sym, "day": ed, "pushed_at": pushed, "price": entry, "atr": atr, "strength": 0.0}
+        ra = simulate_trade(b, pseudo, TAKE_PROFIT_ATR_MULT)
+        rd = simulate_trade(b, pseudo, TAKE_PROFIT_ATR_MULT, use_stop=False)
+        closed = tr.get("status") == "closed" and tr.get("exitPrice")
+        exit_date = pd.Timestamp(tr["exitDate"]).date() if closed and tr.get("exitDate") else b.index[-1]
+        exit_px = float(tr["exitPrice"]) if closed else float(b["Close"].iloc[-1])
+        # worst dip while held: closes on entry/exit days, lows in between (as in trade_drawdown_report.py)
+        held = b[(b.index >= edate) & (b.index <= exit_date)]
+        dips = []
+        for d, r_ in held.iterrows():
+            dips.append(float(r_["Close"]) if d in (edate, exit_date) else float(r_["Low"]))
+        worst = (min(dips) / entry - 1) * 100 if dips else 0.0
+        stop_lvl = entry - STOP_ATR_MULT * atr
+        # Fin alert context
+        day_alerts = by_day.get(ed, [])
+        rank = next((i + 1 for i, a in enumerate(day_alerts) if a["symbol"] == sym), None)
+        top = day_alerts[0] if day_alerts else None
+        top_t = a_lookup.get((ed, top["symbol"])) if top else None
+        mine_pct = (exit_px / entry - 1) * 100 - ROUND_TRIP_COST_PCT
+        rows.append({
+            "symbol": sym, "entry_date": ed, "entry": entry, "exit_date": str(exit_date),
+            "status": "closed" if closed else "open (marked to latest close)",
+            "you_net_pct": round(mine_pct, 2),
+            "you_net_usd": round(tr["shares"] * (exit_px - entry) - tr["shares"] * entry * ROUND_TRIP_COST_PCT / 100, 2),
+            "you_days": len(pd.bdate_range(edate, exit_date)) - 1,
+            "your_worst_dip_pct": round(worst, 1),
+            "fin_stop_reached": bool(dips and min(dips) <= stop_lvl),
+            "rules_A_exit": ra["exit_reason"] if ra else "unresolved",
+            "rules_A_net_pct": ra["net_pct"] if ra else None,
+            "rules_A_days": ra["days_held"] if ra else None,
+            "rules_D_no_stop_exit": rd["exit_reason"] if rd else "unresolved",
+            "rules_D_net_pct": rd["net_pct"] if rd else None,
+            "fin_alert_rank_that_day": rank,
+            "fin_alerts_that_day": len(day_alerts),
+            "fin_top_pick": top["symbol"] if top else None,
+            "fin_top_pick_rules_A_net_pct": top_t["net_pct"] if top_t else None,
+        })
+    def avg(key, only=None):
+        v = [r[key] for r in rows if r[key] is not None and (only is None or only(r))]
+        return round(sum(v) / len(v), 2) if v else None
+    ranks = sorted(r["fin_alert_rank_that_day"] for r in rows if r["fin_alert_rank_that_day"])
+    summary = {
+        "trades_replayed": len(rows), "skipped": skipped,
+        "you_avg_net_pct": avg("you_net_pct"), "you_total_net_usd": round(sum(r["you_net_usd"] for r in rows), 2),
+        "you_win_rate_pct": round(100 * sum(1 for r in rows if r["you_net_pct"] > 0) / len(rows), 1) if rows else None,
+        "fin_stop_would_have_fired_on": [r["symbol"] for r in rows if r["fin_stop_reached"]],
+        "rules_A_avg_net_pct": avg("rules_A_net_pct"),
+        "rules_A_win_rate_pct": round(100 * sum(1 for r in rows if (r["rules_A_net_pct"] or 0) > 0) / len(rows), 1) if rows else None,
+        "rules_A_stopped_out": sum(1 for r in rows if r["rules_A_exit"] in ("stop", "stop_gap")),
+        "rules_D_avg_net_pct": avg("rules_D_net_pct"),
+        "your_picks_had_a_fin_alert_that_day": len(ranks), "median_alert_rank_of_your_picks": ranks[len(ranks) // 2] if ranks else None,
+        "fin_top_pick_avg_net_pct_on_your_entry_days": avg("fin_top_pick_rules_A_net_pct"),
+    }
+    return rows, summary
 
 
 # ---- portfolio view / stats -------------------------------------------------------
@@ -307,7 +405,15 @@ def main():
           f"{len({a['symbol'] for a in alerts})} symbols", file=sys.stderr)
     start = (pd.Timestamp(first_day) - pd.Timedelta(days=7)).strftime("%Y-%m-%d")
     end = (pd.Timestamp.now() + pd.Timedelta(days=2)).strftime("%Y-%m-%d")
-    bars = fetch_daily_bars([a["symbol"] for a in alerts], start, end)
+    my_symbols = []
+    if os.path.exists(MY_TRADES_FILE):
+        my_symbols = [t["symbol"] for t in json.load(open(MY_TRADES_FILE)).get("trades", [])]
+        my_dates = [t["entryDate"] for t in json.load(open(MY_TRADES_FILE)).get("trades", []) if t.get("entryDate")]
+        if my_dates and min(my_dates) < start:
+            start = (pd.Timestamp(min(my_dates)) - pd.Timedelta(days=30)).strftime("%Y-%m-%d")
+        else:
+            start = (pd.Timestamp(start) - pd.Timedelta(days=30)).strftime("%Y-%m-%d")   # ATR history
+    bars = fetch_daily_bars([a["symbol"] for a in alerts] + my_symbols, start, end)
 
     result = {"generated_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
               "alerts": len(alerts), "alert_days": f"{first_day} to {last_day}",
@@ -337,6 +443,13 @@ def main():
             s = stats(pick_account(t))
             grid.append({"inactivity_days": days, "band_atr": band, "trades": s.get("trades"),
                          "avg_net_usd": s.get("avg_net_usd"), "win_rate_pct": s.get("win_rate_pct")})
+    my_rows, my_summary = replay_my_trades(bars, alerts, base_all)
+    result["your_trades_replayed"] = my_summary
+    if my_rows:
+        with open(OUT_MY, "w", newline="") as f:
+            w = csv.DictWriter(f, fieldnames=list(my_rows[0].keys()))
+            w.writeheader()
+            w.writerows(my_rows)
     result["inactivity_sensitivity_top1"] = grid
     cost_check = {}
     saved = ROUND_TRIP_COST_PCT
@@ -376,6 +489,28 @@ def main():
               "| Days | Band (ATR) | Trades | Win % | Avg net $ |", "|---|---|---|---|---|"]
     lines += [f"| {g['inactivity_days']} | {g['band_atr']} | {g['trades']} | {g['win_rate_pct']} | {g['avg_net_usd']} |"
               for g in grid]
+    if my_rows:
+        m = my_summary
+        lines += ["", "## Your logged trades replayed under the same rules", "",
+                  f"{m['trades_replayed']} trades (skipped: {', '.join(m['skipped']) or 'none'}). "
+                  "ATR = simple 14-day average true range the day before entry.", "",
+                  "| | You (actual) | Rules A (stop + take-profit + inactivity) | Rules D (no stop) |", "|---|---|---|---|",
+                  f"| Win rate | {m['you_win_rate_pct']}% | {m['rules_A_win_rate_pct']}% | |",
+                  f"| Avg net % per trade | {m['you_avg_net_pct']} | {m['rules_A_avg_net_pct']} | {m['rules_D_avg_net_pct']} |", "",
+                  f"- Fin's stop level was reached while you held: {', '.join(m['fin_stop_would_have_fired_on']) or 'none'}. "
+                  f"Under rules A, {m['rules_A_stopped_out']} of {m['trades_replayed']} would have been stopped out.",
+                  f"- Your picks had a Fin alert that day for {m['your_picks_had_a_fin_alert_that_day']} of {m['trades_replayed']} trades "
+                  f"(median Fin rank {m['median_alert_rank_of_your_picks']}, 1 = top).",
+                  f"- Fin's top pick on your entry days, under rules A: avg {m['fin_top_pick_avg_net_pct_on_your_entry_days']}% per trade.", "",
+                  "| Symbol | Entry | You: net % / days / worst dip | Rules A | Rules D | Fin rank that day |", "|---|---|---|---|---|---|"]
+        for r in my_rows:
+            rank = r["fin_alert_rank_that_day"]
+            rank_txt = f"{rank} of {r['fin_alerts_that_day']}" if rank else "no alert"
+            dip = f"{r['your_worst_dip_pct']}%" + (" (Fin stop hit)" if r["fin_stop_reached"] else "")
+            lines.append(f"| {r['symbol']} | {r['entry_date']} @ {r['entry']} | "
+                         f"{r['you_net_pct']}% / {r['you_days']}d / {dip} | "
+                         f"{r['rules_A_exit']} {r['rules_A_net_pct']}% | "
+                         f"{r['rules_D_no_stop_exit']} {r['rules_D_net_pct']}% | {rank_txt} |")
     lines += ["", f"Cost sensitivity (avg net $ per trade, top1): {json.dumps(cost_check)}", "",
               "Conventions: stop counts first if a day touches both stop and target; gaps fill at the open; "
               "pre-open and after-close alerts fill at the next open; exits start the day after a regular-session "
