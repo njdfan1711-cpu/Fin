@@ -1,0 +1,248 @@
+{
+  "generated_utc": "2026-10-22T18:08:04+00:00",
+  "alerts": 1765,
+  "alert_days": "2026-08-13 to 2026-10-22",
+  "symbols_with_prices": 453,
+  "assumptions": {
+    "position_usd": 3500,
+    "round_trip_cost_pct": 0.1,
+    "stop_atr": 1.5,
+    "take_profit_atr": 0.5,
+    "full_target_atr": 3.0,
+    "inactivity_days": 3,
+    "inactivity_band_atr": 0.25,
+    "max_hold_days": 7,
+    "max_new_per_day": 1,
+    "max_open": 5
+  },
+  "scenarios": {
+    "A. take-profit +0.5 ATR, stop 1.5 ATR, inactivity stop, 7-day max": {
+      "all_first_alerts": {
+        "label": "all",
+        "trades": 1671,
+        "win_rate_pct": 69.1,
+        "avg_net_pct": -0.31,
+        "avg_net_usd": -10.25,
+        "total_net_usd": -17128.89,
+        "avg_days_held": 2.2,
+        "usd_per_business_day": null,
+        "max_drawdown_usd": -21025.0,
+        "exit_reasons": {
+          "inactive": 27,
+          "max_hold": 49,
+          "stop": 349,
+          "stop_gap": 105,
+          "target": 883,
+          "target_gap": 258
+        }
+      },
+      "top1_account": {
+        "label": "top1/day",
+        "trades": 50,
+        "win_rate_pct": 74.0,
+        "avg_net_pct": -0.16,
+        "avg_net_usd": -5.26,
+        "total_net_usd": -263.14,
+        "avg_days_held": 1.9,
+        "usd_per_business_day": -5.37,
+        "max_drawdown_usd": -1051.3,
+        "exit_reasons": {
+          "inactive": 2,
+          "max_hold": 1,
+          "stop": 7,
+          "stop_gap": 3,
+          "target": 33,
+          "target_gap": 4
+        }
+      },
+      "alerts_without_prices": 0
+    },
+    "B. same, but full target +3 ATR": {
+      "all_first_alerts": {
+        "label": "all",
+        "trades": 1567,
+        "win_rate_pct": 36.9,
+        "avg_net_pct": -1.05,
+        "avg_net_usd": -35.17,
+        "total_net_usd": -55118.24,
+        "avg_days_held": 4.9,
+        "usd_per_business_day": null,
+        "max_drawdown_usd": -56423.56,
+        "exit_reasons": {
+          "inactive": 45,
+          "max_hold": 610,
+          "stop": 570,
+          "stop_gap": 184,
+          "target": 129,
+          "target_gap": 29
+        }
+      },
+      "top1_account": {
+        "label": "top1/day",
+        "trades": 45,
+        "win_rate_pct": 42.2,
+        "avg_net_pct": 0.03,
+        "avg_net_usd": 2.13,
+        "total_net_usd": 95.63,
+        "avg_days_held": 4.3,
+        "usd_per_business_day": 1.95,
+        "max_drawdown_usd": -1867.51,
+        "exit_reasons": {
+          "inactive": 3,
+          "max_hold": 13,
+          "stop": 15,
+          "stop_gap": 4,
+          "target": 8,
+          "target_gap": 2
+        }
+      },
+      "alerts_without_prices": 0
+    },
+    "C. take-profit, NO inactivity stop": {
+      "all_first_alerts": {
+        "label": "all",
+        "trades": 1669,
+        "win_rate_pct": 69.4,
+        "avg_net_pct": -0.31,
+        "avg_net_usd": -10.06,
+        "total_net_usd": -16797.07,
+        "avg_days_held": 2.2,
+        "usd_per_business_day": null,
+        "max_drawdown_usd": -20787.12,
+        "exit_reasons": {
+          "max_hold": 58,
+          "stop": 352,
+          "stop_gap": 105,
+          "target": 895,
+          "target_gap": 259
+        }
+      },
+      "top1_account": {
+        "label": "top1/day",
+        "trades": 50,
+        "win_rate_pct": 76.0,
+        "avg_net_pct": -0.2,
+        "avg_net_usd": -6.91,
+        "total_net_usd": -345.26,
+        "avg_days_held": 2.1,
+        "usd_per_business_day": -7.05,
+        "max_drawdown_usd": -1174.94,
+        "exit_reasons": {
+          "max_hold": 1,
+          "stop": 8,
+          "stop_gap": 3,
+          "target": 34,
+          "target_gap": 4
+        }
+      },
+      "alerts_without_prices": 0
+    },
+    "D. take-profit, NO stop (ride dips; diagnostic of 'hold through dips')": {
+      "all_first_alerts": {
+        "label": "all",
+        "trades": 1623,
+        "win_rate_pct": 75.7,
+        "avg_net_pct": -0.34,
+        "avg_net_usd": -11.04,
+        "total_net_usd": -17917.09,
+        "avg_days_held": 3.1,
+        "usd_per_business_day": null,
+        "max_drawdown_usd": -32330.9,
+        "exit_reasons": {
+          "inactive": 27,
+          "max_hold": 385,
+          "target": 941,
+          "target_gap": 270
+        }
+      },
+      "top1_account": {
+        "label": "top1/day",
+        "trades": 50,
+        "win_rate_pct": 82.0,
+        "avg_net_pct": 0.37,
+        "avg_net_usd": 12.89,
+        "total_net_usd": 644.38,
+        "avg_days_held": 2.5,
+        "usd_per_business_day": 13.15,
+        "max_drawdown_usd": -1042.0,
+        "exit_reasons": {
+          "inactive": 2,
+          "max_hold": 7,
+          "target": 38,
+          "target_gap": 3
+        }
+      },
+      "alerts_without_prices": 0
+    }
+  },
+  "inactivity_sensitivity_top1": [
+    {
+      "inactivity_days": 2,
+      "band_atr": 0.15,
+      "trades": 50,
+      "avg_net_usd": -1.27,
+      "win_rate_pct": 76.0
+    },
+    {
+      "inactivity_days": 2,
+      "band_atr": 0.25,
+      "trades": 50,
+      "avg_net_usd": -4.23,
+      "win_rate_pct": 72.0
+    },
+    {
+      "inactivity_days": 2,
+      "band_atr": 0.5,
+      "trades": 50,
+      "avg_net_usd": -2.51,
+      "win_rate_pct": 70.0
+    },
+    {
+      "inactivity_days": 3,
+      "band_atr": 0.15,
+      "trades": 50,
+      "avg_net_usd": -3.59,
+      "win_rate_pct": 76.0
+    },
+    {
+      "inactivity_days": 3,
+      "band_atr": 0.25,
+      "trades": 50,
+      "avg_net_usd": -5.26,
+      "win_rate_pct": 74.0
+    },
+    {
+      "inactivity_days": 3,
+      "band_atr": 0.5,
+      "trades": 50,
+      "avg_net_usd": -5.59,
+      "win_rate_pct": 74.0
+    },
+    {
+      "inactivity_days": 5,
+      "band_atr": 0.15,
+      "trades": 50,
+      "avg_net_usd": -6.91,
+      "win_rate_pct": 76.0
+    },
+    {
+      "inactivity_days": 5,
+      "band_atr": 0.25,
+      "trades": 50,
+      "avg_net_usd": -7.72,
+      "win_rate_pct": 76.0
+    },
+    {
+      "inactivity_days": 5,
+      "band_atr": 0.5,
+      "trades": 50,
+      "avg_net_usd": -7.72,
+      "win_rate_pct": 76.0
+    }
+  ],
+  "cost_sensitivity_avg_net_usd_top1": {
+    "0.05%": -3.55,
+    "0.1%": -5.26,
+    "0.25%": -10.39
+  }
+}
