@@ -1,3 +1,24 @@
+## 2026-10-22 -- swing_backtest.py: replay of your own logged trades
+
+Files: swing_backtest.py (replace), .github/workflows/swing_backtest.yml (replace; adds
+swing_backtest_my_trades.csv to the commit list). trade_drawdown_report.py is unchanged.
+
+- New section "Your logged trades replayed under the same rules": reads open_positions.json
+  and, for each trade with an entry date, replays your real entry price/date under rules A
+  (take-profit +0.5 ATR, stop 1.5 ATR, inactivity stop, 7-day max) and D (no stop), with
+  ATR = simple 14-day average true range the day before entry. Compares with what you did
+  (net %, days held, worst dip, whether Fin's stop level was reached), and shows each
+  trade's rank among that day's Fin first-alerts plus Fin's top pick that day under rules A.
+- Writes swing_backtest_my_trades.csv; summary also added to swing_backtest_summary.json
+  ("your_trades_replayed") and swing_backtest.md.
+- Overlaps with trade_drawdown_report.py (worst dip, stop reached); that report is kept.
+- Tested offline only (ATR unit test, replay of the real 19-trade log on synthetic prices).
+
+First live results of the base backtest (2026-10-22 run, 1,765 first-alerts): top-1/day
+account under rules A: 50 trades, 74% win, -$5.26/trade; full target (B): +$2.13/trade;
+no stop (D): +$12.89/trade (50 trades, noisy).
+
+
 2026-10-21 -- New: swing_backtest.py (what if an API acted on Fin alerts?)
 New files (no existing file changed): swing_backtest.py (repo root),
 .github/workflows/swing_backtest.yml (workflow_dispatch only).
