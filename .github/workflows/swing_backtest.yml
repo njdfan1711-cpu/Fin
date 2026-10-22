@@ -37,7 +37,7 @@ jobs:
         run: |
           git config user.name "stock-scanner-bot"
           git config user.email "actions@users.noreply.github.com"
-          for f in swing_backtest_trades.csv swing_backtest_summary.json swing_backtest.md; do
+          for f in swing_backtest_trades.csv swing_backtest_my_trades.csv swing_backtest_summary.json swing_backtest.md; do
             if [ -f "$f" ]; then
               git add "$f"
             fi
