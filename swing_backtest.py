@@ -66,6 +66,7 @@ INACTIVITY_BAND_ATR = 0.25
 MAX_HOLD_DAYS = 7
 MAX_NEW_PER_DAY = 1
 MAX_OPEN = 5
+QUICK_TARGET_PCT = 1.0       # scenarios E/F: fixed percentage target (your median exit is ~ +1.2%)
 
 OUTCOME_FILE = "outcome_history.json"
 PUSHES_FILE = "daily_pushes.json"
@@ -127,7 +128,7 @@ def session_of(pushed_at):
 
 # ---- one trade ------------------------------------------------------------------
 def simulate_trade(bars, alert, target_mult, use_stop=True, inactivity=True,
-                   inact_days=None, inact_band=None, max_hold=None):
+                   inact_days=None, inact_band=None, max_hold=None, target_pct=None):
     """bars: DataFrame indexed by date (python date) with Open/High/Low/Close.
     Returns a trade dict, or None if the entry or the exit is not on file yet."""
     inact_days = INACTIVITY_DAYS if inact_days is None else inact_days
@@ -155,7 +156,8 @@ def simulate_trade(bars, alert, target_mult, use_stop=True, inactivity=True,
         entry, first_check = float(bars["Open"].iloc[e]), e
     atr = alert["atr"]
     stop = entry - STOP_ATR_MULT * atr if use_stop else None
-    target = entry + target_mult * atr
+    # target_pct (e.g. 1.0 = +1%) overrides the ATR-based target when given
+    target = entry * (1 + target_pct / 100) if target_pct is not None else entry + target_mult * atr
 
     n_closes, widest = 0, 0.0
     for j in range(first_check, len(dates)):
@@ -232,6 +234,7 @@ def replay_my_trades(bars_by_symbol, alerts, a_trades):
         pseudo = {"symbol": sym, "day": ed, "pushed_at": pushed, "price": entry, "atr": atr, "strength": 0.0}
         ra = simulate_trade(b, pseudo, TAKE_PROFIT_ATR_MULT)
         rd = simulate_trade(b, pseudo, TAKE_PROFIT_ATR_MULT, use_stop=False)
+        re_ = simulate_trade(b, pseudo, None, target_pct=QUICK_TARGET_PCT)
         closed = tr.get("status") == "closed" and tr.get("exitPrice")
         exit_date = pd.Timestamp(tr["exitDate"]).date() if closed and tr.get("exitDate") else b.index[-1]
         exit_px = float(tr["exitPrice"]) if closed else float(b["Close"].iloc[-1])
@@ -259,6 +262,8 @@ def replay_my_trades(bars_by_symbol, alerts, a_trades):
             "rules_A_exit": ra["exit_reason"] if ra else "unresolved",
             "rules_A_net_pct": ra["net_pct"] if ra else None,
             "rules_A_days": ra["days_held"] if ra else None,
+            "rules_E_exit": re_["exit_reason"] if re_ else "unresolved",
+            "rules_E_net_pct": re_["net_pct"] if re_ else None,
             "rules_D_no_stop_exit": rd["exit_reason"] if rd else "unresolved",
             "rules_D_net_pct": rd["net_pct"] if rd else None,
             "fin_alert_rank_that_day": rank,
@@ -279,6 +284,9 @@ def replay_my_trades(bars_by_symbol, alerts, a_trades):
         "rules_A_win_rate_pct": round(100 * sum(1 for r in rows if (r["rules_A_net_pct"] or 0) > 0) / len(rows), 1) if rows else None,
         "rules_A_stopped_out": sum(1 for r in rows if r["rules_A_exit"] in ("stop", "stop_gap")),
         "rules_D_avg_net_pct": avg("rules_D_net_pct"),
+        "rules_E_avg_net_pct": avg("rules_E_net_pct"),
+        "rules_E_win_rate_pct": round(100 * sum(1 for r in rows if (r["rules_E_net_pct"] or 0) > 0) / len(rows), 1) if rows else None,
+        "rules_E_stopped_out": sum(1 for r in rows if r["rules_E_exit"] in ("stop", "stop_gap")),
         "your_picks_had_a_fin_alert_that_day": len(ranks), "median_alert_rank_of_your_picks": ranks[len(ranks) // 2] if ranks else None,
         "fin_top_pick_avg_net_pct_on_your_entry_days": avg("fin_top_pick_rules_A_net_pct"),
     }
@@ -344,6 +352,11 @@ SCENARIOS = [
     ("C. take-profit, NO inactivity stop", dict(target_mult=TAKE_PROFIT_ATR_MULT, inactivity=False)),
     ("D. take-profit, NO stop (ride dips; diagnostic of 'hold through dips')",
      dict(target_mult=TAKE_PROFIT_ATR_MULT, use_stop=False)),
+    # E/F added 2026-10-22: your median winning exit is about +1.2%, so test a quick fixed +1% target
+    (f"E. quick +{QUICK_TARGET_PCT}% target, stop 1.5 ATR, inactivity stop",
+     dict(target_mult=None, target_pct=QUICK_TARGET_PCT)),
+    (f"F. quick +{QUICK_TARGET_PCT}% target, NO stop",
+     dict(target_mult=None, target_pct=QUICK_TARGET_PCT, use_stop=False)),
 ]
 
 
@@ -443,6 +456,11 @@ def main():
             s = stats(pick_account(t))
             grid.append({"inactivity_days": days, "band_atr": band, "trades": s.get("trades"),
                          "avg_net_usd": s.get("avg_net_usd"), "win_rate_pct": s.get("win_rate_pct")})
+    stops = sorted(STOP_ATR_MULT * a["atr"] / a["price"] * 100 for a in alerts)
+    med_stop = stops[len(stops) // 2]
+    win_gain, loss = QUICK_TARGET_PCT - ROUND_TRIP_COST_PCT, med_stop + ROUND_TRIP_COST_PCT
+    result["quick_target_breakeven"] = {"target_pct": QUICK_TARGET_PCT, "median_stop_pct": round(med_stop, 2),
+                                        "breakeven_win_rate_pct": round(100 * loss / (loss + win_gain), 1)}
     my_rows, my_summary = replay_my_trades(bars, alerts, base_all)
     result["your_trades_replayed"] = my_summary
     if my_rows:
@@ -494,15 +512,16 @@ def main():
         lines += ["", "## Your logged trades replayed under the same rules", "",
                   f"{m['trades_replayed']} trades (skipped: {', '.join(m['skipped']) or 'none'}). "
                   "ATR = simple 14-day average true range the day before entry.", "",
-                  "| | You (actual) | Rules A (stop + take-profit + inactivity) | Rules D (no stop) |", "|---|---|---|---|",
-                  f"| Win rate | {m['you_win_rate_pct']}% | {m['rules_A_win_rate_pct']}% | |",
-                  f"| Avg net % per trade | {m['you_avg_net_pct']} | {m['rules_A_avg_net_pct']} | {m['rules_D_avg_net_pct']} |", "",
+                  "| | You (actual) | Rules A (stop + take-profit + inactivity) | Rules D (no stop) | Rules E (+1% target + stop) |",
+                  "|---|---|---|---|---|",
+                  f"| Win rate | {m['you_win_rate_pct']}% | {m['rules_A_win_rate_pct']}% | | {m['rules_E_win_rate_pct']}% |",
+                  f"| Avg net % per trade | {m['you_avg_net_pct']} | {m['rules_A_avg_net_pct']} | {m['rules_D_avg_net_pct']} | {m['rules_E_avg_net_pct']} |", "",
                   f"- Fin's stop level was reached while you held: {', '.join(m['fin_stop_would_have_fired_on']) or 'none'}. "
                   f"Under rules A, {m['rules_A_stopped_out']} of {m['trades_replayed']} would have been stopped out.",
                   f"- Your picks had a Fin alert that day for {m['your_picks_had_a_fin_alert_that_day']} of {m['trades_replayed']} trades "
                   f"(median Fin rank {m['median_alert_rank_of_your_picks']}, 1 = top).",
                   f"- Fin's top pick on your entry days, under rules A: avg {m['fin_top_pick_avg_net_pct_on_your_entry_days']}% per trade.", "",
-                  "| Symbol | Entry | You: net % / days / worst dip | Rules A | Rules D | Fin rank that day |", "|---|---|---|---|---|---|"]
+                  "| Symbol | Entry | You: net % / days / worst dip | Rules A | Rules D | Rules E | Fin rank that day |", "|---|---|---|---|---|---|---|"]
         for r in my_rows:
             rank = r["fin_alert_rank_that_day"]
             rank_txt = f"{rank} of {r['fin_alerts_that_day']}" if rank else "no alert"
@@ -510,8 +529,12 @@ def main():
             lines.append(f"| {r['symbol']} | {r['entry_date']} @ {r['entry']} | "
                          f"{r['you_net_pct']}% / {r['you_days']}d / {dip} | "
                          f"{r['rules_A_exit']} {r['rules_A_net_pct']}% | "
-                         f"{r['rules_D_no_stop_exit']} {r['rules_D_net_pct']}% | {rank_txt} |")
-    lines += ["", f"Cost sensitivity (avg net $ per trade, top1): {json.dumps(cost_check)}", "",
+                         f"{r['rules_D_no_stop_exit']} {r['rules_D_net_pct']}% | "
+                         f"{r['rules_E_exit']} {r['rules_E_net_pct']}% | {rank_txt} |")
+    qb = result["quick_target_breakeven"]
+    lines += ["", f"Quick-target break-even: with a +{qb['target_pct']}% target and the median stop of "
+              f"-{qb['median_stop_pct']}%, the win rate must exceed {qb['breakeven_win_rate_pct']}% to break even after costs.",
+              "", f"Cost sensitivity (avg net $ per trade, top1): {json.dumps(cost_check)}", "",
               "Conventions: stop counts first if a day touches both stop and target; gaps fill at the open; "
               "pre-open and after-close alerts fill at the next open; exits start the day after a regular-session "
               "alert. In-sample, about two months, one market regime."]
