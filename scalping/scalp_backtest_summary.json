@@ -1,33 +1,33 @@
 {
-  "generated_at": "2026-10-26T13:30:59.146789+00:00",
+  "generated_at": "2026-10-26T14:31:22.986345+00:00",
   "cost_model": "measured median spread per symbol x1.0 (flat 2.0c fallback)",
   "symbols_without_spread_data": [
     "WBD"
   ],
-  "total_trades": 204,
-  "win_count": 71,
+  "total_trades": 205,
+  "win_count": 72,
   "loss_count": 133,
-  "win_rate_pct": 34.8,
-  "avg_net_pnl_per_trade": -2.65,
-  "avg_win": 6.6,
+  "win_rate_pct": 35.1,
+  "avg_net_pnl_per_trade": -2.59,
+  "avg_win": 6.64,
   "avg_loss": -7.58,
-  "total_gross_pnl": -105.98,
-  "total_cost": 433.88,
-  "total_net_pnl": -539.86,
-  "total_net_pnl_flat_cost_model": -808.32,
+  "total_gross_pnl": -96.07,
+  "total_cost": 433.95,
+  "total_net_pnl": -530.02,
+  "total_net_pnl_flat_cost_model": -798.49,
   "max_drawdown": -562.26,
   "exit_reason_counts": {
-    "target": 48,
+    "target": 49,
     "stop": 111,
     "time_stop": 41
   },
   "by_spread_tier": {
     "tight_le_0.03pct": {
-      "trades": 92,
-      "gross_pnl": -37.92,
-      "cost": 46.94,
-      "net_pnl": -84.86,
-      "avg_net_per_trade": -0.92
+      "trades": 93,
+      "gross_pnl": -28.01,
+      "cost": 47.01,
+      "net_pnl": -75.02,
+      "avg_net_per_trade": -0.81
     },
     "wide_gt_0.03pct": {
       "trades": 111,
@@ -48,11 +48,11 @@
     "enabled": true,
     "max_spread_pct": 0.0525,
     "passing": {
-      "trades": 133,
-      "gross_pnl": -33.6,
-      "cost": 95.18,
-      "net_pnl": -128.78,
-      "avg_net_per_trade": -0.97
+      "trades": 134,
+      "gross_pnl": -23.69,
+      "cost": 95.26,
+      "net_pnl": -118.95,
+      "avg_net_per_trade": -0.89
     },
     "blocked": {
       "trades": 71,
@@ -267,11 +267,11 @@
       "avg_net_per_trade": 2.59
     },
     "QQQ": {
-      "trades": 3,
-      "gross_pnl": 18.3,
-      "cost": 0.22,
-      "net_pnl": 18.08,
-      "avg_net_per_trade": 6.03
+      "trades": 4,
+      "gross_pnl": 28.21,
+      "cost": 0.29,
+      "net_pnl": 27.92,
+      "avg_net_per_trade": 6.98
     }
   }
 }
