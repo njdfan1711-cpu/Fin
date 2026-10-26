@@ -1,33 +1,33 @@
 {
-  "generated_at": "2026-10-26T16:30:55.298836+00:00",
+  "generated_at": "2026-10-26T17:30:52.361222+00:00",
   "cost_model": "measured median spread per symbol x1.0 (flat 2.0c fallback)",
   "symbols_without_spread_data": [
     "WBD"
   ],
-  "total_trades": 197,
-  "win_count": 65,
+  "total_trades": 198,
+  "win_count": 66,
   "loss_count": 132,
-  "win_rate_pct": 33.0,
-  "avg_net_pnl_per_trade": -3.58,
-  "avg_win": 2.77,
+  "win_rate_pct": 33.3,
+  "avg_net_pnl_per_trade": -3.55,
+  "avg_win": 2.75,
   "avg_loss": -6.7,
-  "total_gross_pnl": -306.81,
-  "total_cost": 398.36,
-  "total_net_pnl": -705.17,
-  "total_net_pnl_flat_cost_model": -941.29,
+  "total_gross_pnl": -304.73,
+  "total_cost": 398.61,
+  "total_net_pnl": -703.34,
+  "total_net_pnl_flat_cost_model": -939.47,
   "max_drawdown": -708.73,
   "exit_reason_counts": {
     "stop": 96,
     "trail_stop": 72,
-    "time_stop": 26
+    "time_stop": 27
   },
   "by_spread_tier": {
     "tight_le_0.03pct": {
-      "trades": 90,
-      "gross_pnl": -108.21,
-      "cost": 45.16,
-      "net_pnl": -153.37,
-      "avg_net_per_trade": -1.7
+      "trades": 91,
+      "gross_pnl": -106.13,
+      "cost": 45.41,
+      "net_pnl": -151.54,
+      "avg_net_per_trade": -1.67
     },
     "wide_gt_0.03pct": {
       "trades": 106,
@@ -48,11 +48,11 @@
     "enabled": true,
     "max_spread_pct": 0.0525,
     "passing": {
-      "trades": 131,
-      "gross_pnl": -174.31,
-      "cost": 93.33,
-      "net_pnl": -267.64,
-      "avg_net_per_trade": -2.04
+      "trades": 132,
+      "gross_pnl": -172.23,
+      "cost": 93.59,
+      "net_pnl": -265.82,
+      "avg_net_per_trade": -2.01
     },
     "blocked": {
       "trades": 66,
@@ -224,13 +224,6 @@
       "net_pnl": -3.1,
       "avg_net_per_trade": -0.34
     },
-    "NVDA": {
-      "trades": 8,
-      "gross_pnl": -0.89,
-      "cost": 2.04,
-      "net_pnl": -2.93,
-      "avg_net_per_trade": -0.37
-    },
     "MSFT": {
       "trades": 5,
       "gross_pnl": -0.4,
@@ -244,6 +237,13 @@
       "cost": 0.18,
       "net_pnl": -1.68,
       "avg_net_per_trade": -0.56
+    },
+    "NVDA": {
+      "trades": 9,
+      "gross_pnl": 1.19,
+      "cost": 2.3,
+      "net_pnl": -1.11,
+      "avg_net_per_trade": -0.12
     },
     "WBD": {
       "trades": 1,
