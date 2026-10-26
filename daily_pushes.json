@@ -104283,6 +104283,997 @@
         "time:late_session"
       ],
       "pushed_at": "2026-10-26T19:38:10.643671+00:00"
+    },
+    {
+      "symbol": "RRC",
+      "tier": "STRONG",
+      "category_count": 2,
+      "strength": 3.7854608,
+      "categories": {
+        "fundamentals": "Revenue growth 16.9% YoY; EPS growth 82.0% YoY; Quality checklist passed (D/E 0.28, ROE 19.3%, Net margin 26.3%)",
+        "technical": "RSI overbought (88.9); Volume spike (9.2x average); Price above rising 50/200-day MAs; Outperforming S&P 500 by 41.5pts (20d); 52-week high confirmed by volume (9.2x average); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); 52-week high, but still 38.4% below all-time high ($86.92) -- possible overhead resistance"
+      },
+      "price_at_push": 53.56999969482422,
+      "atr_at_push": 1.6899926321847099,
+      "trade_plan": {
+        "entry_low": 53.147501536778044,
+        "entry_high": 53.99249785287039,
+        "stop": 51.03501074654715,
+        "target": 58.639977591378354,
+        "take_profit": 54.414996010916575,
+        "shares": 56,
+        "risk_usd": 141.9593811035158
+      },
+      "chase": {
+        "day_chg_pct": 17.68,
+        "day_chg_atr": 4.76,
+        "chg5_pct": 23.92,
+        "chg5_atr": 6.12,
+        "prev_close": 45.52,
+        "flagged": true
+      },
+      "features": [
+        "age:recurring(2-4d)",
+        "atr:mid(3-4.5%)",
+        "cat:fundamentals",
+        "cat:technical",
+        "cats:2",
+        "caut:chase",
+        "caut:earnings_soon",
+        "caut:extended_above_ma",
+        "fund:eps_growth",
+        "fund:quality_passed",
+        "fund:revenue_growth",
+        "runup:>=5%",
+        "tech:52wk_high_below_ath",
+        "tech:52wk_high_vol_confirmed",
+        "tech:above_rising_50_200ma",
+        "tech:outperform_sp500",
+        "tech:rs_line_new_high",
+        "tech:rsi_overbought",
+        "tech:volume_spike",
+        "tier:STRONG",
+        "time:after_close",
+        "volhi:high_adj(>=1.5x)"
+      ],
+      "pushed_at": "2026-10-26T20:08:21.339235+00:00"
+    },
+    {
+      "symbol": "SLDE",
+      "tier": "STRONG",
+      "category_count": 2,
+      "strength": 3.7054400000000003,
+      "categories": {
+        "fundamentals": "Revenue growth 41.5% YoY; EPS growth 101.5% YoY; Quality checklist passed (D/E 0.03, ROE 50.7%, Net margin 40.0%)",
+        "technical": "RSI overbought (93.0); Price above rising 50/200-day MAs; Outperforming S&P 500 by 27.2pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); New ALL-TIME high -- no overhead resistance from prior sellers"
+      },
+      "price_at_push": 29.079999923706055,
+      "atr_at_push": 0.8461424963814872,
+      "trade_plan": {
+        "entry_low": 28.868464299610682,
+        "entry_high": 29.291535547801427,
+        "stop": 27.810786179133824,
+        "target": 31.618427412850515,
+        "take_profit": 29.5030711718968,
+        "shares": 103,
+        "risk_usd": 130.72901569093972
+      },
+      "chase": {
+        "day_chg_pct": 1.86,
+        "day_chg_atr": 0.63,
+        "chg5_pct": 7.21,
+        "chg5_atr": 2.31,
+        "prev_close": 28.55,
+        "flagged": true
+      },
+      "features": [
+        "age:stale(5d+)",
+        "atr:low(<3%)",
+        "cat:fundamentals",
+        "cat:technical",
+        "cats:2",
+        "caut:chase",
+        "caut:earnings_soon",
+        "caut:high_on_light_volume",
+        "fund:eps_growth",
+        "fund:quality_passed",
+        "fund:revenue_growth",
+        "runup:>=5%",
+        "tech:above_rising_50_200ma",
+        "tech:all_time_high",
+        "tech:outperform_sp500",
+        "tech:rs_line_new_high",
+        "tech:rsi_overbought",
+        "tier:STRONG",
+        "time:after_close",
+        "volhi:normal_adj(0.8-1.5x)"
+      ],
+      "pushed_at": "2026-10-26T20:08:21.339235+00:00"
+    },
+    {
+      "symbol": "TRMD",
+      "tier": "STRONG",
+      "category_count": 2,
+      "strength": 3.6967999999999996,
+      "categories": {
+        "fundamentals": "Revenue growth 33.1% YoY; EPS growth 83.6% YoY; Quality checklist passed (D/E 0.46, ROE 27.2%, Net margin 35.5%); Analyst sentiment improving: 8 buy/strongBuy vs. 8 last month",
+        "technical": "Price above rising 50/200-day MAs; Outperforming S&P 500 by 16.0pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); New ALL-TIME high -- no overhead resistance from prior sellers"
+      },
+      "price_at_push": 41.06999969482422,
+      "atr_at_push": 1.4580721173967635,
+      "trade_plan": {
+        "entry_low": 40.70548166547503,
+        "entry_high": 41.43451772417341,
+        "stop": 38.882891518729075,
+        "target": 45.44421604701451,
+        "take_profit": 41.7990357535226,
+        "shares": 73,
+        "risk_usd": 159.6588968549455
+      },
+      "chase": {
+        "day_chg_pct": 2.96,
+        "day_chg_atr": 0.81,
+        "chg5_pct": 9.2,
+        "chg5_atr": 2.37,
+        "prev_close": 39.89,
+        "flagged": true
+      },
+      "features": [
+        "age:recurring(2-4d)",
+        "atr:mid(3-4.5%)",
+        "cat:fundamentals",
+        "cat:technical",
+        "cats:2",
+        "caut:chase",
+        "caut:high_on_light_volume",
+        "fund:analyst_improving",
+        "fund:eps_growth",
+        "fund:quality_passed",
+        "fund:revenue_growth",
+        "runup:2-5%",
+        "tech:above_rising_50_200ma",
+        "tech:all_time_high",
+        "tech:outperform_sp500",
+        "tech:rs_line_new_high",
+        "tier:STRONG",
+        "time:after_close",
+        "volhi:low_adj(<0.8x)"
+      ],
+      "pushed_at": "2026-10-26T20:08:21.339235+00:00"
+    },
+    {
+      "symbol": "AVPT",
+      "tier": "STRONG",
+      "category_count": 2,
+      "strength": 3.63068,
+      "categories": {
+        "fundamentals": "Revenue growth 24.9% YoY; EPS growth 957.6% YoY; Quality checklist passed (D/E 0.00, Current ratio 2.28, ROE 15.7%, Net margin 15.3%)",
+        "technical": "RSI overbought (71.6); Price above rising 50/200-day MAs; Outperforming S&P 500 by 23.3pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); 52-week high, but still 15.7% below all-time high ($19.99) -- possible overhead resistance"
+      },
+      "price_at_push": 16.850000381469727,
+      "atr_at_push": 0.5749286242893764,
+      "trade_plan": {
+        "entry_low": 16.706268225397384,
+        "entry_high": 16.99373253754207,
+        "stop": 15.987607445035662,
+        "target": 18.574786254337855,
+        "take_profit": 17.137464693614415,
+        "shares": 178,
+        "risk_usd": 153.50594268526345
+      },
+      "chase": {
+        "day_chg_pct": 2.06,
+        "day_chg_atr": 0.59,
+        "chg5_pct": 14.31,
+        "chg5_atr": 3.67,
+        "prev_close": 16.51,
+        "flagged": true
+      },
+      "features": [
+        "age:stale(5d+)",
+        "atr:mid(3-4.5%)",
+        "cat:fundamentals",
+        "cat:technical",
+        "cats:2",
+        "caut:chase",
+        "caut:high_on_light_volume",
+        "fund:eps_growth",
+        "fund:quality_passed",
+        "fund:revenue_growth",
+        "runup:>=5%",
+        "tech:52wk_high_below_ath",
+        "tech:above_rising_50_200ma",
+        "tech:outperform_sp500",
+        "tech:rs_line_new_high",
+        "tech:rsi_overbought",
+        "tier:STRONG",
+        "time:after_close",
+        "volhi:low_adj(<0.8x)"
+      ],
+      "pushed_at": "2026-10-26T20:08:21.339235+00:00"
+    },
+    {
+      "symbol": "ASC",
+      "tier": "STRONG",
+      "category_count": 2,
+      "strength": 3.592611748328563,
+      "categories": {
+        "fundamentals": "Revenue growth 13.6% YoY; EPS growth 137.3% YoY; Quality checklist passed (D/E 0.20, Current ratio 4.33, ROE 16.5%, Net margin 29.7%)",
+        "technical": "MACD bullish crossover; Price above rising 50/200-day MAs; Outperforming S&P 500 by 14.1pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); New ALL-TIME high -- no overhead resistance from prior sellers"
+      },
+      "price_at_push": 20.700000762939453,
+      "atr_at_push": 0.8949997765677316,
+      "trade_plan": {
+        "entry_low": 20.47625081879752,
+        "entry_high": 20.923750707081386,
+        "stop": 19.357501098087855,
+        "target": 23.38500009264265,
+        "take_profit": 21.147500651223318,
+        "shares": 144,
+        "risk_usd": 193.3199517386301
+      },
+      "chase": {
+        "day_chg_pct": 3.34,
+        "day_chg_atr": 0.75,
+        "chg5_pct": 11.89,
+        "chg5_atr": 2.46,
+        "prev_close": 20.03,
+        "flagged": true
+      },
+      "features": [
+        "age:new(1d)",
+        "atr:mid(3-4.5%)",
+        "cat:fundamentals",
+        "cat:technical",
+        "cats:2",
+        "caut:chase",
+        "caut:high_on_light_volume",
+        "fund:eps_growth",
+        "fund:quality_passed",
+        "fund:revenue_growth",
+        "tech:above_rising_50_200ma",
+        "tech:all_time_high",
+        "tech:macd_bullish_cross",
+        "tech:outperform_sp500",
+        "tech:rs_line_new_high",
+        "tier:STRONG",
+        "time:after_close",
+        "volhi:normal_adj(0.8-1.5x)"
+      ],
+      "pushed_at": "2026-10-26T20:08:21.339235+00:00"
+    },
+    {
+      "symbol": "CART",
+      "tier": "STRONG",
+      "category_count": 2,
+      "strength": 3.48265504,
+      "categories": {
+        "fundamentals": "Revenue growth 12.6% YoY; Quality checklist passed (D/E 0.00, Current ratio 2.40, ROE 16.7%, Net margin 12.0%)",
+        "technical": "RSI overbought (88.7); 20/50-day MA bullish crossover; Volume spike (8.2x average); Price above rising 50/200-day MAs; Outperforming S&P 500 by 40.5pts (20d); 52-week high confirmed by volume (8.2x average); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); New ALL-TIME high -- no overhead resistance from prior sellers"
+      },
+      "price_at_push": 60.880001068115234,
+      "atr_at_push": 2.5544281005859375,
+      "trade_plan": {
+        "entry_low": 60.24139404296875,
+        "entry_high": 61.51860809326172,
+        "stop": 57.04835891723633,
+        "target": 68.54328536987305,
+        "take_profit": 62.1572151184082,
+        "shares": 49,
+        "risk_usd": 187.7504653930664
+      },
+      "chase": {
+        "day_chg_pct": 7.87,
+        "day_chg_atr": 1.74,
+        "chg5_pct": 21.98,
+        "chg5_atr": 4.29,
+        "prev_close": 56.44,
+        "flagged": true
+      },
+      "features": [
+        "age:recurring(2-4d)",
+        "atr:mid(3-4.5%)",
+        "cat:fundamentals",
+        "cat:technical",
+        "cats:2",
+        "caut:chase",
+        "caut:extended_above_ma",
+        "fund:quality_passed",
+        "fund:revenue_growth",
+        "runup:>=5%",
+        "tech:52wk_high_vol_confirmed",
+        "tech:above_rising_50_200ma",
+        "tech:all_time_high",
+        "tech:ma_20_50_cross",
+        "tech:outperform_sp500",
+        "tech:rs_line_new_high",
+        "tech:rsi_overbought",
+        "tech:volume_spike",
+        "tier:STRONG",
+        "time:after_close",
+        "volhi:high_adj(>=1.5x)"
+      ],
+      "pushed_at": "2026-10-26T20:08:21.339235+00:00"
+    },
+    {
+      "symbol": "EOG",
+      "tier": "STRONG",
+      "category_count": 2,
+      "strength": 3.44184,
+      "categories": {
+        "fundamentals": "Revenue growth 18.7% YoY; EPS growth 24.8% YoY; Quality checklist passed (D/E 0.27, Current ratio 1.63, ROE 22.4%, Net margin 25.5%)",
+        "technical": "RSI overbought (90.6); Price above rising 50/200-day MAs; Outperforming S&P 500 by 17.2pts (20d); New ALL-TIME high -- no overhead resistance from prior sellers"
+      },
+      "price_at_push": 163.69500732421875,
+      "atr_at_push": 3.990660451229366,
+      "trade_plan": {
+        "entry_low": 162.6973422114114,
+        "entry_high": 164.6926724370261,
+        "stop": 157.7090166473747,
+        "target": 175.66698867790683,
+        "take_profit": 165.69033754983343,
+        "shares": 18,
+        "risk_usd": 107.74783218319271
+      },
+      "chase": {
+        "day_chg_pct": 0.41,
+        "day_chg_atr": 0.17,
+        "chg5_pct": 3.83,
+        "chg5_atr": 1.51,
+        "prev_close": 163.03,
+        "flagged": false
+      },
+      "features": [
+        "age:stale(5d+)",
+        "atr:low(<3%)",
+        "cat:fundamentals",
+        "cat:technical",
+        "cats:2",
+        "caut:high_on_light_volume",
+        "fund:eps_growth",
+        "fund:quality_passed",
+        "fund:revenue_growth",
+        "runup:>=5%",
+        "tech:above_rising_50_200ma",
+        "tech:all_time_high",
+        "tech:outperform_sp500",
+        "tech:rsi_overbought",
+        "tier:STRONG",
+        "time:after_close",
+        "volhi:low_adj(<0.8x)"
+      ],
+      "pushed_at": "2026-10-26T20:08:21.339235+00:00"
+    },
+    {
+      "symbol": "DEO",
+      "tier": "STRONG",
+      "category_count": 2,
+      "strength": 3.410028187328451,
+      "categories": {
+        "fundamentals": "Revenue growth 48.7% YoY; EPS growth 58.3% YoY; Quality checklist passed (Current ratio 1.60, ROE 33.2%, Net margin 12.4%)",
+        "technical": "RSI overbought (76.3); 20/50-day MA bullish crossover; Price above rising 50/200-day MAs; Outperforming S&P 500 by 10.9pts (20d)"
+      },
+      "price_at_push": 94.41999816894531,
+      "atr_at_push": 1.9780972336220362,
+      "trade_plan": {
+        "entry_low": 93.92547386053981,
+        "entry_high": 94.91452247735081,
+        "stop": 91.45285231851226,
+        "target": 100.35428986981142,
+        "take_profit": 95.40904678575633,
+        "shares": 31,
+        "risk_usd": 91.98152136342473
+      },
+      "chase": {
+        "day_chg_pct": -1.62,
+        "day_chg_atr": -0.78,
+        "chg5_pct": 0.99,
+        "chg5_atr": 0.47,
+        "prev_close": 95.97,
+        "flagged": false
+      },
+      "features": [
+        "age:recurring(2-4d)",
+        "atr:low(<3%)",
+        "cat:fundamentals",
+        "cat:technical",
+        "cats:2",
+        "fund:eps_growth",
+        "fund:quality_passed",
+        "fund:revenue_growth",
+        "runup:<2%",
+        "tech:above_rising_50_200ma",
+        "tech:ma_20_50_cross",
+        "tech:outperform_sp500",
+        "tech:rsi_overbought",
+        "tier:STRONG",
+        "time:after_close"
+      ],
+      "pushed_at": "2026-10-26T20:08:21.339235+00:00"
+    },
+    {
+      "symbol": "CNQ",
+      "tier": "STRONG",
+      "category_count": 2,
+      "strength": 3.38324,
+      "categories": {
+        "fundamentals": "Revenue growth 17.6% YoY; EPS growth 42.9% YoY; Quality checklist passed (D/E 0.44, ROE 26.7%, Net margin 26.3%)",
+        "technical": "RSI overbought (86.9); Price above rising 50/200-day MAs; Outperforming S&P 500 by 15.9pts (20d); New ALL-TIME high -- no overhead resistance from prior sellers"
+      },
+      "price_at_push": 55.099998474121094,
+      "atr_at_push": 1.401428495134626,
+      "trade_plan": {
+        "entry_low": 54.749641350337434,
+        "entry_high": 55.45035559790475,
+        "stop": 52.99785573141916,
+        "target": 59.304283959524966,
+        "take_profit": 55.800712721688406,
+        "shares": 54,
+        "risk_usd": 113.51570810590455
+      },
+      "chase": {
+        "day_chg_pct": 0.07,
+        "day_chg_atr": 0.03,
+        "chg5_pct": 1.81,
+        "chg5_atr": 0.7,
+        "prev_close": 55.06,
+        "flagged": false
+      },
+      "features": [
+        "age:stale(5d+)",
+        "atr:low(<3%)",
+        "cat:fundamentals",
+        "cat:technical",
+        "cats:2",
+        "caut:high_on_light_volume",
+        "fund:eps_growth",
+        "fund:quality_passed",
+        "fund:revenue_growth",
+        "runup:2-5%",
+        "tech:above_rising_50_200ma",
+        "tech:all_time_high",
+        "tech:outperform_sp500",
+        "tech:rsi_overbought",
+        "tier:STRONG",
+        "time:after_close",
+        "volhi:low_adj(<0.8x)"
+      ],
+      "pushed_at": "2026-10-26T20:08:21.339235+00:00"
+    },
+    {
+      "symbol": "VAL",
+      "tier": "STRONG",
+      "category_count": 2,
+      "strength": 3.3824,
+      "categories": {
+        "fundamentals": "EPS growth 248.3% YoY; Quality checklist passed (D/E 0.34, Current ratio 1.77, ROE 31.3%, Net margin 44.0%)",
+        "technical": "RSI overbought (86.2); 20/50-day MA bullish crossover; Price above rising 50/200-day MAs; Outperforming S&P 500 by 24.8pts (20d)"
+      },
+      "price_at_push": 99.34500122070312,
+      "atr_at_push": 3.6366500854492188,
+      "trade_plan": {
+        "entry_low": 98.43583869934082,
+        "entry_high": 100.25416374206543,
+        "stop": 93.8900260925293,
+        "target": 110.25495147705078,
+        "take_profit": 101.16332626342773,
+        "shares": 30,
+        "risk_usd": 163.64925384521484
+      },
+      "chase": {
+        "day_chg_pct": 2.07,
+        "day_chg_atr": 0.55,
+        "chg5_pct": 11.14,
+        "chg5_atr": 2.74,
+        "prev_close": 97.33,
+        "flagged": true
+      },
+      "features": [
+        "age:recurring(2-4d)",
+        "atr:mid(3-4.5%)",
+        "cat:fundamentals",
+        "cat:technical",
+        "cats:2",
+        "caut:chase",
+        "fund:eps_growth",
+        "fund:quality_passed",
+        "runup:>=5%",
+        "tech:above_rising_50_200ma",
+        "tech:ma_20_50_cross",
+        "tech:outperform_sp500",
+        "tech:rsi_overbought",
+        "tier:STRONG",
+        "time:after_close"
+      ],
+      "pushed_at": "2026-10-26T20:08:21.339235+00:00"
+    },
+    {
+      "symbol": "HCSG",
+      "tier": "STRONG",
+      "category_count": 2,
+      "strength": 3.374,
+      "categories": {
+        "fundamentals": "Earnings beat by 51.3% (5d ago); EPS growth 1113.1% YoY; Quality checklist passed (D/E 0.00, Current ratio 3.38, ROE 24.1%)",
+        "technical": "RSI overbought (82.9); Price above rising 50/200-day MAs; Outperforming S&P 500 by 20.9pts (20d)"
+      },
+      "price_at_push": 25.1200008392334,
+      "atr_at_push": 0.8110643114362445,
+      "trade_plan": {
+        "entry_low": 24.91723476137434,
+        "entry_high": 25.32276691709246,
+        "stop": 23.90340437207903,
+        "target": 27.553193773542134,
+        "take_profit": 25.525532994951522,
+        "shares": 119,
+        "risk_usd": 144.77497959136974
+      },
+      "chase": {
+        "day_chg_pct": -0.71,
+        "day_chg_atr": -0.22,
+        "chg5_pct": 19.0,
+        "chg5_atr": 4.94,
+        "prev_close": 25.3,
+        "flagged": true
+      },
+      "features": [
+        "age:recurring(2-4d)",
+        "atr:mid(3-4.5%)",
+        "cat:fundamentals",
+        "cat:technical",
+        "cats:2",
+        "caut:chase",
+        "fund:earnings_beat",
+        "fund:eps_growth",
+        "fund:quality_passed",
+        "runup:>=5%",
+        "tech:above_rising_50_200ma",
+        "tech:outperform_sp500",
+        "tech:rsi_overbought",
+        "tier:STRONG",
+        "time:after_close"
+      ],
+      "pushed_at": "2026-10-26T20:08:21.339235+00:00"
+    },
+    {
+      "symbol": "SU",
+      "tier": "STRONG",
+      "category_count": 2,
+      "strength": 3.3373999999999997,
+      "categories": {
+        "fundamentals": "Revenue growth 13.8% YoY; EPS growth 65.6% YoY; Quality checklist passed (D/E 0.32, ROE 19.4%, Net margin 15.8%)",
+        "technical": "RSI overbought (87.2); Price above rising 50/200-day MAs; Outperforming S&P 500 by 15.6pts (20d); New ALL-TIME high -- no overhead resistance from prior sellers"
+      },
+      "price_at_push": 79.4800033569336,
+      "atr_at_push": 2.2200001307896207,
+      "trade_plan": {
+        "entry_low": 78.92500332423619,
+        "entry_high": 80.035003389631,
+        "stop": 76.15000316074916,
+        "target": 86.14000374930245,
+        "take_profit": 80.59000342232841,
+        "shares": 37,
+        "risk_usd": 123.21000725882386
+      },
+      "chase": {
+        "day_chg_pct": 0.13,
+        "day_chg_atr": 0.05,
+        "chg5_pct": 1.39,
+        "chg5_atr": 0.49,
+        "prev_close": 79.38,
+        "flagged": false
+      },
+      "features": [
+        "age:stale(5d+)",
+        "atr:low(<3%)",
+        "cat:fundamentals",
+        "cat:technical",
+        "cats:2",
+        "caut:high_on_light_volume",
+        "fund:eps_growth",
+        "fund:quality_passed",
+        "fund:revenue_growth",
+        "runup:2-5%",
+        "tech:above_rising_50_200ma",
+        "tech:all_time_high",
+        "tech:outperform_sp500",
+        "tech:rsi_overbought",
+        "tier:STRONG",
+        "time:after_close",
+        "volhi:low_adj(<0.8x)"
+      ],
+      "pushed_at": "2026-10-26T20:08:21.339235+00:00"
+    },
+    {
+      "symbol": "PACS",
+      "tier": "STRONG",
+      "category_count": 2,
+      "strength": 3.3174453039414518,
+      "categories": {
+        "fundamentals": "Revenue growth 114.6% YoY; EPS growth 248.3% YoY",
+        "technical": "RSI overbought (73.7); Price above rising 50/200-day MAs; Outperforming S&P 500 by 13.2pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); New ALL-TIME high -- no overhead resistance from prior sellers"
+      },
+      "price_at_push": 48.7400016784668,
+      "atr_at_push": 1.7314284188406808,
+      "trade_plan": {
+        "entry_low": 48.307144573756624,
+        "entry_high": 49.17285878317697,
+        "stop": 46.14285905020578,
+        "target": 53.93428693498883,
+        "take_profit": 49.605715887887136,
+        "shares": 61,
+        "risk_usd": 158.42570032392211
+      },
+      "chase": {
+        "day_chg_pct": 2.31,
+        "day_chg_atr": 0.64,
+        "chg5_pct": 6.3,
+        "chg5_atr": 1.67,
+        "prev_close": 47.64,
+        "flagged": false
+      },
+      "features": [
+        "age:stale(5d+)",
+        "atr:mid(3-4.5%)",
+        "cat:fundamentals",
+        "cat:technical",
+        "cats:2",
+        "caut:high_on_light_volume",
+        "fund:eps_growth",
+        "fund:revenue_growth",
+        "runup:2-5%",
+        "tech:above_rising_50_200ma",
+        "tech:all_time_high",
+        "tech:outperform_sp500",
+        "tech:rs_line_new_high",
+        "tech:rsi_overbought",
+        "tier:STRONG",
+        "time:after_close",
+        "volhi:normal_adj(0.8-1.5x)"
+      ],
+      "pushed_at": "2026-10-26T20:08:21.339235+00:00"
+    },
+    {
+      "symbol": "URBN",
+      "tier": "STRONG",
+      "category_count": 2,
+      "strength": 3.2652266666666665,
+      "categories": {
+        "fundamentals": "Revenue growth 11.0% YoY; EPS growth 25.4% YoY; Quality checklist passed (D/E 0.00, Current ratio 1.51, ROE 20.7%)",
+        "technical": "RSI overbought (79.5); Price above rising 50/200-day MAs; Outperforming S&P 500 by 20.1pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); New ALL-TIME high -- no overhead resistance from prior sellers"
+      },
+      "price_at_push": 90.58999633789062,
+      "atr_at_push": 2.8592845371791293,
+      "trade_plan": {
+        "entry_low": 89.87517520359584,
+        "entry_high": 91.3048174721854,
+        "stop": 86.30106953212193,
+        "target": 99.16784994942802,
+        "take_profit": 92.01963860648019,
+        "shares": 33,
+        "risk_usd": 141.534584590367
+      },
+      "chase": {
+        "day_chg_pct": 4.67,
+        "day_chg_atr": 1.41,
+        "chg5_pct": 4.33,
+        "chg5_atr": 1.32,
+        "prev_close": 86.55,
+        "flagged": true
+      },
+      "features": [
+        "age:stale(5d+)",
+        "atr:mid(3-4.5%)",
+        "cat:fundamentals",
+        "cat:technical",
+        "cats:2",
+        "caut:chase",
+        "caut:high_on_light_volume",
+        "fund:eps_growth",
+        "fund:quality_passed",
+        "fund:revenue_growth",
+        "runup:2-5%",
+        "tech:above_rising_50_200ma",
+        "tech:all_time_high",
+        "tech:outperform_sp500",
+        "tech:rs_line_new_high",
+        "tech:rsi_overbought",
+        "tier:STRONG",
+        "time:after_close",
+        "volhi:normal_adj(0.8-1.5x)"
+      ],
+      "pushed_at": "2026-10-26T20:08:21.339235+00:00"
+    },
+    {
+      "symbol": "CBOE",
+      "tier": "STRONG",
+      "category_count": 2,
+      "strength": 3.24416,
+      "categories": {
+        "fundamentals": "Revenue growth 11.7% YoY; EPS growth 50.4% YoY; Quality checklist passed (D/E 0.28, Current ratio 1.87, ROE 25.8%, Net margin 26.7%)",
+        "technical": "RSI overbought (76.2); Price above rising 50/200-day MAs; Outperforming S&P 500 by 32.3pts (20d)"
+      },
+      "price_at_push": 335.0400085449219,
+      "atr_at_push": 11.586070469447545,
+      "trade_plan": {
+        "entry_low": 332.14349092756,
+        "entry_high": 337.93652616228377,
+        "stop": 317.66090284075057,
+        "target": 369.7982199532645,
+        "take_profit": 340.83304377964566,
+        "shares": 8,
+        "risk_usd": 139.03284563337047
+      },
+      "chase": {
+        "day_chg_pct": -1.58,
+        "day_chg_atr": -0.46,
+        "chg5_pct": 9.32,
+        "chg5_atr": 2.47,
+        "prev_close": 340.42,
+        "flagged": true
+      },
+      "features": [
+        "age:recurring(2-4d)",
+        "atr:mid(3-4.5%)",
+        "cat:fundamentals",
+        "cat:technical",
+        "cats:2",
+        "caut:chase",
+        "caut:earnings_soon",
+        "fund:eps_growth",
+        "fund:quality_passed",
+        "fund:revenue_growth",
+        "runup:>=5%",
+        "tech:above_rising_50_200ma",
+        "tech:outperform_sp500",
+        "tech:rsi_overbought",
+        "tier:STRONG",
+        "time:after_close"
+      ],
+      "pushed_at": "2026-10-26T20:08:21.339235+00:00"
+    },
+    {
+      "symbol": "FIGS",
+      "tier": "STRONG",
+      "category_count": 2,
+      "strength": 3.22468,
+      "categories": {
+        "fundamentals": "Revenue growth 24.7% YoY; EPS growth 686.6% YoY",
+        "technical": "RSI overbought (91.2); Price above rising 50/200-day MAs; Outperforming S&P 500 by 53.0pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); 52-week high, but still 58.4% below all-time high ($50.10) -- possible overhead resistance"
+      },
+      "price_at_push": 20.829999923706055,
+      "atr_at_push": 1.0921570914132255,
+      "trade_plan": {
+        "entry_low": 20.556960650852748,
+        "entry_high": 21.10303919655936,
+        "stop": 19.191764286586217,
+        "target": 24.10647119794573,
+        "take_profit": 21.37607846941267,
+        "shares": 144,
+        "risk_usd": 235.90593174525662
+      },
+      "chase": {
+        "day_chg_pct": 3.12,
+        "day_chg_atr": 0.58,
+        "chg5_pct": 7.1,
+        "chg5_atr": 1.26,
+        "prev_close": 20.2,
+        "flagged": false
+      },
+      "features": [
+        "age:stale(5d+)",
+        "atr:high(>=4.5%)",
+        "cat:fundamentals",
+        "cat:technical",
+        "cats:2",
+        "caut:extended_above_ma",
+        "caut:high_on_light_volume",
+        "fund:eps_growth",
+        "fund:revenue_growth",
+        "runup:>=5%",
+        "tech:52wk_high_below_ath",
+        "tech:above_rising_50_200ma",
+        "tech:outperform_sp500",
+        "tech:rs_line_new_high",
+        "tech:rsi_overbought",
+        "tier:STRONG",
+        "time:after_close",
+        "volhi:low_adj(<0.8x)"
+      ],
+      "pushed_at": "2026-10-26T20:08:21.339235+00:00"
+    },
+    {
+      "symbol": "NDAQ",
+      "tier": "STRONG",
+      "category_count": 2,
+      "strength": 3.2107142552835333,
+      "categories": {
+        "fundamentals": "Revenue growth 12.2% YoY; EPS growth 30.4% YoY; Quality checklist passed (D/E 0.74, ROE 17.3%, Net margin 22.7%)",
+        "technical": "RSI overbought (79.9); Outperforming S&P 500 by 13.1pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); New ALL-TIME high -- no overhead resistance from prior sellers"
+      },
+      "price_at_push": 104.72000122070312,
+      "atr_at_push": 2.272141592843192,
+      "trade_plan": {
+        "entry_low": 104.15196582249233,
+        "entry_high": 105.28803661891392,
+        "stop": 101.31178883143834,
+        "target": 111.5364259992327,
+        "take_profit": 105.85607201712472,
+        "shares": 28,
+        "risk_usd": 95.42994689941412
+      },
+      "chase": {
+        "day_chg_pct": 2.11,
+        "day_chg_atr": 0.95,
+        "chg5_pct": 12.36,
+        "chg5_atr": 5.07,
+        "prev_close": 102.56,
+        "flagged": true
+      },
+      "features": [
+        "age:new(1d)",
+        "atr:low(<3%)",
+        "cat:fundamentals",
+        "cat:technical",
+        "cats:2",
+        "caut:chase",
+        "caut:high_on_light_volume",
+        "fund:eps_growth",
+        "fund:quality_passed",
+        "fund:revenue_growth",
+        "tech:all_time_high",
+        "tech:outperform_sp500",
+        "tech:rs_line_new_high",
+        "tech:rsi_overbought",
+        "tier:STRONG",
+        "time:after_close",
+        "volhi:normal_adj(0.8-1.5x)"
+      ],
+      "pushed_at": "2026-10-26T20:08:21.339235+00:00"
+    },
+    {
+      "symbol": "HALO",
+      "tier": "STRONG",
+      "category_count": 2,
+      "strength": 3.1809565037040617,
+      "categories": {
+        "fundamentals": "Revenue growth 41.1% YoY; Quality checklist passed (Current ratio 4.66, ROE 180.6%, Net margin 24.9%)",
+        "technical": "RSI overbought (88.6); Price above rising 50/200-day MAs; Outperforming S&P 500 by 13.4pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); New ALL-TIME high -- no overhead resistance from prior sellers"
+      },
+      "price_at_push": 128.00999450683594,
+      "atr_at_push": 3.517857142857143,
+      "trade_plan": {
+        "entry_low": 127.13053022112165,
+        "entry_high": 128.88945879255022,
+        "stop": 122.73320879255023,
+        "target": 138.56356593540735,
+        "take_profit": 129.76892307826452,
+        "shares": 23,
+        "risk_usd": 121.36607142857129
+      },
+      "chase": {
+        "day_chg_pct": 1.89,
+        "day_chg_atr": 0.68,
+        "chg5_pct": 4.5,
+        "chg5_atr": 1.57,
+        "prev_close": 125.63,
+        "flagged": false
+      },
+      "features": [
+        "age:new(1d)",
+        "atr:low(<3%)",
+        "cat:fundamentals",
+        "cat:technical",
+        "cats:2",
+        "caut:high_on_light_volume",
+        "fund:quality_passed",
+        "fund:revenue_growth",
+        "tech:above_rising_50_200ma",
+        "tech:all_time_high",
+        "tech:outperform_sp500",
+        "tech:rs_line_new_high",
+        "tech:rsi_overbought",
+        "tier:STRONG",
+        "time:after_close",
+        "volhi:low_adj(<0.8x)"
+      ],
+      "pushed_at": "2026-10-26T20:08:21.339235+00:00"
+    },
+    {
+      "symbol": "OSPN",
+      "tier": "STRONG",
+      "category_count": 2,
+      "strength": 3.17788,
+      "categories": {
+        "fundamentals": "EPS growth 16.3% YoY; Quality checklist passed (D/E 0.02, Current ratio 1.50, ROE 25.9%, Net margin 27.8%)",
+        "technical": "Price above rising 50/200-day MAs; Outperforming S&P 500 by 15.3pts (20d); 52-week high confirmed by volume (1.5x average); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); 52-week high, but still 48.9% below all-time high ($40.34) -- possible overhead resistance"
+      },
+      "price_at_push": 20.600000381469727,
+      "atr_at_push": 0.7621425901140485,
+      "trade_plan": {
+        "entry_low": 20.409464733941213,
+        "entry_high": 20.79053602899824,
+        "stop": 19.456786496298655,
+        "target": 22.88642815181187,
+        "take_profit": 20.98107167652675,
+        "shares": 145,
+        "risk_usd": 165.7660133498054
+      },
+      "chase": {
+        "day_chg_pct": 2.03,
+        "day_chg_atr": 0.54,
+        "chg5_pct": 16.85,
+        "chg5_atr": 3.9,
+        "prev_close": 20.19,
+        "flagged": true
+      },
+      "features": [
+        "age:recurring(2-4d)",
+        "atr:mid(3-4.5%)",
+        "cat:fundamentals",
+        "cat:technical",
+        "cats:2",
+        "caut:chase",
+        "caut:earnings_soon",
+        "fund:eps_growth",
+        "fund:quality_passed",
+        "runup:2-5%",
+        "tech:52wk_high_below_ath",
+        "tech:52wk_high_vol_confirmed",
+        "tech:above_rising_50_200ma",
+        "tech:outperform_sp500",
+        "tech:rs_line_new_high",
+        "tier:STRONG",
+        "time:after_close",
+        "volhi:high_adj(>=1.5x)"
+      ],
+      "pushed_at": "2026-10-26T20:08:21.339235+00:00"
+    },
+    {
+      "symbol": "TXN",
+      "tier": "STRONG",
+      "category_count": 2,
+      "strength": 3.153971112370349,
+      "categories": {
+        "fundamentals": "Earnings beat by 7.3% (5d ago); Revenue growth 20.3% YoY; EPS growth 40.7% YoY; Quality checklist passed (D/E 0.86, Current ratio 4.35, ROE 40.5%, Net margin 34.2%)",
+        "technical": "MACD bullish crossover; Price above rising 50/200-day MAs; Outperforming S&P 500 by 7.2pts (20d)"
+      },
+      "price_at_push": 298.1199951171875,
+      "atr_at_push": 10.244931902204241,
+      "trade_plan": {
+        "entry_low": 295.55876214163646,
+        "entry_high": 300.68122809273854,
+        "stop": 282.7525972638811,
+        "target": 328.8547908238003,
+        "take_profit": 303.24246106828963,
+        "shares": 10,
+        "risk_usd": 153.67397853306386
+      },
+      "chase": {
+        "day_chg_pct": 4.72,
+        "day_chg_atr": 1.31,
+        "chg5_pct": 7.96,
+        "chg5_atr": 2.14,
+        "prev_close": 284.69,
+        "flagged": true
+      },
+      "features": [
+        "age:new(1d)",
+        "atr:mid(3-4.5%)",
+        "cat:fundamentals",
+        "cat:technical",
+        "cats:2",
+        "caut:chase",
+        "fund:earnings_beat",
+        "fund:eps_growth",
+        "fund:quality_passed",
+        "fund:revenue_growth",
+        "tech:above_rising_50_200ma",
+        "tech:macd_bullish_cross",
+        "tech:outperform_sp500",
+        "tier:STRONG",
+        "time:after_close"
+      ],
+      "pushed_at": "2026-10-26T20:08:21.339235+00:00"
     }
   ]
 }
