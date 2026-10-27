@@ -1,25 +1,25 @@
 {
-  "generated_at": "2026-10-27T14:31:01.944089+00:00",
+  "generated_at": "2026-10-27T15:31:04.986185+00:00",
   "cost_model": "measured median spread per symbol x1.0 (flat 2.0c fallback)",
   "symbols_without_spread_data": [
     "WBD"
   ],
-  "total_trades": 211,
-  "win_count": 75,
+  "total_trades": 213,
+  "win_count": 77,
   "loss_count": 136,
-  "win_rate_pct": 35.5,
-  "avg_net_pnl_per_trade": -2.54,
-  "avg_win": 6.47,
+  "win_rate_pct": 36.2,
+  "avg_net_pnl_per_trade": -2.47,
+  "avg_win": 6.43,
   "avg_loss": -7.51,
-  "total_gross_pnl": -99.84,
-  "total_cost": 436.84,
-  "total_net_pnl": -536.68,
-  "total_net_pnl_flat_cost_model": -805.96,
+  "total_gross_pnl": -87.91,
+  "total_cost": 439.24,
+  "total_net_pnl": -527.15,
+  "total_net_pnl_flat_cost_model": -794.95,
   "max_drawdown": -562.26,
   "exit_reason_counts": {
-    "target": 49,
+    "target": 50,
     "stop": 113,
-    "time_stop": 44
+    "time_stop": 45
   },
   "by_spread_tier": {
     "tight_le_0.03pct": {
@@ -30,11 +30,11 @@
       "avg_net_per_trade": -0.86
     },
     "wide_gt_0.03pct": {
-      "trades": 112,
-      "gross_pnl": -70.52,
-      "cost": 386.2,
-      "net_pnl": -456.72,
-      "avg_net_per_trade": -4.08
+      "trades": 114,
+      "gross_pnl": -58.59,
+      "cost": 388.6,
+      "net_pnl": -447.19,
+      "avg_net_per_trade": -3.92
     },
     "no_spread_data": {
       "trades": 1,
@@ -48,11 +48,11 @@
     "enabled": true,
     "max_spread_pct": 0.0525,
     "passing": {
-      "trades": 140,
-      "gross_pnl": -27.46,
-      "cost": 98.15,
-      "net_pnl": -125.61,
-      "avg_net_per_trade": -0.9
+      "trades": 142,
+      "gross_pnl": -15.53,
+      "cost": 100.55,
+      "net_pnl": -116.08,
+      "avg_net_per_trade": -0.82
     },
     "blocked": {
       "trades": 71,
@@ -133,13 +133,6 @@
       "net_pnl": -19.62,
       "avg_net_per_trade": -6.54
     },
-    "PLTR": {
-      "trades": 9,
-      "gross_pnl": -2.68,
-      "cost": 10.5,
-      "net_pnl": -13.18,
-      "avg_net_per_trade": -1.46
-    },
     "AMZN": {
       "trades": 4,
       "gross_pnl": -11.11,
@@ -153,6 +146,13 @@
       "cost": 1.37,
       "net_pnl": -12.86,
       "avg_net_per_trade": -6.43
+    },
+    "PLTR": {
+      "trades": 10,
+      "gross_pnl": -1.11,
+      "cost": 11.7,
+      "net_pnl": -12.81,
+      "avg_net_per_trade": -1.28
     },
     "COIN": {
       "trades": 6,
@@ -252,19 +252,19 @@
       "net_pnl": 10.43,
       "avg_net_per_trade": 1.3
     },
-    "HOOD": {
-      "trades": 11,
-      "gross_pnl": 25.61,
-      "cost": 13.01,
-      "net_pnl": 12.6,
-      "avg_net_per_trade": 1.15
-    },
     "T": {
       "trades": 6,
       "gross_pnl": 23.43,
       "cost": 7.87,
       "net_pnl": 15.56,
       "avg_net_per_trade": 2.59
+    },
+    "HOOD": {
+      "trades": 12,
+      "gross_pnl": 35.97,
+      "cost": 14.2,
+      "net_pnl": 21.77,
+      "avg_net_per_trade": 1.81
     },
     "QQQ": {
       "trades": 5,
