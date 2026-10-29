@@ -1,33 +1,33 @@
 {
-  "generated_at": "2026-10-29T15:30:59.248034+00:00",
+  "generated_at": "2026-10-29T16:31:04.631939+00:00",
   "cost_model": "measured median spread per symbol x1.0 (flat 2.0c fallback)",
   "symbols_without_spread_data": [
     "WBD"
   ],
-  "total_trades": 234,
+  "total_trades": 235,
   "win_count": 85,
-  "loss_count": 149,
-  "win_rate_pct": 36.3,
-  "avg_net_pnl_per_trade": -2.26,
+  "loss_count": 150,
+  "win_rate_pct": 36.2,
+  "avg_net_pnl_per_trade": -2.28,
   "avg_win": 6.65,
   "avg_loss": -7.34,
-  "total_gross_pnl": -73.07,
-  "total_cost": 456.18,
-  "total_net_pnl": -529.25,
-  "total_net_pnl_flat_cost_model": -792.53,
+  "total_gross_pnl": -79.01,
+  "total_cost": 456.74,
+  "total_net_pnl": -535.75,
+  "total_net_pnl_flat_cost_model": -799.11,
   "max_drawdown": -562.26,
   "exit_reason_counts": {
     "target": 57,
-    "stop": 122,
+    "stop": 123,
     "time_stop": 50
   },
   "by_spread_tier": {
     "tight_le_0.03pct": {
-      "trades": 111,
-      "gross_pnl": -37.43,
-      "cost": 55.96,
-      "net_pnl": -93.39,
-      "avg_net_per_trade": -0.84
+      "trades": 112,
+      "gross_pnl": -43.37,
+      "cost": 56.52,
+      "net_pnl": -99.89,
+      "avg_net_per_trade": -0.89
     },
     "wide_gt_0.03pct": {
       "trades": 122,
@@ -48,11 +48,11 @@
     "enabled": true,
     "max_spread_pct": 0.0525,
     "passing": {
-      "trades": 163,
-      "gross_pnl": -0.69,
-      "cost": 117.49,
-      "net_pnl": -118.18,
-      "avg_net_per_trade": -0.73
+      "trades": 164,
+      "gross_pnl": -6.63,
+      "cost": 118.05,
+      "net_pnl": -124.68,
+      "avg_net_per_trade": -0.76
     },
     "blocked": {
       "trades": 71,
@@ -231,6 +231,13 @@
       "net_pnl": 4.23,
       "avg_net_per_trade": 1.41
     },
+    "INTC": {
+      "trades": 9,
+      "gross_pnl": 10.77,
+      "cost": 4.99,
+      "net_pnl": 5.78,
+      "avg_net_per_trade": 0.64
+    },
     "NFLX": {
       "trades": 10,
       "gross_pnl": 12.46,
@@ -244,13 +251,6 @@
       "cost": 7.14,
       "net_pnl": 9.33,
       "avg_net_per_trade": 0.72
-    },
-    "INTC": {
-      "trades": 8,
-      "gross_pnl": 16.71,
-      "cost": 4.43,
-      "net_pnl": 12.28,
-      "avg_net_per_trade": 1.53
     },
     "HOOD": {
       "trades": 13,
