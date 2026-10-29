@@ -264,7 +264,7 @@ MOMENTUM_STOP_ATR_MULT = 1.0          # tighter stop for the momentum track --
                                        # low-float/volume-spike setups move
                                        # fast, a 1.5x-ATR stop is too loose
 REWARD_RISK_RATIO = 2.0               # target = entry + this * (entry - stop)
-DEFAULT_POSITION_SIZE_USD = 3000      # used to size the suggested share count
+DEFAULT_POSITION_SIZE_USD = 5000      # used to size the suggested share count
 
 # Take-profit level (shown in the trade plan + watched by position_monitor).
 # The full target (REWARD_RISK_RATIO x a 1.5-ATR stop = 3 ATR, ~12% for a
