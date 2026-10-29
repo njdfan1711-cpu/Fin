@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-29T16:31:21+00:00",
+  "generated_utc": "2026-10-29T17:31:20+00:00",
   "data_window": "2026-10-21 to 2026-10-29",
   "symbols": [
     "AAPL",
@@ -37,23 +37,23 @@
   },
   "random": {
     "A_same_symbol_day": {
-      "avg_gross_mean": 0.076,
+      "avg_gross_mean": -0.033,
       "avg_gross_5th_95th": [
-        -1.882,
-        2.08
+        -1.908,
+        1.969
       ],
-      "avg_net_mean": -0.689,
-      "win_rate_pct_mean": 40.8,
-      "target_rate_pct_mean": 22.2,
-      "p_value_real_gross_beats_random": 0.507
+      "avg_net_mean": -0.798,
+      "win_rate_pct_mean": 40.2,
+      "target_rate_pct_mean": 21.0,
+      "p_value_real_gross_beats_random": 0.461
     },
     "B_within_15_min": {
-      "avg_gross_mean": 2.555,
+      "avg_gross_mean": 2.558,
       "avg_gross_5th_95th": [
-        0.658,
-        4.412
+        0.663,
+        4.407
       ],
-      "avg_net_mean": 1.791,
+      "avg_net_mean": 1.794,
       "win_rate_pct_mean": 56.7,
       "target_rate_pct_mean": 41.8,
       "p_value_real_gross_beats_random": 0.991
