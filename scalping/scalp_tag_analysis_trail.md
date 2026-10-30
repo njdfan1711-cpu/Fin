@@ -1,13 +1,13 @@
 # Scalp signal analysis (trail exits)
 
-_194 tagged trades, 22 trading days (2026-10-01 to 2026-10-30). Costs: measured median spread per symbol (flat 2c fallback)._
+_199 tagged trades, 22 trading days (2026-10-01 to 2026-10-30). Costs: measured median spread per symbol (flat 2c fallback)._
 
 **Hypotheses, not findings.** Many features are tested on a small sample from a few days of one market regime, and trades cluster in time and in a few symbols. ▲/▼ mean the win-rate interval excludes the baseline. Do not retune thresholds from this yet.
 
 ## Baseline
 | bucket | trades | win% (95% CI) | avg gross | avg net | total net | |
 |---|--:|---|--:|--:|--:|---|
-| all trades | 194 | 38% (32-45) | -0.82 | -2.64 | -512 |  |
+| all trades | 199 | 38% (32-45) | -0.83 | -2.63 | -523 |  |
 
 ## What-if filters (judged by what they would have removed)
 
@@ -15,136 +15,136 @@ A rule helps when the *removed* trades have a clearly negative average net and t
 
 | rule | removed | removed total net | removed avg net | kept | kept total net | kept avg net | change in total net |
 |---|--:|--:|--:|--:|--:|--:|--:|
-| skip first 15 min and last 15 min | 28 | +11 | +0.38 | 166 | -523 | -3.15 | -11 |
-| skip first 30 min | 1 | -6 | -6.31 | 193 | -506 | -2.62 | +6 |
-| skip when SPY is down on the day | 75 | -249 | -3.33 | 119 | -263 | -2.21 | +249 |
-| skip when SPY is below its VWAP | 79 | -290 | -3.67 | 115 | -223 | -1.94 | +290 |
-| skip when SPY fell over the last 15 min | 72 | -178 | -2.48 | 122 | -334 | -2.74 | +178 |
-| skip over-extended (30-min run in top quarter, > 0.47%) | 48 | -191 | -3.98 | 146 | -321 | -2.20 | +191 |
-| skip stock not beating SPY over 15 min | 32 | -70 | -2.19 | 162 | -442 | -2.73 | +70 |
-| skip afternoon entries (2:00-3:45 PM) | 42 | -218 | -5.19 | 152 | -294 | -1.93 | +218 |
-| skip volume spikes above 5x average | 35 | -159 | -4.55 | 159 | -353 | -2.22 | +159 |
-| skip when the stop is inside normal noise (range > stop) | 8 | -15 | -1.91 | 186 | -497 | -2.67 | +15 |
-| skip entries after a big burst (10-min bounce in top quarter, > 0.62%) | 19 | -71 | -3.71 | 175 | -442 | -2.52 | +71 |
-| trade only tight spreads (<= 0.03%) -- unmeasured symbols kept | 104 | -362 | -3.48 | 90 | -151 | -1.67 | +362 |
+| skip first 15 min and last 15 min | 29 | +13 | +0.45 | 170 | -536 | -3.15 | -13 |
+| skip first 30 min | 1 | -6 | -6.31 | 198 | -517 | -2.61 | +6 |
+| skip when SPY is down on the day | 80 | -260 | -3.25 | 119 | -263 | -2.21 | +260 |
+| skip when SPY is below its VWAP | 83 | -294 | -3.54 | 116 | -229 | -1.98 | +294 |
+| skip when SPY fell over the last 15 min | 75 | -185 | -2.47 | 124 | -338 | -2.73 | +185 |
+| skip over-extended (30-min run in top quarter, > 0.47%) | 50 | -204 | -4.08 | 149 | -319 | -2.14 | +204 |
+| skip stock not beating SPY over 15 min | 33 | -63 | -1.91 | 166 | -460 | -2.77 | +63 |
+| skip afternoon entries (2:00-3:45 PM) | 43 | -211 | -4.91 | 156 | -312 | -2.00 | +211 |
+| skip volume spikes above 5x average | 38 | -180 | -4.73 | 161 | -343 | -2.13 | +180 |
+| skip when the stop is inside normal noise (range > stop) | 11 | -36 | -3.25 | 188 | -487 | -2.59 | +36 |
+| skip entries after a big burst (10-min bounce in top quarter, > 0.62%) | 20 | -68 | -3.42 | 179 | -455 | -2.54 | +68 |
+| trade only tight spreads (<= 0.03%) -- unmeasured symbols kept | 106 | -375 | -3.54 | 93 | -148 | -1.59 | +375 |
 
 ## Results by market condition
 
 ### Minutes since the open
 | bucket | trades | win% (95% CI) | avg gross | avg net | total net | |
 |---|--:|---|--:|--:|--:|---|
-| 15-60 | 27 | 56% (37-72) | +0.58 | -1.48 | -40 |  |
-| 60-240 | 84 | 35% (25-45) | -1.26 | -2.76 | -232 |  |
-| 240-375 | 55 | 33% (22-46) | -2.45 | -4.57 | -251 |  |
-| 375-390 | 28 | 43% (27-61) | +2.40 | +0.38 | +11 |  |
+| 15-60 | 29 | 52% (34-69) | +0.13 | -1.85 | -54 |  |
+| 60-240 | 85 | 34% (25-45) | -1.32 | -2.81 | -239 |  |
+| 240-375 | 56 | 34% (23-47) | -2.27 | -4.36 | -244 |  |
+| 375-390 | 29 | 45% (28-62) | +2.42 | +0.45 | +13 |  |
 
 ### SPY return since the open (%)
 | bucket | trades | win% (95% CI) | avg gross | avg net | total net | |
 |---|--:|---|--:|--:|--:|---|
-| < -0.2 | 26 | 38% (22-57) | -1.03 | -2.68 | -70 |  |
-| -0.2 to 0 | 49 | 37% (25-51) | -1.45 | -3.67 | -180 |  |
+| < -0.2 | 29 | 38% (23-56) | -1.05 | -2.63 | -76 |  |
+| -0.2 to 0 | 51 | 37% (25-51) | -1.45 | -3.61 | -184 |  |
 | 0 to 0.2 | 61 | 36% (25-49) | -1.36 | -2.73 | -167 |  |
 | > 0.2 | 58 | 41% (30-54) | +0.38 | -1.66 | -96 |  |
 
 ### SPY vs its VWAP (%)
 | bucket | trades | win% (95% CI) | avg gross | avg net | total net | |
 |---|--:|---|--:|--:|--:|---|
-| below VWAP | 79 | 30% (21-41) | -1.62 | -3.67 | -290 |  |
-| above VWAP | 115 | 43% (35-53) | -0.27 | -1.94 | -223 |  |
+| below VWAP | 83 | 31% (22-42) | -1.55 | -3.54 | -294 |  |
+| above VWAP | 116 | 43% (34-52) | -0.31 | -1.98 | -229 |  |
 
 ### Stock minus SPY, last 15 min (%)
 | bucket | trades | win% (95% CI) | avg gross | avg net | total net | |
 |---|--:|---|--:|--:|--:|---|
-| (-0.512, 0.134] | 65 | 35% (25-48) | -0.07 | -1.49 | -97 |  |
-| (0.134, 0.374] | 65 | 48% (36-60) | -0.62 | -2.45 | -159 |  |
-| (0.374, 1.555] | 64 | 31% (21-43) | -1.78 | -4.01 | -257 |  |
+| (-0.512, 0.132] | 67 | 37% (27-49) | -0.00 | -1.40 | -94 |  |
+| (0.132, 0.374] | 67 | 46% (35-58) | -0.68 | -2.48 | -166 |  |
+| (0.374, 1.555] | 65 | 31% (21-43) | -1.84 | -4.05 | -263 |  |
 
 ### Stock move over the last 30 min (%) -- how extended
 | bucket | trades | win% (95% CI) | avg gross | avg net | total net | |
 |---|--:|---|--:|--:|--:|---|
-| (-0.795, 0.133] | 65 | 42% (30-54) | +0.12 | -1.29 | -84 |  |
-| (0.133, 0.405] | 64 | 41% (29-53) | -0.80 | -2.85 | -183 |  |
-| (0.405, 1.281] | 64 | 33% (23-45) | -1.71 | -3.74 | -239 |  |
+| (-0.795, 0.118] | 66 | 41% (30-53) | +0.11 | -1.30 | -86 |  |
+| (0.118, 0.404] | 66 | 41% (30-53) | -0.85 | -2.85 | -188 |  |
+| (0.404, 1.281] | 66 | 33% (23-45) | -1.68 | -3.68 | -243 |  |
 
 ### Stock move since its day open (%)
 | bucket | trades | win% (95% CI) | avg gross | avg net | total net | |
 |---|--:|---|--:|--:|--:|---|
-| (-4.589, -0.326] | 65 | 38% (28-51) | -1.13 | -3.24 | -210 |  |
-| (-0.326, 0.356] | 64 | 45% (34-57) | +0.70 | -0.56 | -36 |  |
-| (0.356, 2.726] | 65 | 31% (21-43) | -2.00 | -4.09 | -266 |  |
+| (-4.589, -0.348] | 67 | 37% (27-49) | -1.26 | -3.33 | -223 |  |
+| (-0.348, 0.338] | 66 | 45% (34-57) | +0.63 | -0.60 | -40 |  |
+| (0.338, 2.726] | 66 | 32% (22-44) | -1.85 | -3.95 | -260 |  |
 
 ### Entry distance above VWAP (%)
 | bucket | trades | win% (95% CI) | avg gross | avg net | total net | |
 |---|--:|---|--:|--:|--:|---|
-| (-0.0006000000000000001, 0.0521] | 65 | 40% (29-52) | -1.13 | -2.72 | -177 |  |
-| (0.0521, 0.122] | 64 | 39% (28-51) | +0.23 | -1.39 | -89 |  |
-| (0.122, 0.678] | 65 | 35% (25-48) | -1.53 | -3.79 | -246 |  |
+| (-0.0006000000000000001, 0.0521] | 67 | 40% (29-52) | -1.07 | -2.64 | -177 |  |
+| (0.0521, 0.122] | 66 | 39% (29-51) | +0.18 | -1.42 | -93 |  |
+| (0.122, 0.678] | 66 | 35% (24-47) | -1.59 | -3.83 | -253 |  |
 
 ### 3-minute momentum at entry (%)
 | bucket | trades | win% (95% CI) | avg gross | avg net | total net | |
 |---|--:|---|--:|--:|--:|---|
-| (0.149, 0.207] | 65 | 42% (30-54) | +0.02 | -1.22 | -79 |  |
-| (0.207, 0.314] | 64 | 39% (28-51) | -0.84 | -2.85 | -182 |  |
-| (0.314, 0.875] | 65 | 34% (24-46) | -1.63 | -3.85 | -251 |  |
+| (0.149, 0.206] | 67 | 43% (32-55) | +0.18 | -1.04 | -70 |  |
+| (0.206, 0.312] | 66 | 38% (27-50) | -0.99 | -2.97 | -196 |  |
+| (0.312, 0.875] | 66 | 33% (23-45) | -1.69 | -3.90 | -257 |  |
 
 ### Volume vs 20-minute average (x)
 | bucket | trades | win% (95% CI) | avg gross | avg net | total net | |
 |---|--:|---|--:|--:|--:|---|
-| (2.0, 2.389] | 65 | 38% (28-51) | -0.69 | -2.43 | -158 |  |
-| (2.389, 3.589] | 64 | 45% (34-57) | +0.69 | -1.14 | -73 |  |
-| (3.589, 18.762] | 65 | 31% (21-43) | -2.43 | -4.33 | -281 |  |
+| (2.0, 2.39] | 67 | 40% (29-52) | -0.54 | -2.24 | -150 |  |
+| (2.39, 3.637] | 66 | 45% (34-57) | +0.65 | -1.15 | -76 |  |
+| (3.637, 18.762] | 66 | 29% (19-41) | -2.60 | -4.49 | -297 |  |
 
 ### Recent volatility (avg 1-min range, % of price)
 | bucket | trades | win% (95% CI) | avg gross | avg net | total net | |
 |---|--:|---|--:|--:|--:|---|
-| (0.033299999999999996, 0.0972] | 65 | 46% (35-58) | +0.42 | -0.34 | -22 |  |
-| (0.0972, 0.145] | 64 | 42% (31-54) | -0.95 | -2.18 | -139 |  |
-| (0.145, 0.392] | 65 | 26% (17-38) | -1.92 | -5.40 | -351 | ▼ |
+| (0.033299999999999996, 0.0971] | 67 | 48% (36-60) | +0.56 | -0.19 | -12 |  |
+| (0.0971, 0.145] | 66 | 41% (30-53) | -1.10 | -2.36 | -156 |  |
+| (0.145, 0.392] | 66 | 26% (17-37) | -1.97 | -5.38 | -355 | ▼ |
 
 ### Gap at the open vs yesterday's close (%)
 | bucket | trades | win% (95% CI) | avg gross | avg net | total net | |
 |---|--:|---|--:|--:|--:|---|
-| (-6.706, -0.514] | 23 | 30% (16-51) | -2.58 | -3.44 | -79 |  |
-| (-0.514, 0.464] | 22 | 50% (31-69) | -0.52 | -1.02 | -23 |  |
-| (0.464, 5.305] | 23 | 65% (45-81) | +0.51 | -0.21 | -5 | ▲ |
+| (-6.941000000000001, -0.633] | 25 | 28% (14-48) | -2.83 | -3.71 | -93 |  |
+| (-0.633, 0.444] | 24 | 50% (31-69) | -0.40 | -0.93 | -22 |  |
+| (0.444, 5.305] | 24 | 67% (47-82) | +0.61 | -0.11 | -3 | ▲ |
 
 ### Recent 1-min range / stop distance (x; > 1 = stop inside noise)
 | bucket | trades | win% (95% CI) | avg gross | avg net | total net | |
 |---|--:|---|--:|--:|--:|---|
-| (0.223, 0.487] | 25 | 44% (27-63) | -0.71 | -1.39 | -35 |  |
-| (0.487, 0.694] | 26 | 50% (32-68) | -1.04 | -1.73 | -45 |  |
-| (0.694, 1.74] | 24 | 50% (31-69) | -1.41 | -2.23 | -54 |  |
+| (0.223, 0.486] | 27 | 48% (31-66) | -0.27 | -0.93 | -25 |  |
+| (0.486, 0.709] | 26 | 50% (32-68) | -1.04 | -1.73 | -45 |  |
+| (0.709, 1.74] | 27 | 44% (28-63) | -1.90 | -2.74 | -74 |  |
 
 ### Distance below the day's high so far (%; 0 = at the high)
 | bucket | trades | win% (95% CI) | avg gross | avg net | total net | |
 |---|--:|---|--:|--:|--:|---|
-| (0.173, 0.769] | 25 | 52% (33-70) | -0.71 | -1.16 | -29 |  |
-| (0.769, 1.203] | 25 | 40% (23-59) | -1.53 | -2.36 | -59 |  |
-| (1.203, 3.566] | 25 | 52% (33-70) | -0.90 | -1.81 | -45 |  |
+| (0.173, 0.779] | 27 | 52% (34-69) | -0.79 | -1.25 | -34 |  |
+| (0.779, 1.206] | 26 | 42% (26-61) | -1.17 | -1.97 | -51 |  |
+| (1.206, 3.566] | 27 | 48% (31-66) | -1.26 | -2.19 | -59 |  |
 
 ### Bounce off the last 10 minutes' low (%) -- buying after the burst
 | bucket | trades | win% (95% CI) | avg gross | avg net | total net | |
 |---|--:|---|--:|--:|--:|---|
-| (0.216, 0.35] | 25 | 36% (20-55) | -1.40 | -1.99 | -50 |  |
-| (0.35, 0.56] | 25 | 68% (48-83) | +0.55 | -0.18 | -5 | ▲ |
-| (0.56, 1.21] | 25 | 40% (23-59) | -2.30 | -3.16 | -79 |  |
+| (0.168, 0.348] | 27 | 41% (25-59) | -0.90 | -1.49 | -40 |  |
+| (0.348, 0.552] | 26 | 58% (39-74) | -0.37 | -1.11 | -29 | ▲ |
+| (0.552, 1.21] | 27 | 44% (28-63) | -1.91 | -2.79 | -75 |  |
 
 ## Price path after entry (for tuning exits)
 
-- Median best price reached: +0.12% | median worst: -0.15%
-- Reached +0.175% at some point: 45% of trades
-- Reached +0.35% at some point: 8% of trades
+- Median best price reached: +0.12% | median worst: -0.16%
+- Reached +0.175% at some point: 44% of trades
+- Reached +0.35% at some point: 9% of trades
 - Reached +0.5% at some point: 2% of trades
 - Reached +0.75% at some point: 1% of trades
-- Fell to -0.20% or worse at some point: 45%
-- Exit mix: stop 87, trail_stop 76, time_stop 29, eod 2
+- Fell to -0.20% or worse at some point: 46%
+- Exit mix: stop 90, trail_stop 77, time_stop 29, eod 3
 
 Stop-outs by volatility (a fixed 0.20% stop may be too tight for jumpy stocks):
 
 | volatility bucket | trades | stopped out | hit target / trail | timed out |
 |---|--:|--:|--:|--:|
-| (0.033299999999999996, 0.0972] | 65 | 32% | 29% | 37% |
-| (0.0972, 0.145] | 64 | 47% | 47% | 5% |
-| (0.145, 0.392] | 65 | 55% | 42% | 3% |
+| (0.033299999999999996, 0.0971] | 67 | 31% | 30% | 36% |
+| (0.0971, 0.145] | 66 | 48% | 45% | 5% |
+| (0.145, 0.392] | 66 | 56% | 41% | 3% |
 
 _Limits: tags exist only for trades found since tagging began (yfinance keeps 7 days of 1-minute bars). The backtest allows one position per symbol at a time, while the live bot will hold one position in total, so competing simultaneous signals are all counted here._
