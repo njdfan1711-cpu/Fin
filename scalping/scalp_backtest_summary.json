@@ -1,40 +1,40 @@
 {
-  "generated_at": "2026-10-30T19:31:07.678291+00:00",
+  "generated_at": "2026-11-02T14:31:17.478808+00:00",
   "cost_model": "measured median spread per symbol x1.0 (flat 2.0c fallback)",
   "symbols_without_spread_data": [
     "WBD"
   ],
-  "total_trades": 245,
-  "win_count": 91,
-  "loss_count": 154,
-  "win_rate_pct": 37.1,
-  "avg_net_pnl_per_trade": -2.12,
-  "avg_win": 6.68,
-  "avg_loss": -7.32,
-  "total_gross_pnl": -56.34,
-  "total_cost": 463.71,
-  "total_net_pnl": -520.05,
-  "total_net_pnl_flat_cost_model": -782.08,
+  "total_trades": 250,
+  "win_count": 93,
+  "loss_count": 157,
+  "win_rate_pct": 37.2,
+  "avg_net_pnl_per_trade": -2.11,
+  "avg_win": 6.63,
+  "avg_loss": -7.29,
+  "total_gross_pnl": -59.39,
+  "total_cost": 468.76,
+  "total_net_pnl": -528.15,
+  "total_net_pnl_flat_cost_model": -789.81,
   "max_drawdown": -562.26,
   "exit_reason_counts": {
     "target": 60,
-    "stop": 127,
+    "stop": 129,
     "time_stop": 52
   },
   "by_spread_tier": {
     "tight_le_0.03pct": {
-      "trades": 119,
-      "gross_pnl": -19.44,
-      "cost": 59.98,
-      "net_pnl": -79.42,
-      "avg_net_per_trade": -0.67
+      "trades": 121,
+      "gross_pnl": -9.51,
+      "cost": 61.13,
+      "net_pnl": -70.64,
+      "avg_net_per_trade": -0.58
     },
     "wide_gt_0.03pct": {
-      "trades": 125,
-      "gross_pnl": -42.72,
-      "cost": 401.8,
-      "net_pnl": -444.52,
-      "avg_net_per_trade": -3.56
+      "trades": 128,
+      "gross_pnl": -55.7,
+      "cost": 405.69,
+      "net_pnl": -461.39,
+      "avg_net_per_trade": -3.6
     },
     "no_spread_data": {
       "trades": 1,
@@ -48,11 +48,11 @@
     "enabled": true,
     "max_spread_pct": 0.0525,
     "passing": {
-      "trades": 174,
-      "gross_pnl": 16.04,
-      "cost": 125.02,
-      "net_pnl": -108.98,
-      "avg_net_per_trade": -0.63
+      "trades": 179,
+      "gross_pnl": 12.99,
+      "cost": 130.07,
+      "net_pnl": -117.08,
+      "avg_net_per_trade": -0.65
     },
     "blocked": {
       "trades": 71,
@@ -105,12 +105,12 @@
       "net_pnl": -29.06,
       "avg_net_per_trade": -5.81
     },
-    "UBER": {
-      "trades": 14,
-      "gross_pnl": -16.33,
-      "cost": 6.13,
-      "net_pnl": -22.46,
-      "avg_net_per_trade": -1.6
+    "AMD": {
+      "trades": 11,
+      "gross_pnl": -9.34,
+      "cost": 15.47,
+      "net_pnl": -24.81,
+      "avg_net_per_trade": -2.26
     },
     "F": {
       "trades": 5,
@@ -120,18 +120,18 @@
       "avg_net_per_trade": -4.13
     },
     "AVGO": {
-      "trades": 3,
-      "gross_pnl": -17.42,
-      "cost": 2.07,
-      "net_pnl": -19.49,
-      "avg_net_per_trade": -6.5
+      "trades": 4,
+      "gross_pnl": -13.91,
+      "cost": 2.77,
+      "net_pnl": -16.68,
+      "avg_net_per_trade": -4.17
     },
-    "AMD": {
-      "trades": 10,
-      "gross_pnl": -4.29,
-      "cost": 14.15,
-      "net_pnl": -18.44,
-      "avg_net_per_trade": -1.84
+    "UBER": {
+      "trades": 15,
+      "gross_pnl": -9.91,
+      "cost": 6.59,
+      "net_pnl": -16.5,
+      "avg_net_per_trade": -1.1
     },
     "SMCI": {
       "trades": 10,
@@ -189,6 +189,13 @@
       "net_pnl": -1.47,
       "avg_net_per_trade": -0.11
     },
+    "HOOD": {
+      "trades": 15,
+      "gross_pnl": 18.4,
+      "cost": 17.75,
+      "net_pnl": 0.65,
+      "avg_net_per_trade": 0.04
+    },
     "SPY": {
       "trades": 3,
       "gross_pnl": 1.49,
@@ -238,13 +245,6 @@
       "net_pnl": 5.78,
       "avg_net_per_trade": 0.64
     },
-    "HOOD": {
-      "trades": 14,
-      "gross_pnl": 24.25,
-      "cost": 16.57,
-      "net_pnl": 7.68,
-      "avg_net_per_trade": 0.55
-    },
     "TSLA": {
       "trades": 13,
       "gross_pnl": 16.47,
@@ -260,11 +260,11 @@
       "avg_net_per_trade": 0.96
     },
     "T": {
-      "trades": 7,
-      "gross_pnl": 33.87,
-      "cost": 9.3,
-      "net_pnl": 24.57,
-      "avg_net_per_trade": 3.51
+      "trades": 8,
+      "gross_pnl": 31.79,
+      "cost": 10.69,
+      "net_pnl": 21.1,
+      "avg_net_per_trade": 2.64
     },
     "QQQ": {
       "trades": 5,
