@@ -1,24 +1,24 @@
 {
-  "generated_at": "2026-11-03T18:31:19.962060+00:00",
+  "generated_at": "2026-11-03T19:31:52.299971+00:00",
   "cost_model": "measured median spread per symbol x1.0 (flat 2.0c fallback)",
   "symbols_without_spread_data": [
     "WBD"
   ],
-  "total_trades": 260,
+  "total_trades": 261,
   "win_count": 93,
-  "loss_count": 167,
-  "win_rate_pct": 35.8,
-  "avg_net_pnl_per_trade": -2.26,
+  "loss_count": 168,
+  "win_rate_pct": 35.6,
+  "avg_net_pnl_per_trade": -2.28,
   "avg_win": 6.63,
-  "avg_loss": -7.22,
-  "total_gross_pnl": -113.4,
-  "total_cost": 475.21,
-  "total_net_pnl": -588.61,
-  "total_net_pnl_flat_cost_model": -850.38,
-  "max_drawdown": -605.96,
+  "avg_loss": -7.21,
+  "total_gross_pnl": -118.55,
+  "total_cost": 476.08,
+  "total_net_pnl": -594.63,
+  "total_net_pnl_flat_cost_model": -855.59,
+  "max_drawdown": -611.97,
   "exit_reason_counts": {
     "target": 60,
-    "stop": 138,
+    "stop": 139,
     "time_stop": 53
   },
   "by_spread_tier": {
@@ -30,11 +30,11 @@
       "avg_net_per_trade": -0.95
     },
     "wide_gt_0.03pct": {
-      "trades": 129,
-      "gross_pnl": -61.67,
-      "cost": 406.89,
-      "net_pnl": -468.56,
-      "avg_net_per_trade": -3.63
+      "trades": 130,
+      "gross_pnl": -66.82,
+      "cost": 407.76,
+      "net_pnl": -474.58,
+      "avg_net_per_trade": -3.65
     },
     "no_spread_data": {
       "trades": 1,
@@ -48,11 +48,11 @@
     "enabled": true,
     "max_spread_pct": 0.0525,
     "passing": {
-      "trades": 189,
-      "gross_pnl": -41.02,
-      "cost": 136.52,
-      "net_pnl": -177.54,
-      "avg_net_per_trade": -0.94
+      "trades": 190,
+      "gross_pnl": -46.17,
+      "cost": 137.38,
+      "net_pnl": -183.55,
+      "avg_net_per_trade": -0.97
     },
     "blocked": {
       "trades": 71,
@@ -70,6 +70,13 @@
       "net_pnl": -285.04,
       "avg_net_per_trade": -13.57
     },
+    "MU": {
+      "trades": 12,
+      "gross_pnl": -37.25,
+      "cost": 10.67,
+      "net_pnl": -47.92,
+      "avg_net_per_trade": -3.99
+    },
     "SNAP": {
       "trades": 13,
       "gross_pnl": 20.98,
@@ -83,13 +90,6 @@
       "cost": 4.07,
       "net_pnl": -42.09,
       "avg_net_per_trade": -6.01
-    },
-    "MU": {
-      "trades": 11,
-      "gross_pnl": -32.1,
-      "cost": 9.81,
-      "net_pnl": -41.91,
-      "avg_net_per_trade": -3.81
     },
     "SOFI": {
       "trades": 7,
