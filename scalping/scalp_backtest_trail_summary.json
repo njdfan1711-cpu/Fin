@@ -1,33 +1,33 @@
 {
-  "generated_at": "2026-11-05T15:31:08.259671+00:00",
+  "generated_at": "2026-11-05T16:31:04.760633+00:00",
   "cost_model": "measured median spread per symbol x1.0 (flat 2.0c fallback)",
   "symbols_without_spread_data": [
     "WBD"
   ],
-  "total_trades": 269,
-  "win_count": 102,
+  "total_trades": 270,
+  "win_count": 103,
   "loss_count": 167,
-  "win_rate_pct": 37.9,
-  "avg_net_pnl_per_trade": -2.89,
-  "avg_win": 2.98,
+  "win_rate_pct": 38.1,
+  "avg_net_pnl_per_trade": -2.88,
+  "avg_win": 2.96,
   "avg_loss": -6.48,
-  "total_gross_pnl": -326.7,
-  "total_cost": 451.83,
-  "total_net_pnl": -778.53,
-  "total_net_pnl_flat_cost_model": -1002.6,
+  "total_gross_pnl": -325.47,
+  "total_cost": 451.91,
+  "total_net_pnl": -777.38,
+  "total_net_pnl_flat_cost_model": -1001.45,
   "max_drawdown": -808.75,
   "exit_reason_counts": {
     "stop": 124,
-    "trail_stop": 104,
+    "trail_stop": 105,
     "time_stop": 32
   },
   "by_spread_tier": {
     "tight_le_0.03pct": {
-      "trades": 139,
-      "gross_pnl": -113.74,
-      "cost": 70.77,
-      "net_pnl": -184.51,
-      "avg_net_per_trade": -1.33
+      "trades": 140,
+      "gross_pnl": -112.51,
+      "cost": 70.85,
+      "net_pnl": -183.36,
+      "avg_net_per_trade": -1.31
     },
     "wide_gt_0.03pct": {
       "trades": 129,
@@ -48,11 +48,11 @@
     "enabled": true,
     "max_spread_pct": 0.0525,
     "passing": {
-      "trades": 203,
-      "gross_pnl": -194.2,
-      "cost": 146.81,
-      "net_pnl": -341.01,
-      "avg_net_per_trade": -1.68
+      "trades": 204,
+      "gross_pnl": -192.97,
+      "cost": 146.88,
+      "net_pnl": -339.85,
+      "avg_net_per_trade": -1.67
     },
     "blocked": {
       "trades": 66,
@@ -267,11 +267,11 @@
       "avg_net_per_trade": 1.31
     },
     "QQQ": {
-      "trades": 6,
-      "gross_pnl": 27.46,
-      "cost": 0.45,
-      "net_pnl": 27.01,
-      "avg_net_per_trade": 4.5
+      "trades": 7,
+      "gross_pnl": 28.69,
+      "cost": 0.52,
+      "net_pnl": 28.17,
+      "avg_net_per_trade": 4.02
     }
   }
 }

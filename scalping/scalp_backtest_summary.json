@@ -1,33 +1,33 @@
 {
-  "generated_at": "2026-11-05T15:31:08.251299+00:00",
+  "generated_at": "2026-11-05T16:31:04.754135+00:00",
   "cost_model": "measured median spread per symbol x1.0 (flat 2.0c fallback)",
   "symbols_without_spread_data": [
     "WBD"
   ],
-  "total_trades": 277,
-  "win_count": 104,
+  "total_trades": 278,
+  "win_count": 105,
   "loss_count": 173,
-  "win_rate_pct": 37.5,
-  "avg_net_pnl_per_trade": -1.97,
-  "avg_win": 6.61,
+  "win_rate_pct": 37.8,
+  "avg_net_pnl_per_trade": -1.93,
+  "avg_win": 6.64,
   "avg_loss": -7.12,
-  "total_gross_pnl": -57.29,
-  "total_cost": 487.43,
-  "total_net_pnl": -544.72,
-  "total_net_pnl_flat_cost_model": -801.13,
+  "total_gross_pnl": -48.06,
+  "total_cost": 487.5,
+  "total_net_pnl": -535.56,
+  "total_net_pnl_flat_cost_model": -791.98,
   "max_drawdown": -611.97,
   "exit_reason_counts": {
-    "target": 66,
+    "target": 67,
     "stop": 141,
     "time_stop": 57
   },
   "by_spread_tier": {
     "tight_le_0.03pct": {
-      "trades": 142,
-      "gross_pnl": 6.67,
-      "cost": 72.63,
-      "net_pnl": -65.96,
-      "avg_net_per_trade": -0.46
+      "trades": 143,
+      "gross_pnl": 15.9,
+      "cost": 72.7,
+      "net_pnl": -56.8,
+      "avg_net_per_trade": -0.4
     },
     "wide_gt_0.03pct": {
       "trades": 134,
@@ -48,11 +48,11 @@
     "enabled": true,
     "max_spread_pct": 0.0525,
     "passing": {
-      "trades": 206,
-      "gross_pnl": 15.09,
-      "cost": 148.74,
-      "net_pnl": -133.65,
-      "avg_net_per_trade": -0.65
+      "trades": 207,
+      "gross_pnl": 24.32,
+      "cost": 148.81,
+      "net_pnl": -124.49,
+      "avg_net_per_trade": -0.6
     },
     "blocked": {
       "trades": 71,
@@ -267,11 +267,11 @@
       "avg_net_per_trade": 2.64
     },
     "QQQ": {
-      "trades": 6,
-      "gross_pnl": 41.12,
-      "cost": 0.45,
-      "net_pnl": 40.67,
-      "avg_net_per_trade": 6.78
+      "trades": 7,
+      "gross_pnl": 50.35,
+      "cost": 0.52,
+      "net_pnl": 49.83,
+      "avg_net_per_trade": 7.12
     }
   }
 }
