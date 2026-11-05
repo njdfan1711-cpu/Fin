@@ -328,6 +328,10 @@ def main():
             "tier": entry.get("tier"),
             "category_count": entry.get("category_count"),
             "strength": entry.get("strength"),
+            # Shadow-scoring fields (None on older records): see compose_alerts.py
+            "adj_strength": entry.get("adj_strength"),
+            "ext_flags": entry.get("ext_flags"),
+            "old_tier": entry.get("old_tier"),
             "pushed_day": day_key,
             "price_at_push": price_at_push,
             "atr_at_push": entry.get("atr_at_push"),

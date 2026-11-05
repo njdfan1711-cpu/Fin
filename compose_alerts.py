@@ -36,11 +36,13 @@ day remain active per their validity window and get pulled in here too.
 """
 
 import json
+import math
 import os
 import re
 import sys
+import time
 import urllib.request
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from zoneinfo import ZoneInfo
 import hashlib
 
@@ -83,6 +85,17 @@ from config import (
     TAKE_PROFIT_ATR_MULT,
     CHASE_DAY_ATR_MULT,
     CHASE_5D_ATR_MULT,
+    RECENT_IPO_DAYS,
+    IPO_LOCKUP_DAYS,
+    PRICED_TOP_N,
+    EXTENSION_PENALTY,
+    STALE_ALERT_DAY,
+    EXTENSION_RUNUP_PCT,
+    STRONG_TOP_PCT,
+    MODERATE_TOP_PCT,
+    PRICED_BATCH_SIZE,
+    PRICED_EXTRA_TIME_BUDGET_SECONDS,
+    ALERTS_PAGE_URL,
     NTFY_MESSAGE_BYTE_LIMIT,
     NTFY_SAFE_BODY_BYTE_BUDGET,
 )
@@ -117,6 +130,11 @@ CAUTION_CATEGORY = "caution"
 # treatment as CAUTION_CATEGORY: excluded from scoring, shown as a warning.
 EARNINGS_QUALITY_CATEGORY = "earnings_quality"
 
+# "earnings_reaction" -- also owned by fundamentals_scan.py: the company
+# reported earnings within EARNINGS_REACTION_DAYS (timing caution, distinct
+# from the margin-quality caution above). Excluded from scoring.
+EARNINGS_REACTION_CATEGORY = "earnings_reaction"
+
 # "news_caution" -- owned by news_scan.py, same collision-avoidance reason
 # as above (a symbol could have a technical caution AND a bearish-news
 # caution in the same cycle; sharing one category slot would let whichever
@@ -132,6 +150,7 @@ NEWS_CAUTION_CATEGORY = "news_caution"
 CAUTION_STYLE_CATEGORIES = [
     (CAUTION_CATEGORY, "Caution"),
     (EARNINGS_QUALITY_CATEGORY, "Earnings quality"),
+    (EARNINGS_REACTION_CATEGORY, "Earnings reaction"),
     (NEWS_CAUTION_CATEGORY, "News caution"),
 ]
 CAUTION_STYLE_CATEGORY_KEYS = {cat for cat, _ in CAUTION_STYLE_CATEGORIES}
@@ -196,6 +215,67 @@ def conviction_tier(category_count: int, total_strength: float) -> str:
     if category_count == 2 and total_strength >= STRONG_TIER_STRENGTH_FOR_TWO:
         return "STRONG"
     return "MODERATE"
+
+
+# ---------------------------------------------------------------------------
+# Extension flags, extension-adjusted ranking, relative tiers (2026-11).
+# Rationale and evidence: config.py (EXTENSION_PENALTY block) and CHANGELOG.
+# ---------------------------------------------------------------------------
+_EXT_MA_RE = re.compile(r"Extended \d+% above 50-day MA")
+
+
+def cheap_extension_flags(cats: dict, hist: dict | None) -> list:
+    """Flags knowable for EVERY ticker without a price fetch (used for ranking)."""
+    flags = []
+    caut = (cats.get(CAUTION_CATEGORY) or {}).get("detail", "")
+    tech = (cats.get("technical") or {}).get("detail", "")
+    if _EXT_MA_RE.search(caut):
+        flags.append("extended above 50-day MA")
+    if "RSI overbought" in caut or "RSI overbought" in tech:   # tech: pre-change records
+        flags.append("RSI overbought")
+    if EARNINGS_REACTION_CATEGORY in cats:
+        flags.append("just reported earnings")
+    day, _ = streak_day_and_move(hist, None)
+    if day >= STALE_ALERT_DAY:
+        flags.append(f"stale alert (Day {day})")
+    return flags
+
+
+def late_extension_flags(chase_info: dict | None, move_pct: float | None) -> list:
+    """Flags that need a live price (tier and Extended filter only, never ranking)."""
+    flags = []
+    if format_chase_caution(chase_info):
+        flags.append("chase risk (big move today)")
+    if move_pct is not None and move_pct >= EXTENSION_RUNUP_PCT:
+        flags.append(f"already +{move_pct:.1f}% since first alert")
+    return flags
+
+
+def adjusted_strength(raw: float, n_flags: int) -> float:
+    return raw - EXTENSION_PENALTY * n_flags
+
+
+def assign_tiers(ordered_syms: list, ratings: dict, priced: set) -> None:
+    """Sets ratings[sym]["tier"] in place. ordered_syms is the final rank order.
+    Clean (flag-free) names are tiered relatively: top STRONG_TOP_PCT = STRONG (only
+    with the absolute floor and a live price check), up to MODERATE_TOP_PCT =
+    MODERATE, the rest WATCH. Any flagged name is EXTENDED."""
+    clean = [s for s in ordered_syms if not ratings[s]["flags"]]
+    n = len(clean)
+    n_strong = math.ceil(n * STRONG_TOP_PCT)
+    n_top = math.ceil(n * MODERATE_TOP_PCT)
+    for i, s in enumerate(clean):
+        r = ratings[s]
+        strong_ok = (i < n_strong and s in priced
+                     and conviction_tier(r["count"], r["raw"]) == "STRONG")
+        r["tier"] = "STRONG" if strong_ok else "MODERATE" if i < n_top else "WATCH"
+    for s in ordered_syms:
+        if ratings[s]["flags"]:
+            ratings[s]["tier"] = "EXTENDED"
+
+
+_TIER_TAGS = {"STRONG": "\U0001F525 STRONG", "MODERATE": "\u2713 Moderate",
+              "WATCH": "\u2022 Watch", "EXTENDED": "\u26A0\uFE0F Extended"}
 
 
 def fetch_price_target(symbol: str):
@@ -288,7 +368,7 @@ def _parse_price_atr(df: pd.DataFrame):
 MAX_PRICE_RETRIES = 15
 
 
-def fetch_prices_and_atr(symbols: list[str]) -> dict:
+def fetch_prices_and_atr(symbols: list[str], max_retries: int = MAX_PRICE_RETRIES) -> dict:
     """Live-ish price + ATR(14) for just the shortlist -- cheap since it's
     a small batch. Replaces the old fetch_current_prices: everything that
     used to just need a price now also needs ATR for the trade plan, and
@@ -338,7 +418,7 @@ def fetch_prices_and_atr(symbols: list[str]) -> dict:
     if missing:
         print(f"[price/ATR] {len(missing)} symbol(s) missing after batch: "
               + ", ".join(f"{s} ({r})" for s, r in missing.items()), file=sys.stderr)
-        for sym in list(missing)[:MAX_PRICE_RETRIES]:
+        for sym in list(missing)[:max_retries]:
             try:
                 one = yf.download(
                     tickers=sym,
@@ -359,8 +439,8 @@ def fetch_prices_and_atr(symbols: list[str]) -> dict:
                 why = reason or missing[sym]
                 print(f"[price/ATR] {sym}: STILL MISSING after retry -- {why}. "
                       f"No trade plan or chase caution will be shown for it.", file=sys.stderr)
-        for sym in list(missing)[MAX_PRICE_RETRIES:]:
-            print(f"[price/ATR] {sym}: not retried (retry cap {MAX_PRICE_RETRIES})", file=sys.stderr)
+        for sym in list(missing)[max_retries:]:
+            print(f"[price/ATR] {sym}: not retried (retry cap {max_retries})", file=sys.stderr)
     return results
 
 
@@ -397,6 +477,88 @@ def compute_trade_plan(price: float | None, atr: float | None, stop_atr_mult: fl
         "shares": shares,
         "risk_usd": risk_usd,
     }
+
+
+def fetch_first_trade_dates(symbols: list[str]) -> dict:
+    """First trade date per symbol (date objects), from the first bar of a
+    full-history weekly download. Shortlist only (same symbols as the price
+    fetch), no API key, no state file. Weekly bars put the date within ~7
+    days of the real first trade, plenty for a 12-month threshold. Any
+    symbol that fails is simply absent -- the IPO flag then stays silent
+    for it (a missing flag is never an error)."""
+    if not symbols:
+        return {}
+    try:
+        data = yf.download(
+            tickers=" ".join(symbols),
+            period="max",
+            interval="1wk",
+            group_by="ticker",
+            threads=True,
+            progress=False,
+            timeout=PRICE_FETCH_TIMEOUT_SECONDS,
+        )
+    except Exception as e:
+        print(f"[first-trade-date fetch error] {e}", file=sys.stderr)
+        return {}
+    out = {}
+    for sym in symbols:
+        try:
+            df = data if len(symbols) == 1 else data[sym]
+            df = _flatten_columns(df)
+            closes = df["Close"].dropna()
+            if closes.empty:
+                continue
+            out[sym] = closes.index[0].date()
+        except Exception:
+            continue
+    return out
+
+
+def format_recent_ipo_caution(first_trade: date | None, today: date | None = None) -> str | None:
+    """Display-only flag for names public less than RECENT_IPO_DAYS.
+    Returns None when the date is unknown or the name is seasoned."""
+    if first_trade is None:
+        return None
+    today = today or datetime.now(timezone.utc).astimezone(ET).date()
+    age_days = (today - first_trade).days
+    if age_days < 0 or age_days >= RECENT_IPO_DAYS:
+        return None
+    months = age_days / 30.4
+    age = f"~{months:.0f} mo" if months >= 1 else f"{age_days}d"
+    note = ("short trading history, valuation still being discovered" if age_days >= IPO_LOCKUP_DAYS
+            else "inside the typical ~180-day lock-up window; insider/early-holder selling can start")
+    return (f"  \u2022 \u26A0\uFE0F **Recent IPO:** public {age} (first trade "
+            f"{first_trade.isoformat()}) -- {note}.")
+
+
+def fetch_extra_tier(extra_symbols: list, price_atr: dict, first_trade_dates: dict,
+                     batch_size: int = None, budget_s: float = None) -> int:
+    """Best-effort second pass for ranks past the push cap (latest_alerts.md only).
+    Mutates price_atr / first_trade_dates in place; returns how many symbols were
+    attempted. Small batches, no individual retries, hard time budget, and every
+    batch is isolated: a failure just leaves those names without a plan/flag."""
+    batch_size = batch_size or PRICED_BATCH_SIZE
+    budget_s = PRICED_EXTRA_TIME_BUDGET_SECONDS if budget_s is None else budget_s
+    if not extra_symbols:
+        return 0
+    t0 = time.perf_counter()
+    done = 0
+    for i in range(0, len(extra_symbols), batch_size):
+        if time.perf_counter() - t0 > budget_s:
+            print(f"[timing] extra-tier time budget ({budget_s}s) spent; "
+                  f"{len(extra_symbols) - done} ticker(s) left without a trade plan.", file=sys.stderr)
+            break
+        chunk = extra_symbols[i:i + batch_size]
+        try:
+            price_atr.update(fetch_prices_and_atr(chunk, max_retries=0))
+            first_trade_dates.update(fetch_first_trade_dates(chunk))
+        except Exception as e:
+            print(f"[extra tier] batch {i // batch_size + 1} failed: {e}", file=sys.stderr)
+        done += len(chunk)
+    print(f"[timing] extra tier ({len(extra_symbols)} ticker(s)): {time.perf_counter() - t0:.1f}s, "
+          f"{sum(1 for s in extra_symbols if s in price_atr)} priced.", file=sys.stderr)
+    return done
 
 
 def compute_chase_info(price: float | None, atr: float | None,
@@ -441,7 +603,8 @@ def build_push_features(cats: dict, tier: str, category_count: int,
                         price: float | None, atr: float | None,
                         chase_info: dict | None,
                         history: dict | None = None,
-                        asof: datetime | None = None) -> list:
+                        asof: datetime | None = None,
+                        recent_ipo_flagged: bool = False) -> list:
     """Normalized feature tags for one push (see features.py) -- stored with
     the push so outcome_history can be scored per feature later, since
     daily_pushes.json is pruned long before outcomes are evaluated."""
@@ -458,7 +621,8 @@ def build_push_features(cats: dict, tier: str, category_count: int,
     return extract_features(signals, cautions, tier=tier, category_count=category_count,
                             atr_pct=atr_pct,
                             chase_flagged=bool(chase_info and chase_info.get("flagged")),
-                            asof=asof, prior_push_days=prior_days, runup_pct=runup_pct)
+                            asof=asof, prior_push_days=prior_days, runup_pct=runup_pct,
+                            recent_ipo_flagged=recent_ipo_flagged)
 
 
 def format_low_atr_caution(price: float | None, atr: float | None) -> str | None:
@@ -617,7 +781,8 @@ def is_new_ticker(hist: dict | None) -> bool:
 def format_ticker_line(rank: int, symbol: str, name: str, categories: dict,
                         price, target, atr=None, sector_note: str | None = None,
                         is_new: bool = False, chase_info: dict | None = None,
-                        streak_tag: str = "") -> str:
+                        streak_tag: str = "", ipo_caution: str | None = None,
+                        tier: str | None = None) -> str:
     """
     Markdown-formatted: bold ticker/price header line, reasons as a clean
     indented bullet list underneath instead of one long comma/pipe string.
@@ -634,8 +799,8 @@ def format_ticker_line(rank: int, symbol: str, name: str, categories: dict,
     new_tag = "\U0001F195 " if is_new else ""  # 🆕
 
     count, strength = score_ticker(categories)
-    tier = conviction_tier(count, strength)
-    tier_tag = "\U0001F525 STRONG" if tier == "STRONG" else "\u2713 Moderate"  # 🔥 / ✓
+    tier = tier or conviction_tier(count, strength)
+    tier_tag = _TIER_TAGS.get(tier, tier)  # 🔥 / ✓ / • / ⚠️
 
     header = f"{new_tag}**#{rank} {symbol}** [{tier_tag}] _{display_name}_{price_bit}"
     if streak_tag:
@@ -661,6 +826,8 @@ def format_ticker_line(rank: int, symbol: str, name: str, categories: dict,
     chase_caution = format_chase_caution(chase_info)
     if chase_caution:
         bullets.append(chase_caution)
+    if ipo_caution:
+        bullets.append(ipo_caution)
 
     return header + "\n" + "\n".join(bullets)
 
@@ -829,11 +996,18 @@ def main():
     # Rank by confidence, category count first then combined strength;
     # tiebreak_key is the last-resort tertiary key for any exact ties
     # left after combine_strengths' geometric-decay sum.
-    ranked = sorted(
-        qualifying.items(),
-        key=lambda kv: (*score_ticker(kv[1]), tiebreak_key(kv[0])),
-        reverse=True,
-    )
+    # Streak history for every qualifying ticker (read-only; must run BEFORE this
+    # cycle's record_push so the current push isn't counted as a prior day). Needed
+    # now, not just for display: the stale-alert flag feeds the ranking.
+    streak_hist = symbol_history(list(qualifying))
+    cheap_flags = {sym: cheap_extension_flags(cats, streak_hist.get(sym))
+                   for sym, cats in qualifying.items()}
+
+    def _rank_key(kv):
+        count, raw = score_ticker(kv[1])
+        return (count, adjusted_strength(raw, len(cheap_flags[kv[0]])), tiebreak_key(kv[0]))
+
+    ranked = sorted(qualifying.items(), key=_rank_key, reverse=True)
     # Attach each ticker's overall rank now, so the push and the full
     # written list use the same index even after recently-alerted tickers
     # get filtered out of the push.
@@ -858,9 +1032,23 @@ def main():
     # TOP_N_ALERTS simply won't have a trade-plan bullet, same as today's
     # ntfy push.
     symbols_to_price = [sym for _, sym, _ in push_list]
+    t_core = time.perf_counter()
     price_atr = fetch_prices_and_atr(symbols_to_price)
+    # Recent-IPO flag (display-only): first trade date for the same shortlist.
+    first_trade_dates = fetch_first_trade_dates(symbols_to_price)
+    print(f"[timing] core price/ATR + first-trade-date fetch for {len(symbols_to_price)} "
+          f"ticker(s): {time.perf_counter() - t_core:.1f}s", file=sys.stderr)
+
+    # Best-effort second pass for the rest of the PRICED_TOP_N tier (latest_alerts.md
+    # only -- never part of the push). Small batches, no individual retries, time
+    # budget. Anything that fails simply has no trade plan / flag; the core fetch
+    # above is already done and untouched.
+    extra_symbols = [sym for _, sym, _ in ranked_with_rank[TOP_N_ALERTS:PRICED_TOP_N]]
+    fetch_extra_tier(extra_symbols, price_atr, first_trade_dates)
     prices = {sym: v["price"] for sym, v in price_atr.items()}
     atrs = {sym: v["atr"] for sym, v in price_atr.items()}
+    ipo_cautions = {sym: format_recent_ipo_caution(first_trade_dates.get(sym))
+                    for sym in symbols_to_price + extra_symbols}
 
     # Write the FULL ranked list to the repo regardless of push cap.
     # Built as a single in-memory string first so the exact same content
@@ -871,23 +1059,53 @@ def main():
     # qualifying list fluctuates intraday as tickers add/drop -- a
     # daily-only file would silently lose whichever tickers didn't
     # survive to the last run of the day.
-    # Streak history for every ranked ticker (read-only; must run BEFORE this
-    # cycle's record_push so the current push isn't counted as a prior day).
-    streak_hist = symbol_history([sym for _, sym, _ in ranked_with_rank])
+    # (streak_hist was computed before ranking -- see above.)
+
+    # Per-ticker rating: raw strength, extension flags (cheap + price-based), the
+    # extension-adjusted strength and the relative tier. Computed once, after pricing,
+    # so the .md, the push and the logged records all agree.
+    ratings = {}
+    for rank, sym, cats in ranked_with_rank:
+        count, raw = score_ticker(cats)
+        pa = price_atr.get(sym, {})
+        ci = compute_chase_info(prices.get(sym), atrs.get(sym), pa.get("prev_close"), pa.get("close_5d"))
+        _, move = streak_day_and_move(streak_hist.get(sym), prices.get(sym))
+        flags = cheap_flags[sym] + late_extension_flags(ci, move)
+        ratings[sym] = {"count": count, "raw": raw, "flags": flags,
+                        "adj": adjusted_strength(raw, len(flags)), "tier": "WATCH",
+                        "old_tier": conviction_tier(count, raw)}
+    # Final order uses ALL flags (the price-based ones too, where a price exists), so
+    # the written rank, the displayed strength and the push list always agree. The
+    # first sort (cheap flags only) decided whom to price; only that priced block is
+    # re-sorted, so a name that was never price-checked can never leapfrog one that was
+    # (and got dinged for chase risk) -- the block boundary is never crossed.
+    block = max(PRICED_TOP_N, TOP_N_ALERTS)
+    order = sorted(ranked_with_rank[:block],
+                   key=lambda t: (ratings[t[1]]["count"], ratings[t[1]]["adj"], tiebreak_key(t[1])),
+                   reverse=True) + ranked_with_rank[block:]
+    ranked = [(sym, cats) for _, sym, cats in order]
+    ranked_with_rank = [(i, sym, cats) for i, (_, sym, cats) in enumerate(order, start=1)]
+    push_list = ranked_with_rank[:TOP_N_ALERTS]
+    assign_tiers([sym for _, sym, _ in ranked_with_rank], ratings,
+                 {s for s, v in price_atr.items() if v.get("price")})
 
     import io
     run_stamp = datetime.now(timezone.utc).astimezone(ET).strftime("%Y-%m-%d_%H%M")
     buf = io.StringIO()
     f = buf
     f.write(f"# Latest Alerts ({len(ranked)} qualifying tickers)\n")
-    f.write(f"_Run: {run_stamp} ET_\n\n")
+    f.write(f"_Run: {run_stamp} ET_\n")
+    f.write("_Scoring: extension-adjusted ranking, relative tiers_\n\n")
     for rank, sym, cats in ranked_with_rank:
         count, strength = score_ticker(cats)
+        rt = ratings[sym]
         name = clean_company_name(company_names.get(sym, ""))
         label = f"{name} ({sym})" if name else sym
         streak_tag = format_streak_tag(streak_hist.get(sym), prices.get(sym))
-        f.write(f"## {rank}. {label} -- [{conviction_tier(count, strength)}] "
-                f"{count} signals, strength {strength:.2f}"
+        raw_note = (f" (raw {rt['raw']:.2f}, {len(rt['flags'])} extension flag"
+                    f"{'s' if len(rt['flags']) != 1 else ''})") if rt["flags"] else ""
+        f.write(f"## {rank}. {label} -- [{rt['tier']}] "
+                f"{count} signals, strength {rt['adj']:.2f}{raw_note}"
                 f"{' \u00B7 ' + streak_tag if streak_tag else ''}\n")
         for cat, info in cats.items():
             if cat in CAUTION_STYLE_CATEGORY_KEYS:
@@ -918,6 +1136,11 @@ def main():
                 compute_chase_info(prices.get(sym), atrs.get(sym), pa.get("prev_close"), pa.get("close_5d")))
             if chase_line:
                 f.write("- \u26A0\uFE0F **CAUTION**: " + chase_line.split("**Chase risk:** ", 1)[1] + "\n")
+        ipo_line = ipo_cautions.get(sym)
+        if ipo_line:
+            f.write("- \u26A0\uFE0F **RECENT IPO**: " + ipo_line.split("**Recent IPO:** ", 1)[1] + "\n")
+        if ratings[sym]["flags"]:
+            f.write("- **Extension flags**: " + "; ".join(ratings[sym]["flags"]) + "\n")
         f.write("\n")
 
     if momentum_ranked:
@@ -947,6 +1170,13 @@ def main():
     alert_content = buf.getvalue()
     with open(LATEST_ALERTS_FILE, "w") as out:
         out.write(alert_content)
+    # Styled page rendered from the same text. Display-only extra: any failure
+    # here must never affect the alert, the push, or the .md file above.
+    try:
+        from render_alerts_html import write_html
+        write_html(alert_content, "latest_alerts.html")
+    except Exception as e:
+        print(f"[latest_alerts.html] render failed (non-fatal): {e}", file=sys.stderr)
     os.makedirs(ALERTS_HISTORY_DIR, exist_ok=True)
     history_path = os.path.join(ALERTS_HISTORY_DIR, f"latest_alerts_{run_stamp}.md")
     with open(history_path, "w") as out:
@@ -958,7 +1188,8 @@ def main():
     # but doesn't reliably work from an expanded/copyable message view --
     # a proper [text](url) markdown link is more consistent across
     # clients since Markdown: yes is already set on this push).
-    click_url = f"{REPO_URL}/blob/main/{LATEST_ALERTS_FILE}" if REPO_URL else None
+    click_url = (ALERTS_PAGE_URL or
+                 (f"{REPO_URL}/blob/main/{LATEST_ALERTS_FILE}" if REPO_URL else None))
 
     lines = []
     for rank, sym, cats in push_list:
@@ -975,7 +1206,9 @@ def main():
         chase_info = compute_chase_info(price, atr, pa.get("prev_close"), pa.get("close_5d"))
         lines.append(format_ticker_line(rank, sym, name, cats, price, target, atr, sector_note, is_new,
                                         chase_info=chase_info,
-                                        streak_tag=format_streak_tag(streak_hist.get(sym), price)))
+                                        streak_tag=format_streak_tag(streak_hist.get(sym), price),
+                                        ipo_caution=ipo_cautions.get(sym),
+                                        tier=ratings[sym]["tier"]))
 
     # Footer pieces are built FIRST, in their final form, so their exact
     # byte cost is known BEFORE deciding how many ticker lines fit --
@@ -1016,7 +1249,7 @@ def main():
     new_count = sum(1 for rank, sym, cats in push_list
                     if is_new_ticker(streak_hist.get(sym)))
     strong_count = sum(1 for rank, sym, cats in push_list
-                        if conviction_tier(*score_ticker(cats)) == "STRONG")
+                        if ratings[sym]["tier"] == "STRONG")
     # NOTE: no emoji in the title -- it becomes an HTTP header, and Python's
     # urllib encodes headers as Latin-1, which crashes on characters like 🔥.
     # Emoji are fine in the message BODY (sent as UTF-8), just not headers.
@@ -1044,9 +1277,14 @@ def main():
         record_push([
             {
                 "symbol": sym,
-                "tier": conviction_tier(*score_ticker(cats)),
+                "tier": ratings[sym]["tier"],
                 "category_count": score_ticker(cats)[0],
-                "strength": score_ticker(cats)[1],
+                "strength": score_ticker(cats)[1],          # RAW strength (continuity with history)
+                # Shadow scoring, so raw vs adjusted ranking and old vs new tier can be
+                # compared later (scorecard.py "Shadow score check"):
+                "adj_strength": round(ratings[sym]["adj"], 4),
+                "ext_flags": ratings[sym]["flags"],
+                "old_tier": ratings[sym]["old_tier"],
                 "categories": {
                     cat: info["detail"] for cat, info in cats.items()
                     if cat not in CAUTION_STYLE_CATEGORY_KEYS
@@ -1063,12 +1301,13 @@ def main():
                                             price_atr.get(sym, {}).get("prev_close"),
                                             price_atr.get(sym, {}).get("close_5d")),
                 "features": build_push_features(
-                    cats, conviction_tier(*score_ticker(cats)), score_ticker(cats)[0],
+                    cats, ratings[sym]["tier"], score_ticker(cats)[0],
                     prices.get(sym), atrs.get(sym),
                     compute_chase_info(prices.get(sym), atrs.get(sym),
                                        price_atr.get(sym, {}).get("prev_close"),
                                        price_atr.get(sym, {}).get("close_5d")),
-                    history=push_hist.get(sym), asof=push_asof),
+                    history=push_hist.get(sym), asof=push_asof,
+                    recent_ipo_flagged=bool(ipo_cautions.get(sym))),
             }
             for _, sym, cats in push_list
         ])

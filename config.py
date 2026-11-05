@@ -37,6 +37,15 @@ EARNINGS_PROXIMITY_DAYS = 5        # flag a caution if the NEXT scheduled report
                                     # this many days -- an ATR-based stop offers zero
                                     # protection against an overnight earnings gap, and a
                                     # multi-day swing hold can easily run right into one
+EARNINGS_REACTION_DAYS = 3         # flag a caution when the company reported earnings within
+                                    # this many calendar days (0 = reported today). A pick that
+                                    # qualifies INSIDE the reaction window is often the earnings
+                                    # gap-up itself, and post-earnings pops frequently fade over
+                                    # the next sessions (2026-11 LIFE: +12% after hours, new
+                                    # all-time high next day, then back below the pre-earnings
+                                    # close within 48h). Flag only -- never excludes or re-ranks.
+                                    # Must be <= EARNINGS_RECENCY_DAYS (that sets how far back
+                                    # the earnings calendar is pulled).
 REVENUE_GROWTH_YOY_PCT = 10.0     # YoY revenue growth at or above this
 EPS_GROWTH_YOY_PCT = 10.0         # YoY EPS growth at or above this
 
@@ -111,6 +120,9 @@ SIGNAL_VALIDITY_HOURS = {
     "news_caution": 8,     # same cadence as "news" -- same underlying data source
     "news_neutral": 8,
     "fundamentals": EARNINGS_RECENCY_DAYS * 24,
+    "earnings_reaction": EARNINGS_RECENCY_DAYS * 24,  # just-reported caution; cleared
+                                                       # daily by fundamentals_scan once
+                                                       # outside EARNINGS_REACTION_DAYS
     "earnings_quality": EARNINGS_RECENCY_DAYS * 24,  # same cadence as
                                                       # fundamentals -- tied
                                                       # to the same quarterly
@@ -131,6 +143,35 @@ MIN_QUALIFYING_STRENGTH = 1.0   # ALSO require combined strength across those
                                  # a bare-minimum revenue growth reading) would
                                  # qualify exactly as easily as two strong ones
 TOP_N_ALERTS = 20           # cap on a single push, ranked by confidence
+# How far down the ranking latest_alerts.md gets live price/ATR, a trade plan, the
+# chase caution and the recent-IPO flag. The top TOP_N_ALERTS are always fetched
+# first, exactly as before; ranks TOP_N_ALERTS+1..PRICED_TOP_N are a best-effort
+# second pass in small batches (a failed batch just leaves those entries without a
+# plan -- it can never affect the top picks) and stops once the time budget below
+# is spent. Set equal to TOP_N_ALERTS to turn the extra pass off.
+PRICED_TOP_N = 60
+
+# --- Extension-aware ranking and relative tiers (2026-11) -------------------------
+# Backed by scorecard.py findings, NOT yet validated going forward: picks carrying
+# "extension" flags did clearly worse than clean ones, and raw strength did not
+# predict results. Both raw and adjusted scores are logged (see compose_alerts.py
+# record_push / scorecard.py "Shadow score check") so this can be checked and undone.
+# Extension flags: extended above 50-day MA, RSI overbought, just reported earnings,
+# stale alert (Day >= STALE_ALERT_DAY) -- known for every ticker, so they affect the
+# RANKING -- plus chase risk and "already up EXTENSION_RUNUP_PCT since first alert",
+# which need a live price, so they affect only the TIER and the Extended filter.
+EXTENSION_PENALTY = 0.5        # strength subtracted per flag when ranking (0 = off)
+STALE_ALERT_DAY = 5            # "Day N" streak at/after which an alert counts as stale
+EXTENSION_RUNUP_PCT = 5.0      # already up this much since the first alert = extended
+# Tiers are relative, computed each run among CLEAN (flag-free) tickers only:
+# Strong = top STRONG_TOP_PCT, Moderate = on to MODERATE_TOP_PCT (cumulative), rest
+# Watch. Any flagged ticker is "Extended" whatever its score. Strong also needs the old
+# absolute floor (conviction_tier) AND a live price check, so a missing check can never
+# produce a Strong.
+STRONG_TOP_PCT = 0.10
+MODERATE_TOP_PCT = 0.40
+PRICED_BATCH_SIZE = 30
+PRICED_EXTRA_TIME_BUDGET_SECONDS = 120
 
 # --- ntfy message size (https://docs.ntfy.sh/publish/#limitations) --
 # messages over this many BYTES (not Python string length -- see the note
@@ -284,6 +325,17 @@ TAKE_PROFIT_ATR_MULT = 0.5
 # weak/inconclusive (stop rate ~35% for >=1 ATR run-ups vs ~35% flat), so
 # this is logged per push (the "chase" field in daily_pushes/outcome
 # history) and should be re-validated once there's more data.
+# "Recent IPO" caution -- flags (never excludes) a pick whose first trade date
+# is within RECENT_IPO_DAYS. Newly public names have a short price history, a
+# valuation still being discovered, and a lock-up expiry (typically ~180 days
+# after the IPO) when insiders/early holders can first sell. Seasoned large
+# caps are far less exposed. Age comes from the first bar in yfinance's
+# full-history download for the shortlist only (no API key, no state file).
+# 365 is a starting point, not a tested threshold -- the scorecard tags
+# (caut:recent_ipo) will show whether it separates outcomes.
+RECENT_IPO_DAYS = 365
+IPO_LOCKUP_DAYS = 180        # inside this window the caution also mentions the lock-up
+
 CHASE_DAY_ATR_MULT = 1.0     # up >= this many ATRs vs prior close
 CHASE_5D_ATR_MULT = 2.0      # or up >= this many ATRs vs ~5 bars ago
 
@@ -297,6 +349,9 @@ REVIEW_HOLD_MULTIPLIER = 1.0
 # no secret needed, GitHub provides this automatically) so the push
 # notification can link straight to the full list in the repo.
 REPO_URL = os.environ.get("REPO_URL", "")
+# Optional: where latest_alerts.html is served (e.g. a GitHub Pages URL). When
+# set, tapping an ntfy alert opens the styled page instead of the raw .md file.
+ALERTS_PAGE_URL = os.environ.get("ALERTS_PAGE_URL", "")
 TICKER_SECTORS_FILE = "sectors.json"           # {symbol: industry}
 SECTOR_ALERTS_FILE = "sector_alerts.json"      # active sector-level news annotations
 

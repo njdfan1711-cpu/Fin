@@ -76,6 +76,7 @@ from config import (
     EARNINGS_SURPRISE_PCT,
     EARNINGS_RECENCY_DAYS,
     EARNINGS_PROXIMITY_DAYS,
+    EARNINGS_REACTION_DAYS,
     REVENUE_GROWTH_YOY_PCT,
     EPS_GROWTH_YOY_PCT,
     MAX_DEBT_TO_EQUITY,
@@ -132,9 +133,9 @@ def fetch_earnings_calendar(from_date: date, to_date: date) -> list[dict]:
     return records
 
 
-def build_earnings_surprise_map(eligible: set) -> tuple[dict, dict]:
+def build_earnings_surprise_map(eligible: set) -> tuple[dict, dict, dict]:
     """
-    Returns (surprise_map, proximity_map):
+    Returns (surprise_map, proximity_map, reaction_map):
       - surprise_map: {symbol: (detail, strength)} for eligible tickers
         with a qualifying, sufficiently-recent earnings beat.
       - proximity_map: {symbol: (detail, strength)} for eligible tickers
@@ -156,6 +157,7 @@ def build_earnings_surprise_map(eligible: set) -> tuple[dict, dict]:
 
     surprise_results = {}
     proximity_results = {}
+    reaction_results = {}
     skipped_no_estimate = 0
     for rec in records:
         symbol = rec.get("symbol")
@@ -186,6 +188,24 @@ def build_earnings_surprise_map(eligible: set) -> tuple[dict, dict]:
             if symbol not in proximity_results or days_until < proximity_results[symbol][2]:
                 proximity_results[symbol] = (detail, strength, days_until)
 
+        # -- Just reported: earnings-reaction caution (beat OR miss) --
+        # Entering inside the reaction window often means buying the gap-up
+        # itself; pops frequently fade. Needs a real reported EPS so a
+        # same-day report that hasn't printed yet stays "scheduled today".
+        # Recorded under its OWN "earnings_reaction" caution category (shown as
+        # the "Earnings reaction" warning), display-only.
+        if 0 <= days_ago <= EARNINGS_REACTION_DAYS and actual is not None:
+            when = ("today" if days_ago == 0
+                    else "yesterday" if days_ago == 1 else f"{days_ago}d ago")
+            r_detail = (f"Earnings reported {when} ({period_date.isoformat()}) -- inside the "
+                        f"earnings-reaction window, and gap-ups often fade (a hold above the "
+                        f"pre-earnings close is safer confirmation)")
+            prev = proximity_results.get(symbol)
+            if prev is not None and prev[2] == 0:
+                # Same-day report already printed: it's no longer "scheduled".
+                del proximity_results[symbol]
+            reaction_results[symbol] = (r_detail, 0.5)
+
         # -- Past: earnings-beat signal, same logic as before --
         if actual is None or estimate in (None, 0):
             if days_ago >= 0:
@@ -209,7 +229,9 @@ def build_earnings_surprise_map(eligible: set) -> tuple[dict, dict]:
 
     # Strip the internal days_until sort key before returning.
     proximity_results = {sym: (d, s) for sym, (d, s, _) in proximity_results.items()}
-    return surprise_results, proximity_results
+    # reaction_results = just-reported cautions ("earnings_reaction" category,
+    # its own label so it is never confused with the margin-quality caution).
+    return surprise_results, proximity_results, reaction_results
 
 
 def load_metrics_cache() -> dict:
@@ -469,11 +491,13 @@ def main():
 
     # One bulk call for earnings surprises AND upcoming-earnings proximity
     # across the whole eligible universe, instead of one call per ticker.
-    earnings_map, proximity_map = build_earnings_surprise_map(eligible_set)
+    earnings_map, proximity_map, reaction_map = build_earnings_surprise_map(eligible_set)
     print(f"  {len(earnings_map)} eligible ticker(s) have a qualifying recent "
           f"earnings beat.", file=sys.stderr)
     print(f"  {len(proximity_map)} eligible ticker(s) report within the next "
           f"{EARNINGS_PROXIMITY_DAYS} day(s) (proximity caution).", file=sys.stderr)
+    print(f"  {len(reaction_map)} eligible ticker(s) reported within the last "
+          f"{EARNINGS_REACTION_DAYS} day(s) (earnings-reaction caution).", file=sys.stderr)
 
     signals = {}
     total_signals = 0
@@ -576,6 +600,15 @@ def main():
             # displayed as still-current on 8/28 even though the report
             # date has come and gone.
             clear_signal(symbol, "earnings_quality")
+
+        # Just-reported (earnings-reaction) caution: own category, recorded
+        # every run and actively cleared once the report ages out of the
+        # EARNINGS_REACTION_DAYS window.
+        reaction = reaction_map.get(symbol)
+        if reaction:
+            record_signal(symbol, "earnings_reaction", reaction[0], strength=reaction[1])
+        else:
+            clear_signal(symbol, "earnings_reaction")
 
         if i % 100 == 0:
             print(f"  ...{i}/{len(symbols)} checked", file=sys.stderr)

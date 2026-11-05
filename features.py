@@ -44,6 +44,8 @@ _CAUTION_PATTERNS = [
     (r"Extended .*above .*MA", "caut:extended_above_ma"),
     (r"on light volume", "caut:high_on_light_volume"),
     (r"Analyst sentiment deteriorating", "caut:analyst_deteriorating"),
+    (r"Earnings reported", "caut:post_earnings"),
+    (r"RSI overbought", "caut:rsi_overbought"),
     (r"Earnings scheduled today", "caut:earnings_today"),
     (r"Earnings scheduled in", "caut:earnings_soon"),
     (r"^up [+-]?[\d.]+% today", "caut:chase"),
@@ -186,7 +188,8 @@ def atr_bucket(atr_pct):
 
 def extract_features(signals: dict, cautions: list | None = None, *, tier=None,
                      category_count=None, atr_pct=None, chase_flagged=None,
-                     asof=None, prior_push_days=None, runup_pct=None) -> list:
+                     asof=None, prior_push_days=None, runup_pct=None,
+                     recent_ipo_flagged=None) -> list:
     """
     signals:  {"technical": "<detail>", "fundamentals": "<detail>", "news": "<detail>", ...}
               (non-caution categories only; unknown keys are ignored)
@@ -224,6 +227,8 @@ def extract_features(signals: dict, cautions: list | None = None, *, tier=None,
         tags.add(b)
     if chase_flagged is True:
         tags.add("caut:chase")
+    if recent_ipo_flagged is True:
+        tags.add("caut:recent_ipo")
     tb = time_bucket(asof)
     if tb:
         tags.add(tb)

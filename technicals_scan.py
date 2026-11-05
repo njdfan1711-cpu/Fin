@@ -3,9 +3,8 @@ technicals_scan.py
 
 Runs every 30 minutes during market hours. Scans eligible.csv (the
 liquidity/quality-filtered subset) for:
-  - RSI extremes (low-weight signal per your preference -- kept as
-    oversold/overbought mean-reversion, deliberately NOT changed to a
-    momentum-confirmation range)
+  - RSI oversold (low-weight signal, mean-reversion) and RSI overbought (a
+    CAUTION since 2026-11, no longer a scored signal -- see evaluate_symbol)
   - 20/50-day moving average crossovers (momentum signal)
   - Relative volume spikes (today's volume vs 20-day average)
   - MACD bullish crossover (12/26 EMA, 9-day signal line)
@@ -161,12 +160,15 @@ def evaluate_symbol(df: pd.DataFrame, spy_data: dict):
 
     current_price = float(closes.iloc[-1])
 
-    # RSI -- kept as mean-reversion (oversold/overbought), unchanged
+    # RSI -- oversold stays a (low-weight) mean-reversion signal. Overbought used to
+    # be scored as a POSITIVE finding too (+0.4), which contradicts mean reversion:
+    # overbought is a pullback-risk warning, not a buy signal. Scorecard: picks with
+    # it averaged -0.15 R vs +0.01 without. It is now a caution (shown, never scored).
     rsi = compute_rsi(closes)
     if rsi <= RSI_OVERSOLD:
         findings.append((f"RSI oversold ({rsi:.1f})", 0.4))
     elif rsi >= RSI_OVERBOUGHT:
-        findings.append((f"RSI overbought ({rsi:.1f})", 0.4))
+        caution.append((f"RSI overbought ({rsi:.1f}) -- pullback risk, not a buy signal", 0.4))
 
     # 20/50-day MA crossover
     ma_short = closes.rolling(MA_SHORT).mean()

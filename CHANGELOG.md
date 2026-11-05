@@ -1,3 +1,144 @@
+## 2026-11-05 (extension-aware ranking, relative tiers, RSI overbought demoted to a caution)
+Built on live `main` (commit 2dc0edf) plus the two 2026-11-04 change sets below. New base hashes
+(sha256, first 12): technicals_scan.py e100c1f68d15, track_outcomes.py 67a1313cdfb9,
+scorecard.py 8a99b63305b9. config.py, compose_alerts.py, features.py are the files already listed
+below, now at newer versions (their original base hashes are unchanged below).
+Tested offline: a full mocked run of compose_alerts.main() on 200 synthetic tickers (ranking, tiers,
+.md, push, logged records, page parsing), unit tests of the new helpers, the RSI move through
+evaluate_symbol, the page's JavaScript in jsdom, and a what-if on the real 1,201-ticker list.
+Not yet seen in a live run.
+
+Why: the 2026-11 scorecard review showed (a) the raw-strength ranking did not predict results
+(top-quintile strength did worst), (b) picks carrying "extension" flags did clearly worse
+(0 flags avg R +0.08, 1 flag -0.12, 2 flags -0.21, 4 flags -0.40; worse in both halves of the
+window), (c) RSI overbought was scored as a POSITIVE signal (+0.4) and was the most common technical
+finding (52% of picks, avg R -0.15), and (d) 992 of 1,201 tickers were labelled STRONG, so the label
+meant almost nothing. All three are in-sample on ~10 weeks, one regime, with flags chosen after
+seeing the data: treat as a hypothesis to be confirmed by the shadow check below, not a result.
+
+- `technicals_scan.py`: RSI overbought is now a CAUTION ("pullback risk, not a buy signal"), never a
+  scored finding. RSI oversold is unchanged. A ticker whose only technical finding was RSI overbought
+  no longer has a technical category (1 of the 1,201 in the current list); 399 tickers carry the flag.
+- `config.py`: EXTENSION_PENALTY = 0.5, STALE_ALERT_DAY = 5, EXTENSION_RUNUP_PCT = 5.0,
+  STRONG_TOP_PCT = 0.10, MODERATE_TOP_PCT = 0.40 (all tunable; EXTENSION_PENALTY = 0 turns the
+  ranking change off).
+- `compose_alerts.py`: extension flags = extended above 50-day MA, RSI overbought, just reported
+  earnings, stale alert (Day >= 5) [known for every ticker, used for RANKING] plus chase risk and
+  already +5% since first alert [need a live price, used for the TIER and Extended filter].
+  Ranking key is still (category count, strength, tiebreak) but strength is now raw minus 0.5 per
+  flag. Only the priced block (first PRICED_TOP_N after the first sort) is re-sorted once price-based
+  flags are known, so a name that was never price-checked can never leapfrog one that was.
+  Tiers are relative, computed among CLEAN (flag-free) tickers each run: STRONG = top 10% (also needs
+  the old absolute floor AND a live price check), MODERATE = on to 40%, WATCH = rest; any flagged
+  ticker is EXTENDED whatever its score. The old conviction_tier() is kept as the STRONG floor.
+  Push header tags: STRONG / Moderate / Watch / Extended; the push title counts new-STRONG.
+  latest_alerts.md: header shows adjusted strength with "(raw X, N extension flags)" when flagged, a
+  new "Extension flags" bullet, and a `_Scoring:` marker line so the page knows the file is new-format.
+- Shadow logging: every pushed record now also stores `adj_strength`, `ext_flags` and `old_tier`
+  (`strength` stays RAW for continuity; `tier` is the NEW tier). `track_outcomes.py` carries them
+  into outcome_history.json.
+- `scorecard.py`: new "Shadow score check" section (top third by raw vs adjusted strength, 0 vs 1+
+  flags, new tiers). Shows "insufficient data" until 90 picks carry both scores.
+- `features.py`: new tag `caut:rsi_overbought`; `tech:rsi_overbought` stays for old records only.
+- `render_alerts_html.py`: understands the new header, the "Extension flags" bullet and the
+  EXTENDED/WATCH tiers (new Watch filter pill); with new-format files Fresh/Extended come straight
+  from the logged flags, older files still use the heuristics.
+- Behavior changes to expect: far fewer STRONG (what-if on the current list: 79 of 1,201 vs 992, and
+  fewer still until more names are price-checked), most of today's top 20 drop out of the top 20, the
+  push is mostly clean names, qualifying counts shift slightly. Tail names (beyond the priced block)
+  never get STRONG.
+- Open items: strength weights themselves are untouched; the "poised to break out" setup detector
+  (tight range near resistance, volatility contraction) is not built; thresholds are not tuned.
+
+## 2026-11-04 (styled alerts page + priced tier beyond the push cap)
+Second change set on top of the earnings-reaction / recent-IPO entry below; same base commit
+(2dc0edf). New-file hashes n/a. Base hashes: intraday.yml dc644625efec,
+.gitattributes 50b8070f3cb0; config.py, compose_alerts.py, fundamentals_scan.py,
+features.py are the already-listed files, now at their newer versions.
+Tested offline: renderer against the real 1,201-ticker latest_alerts.md (all 1,201 cards and all
+3,021 bullets preserved, 20 trade plans parsed into the grid), a visual render of sample cards,
+and the extra-tier fetch with mocked batches (failed batch isolated, time budget honored).
+Not yet seen in a live run: the Yahoo fetch timing for the extra tier.
+
+- NEW `render_alerts_html.py`: turns latest_alerts.md into a self-contained latest_alerts.html
+  (no external fonts/scripts). ntfy-style cards with a tier/warning-colored stripe, sectioned
+  Signals / warning callouts (red = chase risk, amber = other cautions, blue = info) / Trade plan
+  grid / muted news; sticky header with counts, filter pills (All, Strong, Moderate, Trade plan,
+  No warnings), ticker/name search, expand/collapse all. Top 20 cards start expanded. Palette and
+  pill/rounded-card shapes follow the Yarrow EHR and Survivor apps; light/dark follows the phone.
+  Markdown stays the source of truth: unknown bullet labels render as generic rows, never dropped.
+  Also runs standalone: `python render_alerts_html.py`.
+- `compose_alerts.py`: writes latest_alerts.html right after latest_alerts.md (try/except, can
+  never affect the alert, push or .md). New `fetch_extra_tier()` prices ranks 21..PRICED_TOP_N in
+  best-effort batches (no individual retries, time budget) so those entries also get the trade
+  plan, chase caution and Recent IPO flag in latest_alerts.md. The top-20 fetch runs first and is
+  unchanged. `fetch_prices_and_atr()` gained an optional `max_retries` arg (default unchanged).
+  `[timing]` lines in the Actions log show what each fetch cost. ntfy click-through uses
+  ALERTS_PAGE_URL when set, otherwise the .md link as before.
+- `config.py`: `PRICED_TOP_N = 60` (set to 20 to turn the extra pass off), `PRICED_BATCH_SIZE = 30`,
+  `PRICED_EXTRA_TIME_BUDGET_SECONDS = 120`, `ALERTS_PAGE_URL` (env, empty by default).
+- `fundamentals_scan.py` / `compose_alerts.py`: reaction and IPO caution sentences no longer contain
+  a semicolon (the page splits the combined earnings-quality line on "; ").
+- `.github/workflows/intraday.yml`: commits latest_alerts.html; passes the optional ALERTS_PAGE_URL
+  repo variable. `.gitattributes`: `latest_alerts.html merge=ours` like the .md.
+- `render_alerts_html.py` (follow-up, same day): filters are now multi-select (tap several to
+  combine). New filters: Fresh setup and Extended, alongside Strong, Moderate, Trade plan, No
+  warnings, plus Clear. Strong/Moderate combine as "either"; everything else combines as "and";
+  Fresh and Extended are opposites so picking one unpicks the other. Extended = any of: extended
+  above 50-day MA caution, RSI overbought, chase caution, earnings-reaction caution, or already
+  +5% since the first alert. Fresh = not extended and a young alert (no streak tag, or Day <= 4).
+  Both are display-only, defined from scorecard findings, thresholds at the top of the file
+  (FRESH_MAX_DAY, EXTENDED_RUNUP_PCT). They use data that exists for every ticker, so they no
+  longer depend on whether a price was fetched; the chase caution just adds to Extended when it
+  exists. Card stripe now follows that status (red chasing, amber extended, green fresh, blue
+  neither) instead of the Strong/Moderate tier, and cards with no price check get a dashed
+  "No price check" chip so a missing check never looks like a passed one. Tested by running the
+  page's real JavaScript in jsdom against the 1,201-ticker file.
+- `render_alerts_html.py` (follow-up): "Hide filters / Show filters" toggle collapses the stats, filter
+  pills and legend so only the title row stays pinned; the button shows how many filters are on
+  while collapsed, and filtering keeps working. Remembers the choice via localStorage (not
+  verified in a real browser, only in jsdom).
+- Ranks 61+ still have no trade plan, chase caution or IPO flag (only the earnings-reaction and
+  existing cautions, which need no price fetch).
+
+## 2026-11-04 (post-earnings caution + recent-IPO flag)
+Built from live `main` (commit 2dc0edf, pulled 2026-11-04). Base file hashes (sha256, first 12):
+config.py 2abb66f9cc9a, fundamentals_scan.py 76700ba2c70e,
+compose_alerts.py b77c89b18955, features.py 2c9ff503df92.
+Tested offline with mocked earnings-calendar and yfinance data (reaction map, feature tags,
+IPO-age helper, push-line rendering); not yet seen in a live run.
+
+Why: LIFE (public since 2026-01-29) alerted the day after its Q3 report, on the gap-up to a new
+all-time high, and was back below the pre-earnings close within 48 hours. Fin already scored the
+earnings beat but had nothing that said "you are inside the reaction window", and nothing that
+said the company is newly public.
+
+- `config.py`: new `EARNINGS_REACTION_DAYS = 3` (must stay <= EARNINGS_RECENCY_DAYS) and
+  `RECENT_IPO_DAYS = 365`, `IPO_LOCKUP_DAYS = 180`. Thresholds are starting points, not tested.
+- `fundamentals_scan.py`: `build_earnings_surprise_map()` now returns a third map and records a
+  caution for any eligible symbol that reported 0-3 calendar days ago with a printed EPS (beat OR
+  miss). It has its OWN category, `earnings_reaction`, shown as the "Earnings reaction" warning,
+  separate from the margin-quality "Earnings quality" warning. No scoring effect; recorded every
+  run and cleared once the report ages out of the window. A same-day report that has printed
+  replaces the "scheduled today" caution; one that has not printed stays "scheduled". No extra
+  API calls (same bulk calendar call). Call site unpacks 3 values now.
+- `config.py` (also): `"earnings_reaction"` added to `SIGNAL_VALIDITY_HOURS` (same 5-day window as
+  earnings_quality; the daily clear is what actually ends it).
+- `compose_alerts.py`: new `fetch_first_trade_dates()` (one batched yfinance weekly full-history
+  download for the shortlist only, first bar = first trade date; failure = no flag) and
+  `format_recent_ipo_caution()`. Names public < 365 days get a "Recent IPO" warning bullet in
+  the push and in latest_alerts.md; inside 180 days it also mentions the lock-up window.
+  Display-only: never excludes or re-ranks. Like the trade plan and chase caution, it only covers
+  the shortlist (top TOP_N_ALERTS = 20); names ranked below that get no IPO flag.
+- `compose_alerts.py` (also): `EARNINGS_REACTION_CATEGORY` added to `CAUTION_STYLE_CATEGORIES`
+  with label "Earnings reaction" (push and latest_alerts.md pick it up automatically).
+- `features.py`: new tags `caut:post_earnings` and `caut:recent_ipo`, so the scorecard can test
+  whether either flag separates outcomes. New `recent_ipo_flagged` argument (default None).
+- Not done (needs price levels): "wait for a close above the pre-earnings close" is only
+  advice in the caution text for now, not a computed check. Candidate next step.
+- Limits: weekly bars put the IPO date within ~7 days of the true first trade; spin-offs and
+  relistings can show a short history; a ticker yfinance cannot fetch simply gets no flag.
+
 ## 2026-10-22 -- swing_backtest.py: replay of your own logged trades
 
 Files: swing_backtest.py (replace), .github/workflows/swing_backtest.yml (replace; adds

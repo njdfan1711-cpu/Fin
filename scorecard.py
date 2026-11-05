@@ -116,6 +116,40 @@ def summarize(rows):
     }
 
 
+def shadow_section(samples) -> list:
+    """Raw-strength vs extension-adjusted ranking, and the new tiers, on pushes that
+    logged both scores (compose_alerts.py record_push: adj_strength / ext_flags /
+    old_tier). Answers "did the 2026-11 ranking change actually help?" going forward."""
+    rows = [x for x in samples if x["entry"].get("adj_strength") is not None]
+    L = ["## Shadow score check (raw strength vs extension-adjusted)"]
+    if len(rows) < 3 * MIN_SAMPLES:
+        L.append(f"_{len(rows)} picks so far with both scores logged -- insufficient data "
+                 f"(need {3 * MIN_SAMPLES}). Only picks pushed after the extension-adjusted "
+                 f"ranking went live carry them._\n")
+        return L
+    k = len(rows) // 3
+    by_raw = sorted(rows, key=lambda x: x["entry"]["strength"])
+    by_adj = sorted(rows, key=lambda x: x["entry"]["adj_strength"])
+    L.append("| Group | n | tickers | stop% | target% | avg R | win% (95% CI) |")
+    L.append("|---|--:|--:|--:|--:|--:|---|")
+
+    def row(label, rs):
+        s = summarize(rs)
+        L.append(f"| {label} | {s['n']} | {s['tickers']} | {s['stop']*100:.0f} | {s['target']*100:.0f} "
+                 f"| {s['avg_r']:+.2f} | {s['win']*100:.0f} ({s['win_lo']*100:.0f}-{s['win_hi']*100:.0f}) |")
+    row("All logged picks", rows)
+    row("Top third by RAW strength", by_raw[-k:])
+    row("Top third by ADJUSTED strength", by_adj[-k:])
+    row("Picks with 0 extension flags", [x for x in rows if not x["entry"].get("ext_flags")])
+    row("Picks with 1+ extension flags", [x for x in rows if x["entry"].get("ext_flags")])
+    for t in ("STRONG", "MODERATE", "WATCH", "EXTENDED"):
+        sel = [x for x in rows if x["entry"].get("tier") == t]
+        if sel:
+            row(f"Tier {t} (new)", sel)
+    L.append("")
+    return L
+
+
 def build_report(samples, total_entries):
     base = summarize(samples)
     days = sorted({x["day"] for x in samples})
@@ -188,6 +222,8 @@ def build_report(samples, total_entries):
                  f"stop first: {stop_first} ({stop_first/len(tp)*100:.0f}%)")
         L.append(f"- Median best price in window: {mfe[len(mfe)//2]:+.1f}% vs entry\n")
 
+    L.extend(shadow_section(samples))
+    L.append("")
     constant = sorted(f for f in by_feat if len(by_feat[f]) == base["n"])
     L.append(f"_{len(by_feat)} distinct features tracked; always-present (hidden): "
              f"{', '.join(constant) or 'none'}. Raw push records without recoverable "
