@@ -44,6 +44,9 @@ jobs:
           FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           REPO_URL: ${{ github.server_url }}/${{ github.repository }}
+          # Optional repo variable (Settings > Secrets and variables > Actions > Variables).
+          # When set, tapping an ntfy alert opens the styled page instead of the raw .md.
+          ALERTS_PAGE_URL: ${{ vars.ALERTS_PAGE_URL }}
         run: python compose_alerts.py
 
       - name: Check open positions (stop/target/drawdown/overdue)
@@ -62,7 +65,7 @@ jobs:
           # used for files that are fully regenerated each run (see
           # .gitattributes) and have nothing to structurally merge.
           git config merge.ours.driver true
-          for f in signals_state.json alert_log.json latest_alerts.md daily_pushes.json position_monitor_state.json; do
+          for f in signals_state.json alert_log.json latest_alerts.md latest_alerts.html daily_pushes.json position_monitor_state.json; do
             if [ -f "$f" ]; then
               git add "$f"
             fi
