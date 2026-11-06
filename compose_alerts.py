@@ -1190,6 +1190,10 @@ def main():
     # clients since Markdown: yes is already set on this push).
     click_url = (ALERTS_PAGE_URL or
                  (f"{REPO_URL}/blob/main/{LATEST_ALERTS_FILE}" if REPO_URL else None))
+    # Shown in the Actions log so a wrong/missing ALERTS_PAGE_URL is easy to spot.
+    print(f"[alert link] tapping this push opens: {click_url} "
+          f"({'from ALERTS_PAGE_URL' if ALERTS_PAGE_URL else 'FALLBACK to the repo .md file: ALERTS_PAGE_URL is empty in this run'})",
+          file=sys.stderr)
 
     lines = []
     for rank, sym, cats in push_list:
