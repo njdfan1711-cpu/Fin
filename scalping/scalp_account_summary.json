@@ -1,21 +1,21 @@
 {
-  "generated_utc": "2026-11-06T14:30:52+00:00",
+  "generated_utc": "2026-11-06T15:30:46+00:00",
   "rank_mode": "least_extended",
   "rules": "one position at a time; cost gate on; indicators per day; flat at close",
-  "signals_available": 212,
+  "signals_available": 216,
   "trading_days": 31,
-  "trades_taken": 152,
-  "trades_per_day": 4.9,
-  "gross_pnl": 37.77,
-  "cost": 113.37,
-  "net_pnl": -75.6,
-  "net_per_trade": -0.5,
-  "win_rate_pct": 41.4,
+  "trades_taken": 154,
+  "trades_per_day": 4.97,
+  "gross_pnl": 42.12,
+  "cost": 115.33,
+  "net_pnl": -73.21,
+  "net_per_trade": -0.48,
+  "win_rate_pct": 41.6,
   "max_drawdown": -151.42,
   "exit_reasons": {
     "eod": 8,
-    "stop": 73,
-    "target": 38,
+    "stop": 74,
+    "target": 39,
     "time_stop": 33
   },
   "net_by_day": {
@@ -49,16 +49,16 @@
     "2026-11-02": -19.7,
     "2026-11-03": -14.27,
     "2026-11-04": 18.87,
-    "2026-11-05": 37.42
+    "2026-11-05": 39.81
   },
   "skipped_by_reason": {
-    "outranked same minute": 34,
-    "position open": 26
+    "outranked same minute": 35,
+    "position open": 27
   },
   "picked_vs_outranked": {
-    "same_minute_ties": 16,
-    "avg_net_difference": -1.21,
-    "std_error": 2.02,
+    "same_minute_ties": 17,
+    "avg_net_difference": -0.24,
+    "std_error": 2.13,
     "note": "Positive = the ranking's pick beat the signals it outranked. Judge on NEW data only; need many ties before trusting it."
   }
 }
