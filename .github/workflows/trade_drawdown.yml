@@ -1,13 +1,13 @@
 name: Trade drawdown report
 
 # Manual only: Actions tab -> "Trade drawdown report" -> Run workflow.
-# Reads open_positions.json, pulls daily bars, and commits
-# trade_drawdown_report.md to the repo root.
+# Reads open_positions.json from the separate PRIVATE trade-data repo, pulls daily bars,
+# and commits trade_drawdown_report.md back to that private repo (never to this public one).
 on:
   workflow_dispatch: {}
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: trade-drawdown
@@ -22,6 +22,13 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Check out private trade-data repo
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ vars.PRIVATE_REPO || format('{0}/fin-private', github.repository_owner) }}
+          token: ${{ secrets.PRIVATE_REPO_TOKEN }}
+          path: private
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -31,9 +38,12 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Build drawdown report
+        env:
+          FIN_PRIVATE_DIR: private
         run: python trade_drawdown_report.py
 
-      - name: Commit report
+      - name: Commit report to the PRIVATE repo
+        working-directory: private
         run: |
           git config user.name "stock-scanner-bot"
           git config user.email "actions@users.noreply.github.com"
@@ -41,7 +51,7 @@ jobs:
           git diff --staged --quiet && echo "No changes to commit" && exit 0
           git commit -m "Trade drawdown report [automated]"
           for attempt in 1 2 3 4 5; do
-            if git pull --rebase origin main && git push; then
+            if git pull --rebase && git push; then
               break
             fi
             echo "Push/rebase attempt $attempt failed, retrying..."

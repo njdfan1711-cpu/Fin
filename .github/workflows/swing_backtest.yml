@@ -7,7 +7,7 @@ on:
   workflow_dispatch: {}
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: swing-backtest
@@ -22,6 +22,14 @@ jobs:
         with:
           fetch-depth: 0
 
+      # Your trade log (and every output that mixes it in) lives in the separate PRIVATE repo.
+      - name: Check out private trade-data repo
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ vars.PRIVATE_REPO || format('{0}/fin-private', github.repository_owner) }}
+          token: ${{ secrets.PRIVATE_REPO_TOKEN }}
+          path: private
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -31,9 +39,12 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run swing backtest
+        env:
+          FIN_PRIVATE_DIR: private
         run: python swing_backtest.py
 
-      - name: Commit results
+      - name: Commit results to the PRIVATE repo
+        working-directory: private
         run: |
           git config user.name "stock-scanner-bot"
           git config user.email "actions@users.noreply.github.com"
@@ -45,7 +56,7 @@ jobs:
           git diff --staged --quiet && echo "No changes to commit" && exit 0
           git commit -m "Swing backtest update [automated]"
           for attempt in 1 2 3 4 5; do
-            if git pull --rebase origin main && git push; then
+            if git pull --rebase && git push; then
               break
             fi
             echo "Push/rebase attempt $attempt failed, retrying..."
