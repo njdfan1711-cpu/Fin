@@ -1,33 +1,33 @@
 {
-  "generated_at": "2026-11-06T15:30:46.008468+00:00",
+  "generated_at": "2026-11-06T16:30:54.261796+00:00",
   "cost_model": "measured median spread per symbol x1.0 (flat 2.0c fallback)",
   "symbols_without_spread_data": [
     "WBD"
   ],
-  "total_trades": 287,
-  "win_count": 111,
+  "total_trades": 288,
+  "win_count": 112,
   "loss_count": 176,
-  "win_rate_pct": 38.7,
-  "avg_net_pnl_per_trade": -1.77,
-  "avg_win": 6.71,
+  "win_rate_pct": 38.9,
+  "avg_net_pnl_per_trade": -1.73,
+  "avg_win": 6.73,
   "avg_loss": -7.11,
-  "total_gross_pnl": -11.8,
-  "total_cost": 495.0,
-  "total_net_pnl": -506.8,
-  "total_net_pnl_flat_cost_model": -765.0,
+  "total_gross_pnl": -1.75,
+  "total_cost": 495.41,
+  "total_net_pnl": -497.16,
+  "total_net_pnl_flat_cost_model": -755.15,
   "max_drawdown": -611.97,
   "exit_reason_counts": {
-    "target": 72,
+    "target": 73,
     "stop": 144,
     "time_stop": 57
   },
   "by_spread_tier": {
     "tight_le_0.03pct": {
-      "trades": 149,
-      "gross_pnl": 21.56,
-      "cost": 76.35,
-      "net_pnl": -54.79,
-      "avg_net_per_trade": -0.37
+      "trades": 150,
+      "gross_pnl": 31.61,
+      "cost": 76.76,
+      "net_pnl": -45.15,
+      "avg_net_per_trade": -0.3
     },
     "wide_gt_0.03pct": {
       "trades": 137,
@@ -48,11 +48,11 @@
     "enabled": true,
     "max_spread_pct": 0.0525,
     "passing": {
-      "trades": 216,
-      "gross_pnl": 60.58,
-      "cost": 156.3,
-      "net_pnl": -95.72,
-      "avg_net_per_trade": -0.44
+      "trades": 217,
+      "gross_pnl": 70.63,
+      "cost": 156.71,
+      "net_pnl": -86.08,
+      "avg_net_per_trade": -0.4
     },
     "blocked": {
       "trades": 71,
@@ -154,13 +154,6 @@
       "net_pnl": -11.05,
       "avg_net_per_trade": -0.74
     },
-    "GOOGL": {
-      "trades": 8,
-      "gross_pnl": -7.27,
-      "cost": 3.19,
-      "net_pnl": -10.46,
-      "avg_net_per_trade": -1.31
-    },
     "TSLA": {
       "trades": 16,
       "gross_pnl": -0.25,
@@ -195,6 +188,13 @@
       "cost": 22.1,
       "net_pnl": -6.46,
       "avg_net_per_trade": -0.72
+    },
+    "GOOGL": {
+      "trades": 9,
+      "gross_pnl": 2.78,
+      "cost": 3.6,
+      "net_pnl": -0.82,
+      "avg_net_per_trade": -0.09
     },
     "SPY": {
       "trades": 3,
