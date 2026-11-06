@@ -70,11 +70,26 @@ QUICK_TARGET_PCT = 1.0       # scenarios E/F: fixed percentage target (your medi
 
 OUTCOME_FILE = "outcome_history.json"
 PUSHES_FILE = "daily_pushes.json"
-MY_TRADES_FILE = "open_positions.json"     # your Fin Trade Log export
-OUT_MY = "swing_backtest_my_trades.csv"
-OUT_TRADES = "swing_backtest_trades.csv"
-OUT_JSON = "swing_backtest_summary.json"
-OUT_MD = "swing_backtest.md"
+# Your trade log lives in a separate private repo checked out at FIN_PRIVATE_DIR (see
+# config.py). Unset = old behavior (everything in the repo root). Set = the trade log is
+# read from there and EVERY output (they mix in your trades) is written there too, and the
+# console report is withheld because public Actions logs are publicly readable.
+PRIVATE_DIR = os.environ.get("FIN_PRIVATE_DIR", "")
+QUIET = bool(PRIVATE_DIR)
+if QUIET:
+    import logging
+    logging.getLogger("yfinance").setLevel(logging.CRITICAL)
+
+
+def _p(name: str) -> str:
+    return os.path.join(PRIVATE_DIR, name) if PRIVATE_DIR else name
+
+
+MY_TRADES_FILE = _p("open_positions.json")     # your Fin Trade Log export
+OUT_MY = _p("swing_backtest_my_trades.csv")
+OUT_TRADES = _p("swing_backtest_trades.csv")
+OUT_JSON = _p("swing_backtest_summary.json")
+OUT_MD = _p("swing_backtest.md")
 NY = ZoneInfo("America/New_York")
 
 
@@ -540,7 +555,10 @@ def main():
               "alert. In-sample, about two months, one market regime."]
     with open(OUT_MD, "w") as f:
         f.write("\n".join(lines) + "\n")
-    print("\n".join(lines), file=sys.stderr)
+    if QUIET:
+        print("Swing backtest report written to the private repo (contents not logged).", file=sys.stderr)
+    else:
+        print("\n".join(lines), file=sys.stderr)
 
 
 if __name__ == "__main__":

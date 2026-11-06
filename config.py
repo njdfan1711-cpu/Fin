@@ -268,7 +268,15 @@ OUTCOME_HISTORY_FILE = "outcome_history.json"
 # trade_plan Fin generated when each symbol was originally pushed --
 # the feedback loop that was missing between "here's a stop/target" at
 # signal time and what actually happens to a position afterward.
-OPEN_POSITIONS_FILE = "open_positions.json"
+# Trade data lives in a SEPARATE PRIVATE repo (checked out into FIN_PRIVATE_DIR by the
+# workflows) so it never appears in this public repo or its history. When FIN_PRIVATE_DIR
+# is unset (local runs) everything behaves exactly as before: files in the repo root.
+# While it IS set, scripts also stay quiet about trade details in their console output,
+# because GitHub Actions logs of a public repo are publicly readable.
+FIN_PRIVATE_DIR = os.environ.get("FIN_PRIVATE_DIR", "")
+QUIET_TRADE_LOGS = bool(FIN_PRIVATE_DIR)
+OPEN_POSITIONS_FILE = (os.path.join(FIN_PRIVATE_DIR, "open_positions.json")
+                       if FIN_PRIVATE_DIR else "open_positions.json")
 POSITION_MONITOR_STATE_FILE = "position_monitor_state.json"
 # How many days back to search daily_pushes.json for the trade_plan that
 # was active on/before a position's entry_date. 21 covers a full push

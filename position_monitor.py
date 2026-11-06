@@ -43,6 +43,7 @@ import yfinance as yf
 
 from config import (
     OPEN_POSITIONS_FILE,
+    QUIET_TRADE_LOGS,
     POSITION_MONITOR_STATE_FILE,
     DAILY_PUSHES_FILE,
     POSITION_PLAN_LOOKBACK_DAYS,
@@ -57,6 +58,11 @@ from track_outcomes import typical_resolution_days
 
 ET = ZoneInfo("America/New_York")
 FALLBACK_OVERDUE_DAYS = 10  # used only if outcome_history.json has no resolved samples yet
+
+
+if QUIET_TRADE_LOGS:    # yfinance logs failed tickers by name; keep them out of public logs
+    import logging
+    logging.getLogger("yfinance").setLevel(logging.CRITICAL)
 
 
 def _flatten_columns(df: pd.DataFrame) -> pd.DataFrame:
@@ -147,7 +153,10 @@ def fetch_current_price(symbol: str) -> float | None:
             return None
         return float(df["Close"].iloc[-1])
     except Exception as e:
-        print(f"  [price fetch error for {symbol}] {e}", file=sys.stderr)
+        if QUIET_TRADE_LOGS:   # public Actions logs: no symbols, no library error text
+            print("  [price fetch error for one open position]", file=sys.stderr)
+        else:
+            print(f"  [price fetch error for {symbol}] {e}", file=sys.stderr)
         return None
 
 
@@ -257,10 +266,40 @@ def evaluate_position(pos: dict, plan: dict | None, current_price: float | None,
     return result
 
 
+def _alert_monitoring_offline():
+    """Push a notification (at most once per ET day) when private trade data can't be
+    read, so a silently expired token never leaves open positions unmonitored unnoticed.
+    Never raises: this is a courtesy on top of the Actions warning annotation."""
+    try:
+        today = datetime.now(timezone.utc).astimezone(ET).date().isoformat()
+        state = load_json(POSITION_MONITOR_STATE_FILE, {})
+        if state.get("__offline_alert_date") == today:
+            return
+        send_alert(
+            title="Position monitoring is OFF",
+            message=("Couldn't read your trade log from the private repo, so open positions "
+                     "were NOT checked. Most likely the PRIVATE_REPO_TOKEN secret expired or "
+                     "open_positions.json is missing from the private repo."),
+            priority="high",
+            tags=["warning"],
+        )
+        state["__offline_alert_date"] = today
+        save_json(POSITION_MONITOR_STATE_FILE, state)
+    except Exception as e:
+        print(f"[offline alert failed] {e}", file=sys.stderr)
+
+
 def main():
     positions_data = load_json(OPEN_POSITIONS_FILE, None)
     if positions_data is None:
         print(f"{OPEN_POSITIONS_FILE} not found -- nothing synced yet, skipping.")
+        if QUIET_TRADE_LOGS:
+            # Private data configured but unreadable (token expired/missing, or file not
+            # uploaded): positions were NOT monitored this run. Make that visible.
+            print("::warning::Private trade data not found -- open positions were NOT "
+                  "monitored this run. Check PRIVATE_REPO_TOKEN (expired?) and that "
+                  "open_positions.json exists in the private repo.")
+            _alert_monitoring_offline()
         return
 
     open_positions = [p for p in positions_data.get("trades", []) if p.get("status") == "open"]
@@ -294,9 +333,13 @@ def main():
                 if cond in new_conditions
             )
 
-        print(f"{symbol}: price={price}, conditions={sorted(current_conditions)}, "
-              f"pnl_pct={evaluation.get('pnl_pct')}, days_held={evaluation.get('days_held')}")
+        if not QUIET_TRADE_LOGS:   # per-position detail stays out of public logs
+            print(f"{symbol}: price={price}, conditions={sorted(current_conditions)}, "
+                  f"pnl_pct={evaluation.get('pnl_pct')}, days_held={evaluation.get('days_held')}")
 
+    if QUIET_TRADE_LOGS:
+        print(f"Checked {len(open_positions)} open position(s) "
+              f"({sum(1 for c in updated_state.values() if c)} with active conditions).")
     save_json(POSITION_MONITOR_STATE_FILE, updated_state)
 
     if new_alert_lines:

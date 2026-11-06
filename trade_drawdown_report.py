@@ -39,8 +39,17 @@ except Exception:  # config missing or changed: fall back to Fin's current defau
     STOP_ATR_MULT, ATR_PERIOD = 1.5, 14
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-POSITIONS_FILE = os.path.join(HERE, "open_positions.json")
-REPORT_FILE = os.path.join(HERE, "trade_drawdown_report.md")
+# Trade data lives in a separate private repo checked out at FIN_PRIVATE_DIR (see
+# config.py). Unset = old behavior (files next to this script). Set = read the trade log
+# from there, write the report there, and keep trade details out of the (public) log.
+PRIVATE_DIR = os.environ.get("FIN_PRIVATE_DIR", "")
+QUIET = bool(PRIVATE_DIR)
+if QUIET:
+    import logging
+    logging.getLogger("yfinance").setLevel(logging.CRITICAL)
+_DATA_DIR = os.path.abspath(PRIVATE_DIR) if PRIVATE_DIR else HERE
+POSITIONS_FILE = os.path.join(_DATA_DIR, "open_positions.json")
+REPORT_FILE = os.path.join(_DATA_DIR, "trade_drawdown_report.md")
 LOOKBACK_DAYS_FOR_ATR = 60   # calendar days of history before entry (covers 14 bars)
 
 
@@ -63,7 +72,10 @@ def fetch_bars(symbol, start, end):
                 df.index = pd.to_datetime(df.index).tz_localize(None).normalize()
                 return df
         except Exception as e:
-            print(f"[{symbol}] download attempt {attempt} failed: {e}", file=sys.stderr)
+            if QUIET:
+                print(f"[trade] download attempt {attempt} failed", file=sys.stderr)
+            else:
+                print(f"[{symbol}] download attempt {attempt} failed: {e}", file=sys.stderr)
     return pd.DataFrame()
 
 
@@ -231,11 +243,18 @@ def main():
         except Exception as e:   # one bad trade must not stop the report
             results.append({"symbol": t.get("symbol", "?"), "closed": t.get("status") == "closed",
                             "note": f"error: {e}"})
-            print(f"[{t.get('symbol')}] error: {e}", file=sys.stderr)
+            if QUIET:
+                print("[trade] error analyzing one trade (details withheld from public log)", file=sys.stderr)
+            else:
+                print(f"[{t.get('symbol')}] error: {e}", file=sys.stderr)
     report = build_report(results, datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC"))
     with open(REPORT_FILE, "w") as f:
         f.write(report)
-    print(report)
+    if QUIET:
+        print(f"Report for {len(results)} trade(s) written to the private repo "
+              "(contents not logged).")
+    else:
+        print(report)
     return 0
 
 

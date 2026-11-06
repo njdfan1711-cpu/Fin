@@ -1,3 +1,41 @@
+## 2026-11-05 (trade data moved to a separate private repo)
+Built on live `main` (commit 2dc0edf). Base hashes (sha256, first 12): position_monitor.py
+0a3a705777cf, trade_drawdown_report.py b99da6db493d,
+swing_backtest.py 1dcd5db04e4d, trade_drawdown.yml 1f5ae684856f,
+swing_backtest.yml 7dd76da8ed54; config.py and intraday.yml are the files already listed
+in earlier entries today, now at newer versions.
+Tested offline with mocked prices: quiet logs and private writes for all three scripts, the
+missing-data warning and once-a-day push, and that local runs without FIN_PRIVATE_DIR behave exactly
+as before. The workflows were only YAML-validated; they have not run against a real private repo yet.
+
+Why: this repo is public, so open_positions.json (symbols, prices, share counts, dates) and the
+files derived from it were readable by anyone, and so are the Actions logs of a public repo.
+GitHub cannot hide one file inside a public repo, and making the whole repo private would cap free
+Actions minutes and disable Pages, so trade data now lives in a second, private repo.
+
+- `config.py`: `FIN_PRIVATE_DIR` (env, empty = old behavior), `QUIET_TRADE_LOGS`, and
+  `OPEN_POSITIONS_FILE` now points into that directory when it is set.
+- `position_monitor.py`: reads the trade log from the private checkout. While it is set, nothing
+  about positions (symbols, prices, P&L, yfinance error text) goes to the log. If the private data
+  can't be read it logs a `::warning::` annotation and sends ONE high-priority push per ET day
+  ("Position monitoring is OFF") instead of silently skipping. `position_monitor_state.json` stays in
+  this repo (it holds only opaque trade ids and condition names).
+- `trade_drawdown_report.py` / `swing_backtest.py`: read the trade log from, and write EVERY output
+  to, FIN_PRIVATE_DIR (the swing outputs mix your trades into the summary and report, so all of
+  them move). The console report is withheld in this mode.
+- `.github/workflows/intraday.yml`: checks out the private repo (read-only use) with
+  `continue-on-error`, so a missing or expired token can never stop the alerts; only position
+  monitoring pauses, loudly. `trade_drawdown.yml` and `swing_backtest.yml` check it out, run with
+  FIN_PRIVATE_DIR=private, and commit their outputs to the PRIVATE repo; their permissions on this
+  repo dropped to read-only. Private repo name defaults to `<owner>/fin-private` (override with the
+  `PRIVATE_REPO` repository variable); access is the `PRIVATE_REPO_TOKEN` secret (fine-grained
+  token, Contents read/write on that one repo).
+- `.gitignore`: ignores `private/`.
+- Still public afterwards: older commits keep earlier versions of the moved files, older Actions
+  logs show earlier per-position output until they expire, and this changelog names a few traded
+  symbols (entries about the blank-entry-date trades and the drawdown report). See
+  PRIVATE_DATA_SETUP.md for cleanup options.
+
 ## 2026-11-05 (extension-aware ranking, relative tiers, RSI overbought demoted to a caution)
 Built on live `main` (commit 2dc0edf) plus the two 2026-11-04 change sets below. New base hashes
 (sha256, first 12): technicals_scan.py e100c1f68d15, track_outcomes.py 67a1313cdfb9,
