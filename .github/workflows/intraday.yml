@@ -49,10 +49,27 @@ jobs:
           ALERTS_PAGE_URL: ${{ vars.ALERTS_PAGE_URL }}
         run: python compose_alerts.py
 
+      # Trade data lives in a separate PRIVATE repo (read-only use here). If this checkout
+      # fails (token missing/expired), the run carries on without it -- position monitoring
+      # is skipped with a visible warning -- so a token problem can never stop the alerts.
+      - name: Check out private trade data
+        id: private
+        continue-on-error: true
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ vars.PRIVATE_REPO || format('{0}/fin-private', github.repository_owner) }}
+          token: ${{ secrets.PRIVATE_REPO_TOKEN }}
+          path: private
+
       - name: Check open positions (stop/target/drawdown/overdue)
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
-        run: python position_monitor.py
+          FIN_PRIVATE_DIR: private
+        run: |
+          if [ "${{ steps.private.outcome }}" != "success" ]; then
+            echo "::warning::Could not check out the private trade-data repo -- open positions are NOT being monitored this run. Check the PRIVATE_REPO_TOKEN secret (missing or expired?)."
+          fi
+          python position_monitor.py
 
       - name: Commit updated signal/alert state
         run: |
