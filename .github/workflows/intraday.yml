@@ -47,6 +47,9 @@ jobs:
           # Optional repo variable (Settings > Secrets and variables > Actions > Variables).
           # When set, tapping an ntfy alert opens the styled page instead of the raw .md.
           ALERTS_PAGE_URL: ${{ vars.ALERTS_PAGE_URL }}
+          # SEC EDGAR requires a descriptive User-Agent with contact info (drop_check.py).
+          # Add a repo secret SEC_USER_AGENT, e.g. "Fin Greg you@email.com".
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
         run: python compose_alerts.py
 
       # Trade data lives in a separate PRIVATE repo (read-only use here). If this checkout
@@ -82,7 +85,7 @@ jobs:
           # used for files that are fully regenerated each run (see
           # .gitattributes) and have nothing to structurally merge.
           git config merge.ours.driver true
-          for f in signals_state.json alert_log.json latest_alerts.md latest_alerts.html daily_pushes.json position_monitor_state.json; do
+          for f in signals_state.json alert_log.json latest_alerts.md latest_alerts.html daily_pushes.json position_monitor_state.json drop_checks.jsonl; do
             if [ -f "$f" ]; then
               git add "$f"
             fi
