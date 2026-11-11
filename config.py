@@ -161,6 +161,10 @@ PRICED_TOP_N = 60
 # RANKING -- plus chase risk and "already up EXTENSION_RUNUP_PCT since first alert",
 # which need a live price, so they affect only the TIER and the Extended filter.
 EXTENSION_PENALTY = 0.5        # strength subtracted per flag when ranking (0 = off)
+# 2026-11-11: flag-free names rank above ALL flagged names (flagged ones stay listed and are
+# tiered Extended). The penalty above then only orders names within each group. False = the
+# old behaviour, where a flagged name with more signals could still outrank a clean one.
+RANK_CLEAN_FIRST = True
 STALE_ALERT_DAY = 5            # "Day N" streak at/after which an alert counts as stale
 EXTENSION_RUNUP_PCT = 5.0      # already up this much since the first alert = extended
 # Tiers are relative, computed each run among CLEAN (flag-free) tickers only:

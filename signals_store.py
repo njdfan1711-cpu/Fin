@@ -59,10 +59,24 @@ def combine_strengths(strengths: list[float], decay: float = 0.6) -> float:
     return sum(s * (decay ** i) for i, s in enumerate(ordered))
 
 
-def record_signal(symbol: str, category: str, detail: str, strength: float = 1.0):
+def weighted_parts(parts, decay: float = 0.6):
+    """
+    [(detail, raw_strength), ...] -> [(detail, raw_strength, points), ...], strongest first.
+    `points` is what each finding adds to its category score: the strongest counts in full, the
+    next `decay`x, then `decay`^2x, ... -- the same rule as combine_strengths(), so the points of
+    a category always add up to that category's strength. Added 2026-11-11 so alerts can show
+    how each bullet contributes to the score.
+    """
+    ordered = sorted(parts, key=lambda p: p[1], reverse=True)
+    return [(d, s, s * (decay ** i)) for i, (d, s) in enumerate(ordered)]
+
+
+def record_signal(symbol: str, category: str, detail: str, strength: float = 1.0, parts=None):
     """
     category: one of "technical", "news", "fundamentals", "short_interest"
     detail: human-readable reason, e.g. "Earnings beat by 8.2% (2 days ago)"
+    parts: optional [(detail, raw_strength), ...] -- the individual findings behind a combined
+           detail/strength, saved so the alert can show each finding's points
     strength: rough 0-1+ scale, higher = more significant within its category
               (doesn't need to be precise -- it's a tiebreaker, not the main ranking)
     """
@@ -73,6 +87,8 @@ def record_signal(symbol: str, category: str, detail: str, strength: float = 1.0
         "strength": strength,
         "timestamp": datetime.now(timezone.utc).isoformat(),
     }
+    if parts:
+        entry[category]["parts"] = [[str(d), round(float(s), 4)] for d, s in parts]
     state[symbol] = entry
     _save(state)
 

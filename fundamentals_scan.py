@@ -568,7 +568,8 @@ def main():
             # totals instead of tying whenever they share the same top one.
             combined_detail = "; ".join(details)
             combined_strength = combine_strengths(strengths)
-            record_signal(symbol, "fundamentals", combined_detail, strength=combined_strength)
+            record_signal(symbol, "fundamentals", combined_detail, strength=combined_strength,
+                          parts=list(zip(details, strengths)))
             signals[symbol] = details
             total_signals += len(details)
 

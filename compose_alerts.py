@@ -89,6 +89,7 @@ from config import (
     IPO_LOCKUP_DAYS,
     PRICED_TOP_N,
     EXTENSION_PENALTY,
+    RANK_CLEAN_FIRST,
     STALE_ALERT_DAY,
     EXTENSION_RUNUP_PCT,
     STRONG_TOP_PCT,
@@ -99,7 +100,7 @@ from config import (
     NTFY_MESSAGE_BYTE_LIMIT,
     NTFY_SAFE_BODY_BYTE_BUDGET,
 )
-from signals_store import get_active_signals
+from signals_store import get_active_signals, weighted_parts
 from features import extract_features
 from alert_log import mark_alerted
 from daily_pushes import record_push, prune_old_days, symbol_history
@@ -216,6 +217,42 @@ def conviction_tier(category_count: int, total_strength: float) -> str:
     if category_count == 2 and total_strength >= STRONG_TIER_STRENGTH_FOR_TWO:
         return "STRONG"
     return "MODERATE"
+
+
+# ---------------------------------------------------------------------------
+# Score breakdown (2026-11-11): how each bullet contributes to a ticker's strength.
+# ---------------------------------------------------------------------------
+def category_points(cat: str, info: dict):
+    """[(detail, points)] strongest first, or None when this signal was recorded before the
+    per-finding data was saved (it appears after the next scan). Single-finding categories
+    (news, short interest) don't need saved parts."""
+    parts = info.get("parts")
+    if not parts and cat in ("news", "short_interest"):
+        parts = [[info.get("detail", ""), info.get("strength", 0.0)]]
+    if not parts:
+        return None
+    return [(d, p) for d, _s, p in weighted_parts([(d, s) for d, s in parts])]
+
+
+def format_score_breakdown(cats: dict) -> str | None:
+    """One md line, e.g.
+    `Fundamentals +1.46 = Revenue growth 115.3% YoY {+1.00} ;; Earnings beat ... {+0.46} || News +0.70 = ...`
+    Kept as its OWN bullet (not folded into the Technical / Fundamentals / News lines) because
+    backfill_features.py and features.py parse those lines by exact label and text."""
+    excluded = {MOMENTUM_CATEGORY, NEWS_NEUTRAL_CATEGORY} | CAUTION_STYLE_CATEGORY_KEYS
+    blocks = []
+    for cat, info in cats.items():
+        if cat in excluded:
+            continue
+        label = CATEGORY_LABELS.get(cat, cat)
+        total = info.get("strength", 0.0)
+        pts = category_points(cat, info)
+        if pts:
+            items = " ;; ".join(f"{d} {{{p:+.2f}}}" for d, p in pts)
+            blocks.append(f"{label} {total:+.2f} = {items}")
+        else:
+            blocks.append(f"{label} {total:+.2f}")
+    return " || ".join(blocks) if blocks else None
 
 
 # ---------------------------------------------------------------------------
@@ -818,9 +855,6 @@ def format_ticker_line(rank: int, symbol: str, name: str, categories: dict,
             bullets.append(f"  • \u26A0\uFE0F **{label}:** {categories[cat]['detail']}")
     if sector_note:
         bullets.append(f"  • **Sector:** {sector_note}")
-    plan_bullet = format_trade_plan(compute_trade_plan(price, atr, STOP_ATR_MULT), RESOLUTION_DAYS)
-    if plan_bullet:
-        bullets.append(plan_bullet)
     caution = format_low_atr_caution(price, atr)
     if caution:
         bullets.append(caution)
@@ -832,6 +866,10 @@ def format_ticker_line(rank: int, symbol: str, name: str, categories: dict,
         bullets.append(drop_caution)
     if ipo_caution:
         bullets.append(ipo_caution)
+    # The trade plan is always the last bullet.
+    plan_bullet = format_trade_plan(compute_trade_plan(price, atr, STOP_ATR_MULT), RESOLUTION_DAYS)
+    if plan_bullet:
+        bullets.append(plan_bullet)
 
     return header + "\n" + "\n".join(bullets)
 
@@ -1009,7 +1047,9 @@ def main():
 
     def _rank_key(kv):
         count, raw = score_ticker(kv[1])
-        return (count, adjusted_strength(raw, len(cheap_flags[kv[0]])), tiebreak_key(kv[0]))
+        # RANK_CLEAN_FIRST: flag-free names always sort above flagged ones (2026-11-11).
+        clean = 0 if (RANK_CLEAN_FIRST and cheap_flags[kv[0]]) else 1
+        return (clean, count, adjusted_strength(raw, len(cheap_flags[kv[0]])), tiebreak_key(kv[0]))
 
     ranked = sorted(qualifying.items(), key=_rank_key, reverse=True)
     # Attach each ticker's overall rank now, so the push and the full
@@ -1085,7 +1125,8 @@ def main():
     # (and got dinged for chase risk) -- the block boundary is never crossed.
     block = max(PRICED_TOP_N, TOP_N_ALERTS)
     order = sorted(ranked_with_rank[:block],
-                   key=lambda t: (ratings[t[1]]["count"], ratings[t[1]]["adj"], tiebreak_key(t[1])),
+                   key=lambda t: (0 if (RANK_CLEAN_FIRST and ratings[t[1]]["flags"]) else 1,
+                                  ratings[t[1]]["count"], ratings[t[1]]["adj"], tiebreak_key(t[1])),
                    reverse=True) + ranked_with_rank[block:]
     ranked = [(sym, cats) for _, sym, cats in order]
     ranked_with_rank = [(i, sym, cats) for i, (_, sym, cats) in enumerate(order, start=1)]
@@ -1108,7 +1149,13 @@ def main():
     f = buf
     f.write(f"# Latest Alerts ({len(ranked)} qualifying tickers)\n")
     f.write(f"_Run: {run_stamp} ET_\n")
-    f.write("_Scoring: extension-adjusted ranking, relative tiers_\n\n")
+    order_note = ("flag-free names first, then signal count, then strength" if RANK_CLEAN_FIRST
+                  else "signal count, then strength")
+    f.write(f"_Scoring: {order_note} (minus {EXTENSION_PENALTY:.2f} per extension flag); relative tiers_\n")
+    f.write("_Points: each finding's contribution to its category score -- the strongest counts in full, "
+            "the next x0.6, then x0.36, and so on. A ticker's strength is the sum of its categories. "
+            "Context news, cautions and sharp-drop labels are not scored; only extension flags change "
+            "the ranking (see Score breakdown)._\n\n")
     for rank, sym, cats in ranked_with_rank:
         count, strength = score_ticker(cats)
         rt = ratings[sym]
@@ -1124,6 +1171,9 @@ def main():
             if cat in CAUTION_STYLE_CATEGORY_KEYS:
                 continue  # written separately below, clearly marked
             f.write(f"- **{CATEGORY_LABELS.get(cat, cat)}**: {info['detail']}\n")
+        breakdown = format_score_breakdown(cats)
+        if breakdown:
+            f.write(f"- **Score breakdown**: {breakdown}\n")
         for cat, label in CAUTION_STYLE_CATEGORIES:
             if cat in cats:
                 f.write(f"- \u26A0\uFE0F **{label.upper()}**: {cats[cat]['detail']}\n")
@@ -1138,12 +1188,6 @@ def main():
         # only turns "-"/"*"-prefixed lines into proper list items.
         plan = compute_trade_plan(prices.get(sym), atrs.get(sym), STOP_ATR_MULT)
         if plan:
-            entry_mid = (plan["entry_low"] + plan["entry_high"]) / 2
-            tp_pct = (plan["take_profit"] - entry_mid) / entry_mid * 100
-            f.write(f"- **Trade plan**: entry ${plan['entry_low']:.2f}-${plan['entry_high']:.2f}, "
-                    f"take-profit ${plan['take_profit']:.2f} ({tp_pct:+.1f}%), "
-                    f"stop ${plan['stop']:.2f}, full target ${plan['target']:.2f} "
-                    f"(~{plan['shares']} sh, ~${plan['risk_usd']:.0f} at risk)\n")
             pa = price_atr.get(sym, {})
             chase_line = format_chase_caution(
                 compute_chase_info(prices.get(sym), atrs.get(sym), pa.get("prev_close"), pa.get("close_5d")))
@@ -1157,6 +1201,14 @@ def main():
             f.write(drop_md + "\n")
         if ratings[sym]["flags"]:
             f.write("- **Extension flags**: " + "; ".join(ratings[sym]["flags"]) + "\n")
+        # Trade plan is ALWAYS the last line of a card.
+        if plan:
+            entry_mid = (plan["entry_low"] + plan["entry_high"]) / 2
+            tp_pct = (plan["take_profit"] - entry_mid) / entry_mid * 100
+            f.write(f"- **Trade plan**: entry ${plan['entry_low']:.2f}-${plan['entry_high']:.2f}, "
+                    f"take-profit ${plan['take_profit']:.2f} ({tp_pct:+.1f}%), "
+                    f"stop ${plan['stop']:.2f}, full target ${plan['target']:.2f} "
+                    f"(~{plan['shares']} sh, ~${plan['risk_usd']:.0f} at risk)\n")
         f.write("\n")
 
     if momentum_ranked:

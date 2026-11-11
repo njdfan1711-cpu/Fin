@@ -298,7 +298,7 @@ def _drop_parts(info: dict) -> tuple[str, str, str]:
     icon, label = {
         "stay_away": ("\u26D4", "Stay away"),
         "dip": ("\U0001F7E2", "Possible dip"),
-    }.get(info["verdict"], ("\u26A0\uFE0F", "Unclear, wait"))
+    }.get(info["verdict"], ("\U0001F7E1", "Unclear, wait"))
     why = "; ".join(info["reasons"][:3])[:220]
     head = f"Sharp drop {info['day_pct']:+.1f}% today ({info['day_atr']:.1f} ATR) \u2014 {label}"
     return icon, head, why

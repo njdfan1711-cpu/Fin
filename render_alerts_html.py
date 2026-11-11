@@ -37,6 +37,14 @@ _CARD_RE = re.compile(r"^## (\d+)\. (.+?)(?: -- \[([A-Z]+)\] (\d+) signals?, str
                       r"(?: \(raw (-?[\d.]+), (\d+) extension flags?\))?(?: \u00B7 (.+))?)?$")
 _NAME_SYM_RE = re.compile(r"^(.*) \(([A-Z0-9.\-]+)\)$")
 _BULLET_RE = re.compile(r"^- (\u26A0\uFE0F )?\*\*(.+?)\*\*: (.*)$")
+# Sharp-drop diagnosis bullet written by compose_alerts.py (see drop_check.py). Its icon
+# is not always the warning sign, so it needs its own pattern.
+_DROP_RE = re.compile(r"^- (\u26A0\uFE0F|\u26D4|\U0001F7E2|\U0001F7E1) \*\*(SHARP DROP.+?)\*\*: (.*)$")
+# "Score breakdown" bullet (compose_alerts.format_score_breakdown): categories split on " || ",
+# findings on " ;; ", each finding ends with {+0.00}.
+_PTS_RE = re.compile(r"^(.*) \{([+-]\d+\.\d\d)\}$")
+_CAT_RE = re.compile(r"^(.+?) ([+-]\d+\.\d\d)(?: = (.*))?$")
+_PENALTY_RE = re.compile(r"minus ([\d.]+) per extension flag")
 _PLAN_RE = re.compile(
     r"entry \$([\d.,]+)-\$([\d.,]+), take-profit \$([\d.,]+) \(([+-][\d.]+)%\), "
     r"stop \$([\d.,]+), full target \$([\d.,]+) \(~(\d+) sh, ~\$([\d.,]+) at risk\)")
@@ -48,7 +56,7 @@ def _e(s) -> str:
 
 def parse_md(md_text: str) -> dict:
     """-> {"title", "run", "cards": [...], "spec_note", "spec": [...]}"""
-    out = {"title": "Latest Alerts", "run": "", "cards": [], "spec_note": "", "spec": [], "v2": False}
+    out = {"title": "Latest Alerts", "run": "", "cards": [], "spec_note": "", "spec": [], "v2": False, "penalty": 0.5}
     section = "main"
     cur = None
     for raw in md_text.splitlines():
@@ -68,6 +76,9 @@ def parse_md(md_text: str) -> dict:
             continue
         if line.startswith("_Scoring:"):
             out["v2"] = True      # new scoring: flags come from the "Extension flags" bullet
+            pm_ = _PENALTY_RE.search(line)
+            if pm_:
+                out["penalty"] = float(pm_.group(1))
             continue
         if line.startswith("_") and line.endswith("_") and section == "spec" and cur is None:
             out["spec_note"] = line.strip("_")
@@ -79,12 +90,16 @@ def parse_md(md_text: str) -> dict:
             name, sym = (ns.group(1), ns.group(2)) if ns else ("", label)
             cur = {"rank": int(rank), "name": name, "sym": sym, "tier": tier or "",
                    "count": count or "", "strength": strength or "", "raw": raw or "",
-                   "streak": streak or "", "flags": [], "v2": out["v2"],
+                   "streak": streak or "", "flags": [], "v2": out["v2"], "penalty": out["penalty"], "breakdown": {},
                    "signals": [], "warnings": [], "plan": None, "plan_raw": "",
-                   "news": [], "other": []}
+                   "news": [], "other": [], "drops": []}
             (out["cards"] if section == "main" else out["spec"]).append(cur)
             continue
         if cur is None:
+            continue
+        d = _DROP_RE.match(line)
+        if d:
+            cur["drops"].append(d.groups())
             continue
         b = _BULLET_RE.match(line)
         if not b:
@@ -96,6 +111,8 @@ def parse_md(md_text: str) -> dict:
         up = label.upper()
         if up == "EXTENSION FLAGS":
             cur["flags"] = _split_items(text)
+        elif up == "SCORE BREAKDOWN":
+            cur["breakdown"] = _parse_breakdown(text)
         elif warn:
             cur["warnings"].append((label, text))
         elif up.startswith("TRADE PLAN"):
@@ -103,11 +120,39 @@ def parse_md(md_text: str) -> dict:
             pm = _PLAN_RE.search(text)
             if pm:
                 cur["plan"] = pm.groups()
-        elif up.startswith("NEWS"):
+        elif up.startswith("NEWS") and "CONTEXT" in up:
             cur["news"].append(text)
         else:
             cur["signals"].append((label, text))
     return out
+
+
+def _parse_breakdown(text: str) -> dict:
+    """-> {"Fundamentals": (subtotal, [(detail, points) ...]), ...}; findings may be missing."""
+    out = {}
+    for block in text.split(" || "):
+        m = _CAT_RE.match(block.strip())
+        if not m:
+            continue
+        name, total, rest = m.group(1), m.group(2), m.group(3)
+        items = []
+        for it in (rest or "").split(" ;; "):
+            pm = _PTS_RE.match(it.strip())
+            if pm:
+                items.append((pm.group(1), pm.group(2)))
+        out[name] = (total, items)
+    return out
+
+
+def _score_tag(label: str, text: str, penalty: float) -> str:
+    """Short note on how a warning bullet affects the score. Only the extension flags change
+    the ranking (they subtract `penalty`); everything else is display-only."""
+    up, t = label.upper(), text
+    if up == "EARNINGS REACTION" and not t.lower().startswith("earnings scheduled"):
+        return f"rank \u2212{penalty:.2f}"
+    if up == "CAUTION" and (t.startswith("Extended") or t.startswith("up ") or "RSI overbought" in t):
+        return f"rank \u2212{penalty:.2f}"
+    return "not scored"
 
 
 def _warning_severity(label: str, text: str) -> str:
@@ -172,7 +217,7 @@ def _warning_items(label: str, text: str) -> list:
 def _render_card(c: dict, expand: bool) -> str:
     tier = c["tier"]
     tier_cls = {"STRONG": "strong", "MODERATE": "moderate", "EXTENDED": "extended"}.get(tier, "plain")
-    warn_n = len(c["warnings"])
+    warn_n = len(c["warnings"]) + len(c.get("drops", []))
     sev = [_warning_severity(l, t) for l, t in c["warnings"]]
     st = card_status(c)
     # Stripe = what the data says, not the tier: red chasing, amber extended,
@@ -204,19 +249,43 @@ def _render_card(c: dict, expand: bool) -> str:
         raw_bit = f' (raw {_e(c["raw"])})' if c["raw"] else ""
         body.append(f'<div class="meta">{_e(c["count"])} signals \u00B7 strength {_e(c["strength"])}{raw_bit}</div>')
     if st["extended"]:
-        body.append('<div class="why">Extended: ' + _e(" \u00B7 ".join(st["why"])) + '</div>')
+        body.append('<div class="why">Extended: ' + _e(" \u00B7 ".join(st["why"]))
+                    + f' <span class="tag">each flag \u2212{c.get("penalty", 0.5):.2f} rank</span></div>')
 
     if c["signals"]:
         rows = []
         for label, text in c["signals"]:
-            items = "".join(f"<li>{_e(i)}</li>" for i in _split_items(text))
-            rows.append(f'<div class="sec"><div class="sec-h">{_e(label)}</div><ul>{items}</ul></div>')
+            bd = c.get("breakdown", {}).get(label)
+            if bd and bd[1]:
+                # Points from compose_alerts: strongest finding first, each with what it adds.
+                items = "".join(f'<li>{_e(d)}<span class="pts">{_e(p)}</span></li>' for d, p in bd[1])
+            else:
+                items = "".join(f"<li>{_e(i)}</li>" for i in _split_items(text))
+            sub = f'<span class="subtot">{_e(bd[0])}</span>' if bd else ""
+            rows.append(f'<div class="sec"><div class="sec-h">{_e(label)}{sub}</div><ul>{items}</ul></div>')
         body.append("".join(rows))
 
-    for (label, text), s in zip(c["warnings"], sev):
-        items = "".join(f"<div>{_e(i)}</div>" for i in _warning_items(label, text))
-        body.append(f'<div class="callout {s}"><div class="callout-h">\u26A0\uFE0F {_e(label.title())}</div>{items}</div>')
+    # Context-only headlines (not scored) sit with the signals, ahead of the warnings.
+    if c["news"]:
+        news = "".join(f"<li>{_e(n)}</li>" for n in c["news"])
+        body.append(f'<div class="sec news"><div class="sec-h">News (context, not scored)</div><ul>{news}</ul></div>')
 
+    # Sharp-drop diagnosis (display-only): red = stay away, blue = possible dip, amber = unclear.
+    for icon, label, text in c.get("drops", []):
+        cls = "alert" if icon == "\u26D4" else "info" if icon == "\U0001F7E2" else "warn"
+        body.append(f'<div class="callout {cls}"><div class="callout-h">{icon} {_e(label)}'
+                    f'<span class="tag">not scored</span></div><div>{_e(text)}</div></div>')
+
+    for (label, text), sv in zip(c["warnings"], sev):
+        items = "".join(f"<div>{_e(i)}</div>" for i in _warning_items(label, text))
+        tag = _score_tag(label, text, c.get("penalty", 0.5))
+        body.append(f'<div class="callout {sv}"><div class="callout-h">\u26A0\uFE0F {_e(label.title())}'
+                    f'<span class="tag">{_e(tag)}</span></div>{items}</div>')
+
+    for label, text in c["other"]:
+        body.append(f'<div class="sec"><div>{_e(text)}</div></div>')
+
+    # The trade plan is ALWAYS the last thing on the card.
     if c["plan"]:
         lo, hi, tp, tp_pct, stop, target, sh, risk = c["plan"]
         cells = [("Entry", f"${lo}\u2013${hi}", ""), ("Take-profit", f"${tp}", f"{tp_pct}%"),
@@ -231,12 +300,6 @@ def _render_card(c: dict, expand: bool) -> str:
         body.append(f'<div class="plan"><div class="sec-h">Trade plan</div><div class="grid">{grid}</div></div>')
     elif c["plan_raw"]:
         body.append(f'<div class="plan"><div class="sec-h">Trade plan</div><div>{_e(c["plan_raw"])}</div></div>')
-
-    for label, text in c["other"]:
-        body.append(f'<div class="sec"><div>{_e(text)}</div></div>')
-    if c["news"]:
-        news = "".join(f"<li>{_e(n)}</li>" for n in c["news"])
-        body.append(f'<div class="sec news"><div class="sec-h">News (context, not scored)</div><ul>{news}</ul></div>')
 
     search = f'{c["sym"]} {c["name"]}'.lower()
     return (f'<details class="card {stripe}" data-tier="{_e(tier)}" data-plan="{has_plan}" '
@@ -296,6 +359,9 @@ ul{margin:0;padding-left:18px}li{margin:1px 0;font-size:14px}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .cell .cl{font-size:11px;color:var(--muted)}.cell .cv{font-weight:700}.sub{font-weight:600;color:var(--green);font-size:12px;margin-left:5px}
 .news{opacity:.8;font-size:13px}
+.subtot{float:right;color:var(--blue);font-weight:800;letter-spacing:0;font-size:12px}
+.pts{display:inline-block;margin-left:7px;padding:0 6px;border-radius:8px;background:var(--blue-soft);color:var(--blue);font-size:11px;font-weight:800;vertical-align:1px}
+.tag{float:right;font-weight:700;font-size:11px;letter-spacing:0;text-transform:none;opacity:.85}
 h2.spec{font-size:16px;margin:26px 0 4px}.specnote{color:var(--muted);font-size:13px;margin-bottom:8px}
 footer{color:var(--muted);font-size:12px;text-align:center;margin-top:24px}
 @media (max-width:420px){.grid{grid-template-columns:repeat(2,1fr)}.chips{max-width:42%}}
@@ -379,7 +445,7 @@ def render_html(md_text: str, expand_top_n: int = EXPAND_TOP_N) -> str:
 <button class="pill" id="clr">Clear</button>
 <input id="q" type="search" placeholder="Search ticker or name" autocomplete="off">
 <button class="pill" id="exp" data-open="0">Expand all</button></div>
-<div class="legend">Tap several filters to combine them. Stripe: green = fresh, amber = extended, red = chasing a big move, blue = neither.</div></div></header>
+<div class="legend">Tap several filters to combine them. Stripe: green = fresh, amber = extended, red = chasing a big move, blue = neither.<br>Blue numbers = points a finding adds to the ticker\u2019s strength (a category\u2019s strongest finding counts in full, the next \u00d70.6, then \u00d70.36\u2026). Order: flag-free names first, then number of signals, then strength; each extension flag subtracts points from the ranking only.</div></div></header>
 <div class="count" id="cnt"></div>
 {cards_html}{spec_html}
 <footer>Generated from latest_alerts.md \u00B7 display only, not a recommendation</footer>

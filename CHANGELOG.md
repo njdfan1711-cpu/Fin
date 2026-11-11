@@ -1,3 +1,100 @@
+## 2026-11-11 (flag-free names rank first + per-bullet score points on every card)
+Built on the live `main` as fetched 2026-11-11 (commit hash not captured). Base hashes (sha256, first 12):
+compose_alerts.py d137779410f3, config.py 7f1643a1edc3, signals_store.py b21f3be3cca6,
+technicals_scan.py 707703c51f61, fundamentals_scan.py bd0421f23757, drop_check.py 0094a97d1576,
+render_alerts_html.py ecb6f2490583, CHANGELOG.md 11b5b8cca600. This render_alerts_html.py ALSO contains the
+"alerts page" fix in the entry below, so it replaces any earlier copy of that file.
+Tested offline: compile; an end-to-end run of the real compose_alerts.main() against a copy of the repo with
+mocked prices/news and six crafted tickers (clean, flagged, no per-finding data, sharp drop): the order,
+markdown, push text and rendered page were all inspected, and the same run with RANK_CLEAN_FIRST = False
+reproduced the old order (the CoreWeave-style #1); points sum to each category's strength (TXN example
+3.39 matches the hand calculation); backfill_features.parse_run returns identical results with and without
+the new markdown lines; merge_signals_state keeps the new field. NOT yet seen in a live run: the scans
+actually writing per-finding data, and the page with real data.
+
+Why: (1) CoreWeave ranked #1 while carrying earnings-reaction and chase-risk flags because ranking sorted by
+signal COUNT first (it had 3 signals, everyone else 2) and the flag penalty (0.5 each) only reordered names
+with the same count. (2) It was hard to tell why a ticker ranked where it did: bullets are findings inside
+a category, a "signal" is a category, and only the category's combined strength was stored.
+
+- Ranking (`config.py`, `compose_alerts.py`): new `RANK_CLEAN_FIRST = True`. Sort key is now
+  (flag-free first, signal count, strength minus EXTENSION_PENALTY per flag, daily tiebreak), at both sort
+  sites. Flagged names stay in the list, tiered Extended, but sit below every flag-free name, so the top-20
+  push is mostly flag-free names (flagged names only fill spare slots). Set it to False to restore the old
+  order. Known edge: the priced block (top PRICED_TOP_N) is still ranked above names never price-checked,
+  so a chase-flagged name inside that block can sit above an unpriced flag-free name past rank PRICED_TOP_N.
+  The scorecard's raw-vs-adjusted shadow check now compares against this ordering.
+- Per-finding data (`signals_store.py`, `technicals_scan.py`, `fundamentals_scan.py`): `record_signal` takes
+  optional `parts` (the individual findings and their raw strengths) and stores them with the signal;
+  new `weighted_parts()` computes each finding's points with the same 0.6 decay as `combine_strengths`, so a
+  category's points always add up to its strength. Technical and Fundamentals now pass their findings. News
+  and Short Interest are single-finding and need no saved parts. Signals recorded BEFORE this change have
+  no parts, so those cards show the category subtotal only until the next scan rewrites them (technical:
+  next intraday run; fundamentals: next daily scan).
+- Markdown (`compose_alerts.py`): each card gets one new bullet, `- **Score breakdown**: ...`, listing each
+  category's subtotal and each finding's points (strongest first). It is deliberately a SEPARATE bullet:
+  backfill_features.py and features.py match the Technical / Fundamentals / News lines by exact label and
+  text, so those lines are unchanged. The `_Scoring:` line now states the order and the penalty, and a new
+  `_Points:` note explains the decay. The trade plan is now the LAST bullet of every card in the markdown
+  and in the push (the "Expected timeframe" line stays attached under it).
+- Page (`render_alerts_html.py`): each scored bullet shows its points as a blue chip and each category
+  shows its subtotal; the extension-flag line says each flag subtracts the penalty; warning callouts are
+  tagged "rank -0.50" (earnings reaction, extended / RSI-overbought / chase cautions) or "not scored"
+  (earnings quality, other cautions, sharp-drop labels); the legend explains points and order.
+- `drop_check.py`: the "unclear" verdict now uses a yellow circle instead of the warning sign, because the
+  warning sign made backfill_features count it as a news caution. Verdicts are still display-only and do not
+  change rank: a "stay away" name that is otherwise clean still ranks normally (open item).
+
+## 2026-11-11 (alerts page: trade plan always last, scored News stays with signals, drop callout)
+Built on the live `main` as fetched 2026-11-11 (commit hash not captured). Base hashes (sha256, first 12):
+render_alerts_html.py ecb6f2490583, CHANGELOG.md 11b5b8cca600. Only the styled page (latest_alerts.html)
+changes: latest_alerts.md, the ntfy push, scoring and ranking are untouched.
+Tested offline: compile; the new renderer run over the live latest_alerts.md (all 1,197 cards render, none
+has anything after the trade plan; before, CoreWeave's card did); CoreWeave's card re-rendered; the three
+sharp-drop bullets rendered as callouts in a synthetic file. NOT yet seen: the next live run's page.
+
+Why: on CoreWeave's card the scored News headline appeared at the very bottom, under the trade plan, inside a
+block titled "News (context, not scored)", while the card header said 3 signals. Cause: parse_md sent
+every bullet whose label starts with "NEWS" to the context-only block, so the scored "News" signal was pulled
+out of the signals list and relabelled; two different entries (scored "news" and unscored "news_neutral")
+were merged under the not-scored title. The markdown file and the scoring were always correct.
+A second flaw, introduced by the 2026-11-10 drop_check change: the page parser did not recognise the
+"stay away" / "possible dip" bullets (their icons are not the warning sign), so they would have shown as raw
+text with literal asterisks below the trade plan. Fixed here.
+
+- `render_alerts_html.py`: (1) only "News (context, not scored)" goes to the context block; the scored
+  "News" signal is shown with Fundamentals / Technical. (2) New card order: signals, context news,
+  sharp-drop callout, warnings, other lines, TRADE PLAN LAST (always the final block). (3) Sharp-drop
+  bullets get their own callout: red = stay away, blue = possible dip, amber = unclear; they also count in
+  the card's warning chip.
+- Card order is now: summary header, signals (scored), context news, sharp-drop callout, warnings (earnings
+  quality / earnings reaction / caution), trade plan.
+
+## 2026-11-11 (alerts page: trade plan always last, scored News stays with signals, drop callout)
+Built on the live `main` as fetched 2026-11-11 (commit hash not captured). Base hashes (sha256, first 12):
+render_alerts_html.py ecb6f2490583, CHANGELOG.md 11b5b8cca600. Only the styled page (latest_alerts.html)
+changes: latest_alerts.md, the ntfy push, scoring and ranking are untouched.
+Tested offline: compile; the new renderer run over the live latest_alerts.md (all 1,197 cards render, none
+has anything after the trade plan; before, CoreWeave's card did); CoreWeave's card re-rendered; the three
+sharp-drop bullets rendered as callouts in a synthetic file. NOT yet seen: the next live run's page.
+
+Why: on CoreWeave's card the scored News headline appeared at the very bottom, under the trade plan, inside a
+block titled "News (context, not scored)", while the card header said 3 signals. Cause: parse_md sent
+every bullet whose label starts with "NEWS" to the context-only block, so the scored "News" signal was pulled
+out of the signals list and relabelled; two different entries (scored "news" and unscored "news_neutral")
+were merged under the not-scored title. The markdown file and the scoring were always correct.
+A second flaw, introduced by the 2026-11-10 drop_check change: the page parser did not recognise the
+"stay away" / "possible dip" bullets (their icons are not the warning sign), so they would have shown as raw
+text with literal asterisks below the trade plan. Fixed here.
+
+- `render_alerts_html.py`: (1) only "News (context, not scored)" goes to the context block; the scored
+  "News" signal is shown with Fundamentals / Technical. (2) New card order: signals, context news,
+  sharp-drop callout, warnings, other lines, TRADE PLAN LAST (always the final block). (3) Sharp-drop
+  bullets get their own callout: red = stay away, blue = possible dip, amber = unclear; they also count in
+  the card's warning chip.
+- Card order is now: summary header, signals (scored), context news, sharp-drop callout, warnings (earnings
+  quality / earnings reaction / caution), trade plan.
+
 ## 2026-11-10 (sharp-drop check on pushed picks + offering/dilution news keywords)
 Built on the live `main` as fetched 2026-11-10 (commit hash not captured). Base hashes (sha256, first 12):
 news_scan.py c564e4beb353, compose_alerts.py 73f04ad934a6, intraday.yml e61d4008f17e,

@@ -374,7 +374,8 @@ def main():
         combined_detail = "; ".join(d for d, _ in findings)
         strengths = [s for _, s in findings]
         combined_strength = combine_strengths(strengths)
-        record_signal(sym, "technical", combined_detail, strength=combined_strength)
+        record_signal(sym, "technical", combined_detail, strength=combined_strength,
+                      parts=findings)
         total_signals += len(findings)
 
     total_caution = 0
