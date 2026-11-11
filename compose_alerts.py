@@ -104,6 +104,7 @@ from features import extract_features
 from alert_log import mark_alerted
 from daily_pushes import record_push, prune_old_days, symbol_history
 from notify import send_alert
+from drop_check import assess_drop, format_drop_caution, format_drop_md
 
 # Per-request timeout for the yfinance price/ATR batch. Same reasoning as
 # BATCH_TIMEOUT_SECONDS in filters.py: without a timeout, one stalled
@@ -782,7 +783,7 @@ def format_ticker_line(rank: int, symbol: str, name: str, categories: dict,
                         price, target, atr=None, sector_note: str | None = None,
                         is_new: bool = False, chase_info: dict | None = None,
                         streak_tag: str = "", ipo_caution: str | None = None,
-                        tier: str | None = None) -> str:
+                        tier: str | None = None, drop_info: dict | None = None) -> str:
     """
     Markdown-formatted: bold ticker/price header line, reasons as a clean
     indented bullet list underneath instead of one long comma/pipe string.
@@ -826,6 +827,9 @@ def format_ticker_line(rank: int, symbol: str, name: str, categories: dict,
     chase_caution = format_chase_caution(chase_info)
     if chase_caution:
         bullets.append(chase_caution)
+    drop_caution = format_drop_caution(drop_info)
+    if drop_caution:
+        bullets.append(drop_caution)
     if ipo_caution:
         bullets.append(ipo_caution)
 
@@ -1089,6 +1093,15 @@ def main():
     assign_tiers([sym for _, sym, _ in ranked_with_rank], ratings,
                  {s for s, v in price_atr.items() if v.get("price")})
 
+    # Sharp-drop diagnosis (display-only, never changes rank -- see drop_check.py).
+    # Pushed picks only, so the extra EDGAR / Finnhub / yfinance calls stay few.
+    drop_infos = {}
+    for _, sym, _ in push_list:
+        pa = price_atr.get(sym, {})
+        di = assess_drop(sym, prices.get(sym), atrs.get(sym), pa.get("prev_close"))
+        if di:
+            drop_infos[sym] = di
+
     import io
     run_stamp = datetime.now(timezone.utc).astimezone(ET).strftime("%Y-%m-%d_%H%M")
     buf = io.StringIO()
@@ -1139,6 +1152,9 @@ def main():
         ipo_line = ipo_cautions.get(sym)
         if ipo_line:
             f.write("- \u26A0\uFE0F **RECENT IPO**: " + ipo_line.split("**Recent IPO:** ", 1)[1] + "\n")
+        drop_md = format_drop_md(drop_infos.get(sym))
+        if drop_md:
+            f.write(drop_md + "\n")
         if ratings[sym]["flags"]:
             f.write("- **Extension flags**: " + "; ".join(ratings[sym]["flags"]) + "\n")
         f.write("\n")
@@ -1210,6 +1226,7 @@ def main():
         chase_info = compute_chase_info(price, atr, pa.get("prev_close"), pa.get("close_5d"))
         lines.append(format_ticker_line(rank, sym, name, cats, price, target, atr, sector_note, is_new,
                                         chase_info=chase_info,
+                                        drop_info=drop_infos.get(sym),
                                         streak_tag=format_streak_tag(streak_hist.get(sym), price),
                                         ipo_caution=ipo_cautions.get(sym),
                                         tier=ratings[sym]["tier"]))

@@ -167,6 +167,14 @@ BEARISH_KEYWORDS = [
     "delays", "fined", "slashes", "cuts forecast", "cuts outlook",
     "lowers guidance", "lowers outlook", "cuts price target",
     "price target cut", "short seller", "short report", "sec charges",
+    # Added 2026-11-10: equity-offering / dilution phrasing (a 15M-share offering
+    # on a top-ranked pick was not flagged). Plain "offering" is left out on
+    # purpose -- "new product offering" would false-positive.
+    "public offering", "secondary offering", "stock offering",
+    "share offering", "proposed offering", "prices offering",
+    "pricing of public offering", "pricing of upsized",
+    "selling stockholders", "dilution", "dilutive", "at-the-market",
+    "share sale", "convertible senior notes",
 ]
 BULLISH_KEYWORDS = [
     "beats estimates", "beat estimates", "upgrade", "upgraded",

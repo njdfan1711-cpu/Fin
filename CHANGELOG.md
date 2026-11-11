@@ -1,3 +1,50 @@
+## 2026-11-10 (sharp-drop check on pushed picks + offering/dilution news keywords)
+Built on the live `main` as fetched 2026-11-10 (commit hash not captured). Base hashes (sha256, first 12):
+news_scan.py c564e4beb353, compose_alerts.py 73f04ad934a6, intraday.yml e61d4008f17e,
+.gitattributes 50b8070f3cb0, CHANGELOG.md 449735582c2e. drop_check.py is a new file.
+Tested offline: compile + YAML checks; the real repo modules imported with the patched compose_alerts.py
+and format_ticker_line rendered with and without a drop; the verdict logic (offering found -> stay away,
+no news + intact trend + rebound/market selloff -> possible dip, a failed data source -> unclear);
+assess_drop with mocked EDGAR / Finnhub / yfinance (trigger, verdicts, once-a-day log). NOT yet seen in a
+live run: the real EDGAR, Finnhub company-news and yfinance calls, and a full compose_alerts.main().
+
+Why: a top-ranked pick (FA) stayed #1 while down ~8% on news of a 15M-share offering. Review of the code
+found four causes: (a) bearish news is display-only by design, so it can never lower a rank; (b) the
+bearish keyword list had no offering/dilution phrases; (c) news_scan only reads general feeds (Finnhub
+general, Yahoo, CNBC, MarketWatch) with a 40-minute window, and offerings are usually press releases or SEC
+filings, often after the close or premarket; (d) the only price caution (chase risk) fires on UP moves
+only, and fundamentals / short-interest signals stay active until their validity window ends.
+
+- `drop_check.py` (new): for each PUSHED pick that is down >= 1.5 ATR or >= 5% vs the prior close, runs a
+  diagnosis and labels it STAY AWAY / POSSIBLE DIP / UNCLEAR. Checks: SEC EDGAR filings from the last 3 days
+  (424B4/424B5 offering prospectuses, and 8-K items 1.03, 1.05, 2.05, 2.06, 3.01, 4.01, 4.02, 5.02), Finnhub
+  company news from the last 48 hours (bearish by the same keyword list as news_scan), SPY's move today,
+  the 200-day average, and where today's close sits in the day's range. STAY AWAY = a company-specific bad
+  event was found. POSSIBLE DIP = nothing bad found, price above the 200-day, and either SPY is down >= 1%
+  (stock not > 3 points worse than SPY) or the stock is closing in the upper half of the range. UNCLEAR =
+  everything else, and also whenever EDGAR or Finnhub failed (so "no bad news" can't be confirmed).
+  DISPLAY-ONLY: it never changes rank or tier. Every failure path returns nothing / "unclear"; it cannot
+  break the push. Each flagged symbol is logged once per ET day to `drop_checks.jsonl` (inputs + verdict)
+  so the verdicts can be backtested later, the same forward-logging idea as the screen-criteria log.
+- `compose_alerts.py`: imports drop_check; computes `drop_infos` once for the push list (right after
+  tiers are assigned); `format_ticker_line` takes `drop_info` and adds one bullet after the chase caution;
+  the same line is written to latest_alerts.md. The per-run history snapshots and daily_pushes records
+  are unchanged.
+- `news_scan.py`: BEARISH_KEYWORDS gains offering/dilution phrases ("public offering", "secondary
+  offering", "stock offering", "share offering", "proposed offering", "prices offering", "pricing of
+  public offering", "pricing of upsized", "selling stockholders", "dilution", "dilutive", "at-the-market",
+  "share sale", "convertible senior notes"). Plain "offering" is deliberately excluded. Bearish headlines
+  are still caution-only, not scored.
+- `.github/workflows/intraday.yml`: passes the `SEC_USER_AGENT` secret to the compose step and adds
+  `drop_checks.jsonl` to the files committed each run.
+- `.gitattributes`: `drop_checks.jsonl merge=union` (append-only log; keeps both sides on a rebase).
+- Setup needed: add an Actions secret `SEC_USER_AGENT` (e.g. "Fin YourName you@email.com"). SEC asks for a
+  contact in the User-Agent. Without it the code falls back to a placeholder address and EDGAR may refuse.
+- Known limits: "no bad news found" is not proof there is none; daily bars cannot see a premarket gap;
+  volume / candle-shape inputs use the in-progress bar mid-session; sector ETF comparison is not included
+  (SPY only). Next step after 4-6 weeks of logs: backtest each verdict bucket with swing_backtest.py and only
+  then consider letting STAY AWAY demote rank.
+
 ## 2026-11-05 (trade data moved to a separate private repo)
 Built on live `main` (commit 2dc0edf). Base hashes (sha256, first 12): position_monitor.py
 0a3a705777cf, trade_drawdown_report.py b99da6db493d,

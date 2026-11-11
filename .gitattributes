@@ -14,3 +14,6 @@ alerts_history/*.md merge=ours
 # nothing to merge, and it's only ever written by intraday.yml's own
 # serialized runs anyway.
 position_monitor_state.json merge=ours
+# drop_check.py appends one line per flagged drop (append-only log). "union"
+# keeps both sides' lines if a rebase ever sees concurrent appends.
+drop_checks.jsonl merge=union
