@@ -1,3 +1,27 @@
+## 2026-11-11 (card reference guide: fin_card_guide.html)
+Built on the live `main` as fetched 2026-11-11 (commit hash not captured). Base hash (sha256, first 12):
+CHANGELOG.md affbcd11374c. New file `fin_card_guide.html`; no scan, ranking or alert-page code changed.
+Tested offline: tag balance and that every tappable item has exactly one explanation panel (49 each); tap / tap
+again / several-open / Close-all behaviour in a simulated browser (jsdom); the sample card's points add up
+(Fundamentals +1.86, Technical +1.29, News +0.70, raw 3.85, minus two flags = 2.85). NOT tested: how it looks on a
+phone (no browser was available).
+
+Why: the alerts page shows many data points (signals, points chips, extension flags, warnings, tiers, trade plan)
+and it was hard to tell what each one is and whether it changes the rank.
+
+- `fin_card_guide.html`: standalone page (no external files) with ONE fictional sample card (SAMP) in the same
+  style as latest_alerts.html. Every data point on it is tappable: a panel shows What it is / Effect on rank / How
+  it shows up, plus a pill (adds points, -0.50 flag, not scored, label only); tap again to hide, "Close all"
+  resets. Below the card, a glossary covers data points the sample does not show (other signals, other warnings,
+  sharp-drop verdicts, tiers, Fresh chip, stripe colours, No price check, Back tag). All thresholds were read from
+  config.py and the scan scripts as of this date (e.g. 0.6 decay per extra finding, -0.50 per flag, 10% / 30% tiers,
+  25% extended-above-50-day-MA, 3-day earnings-reaction window, 1.0 / 2.0 ATR chase tests, entry +/-0.25 ATR, stop
+  1.5 ATR, take-profit 0.5 ATR, 2:1 full target, $5,000 sizing). If any of those change, this page must be
+  updated with them (it is static text, not generated from config at run time).
+- Open item noticed while reading config.py: the comment on EARNINGS_REACTION_DAYS says the flag "never excludes
+  or re-ranks", but compose_alerts.py counts "just reported earnings" as an extension flag (-0.50, and below
+  flag-free names). The guide describes the code's actual behaviour; the comment is stale.
+
 ## 2026-11-11 (flag-free names rank first + per-bullet score points on every card)
 Built on the live `main` as fetched 2026-11-11 (commit hash not captured). Base hashes (sha256, first 12):
 compose_alerts.py d137779410f3, config.py 7f1643a1edc3, signals_store.py b21f3be3cca6,
