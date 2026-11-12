@@ -85,7 +85,7 @@ jobs:
           # used for files that are fully regenerated each run (see
           # .gitattributes) and have nothing to structurally merge.
           git config merge.ours.driver true
-          for f in signals_state.json alert_log.json latest_alerts.md latest_alerts.html daily_pushes.json position_monitor_state.json drop_checks.jsonl; do
+          for f in signals_state.json alert_log.json latest_alerts.md latest_alerts.html daily_pushes.json position_monitor_state.json drop_checks.jsonl latest_run.json; do
             if [ -f "$f" ]; then
               git add "$f"
             fi
