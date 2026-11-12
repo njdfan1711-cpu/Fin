@@ -1,22 +1,22 @@
 {
-  "generated_utc": "2026-11-12T14:31:20+00:00",
+  "generated_utc": "2026-11-12T15:31:15+00:00",
   "rank_mode": "least_extended",
   "rules": "one position at a time; cost gate on; indicators per day; flat at close",
-  "signals_available": 232,
-  "trading_days": 35,
-  "trades_taken": 169,
-  "trades_per_day": 4.83,
-  "gross_pnl": 15.64,
-  "cost": 126.81,
-  "net_pnl": -111.17,
-  "net_per_trade": -0.66,
-  "win_rate_pct": 40.2,
+  "signals_available": 235,
+  "trading_days": 36,
+  "trades_taken": 172,
+  "trades_per_day": 4.78,
+  "gross_pnl": 6.58,
+  "cost": 128.5,
+  "net_pnl": -121.92,
+  "net_per_trade": -0.71,
+  "win_rate_pct": 40.1,
   "max_drawdown": -151.42,
   "exit_reasons": {
     "eod": 9,
-    "stop": 84,
+    "stop": 86,
     "target": 42,
-    "time_stop": 34
+    "time_stop": 35
   },
   "net_by_day": {
     "2026-09-24": 14.82,
@@ -53,7 +53,8 @@
     "2026-11-06": -14.24,
     "2026-11-09": 2.27,
     "2026-11-10": -18.91,
-    "2026-11-11": -7.08
+    "2026-11-11": -11.25,
+    "2026-11-12": -6.58
   },
   "skipped_by_reason": {
     "outranked same minute": 35,
