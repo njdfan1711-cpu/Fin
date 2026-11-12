@@ -1245,6 +1245,13 @@ def main():
         write_html(alert_content, "latest_alerts.html")
     except Exception as e:
         print(f"[latest_alerts.html] render failed (non-fatal): {e}", file=sys.stderr)
+    # Tiny file the page polls (see render_alerts_html._STALE_JS) to learn when this run has been
+    # published to the host. Committed in the same commit as latest_alerts.html.
+    try:
+        with open("latest_run.json", "w") as _rf:
+            json.dump({"run": run_stamp}, _rf)
+    except Exception as e:
+        print(f"[latest_run.json] write failed (non-fatal): {e}", file=sys.stderr)
     os.makedirs(ALERTS_HISTORY_DIR, exist_ok=True)
     history_path = os.path.join(ALERTS_HISTORY_DIR, f"latest_alerts_{run_stamp}.md")
     with open(history_path, "w") as out:
@@ -1258,6 +1265,12 @@ def main():
     # clients since Markdown: yes is already set on this push).
     click_url = (ALERTS_PAGE_URL or
                  (f"{REPO_URL}/blob/main/{LATEST_ALERTS_FILE}" if REPO_URL else None))
+    if ALERTS_PAGE_URL:
+        # 2026-11-12: this push is sent BEFORE the workflow commits/pushes latest_alerts.html and
+        # the host (Pages/Vercel/...) redeploys it, and the same URL is cached by browsers and CDNs.
+        # The run stamp makes the link unique per run (defeats caches) and lets the page itself see
+        # that it is older than the run that sent the push and wait for it (see render_alerts_html.py).
+        click_url += ("&" if "?" in click_url else "?") + f"r={run_stamp}"
     # Shown in the Actions log so a wrong/missing ALERTS_PAGE_URL is easy to spot.
     print(f"[alert link] tapping this push opens: {click_url} "
           f"({'from ALERTS_PAGE_URL' if ALERTS_PAGE_URL else 'FALLBACK to the repo .md file: ALERTS_PAGE_URL is empty in this run'})",

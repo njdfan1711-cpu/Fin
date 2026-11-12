@@ -308,6 +308,32 @@ def _render_card(c: dict, expand: bool) -> str:
             f'{head}<div class="body">{"".join(body)}</div></details>')
 
 
+# Stale-page guard (2026-11-12). The ntfy push links here with ?r=<run stamp>. The push goes out
+# minutes before this page is committed AND GitHub Pages finishes deploying it (observed: Intraday run
+# ~10 min, then a Pages deployment of 5+ min), so the first tap can land on the PREVIOUS run's page. If the
+# page's own run is older than ?r=, show a banner and poll the tiny latest_run.json (cache-busted) every
+# 20 s for up to 30 min; as soon as it reports the wanted run, reload the page once with a fresh URL.
+# No ?r= (or an older one, e.g. tapping an old notification) -> does nothing.
+_STALE_JS = """(function(){
+var m=document.querySelector('meta[name="fin-run"]');if(!m)return;
+var have=m.content,p=new URLSearchParams(location.search),want=p.get('r');
+if(!want||want<=have)return;
+var b=document.getElementById('fin-stale'),tries=0,MAX=90,n=parseInt(p.get('n')||'0',10);
+var go=window.__finGo||function(u){location.replace(u);};
+function fresh(){if(n>=5){b.textContent='Still showing the '+have+' run after several reloads. Tap here to try again.';n=0;return;}
+p.set('n',String(n+1));p.set('t',String(Date.now()));go(location.pathname+'?'+p.toString()+location.hash);}
+b.hidden=false;b.style.cursor='pointer';b.onclick=function(){n=0;fresh();};
+b.textContent='Showing the '+have+' run. The '+want+' run is still being published (GitHub Pages can take 5\\u201315 min). Checking automatically \\u2013 tap here to retry now.';
+function poll(){
+if(tries>=MAX){b.textContent='Still showing the '+have+' run; the '+want+' run has not appeared yet. Tap here to retry.';return;}
+tries++;
+fetch('latest_run.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(j){
+if(j&&j.run&&j.run>=want){fresh();}else{setTimeout(poll,20000);}
+}).catch(function(){setTimeout(poll,20000);});
+}
+setTimeout(poll,8000);
+})();"""
+
 _CSS = """
 :root{--bg:#f3f5f9;--card:#fff;--ink:#0f1b2d;--muted:#5b6778;--line:#dfe5ee;--blue:#1f5fbf;--blue-soft:#e8f0fd;
 --green:#138a4b;--green-soft:#e4f6ec;--red:#c8372d;--red-soft:#fdecea;--amber:#9a6200;--amber-soft:#fff4dc;--shadow:0 1px 2px rgba(15,27,45,.06)}
@@ -342,7 +368,8 @@ summary::-webkit-details-marker{display:none}
 .chip.warnchip,.chip.extchip{background:var(--amber-soft);color:var(--amber);border-color:transparent}
 .chip.freshchip{background:var(--green-soft);color:var(--green);border-color:transparent}
 .chip.nocheck{font-weight:600;border-style:dashed}
-.why{font-size:13px;color:var(--amber);margin:2px 0 6px}.why.muted{color:var(--muted)}
+.why{font-size:13px;color:var(--amber);margin:2px 0 6px}
+#fin-stale{position:sticky;top:0;z-index:20;background:var(--amber-soft);color:var(--amber);border-bottom:1px solid var(--line);padding:9px 14px;font-size:13px;font-weight:700;text-align:center}#fin-stale[hidden]{display:none}.why.muted{color:var(--muted)}
 .legend{color:var(--muted);font-size:12px;margin:8px 2px 0}
 .titlerow{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
 #fold{flex:0 0 auto;white-space:nowrap}
@@ -426,8 +453,9 @@ def render_html(md_text: str, expand_top_n: int = EXPAND_TOP_N) -> str:
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="light dark">
+<meta name="fin-run" content="{_e(d['run'].split()[0] if d['run'] else '')}">
 <title>Fin \u2013 {_e(d['title'])}</title><style>{_CSS}</style></head>
-<body><div class="wrap">
+<body><div id="fin-stale" hidden></div><div class="wrap">
 <header class="top"><div class="titlerow"><div><h1>{_e(d['title'])}</h1><div class="run">Run {_e(d['run'])}</div></div>
 <button class="pill" id="fold" aria-expanded="true">Hide filters \u25B2</button></div>
 <div id="filters"><div class="stats">
@@ -449,7 +477,7 @@ def render_html(md_text: str, expand_top_n: int = EXPAND_TOP_N) -> str:
 <div class="count" id="cnt"></div>
 {cards_html}{spec_html}
 <footer>Generated from latest_alerts.md \u00B7 display only, not a recommendation</footer>
-</div><script>{_JS}</script></body></html>"""
+</div><script>{_JS}</script><script>{_STALE_JS}</script></body></html>"""
 
 
 def write_html(md_text: str, path: str = HTML_PATH) -> int:

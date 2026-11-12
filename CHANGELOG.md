@@ -1,3 +1,40 @@
+## 2026-11-12 (ntfy link opened an older latest_alerts: run-stamped link + page that waits for the new run)
+Built on the live `main` as fetched 2026-11-12 (commit hash not captured). Base hashes (sha256, first 12):
+compose_alerts.py 6eeab65cce93, render_alerts_html.py e0a23f0ed36a,
+.github/workflows/intraday.yml 0eb4e896fb59, CHANGELOG.md 08d44e12e59d. New files: `.nojekyll`.
+Tested offline: compile + YAML; the new renderer over the live latest_alerts.md (1,140 cards, no script errors); the page guard in
+a simulated browser (jsdom) with a mocked fetch and timers: no ?r= / same / older run does nothing; a newer ?r= shows the banner,
+first check after 8 s, polls latest_run.json (cache-busted, no-store) every 20 s, reloads once the run appears, gives up after
+90 checks (30 min) with a message, keeps retrying on fetch errors, caps reload loops at 5, tapping the banner reloads now.
+NOT tested: a real run, GitHub Pages itself, or a phone.
+
+Symptom: tapping the ntfy alert opened an older version of latest_alerts.
+What was checked: the committed latest_alerts.md and latest_alerts.html on main were from the same run (2026-11-12_1640 ET,
+1,140 cards, new points chips present), so a failed render or a stale commit was NOT the cause.
+Cause (from the workflow order plus the Actions list): the page is hosted on GitHub Pages ("pages build and deployment" runs).
+intraday.yml sends the push in the "Compose and send alerts" step, but commits latest_alerts.* only in its LAST step; an
+Intraday run was observed taking about 10 min, and the Pages deployment that follows each commit took 5+ min (5m13s, and a
+later one still running after 4 min). A tap right after the push therefore lands on the previous run's deployment for roughly
+10-15 min, and the link was the same URL every run, so browsers/CDNs could also serve a cached copy. The repo has no
+`.nojekyll` and ~790 .md files (777 in alerts_history/), so each deployment also runs a full Jekyll build of the whole repo,
+which is a likely reason the deployments are slow (not measured).
+
+- `compose_alerts.py`: when ALERTS_PAGE_URL is set, the click / "View all" link ends in `?r=<run stamp>` (`&r=` if it already
+  has a query), unique per push. Each run also writes `latest_run.json` ({"run": "<run stamp>"}) beside the page.
+- `render_alerts_html.py`: the page records its own run in `<meta name="fin-run">`. If the URL's `r` is NEWER than the page's run,
+  an amber banner says the newer run is still being published and the page polls the tiny `latest_run.json` (cache-busted)
+  every 20 s for up to 30 min, then reloads once with a fresh URL when the wanted run appears (tap the banner to retry now).
+  An older or missing `r` does nothing, so tapping an old notification never triggers it.
+- `.github/workflows/intraday.yml`: adds `latest_run.json` to the files committed each run.
+- `.nojekyll` (new, repo root): tells GitHub Pages to skip the Jekyll build. Expected to shorten each deployment; the effect is
+  not measured. Only applies while Pages is deployed from a branch (the current setup); the md files in the repo are then
+  served as plain text instead of being passed through Jekyll.
+- Known limits: if the host takes longer than 30 min, or the commit step fails, the banner stays until tapped; the guard cannot
+  help when ALERTS_PAGE_URL is empty (the link then opens latest_alerts.md in the repo).
+- Not changed, for later: the push still goes out before the commit. Also noted: .gitattributes marks latest_alerts.md
+  `merge=ours` and has no rule for latest_alerts.html; during `git pull --rebase` "ours" is the upstream side, so if both sides
+  ever changed these files the older upstream copy would win (only possible if something else commits them mid-run).
+
 ## 2026-11-11 (card reference guide: fin_card_guide.html)
 Built on the live `main` as fetched 2026-11-11 (commit hash not captured). Base hash (sha256, first 12):
 CHANGELOG.md affbcd11374c. New file `fin_card_guide.html`; no scan, ranking or alert-page code changed.
