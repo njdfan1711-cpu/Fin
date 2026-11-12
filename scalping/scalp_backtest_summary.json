@@ -1,33 +1,33 @@
 {
-  "generated_at": "2026-11-12T18:31:11.065054+00:00",
+  "generated_at": "2026-11-12T19:31:17.954484+00:00",
   "cost_model": "measured median spread per symbol x1.0 (flat 2.0c fallback)",
   "symbols_without_spread_data": [
     "WBD"
   ],
-  "total_trades": 309,
-  "win_count": 119,
+  "total_trades": 310,
+  "win_count": 120,
   "loss_count": 190,
-  "win_rate_pct": 38.5,
-  "avg_net_pnl_per_trade": -1.74,
-  "avg_win": 6.76,
+  "win_rate_pct": 38.7,
+  "avg_net_pnl_per_trade": -1.73,
+  "avg_win": 6.72,
   "avg_loss": -7.06,
-  "total_gross_pnl": -26.98,
-  "total_cost": 509.72,
-  "total_net_pnl": -536.7,
-  "total_net_pnl_flat_cost_model": -795.12,
+  "total_gross_pnl": -25.3,
+  "total_cost": 510.14,
+  "total_net_pnl": -535.44,
+  "total_net_pnl_flat_cost_model": -794.28,
   "max_drawdown": -611.97,
   "exit_reason_counts": {
     "target": 77,
     "stop": 157,
-    "time_stop": 60
+    "time_stop": 61
   },
   "by_spread_tier": {
     "tight_le_0.03pct": {
-      "trades": 165,
-      "gross_pnl": 23.39,
-      "cost": 84.03,
-      "net_pnl": -60.64,
-      "avg_net_per_trade": -0.37
+      "trades": 166,
+      "gross_pnl": 25.07,
+      "cost": 84.45,
+      "net_pnl": -59.38,
+      "avg_net_per_trade": -0.36
     },
     "wide_gt_0.03pct": {
       "trades": 143,
@@ -48,11 +48,11 @@
     "enabled": true,
     "max_spread_pct": 0.0525,
     "passing": {
-      "trades": 238,
-      "gross_pnl": 45.4,
-      "cost": 171.03,
-      "net_pnl": -125.63,
-      "avg_net_per_trade": -0.53
+      "trades": 239,
+      "gross_pnl": 47.08,
+      "cost": 171.45,
+      "net_pnl": -124.37,
+      "avg_net_per_trade": -0.52
     },
     "blocked": {
       "trades": 71,
@@ -99,11 +99,11 @@
       "avg_net_per_trade": -5.65
     },
     "UBER": {
-      "trades": 19,
-      "gross_pnl": -29.11,
-      "cost": 8.35,
-      "net_pnl": -37.46,
-      "avg_net_per_trade": -1.97
+      "trades": 20,
+      "gross_pnl": -27.43,
+      "cost": 8.77,
+      "net_pnl": -36.2,
+      "avg_net_per_trade": -1.81
     },
     "AVGO": {
       "trades": 6,
