@@ -1,33 +1,33 @@
 {
-  "generated_at": "2026-11-13T16:30:52.238466+00:00",
+  "generated_at": "2026-11-13T17:30:53.970416+00:00",
   "cost_model": "measured median spread per symbol x1.0 (flat 2.0c fallback)",
   "symbols_without_spread_data": [
     "WBD"
   ],
-  "total_trades": 314,
+  "total_trades": 315,
   "win_count": 121,
-  "loss_count": 193,
-  "win_rate_pct": 38.5,
-  "avg_net_pnl_per_trade": -1.74,
+  "loss_count": 194,
+  "win_rate_pct": 38.4,
+  "avg_net_pnl_per_trade": -1.75,
   "avg_win": 6.74,
-  "avg_loss": -7.05,
-  "total_gross_pnl": -33.37,
-  "total_cost": 512.24,
-  "total_net_pnl": -545.61,
-  "total_net_pnl_flat_cost_model": -804.19,
+  "avg_loss": -7.04,
+  "total_gross_pnl": -37.24,
+  "total_cost": 512.67,
+  "total_net_pnl": -549.91,
+  "total_net_pnl_flat_cost_model": -808.92,
   "max_drawdown": -611.97,
   "exit_reason_counts": {
     "target": 78,
     "stop": 160,
-    "time_stop": 61
+    "time_stop": 62
   },
   "by_spread_tier": {
     "tight_le_0.03pct": {
-      "trades": 170,
-      "gross_pnl": 17.0,
-      "cost": 86.54,
-      "net_pnl": -69.54,
-      "avg_net_per_trade": -0.41
+      "trades": 171,
+      "gross_pnl": 13.13,
+      "cost": 86.97,
+      "net_pnl": -73.84,
+      "avg_net_per_trade": -0.43
     },
     "wide_gt_0.03pct": {
       "trades": 143,
@@ -48,11 +48,11 @@
     "enabled": true,
     "max_spread_pct": 0.0525,
     "passing": {
-      "trades": 243,
-      "gross_pnl": 39.01,
-      "cost": 173.54,
-      "net_pnl": -134.53,
-      "avg_net_per_trade": -0.55
+      "trades": 244,
+      "gross_pnl": 35.14,
+      "cost": 173.97,
+      "net_pnl": -138.83,
+      "avg_net_per_trade": -0.57
     },
     "blocked": {
       "trades": 71,
@@ -91,19 +91,19 @@
       "net_pnl": -45.97,
       "avg_net_per_trade": -3.54
     },
+    "UBER": {
+      "trades": 21,
+      "gross_pnl": -31.3,
+      "cost": 9.2,
+      "net_pnl": -40.5,
+      "avg_net_per_trade": -1.93
+    },
     "SOFI": {
       "trades": 7,
       "gross_pnl": -25.41,
       "cost": 14.11,
       "net_pnl": -39.52,
       "avg_net_per_trade": -5.65
-    },
-    "UBER": {
-      "trades": 20,
-      "gross_pnl": -27.43,
-      "cost": 8.77,
-      "net_pnl": -36.2,
-      "avg_net_per_trade": -1.81
     },
     "AVGO": {
       "trades": 7,
