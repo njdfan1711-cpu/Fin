@@ -1,16 +1,16 @@
 # Random-entry baseline
 
-Generated 2026-11-16T19:31:06+00:00. 22 real signals vs 1000 random draws (same symbols and days, same exits and sizing). Symbols: AAPL, AMD, AMZN, AVGO, BAC, GOOGL, HOOD, INTC, JPM, META, MSFT, MU, NFLX, NVDA, PLTR, QQQ, SMCI, SPY, T, TSLA, UBER, XOM.
+Generated 2026-11-16T20:31:28+00:00. 22 real signals vs 1000 random draws (same symbols and days, same exits and sizing). Symbols: AAPL, AMD, AMZN, AVGO, BAC, GOOGL, HOOD, INTC, JPM, META, MSFT, MU, NFLX, NVDA, PLTR, QQQ, SMCI, SPY, T, TSLA, UBER, XOM.
 
 | | Avg gross / trade | Avg net / trade | Win % | Target hit % |
 |---|---|---|---|---|
 | Real signals | $-0.49 | $-1.243 | 40.9 | 18.2 |
-| Random: A_same_symbol_day | $-0.23 (5-95%: -2.312 to 1.898) | $-0.982 | 39.7 | 16.7 |
-| Random: B_within_15_min | $2.274 (5-95%: 0.034 to 4.655) | $1.522 | 55.4 | 34.9 |
+| Random: A_same_symbol_day | $-0.164 (5-95%: -2.229 to 2.029) | $-0.917 | 40.2 | 17.0 |
+| Random: B_within_15_min | $2.283 (5-95%: 0.084 to 4.634) | $1.53 | 55.4 | 35.0 |
 
 p-value = share of random draws whose average gross was at least as good as the real signals' (small = the signal beat random timing):
-- A_same_symbol_day: p = 0.585
-- B_within_15_min: p = 0.975
+- A_same_symbol_day: p = 0.601
+- B_within_15_min: p = 0.976
 
 ## Delay sweep (long, same exits): enter N minutes AFTER the signal
 
