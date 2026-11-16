@@ -1,33 +1,33 @@
 {
-  "generated_at": "2026-11-16T15:30:55.617014+00:00",
+  "generated_at": "2026-11-16T16:31:04.899916+00:00",
   "cost_model": "measured median spread per symbol x1.0 (flat 2.0c fallback)",
   "symbols_without_spread_data": [
     "WBD"
   ],
-  "total_trades": 323,
+  "total_trades": 324,
   "win_count": 122,
-  "loss_count": 201,
-  "win_rate_pct": 37.8,
-  "avg_net_pnl_per_trade": -1.83,
+  "loss_count": 202,
+  "win_rate_pct": 37.7,
+  "avg_net_pnl_per_trade": -1.85,
   "avg_win": 6.71,
   "avg_loss": -7.02,
-  "total_gross_pnl": -71.78,
-  "total_cost": 520.91,
-  "total_net_pnl": -592.69,
-  "total_net_pnl_flat_cost_model": -849.36,
-  "max_drawdown": -611.97,
+  "total_gross_pnl": -77.74,
+  "total_cost": 521.5,
+  "total_net_pnl": -599.24,
+  "total_net_pnl_flat_cost_model": -856.5,
+  "max_drawdown": -616.58,
   "exit_reason_counts": {
     "target": 78,
-    "stop": 167,
+    "stop": 168,
     "time_stop": 63
   },
   "by_spread_tier": {
     "tight_le_0.03pct": {
-      "trades": 173,
-      "gross_pnl": 1.59,
-      "cost": 87.49,
-      "net_pnl": -85.9,
-      "avg_net_per_trade": -0.5
+      "trades": 174,
+      "gross_pnl": -4.37,
+      "cost": 88.08,
+      "net_pnl": -92.45,
+      "avg_net_per_trade": -0.53
     },
     "wide_gt_0.03pct": {
       "trades": 149,
@@ -48,11 +48,11 @@
     "enabled": true,
     "max_spread_pct": 0.0525,
     "passing": {
-      "trades": 252,
-      "gross_pnl": 0.6,
-      "cost": 182.21,
-      "net_pnl": -181.61,
-      "avg_net_per_trade": -0.72
+      "trades": 253,
+      "gross_pnl": -5.36,
+      "cost": 182.8,
+      "net_pnl": -188.16,
+      "avg_net_per_trade": -0.74
     },
     "blocked": {
       "trades": 71,
@@ -71,11 +71,11 @@
       "avg_net_per_trade": -13.57
     },
     "BAC": {
-      "trades": 9,
-      "gross_pnl": -49.99,
-      "cost": 5.25,
-      "net_pnl": -55.24,
-      "avg_net_per_trade": -6.14
+      "trades": 10,
+      "gross_pnl": -55.95,
+      "cost": 5.84,
+      "net_pnl": -61.79,
+      "avg_net_per_trade": -6.18
     },
     "MU": {
       "trades": 15,
