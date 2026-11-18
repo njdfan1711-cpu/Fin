@@ -1,33 +1,33 @@
 {
-  "generated_at": "2026-11-18T15:30:54.227328+00:00",
+  "generated_at": "2026-11-18T16:31:01.529488+00:00",
   "cost_model": "measured median spread per symbol x1.0 (flat 2.0c fallback)",
   "symbols_without_spread_data": [
     "WBD"
   ],
-  "total_trades": 335,
+  "total_trades": 336,
   "win_count": 134,
-  "loss_count": 201,
-  "win_rate_pct": 40.0,
-  "avg_net_pnl_per_trade": -2.55,
+  "loss_count": 202,
+  "win_rate_pct": 39.9,
+  "avg_net_pnl_per_trade": -2.56,
   "avg_win": 3.16,
   "avg_loss": -6.35,
-  "total_gross_pnl": -354.61,
-  "total_cost": 499.22,
-  "total_net_pnl": -853.83,
-  "total_net_pnl_flat_cost_model": -1072.09,
+  "total_gross_pnl": -359.96,
+  "total_cost": 499.75,
+  "total_net_pnl": -859.71,
+  "total_net_pnl_flat_cost_model": -1077.58,
   "max_drawdown": -885.99,
   "exit_reason_counts": {
-    "stop": 152,
+    "stop": 153,
     "trail_stop": 133,
     "time_stop": 38
   },
   "by_spread_tier": {
     "tight_le_0.03pct": {
-      "trades": 184,
-      "gross_pnl": -158.44,
-      "cost": 92.14,
-      "net_pnl": -250.58,
-      "avg_net_per_trade": -1.36
+      "trades": 185,
+      "gross_pnl": -163.79,
+      "cost": 92.66,
+      "net_pnl": -256.45,
+      "avg_net_per_trade": -1.39
     },
     "wide_gt_0.03pct": {
       "trades": 150,
@@ -48,11 +48,11 @@
     "enabled": true,
     "max_spread_pct": 0.0525,
     "passing": {
-      "trades": 269,
-      "gross_pnl": -222.11,
-      "cost": 194.2,
-      "net_pnl": -416.31,
-      "avg_net_per_trade": -1.55
+      "trades": 270,
+      "gross_pnl": -227.46,
+      "cost": 194.72,
+      "net_pnl": -422.18,
+      "avg_net_per_trade": -1.56
     },
     "blocked": {
       "trades": 66,
@@ -112,6 +112,13 @@
       "net_pnl": -41.06,
       "avg_net_per_trade": -6.84
     },
+    "TSLA": {
+      "trades": 23,
+      "gross_pnl": -28.03,
+      "cost": 12.5,
+      "net_pnl": -40.53,
+      "avg_net_per_trade": -1.76
+    },
     "UBER": {
       "trades": 21,
       "gross_pnl": -30.12,
@@ -125,13 +132,6 @@
       "cost": 5.52,
       "net_pnl": -38.16,
       "avg_net_per_trade": -4.77
-    },
-    "TSLA": {
-      "trades": 22,
-      "gross_pnl": -22.68,
-      "cost": 11.98,
-      "net_pnl": -34.66,
-      "avg_net_per_trade": -1.58
     },
     "META": {
       "trades": 9,
