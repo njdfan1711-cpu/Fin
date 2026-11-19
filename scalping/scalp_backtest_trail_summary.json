@@ -1,24 +1,24 @@
 {
-  "generated_at": "2026-11-19T14:30:53.854981+00:00",
+  "generated_at": "2026-11-19T15:31:12.234518+00:00",
   "cost_model": "measured median spread per symbol x1.0 (flat 2.0c fallback)",
   "symbols_without_spread_data": [
     "WBD"
   ],
-  "total_trades": 340,
-  "win_count": 135,
+  "total_trades": 341,
+  "win_count": 136,
   "loss_count": 205,
-  "win_rate_pct": 39.7,
+  "win_rate_pct": 39.9,
   "avg_net_pnl_per_trade": -2.56,
-  "avg_win": 3.17,
+  "avg_win": 3.15,
   "avg_loss": -6.34,
-  "total_gross_pnl": -370.71,
-  "total_cost": 501.35,
-  "total_net_pnl": -872.06,
-  "total_net_pnl_flat_cost_model": -1089.45,
+  "total_gross_pnl": -369.55,
+  "total_cost": 502.29,
+  "total_net_pnl": -871.84,
+  "total_net_pnl_flat_cost_model": -1088.37,
   "max_drawdown": -885.99,
   "exit_reason_counts": {
     "stop": 156,
-    "trail_stop": 134,
+    "trail_stop": 135,
     "time_stop": 38
   },
   "by_spread_tier": {
@@ -30,11 +30,11 @@
       "avg_net_per_trade": -1.42
     },
     "wide_gt_0.03pct": {
-      "trades": 150,
-      "gross_pnl": -198.94,
-      "cost": 405.15,
-      "net_pnl": -604.09,
-      "avg_net_per_trade": -4.03
+      "trades": 151,
+      "gross_pnl": -197.78,
+      "cost": 406.09,
+      "net_pnl": -603.87,
+      "avg_net_per_trade": -4.0
     },
     "no_spread_data": {
       "trades": 1,
@@ -48,11 +48,11 @@
     "enabled": true,
     "max_spread_pct": 0.0525,
     "passing": {
-      "trades": 274,
-      "gross_pnl": -238.21,
-      "cost": 196.32,
-      "net_pnl": -434.53,
-      "avg_net_per_trade": -1.59
+      "trades": 275,
+      "gross_pnl": -237.05,
+      "cost": 197.27,
+      "net_pnl": -434.32,
+      "avg_net_per_trade": -1.58
     },
     "blocked": {
       "trades": 66,
@@ -78,11 +78,11 @@
       "avg_net_per_trade": -7.17
     },
     "MU": {
-      "trades": 17,
-      "gross_pnl": -45.99,
-      "cost": 15.43,
-      "net_pnl": -61.42,
-      "avg_net_per_trade": -3.61
+      "trades": 18,
+      "gross_pnl": -44.83,
+      "cost": 16.37,
+      "net_pnl": -61.2,
+      "avg_net_per_trade": -3.4
     },
     "BAC": {
       "trades": 10,
