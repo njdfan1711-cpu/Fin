@@ -1,33 +1,33 @@
 {
-  "generated_at": "2026-11-20T20:31:08.501101+00:00",
+  "generated_at": "2026-11-23T14:31:31.364490+00:00",
   "cost_model": "measured median spread per symbol x1.0 (flat 2.0c fallback)",
   "symbols_without_spread_data": [
     "WBD"
   ],
-  "total_trades": 350,
+  "total_trades": 351,
   "win_count": 131,
-  "loss_count": 219,
-  "win_rate_pct": 37.4,
-  "avg_net_pnl_per_trade": -1.79,
+  "loss_count": 220,
+  "win_rate_pct": 37.3,
+  "avg_net_pnl_per_trade": -1.81,
   "avg_win": 6.78,
   "avg_loss": -6.92,
-  "total_gross_pnl": -90.07,
-  "total_cost": 537.96,
-  "total_net_pnl": -628.03,
-  "total_net_pnl_flat_cost_model": -876.91,
+  "total_gross_pnl": -95.85,
+  "total_cost": 538.77,
+  "total_net_pnl": -634.62,
+  "total_net_pnl_flat_cost_model": -883.05,
   "max_drawdown": -656.94,
   "exit_reason_counts": {
     "target": 84,
-    "stop": 183,
+    "stop": 184,
     "time_stop": 65
   },
   "by_spread_tier": {
     "tight_le_0.03pct": {
-      "trades": 193,
-      "gross_pnl": -24.97,
-      "cost": 96.19,
-      "net_pnl": -121.16,
-      "avg_net_per_trade": -0.63
+      "trades": 194,
+      "gross_pnl": -30.75,
+      "cost": 97.0,
+      "net_pnl": -127.75,
+      "avg_net_per_trade": -0.66
     },
     "wide_gt_0.03pct": {
       "trades": 156,
@@ -48,11 +48,11 @@
     "enabled": true,
     "max_spread_pct": 0.0525,
     "passing": {
-      "trades": 279,
-      "gross_pnl": -17.69,
-      "cost": 199.27,
-      "net_pnl": -216.96,
-      "avg_net_per_trade": -0.78
+      "trades": 280,
+      "gross_pnl": -23.47,
+      "cost": 200.08,
+      "net_pnl": -223.55,
+      "avg_net_per_trade": -0.8
     },
     "blocked": {
       "trades": 71,
@@ -147,6 +147,13 @@
       "net_pnl": -16.52,
       "avg_net_per_trade": -1.1
     },
+    "XOM": {
+      "trades": 7,
+      "gross_pnl": -9.62,
+      "cost": 5.73,
+      "net_pnl": -15.35,
+      "avg_net_per_trade": -2.19
+    },
     "AMZN": {
       "trades": 10,
       "gross_pnl": -8.48,
@@ -160,13 +167,6 @@
       "cost": 10.01,
       "net_pnl": -11.41,
       "avg_net_per_trade": -0.63
-    },
-    "XOM": {
-      "trades": 6,
-      "gross_pnl": -3.84,
-      "cost": 4.92,
-      "net_pnl": -8.76,
-      "avg_net_per_trade": -1.46
     },
     "COIN": {
       "trades": 6,

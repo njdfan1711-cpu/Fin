@@ -1,33 +1,33 @@
 {
-  "generated_at": "2026-11-20T20:31:08.510682+00:00",
+  "generated_at": "2026-11-23T14:31:31.370491+00:00",
   "cost_model": "measured median spread per symbol x1.0 (flat 2.0c fallback)",
   "symbols_without_spread_data": [
     "WBD"
   ],
-  "total_trades": 342,
-  "win_count": 136,
+  "total_trades": 343,
+  "win_count": 137,
   "loss_count": 206,
-  "win_rate_pct": 39.8,
-  "avg_net_pnl_per_trade": -2.57,
-  "avg_win": 3.15,
+  "win_rate_pct": 39.9,
+  "avg_net_pnl_per_trade": -2.56,
+  "avg_win": 3.13,
   "avg_loss": -6.34,
-  "total_gross_pnl": -375.39,
-  "total_cost": 502.37,
-  "total_net_pnl": -877.76,
-  "total_net_pnl_flat_cost_model": -1094.29,
+  "total_gross_pnl": -374.16,
+  "total_cost": 503.18,
+  "total_net_pnl": -877.34,
+  "total_net_pnl_flat_cost_model": -1093.42,
   "max_drawdown": -885.99,
   "exit_reason_counts": {
     "stop": 157,
-    "trail_stop": 135,
+    "trail_stop": 136,
     "time_stop": 38
   },
   "by_spread_tier": {
     "tight_le_0.03pct": {
-      "trades": 190,
-      "gross_pnl": -180.38,
-      "cost": 94.34,
-      "net_pnl": -274.72,
-      "avg_net_per_trade": -1.45
+      "trades": 191,
+      "gross_pnl": -179.15,
+      "cost": 95.15,
+      "net_pnl": -274.3,
+      "avg_net_per_trade": -1.44
     },
     "wide_gt_0.03pct": {
       "trades": 151,
@@ -48,11 +48,11 @@
     "enabled": true,
     "max_spread_pct": 0.0525,
     "passing": {
-      "trades": 276,
-      "gross_pnl": -242.89,
-      "cost": 197.34,
-      "net_pnl": -440.23,
-      "avg_net_per_trade": -1.6
+      "trades": 277,
+      "gross_pnl": -241.66,
+      "cost": 198.15,
+      "net_pnl": -439.81,
+      "avg_net_per_trade": -1.59
     },
     "blocked": {
       "trades": 66,
@@ -211,11 +211,11 @@
       "avg_net_per_trade": -1.93
     },
     "XOM": {
-      "trades": 6,
-      "gross_pnl": -5.19,
-      "cost": 4.92,
-      "net_pnl": -10.11,
-      "avg_net_per_trade": -1.69
+      "trades": 7,
+      "gross_pnl": -3.96,
+      "cost": 5.73,
+      "net_pnl": -9.69,
+      "avg_net_per_trade": -1.38
     },
     "SPY": {
       "trades": 5,
