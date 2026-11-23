@@ -1,33 +1,33 @@
 {
-  "generated_at": "2026-11-23T15:30:57.676896+00:00",
+  "generated_at": "2026-11-23T16:31:07.078642+00:00",
   "cost_model": "measured median spread per symbol x1.0 (flat 2.0c fallback)",
   "symbols_without_spread_data": [
     "WBD"
   ],
-  "total_trades": 353,
-  "win_count": 131,
+  "total_trades": 354,
+  "win_count": 132,
   "loss_count": 222,
-  "win_rate_pct": 37.1,
-  "avg_net_pnl_per_trade": -1.83,
-  "avg_win": 6.78,
+  "win_rate_pct": 37.3,
+  "avg_net_pnl_per_trade": -1.8,
+  "avg_win": 6.8,
   "avg_loss": -6.91,
-  "total_gross_pnl": -106.69,
-  "total_cost": 540.05,
-  "total_net_pnl": -646.74,
-  "total_net_pnl_flat_cost_model": -894.09,
+  "total_gross_pnl": -97.57,
+  "total_cost": 540.12,
+  "total_net_pnl": -637.69,
+  "total_net_pnl_flat_cost_model": -885.05,
   "max_drawdown": -664.08,
   "exit_reason_counts": {
-    "target": 84,
+    "target": 85,
     "stop": 186,
     "time_stop": 65
   },
   "by_spread_tier": {
     "tight_le_0.03pct": {
-      "trades": 195,
-      "gross_pnl": -36.65,
-      "cost": 97.45,
-      "net_pnl": -134.1,
-      "avg_net_per_trade": -0.69
+      "trades": 196,
+      "gross_pnl": -27.53,
+      "cost": 97.52,
+      "net_pnl": -125.05,
+      "avg_net_per_trade": -0.64
     },
     "wide_gt_0.03pct": {
       "trades": 157,
@@ -48,11 +48,11 @@
     "enabled": true,
     "max_spread_pct": 0.0525,
     "passing": {
-      "trades": 282,
-      "gross_pnl": -34.31,
-      "cost": 201.35,
-      "net_pnl": -235.66,
-      "avg_net_per_trade": -0.84
+      "trades": 283,
+      "gross_pnl": -25.19,
+      "cost": 201.42,
+      "net_pnl": -226.61,
+      "avg_net_per_trade": -0.8
     },
     "blocked": {
       "trades": 71,
@@ -267,11 +267,11 @@
       "avg_net_per_trade": 3.0
     },
     "QQQ": {
-      "trades": 10,
-      "gross_pnl": 63.47,
-      "cost": 0.73,
-      "net_pnl": 62.74,
-      "avg_net_per_trade": 6.27
+      "trades": 11,
+      "gross_pnl": 72.59,
+      "cost": 0.8,
+      "net_pnl": 71.79,
+      "avg_net_per_trade": 6.53
     }
   }
 }
