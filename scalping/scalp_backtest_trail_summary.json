@@ -1,33 +1,33 @@
 {
-  "generated_at": "2026-11-23T16:31:07.087797+00:00",
+  "generated_at": "2026-11-23T17:31:06.291817+00:00",
   "cost_model": "measured median spread per symbol x1.0 (flat 2.0c fallback)",
   "symbols_without_spread_data": [
     "WBD"
   ],
-  "total_trades": 346,
-  "win_count": 140,
+  "total_trades": 348,
+  "win_count": 142,
   "loss_count": 206,
-  "win_rate_pct": 40.5,
-  "avg_net_pnl_per_trade": -2.53,
-  "avg_win": 3.09,
+  "win_rate_pct": 40.8,
+  "avg_net_pnl_per_trade": -2.5,
+  "avg_win": 3.07,
   "avg_loss": -6.34,
-  "total_gross_pnl": -369.32,
-  "total_cost": 504.52,
-  "total_net_pnl": -873.84,
-  "total_net_pnl_flat_cost_model": -1088.86,
+  "total_gross_pnl": -365.81,
+  "total_cost": 505.13,
+  "total_net_pnl": -870.94,
+  "total_net_pnl_flat_cost_model": -1085.57,
   "max_drawdown": -885.99,
   "exit_reason_counts": {
     "stop": 157,
-    "trail_stop": 139,
+    "trail_stop": 141,
     "time_stop": 38
   },
   "by_spread_tier": {
     "tight_le_0.03pct": {
-      "trades": 193,
-      "gross_pnl": -175.44,
-      "cost": 95.66,
-      "net_pnl": -271.1,
-      "avg_net_per_trade": -1.4
+      "trades": 195,
+      "gross_pnl": -171.93,
+      "cost": 96.27,
+      "net_pnl": -268.2,
+      "avg_net_per_trade": -1.38
     },
     "wide_gt_0.03pct": {
       "trades": 152,
@@ -48,11 +48,11 @@
     "enabled": true,
     "max_spread_pct": 0.0525,
     "passing": {
-      "trades": 280,
-      "gross_pnl": -236.82,
-      "cost": 199.5,
-      "net_pnl": -436.32,
-      "avg_net_per_trade": -1.56
+      "trades": 282,
+      "gross_pnl": -233.31,
+      "cost": 200.1,
+      "net_pnl": -433.41,
+      "avg_net_per_trade": -1.54
     },
     "blocked": {
       "trades": 66,
@@ -120,11 +120,11 @@
       "avg_net_per_trade": -6.84
     },
     "TSLA": {
-      "trades": 23,
-      "gross_pnl": -28.03,
-      "cost": 12.5,
-      "net_pnl": -40.53,
-      "avg_net_per_trade": -1.76
+      "trades": 24,
+      "gross_pnl": -27.2,
+      "cost": 13.04,
+      "net_pnl": -40.24,
+      "avg_net_per_trade": -1.68
     },
     "AVGO": {
       "trades": 8,
@@ -267,11 +267,11 @@
       "avg_net_per_trade": 0.88
     },
     "QQQ": {
-      "trades": 11,
-      "gross_pnl": 34.67,
-      "cost": 0.8,
-      "net_pnl": 33.87,
-      "avg_net_per_trade": 3.08
+      "trades": 12,
+      "gross_pnl": 37.35,
+      "cost": 0.87,
+      "net_pnl": 36.48,
+      "avg_net_per_trade": 3.04
     }
   }
 }
