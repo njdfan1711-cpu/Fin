@@ -1,33 +1,33 @@
 {
-  "generated_at": "2026-11-23T18:31:03.455339+00:00",
+  "generated_at": "2026-11-23T19:31:09.724549+00:00",
   "cost_model": "measured median spread per symbol x1.0 (flat 2.0c fallback)",
   "symbols_without_spread_data": [
     "WBD"
   ],
-  "total_trades": 350,
-  "win_count": 143,
+  "total_trades": 351,
+  "win_count": 144,
   "loss_count": 207,
-  "win_rate_pct": 40.9,
-  "avg_net_pnl_per_trade": -2.5,
+  "win_rate_pct": 41.0,
+  "avg_net_pnl_per_trade": -2.49,
   "avg_win": 3.06,
   "avg_loss": -6.34,
-  "total_gross_pnl": -368.84,
-  "total_cost": 506.1,
-  "total_net_pnl": -874.94,
-  "total_net_pnl_flat_cost_model": -1090.54,
+  "total_gross_pnl": -365.91,
+  "total_cost": 506.66,
+  "total_net_pnl": -872.57,
+  "total_net_pnl_flat_cost_model": -1088.63,
   "max_drawdown": -885.99,
   "exit_reason_counts": {
     "stop": 158,
-    "trail_stop": 142,
+    "trail_stop": 143,
     "time_stop": 38
   },
   "by_spread_tier": {
     "tight_le_0.03pct": {
-      "trades": 197,
-      "gross_pnl": -174.96,
-      "cost": 97.24,
-      "net_pnl": -272.2,
-      "avg_net_per_trade": -1.38
+      "trades": 198,
+      "gross_pnl": -172.03,
+      "cost": 97.8,
+      "net_pnl": -269.83,
+      "avg_net_per_trade": -1.36
     },
     "wide_gt_0.03pct": {
       "trades": 152,
@@ -48,11 +48,11 @@
     "enabled": true,
     "max_spread_pct": 0.0525,
     "passing": {
-      "trades": 284,
-      "gross_pnl": -236.34,
-      "cost": 201.07,
-      "net_pnl": -437.41,
-      "avg_net_per_trade": -1.54
+      "trades": 285,
+      "gross_pnl": -233.41,
+      "cost": 201.63,
+      "net_pnl": -435.04,
+      "avg_net_per_trade": -1.53
     },
     "blocked": {
       "trades": 66,
@@ -183,11 +183,11 @@
       "avg_net_per_trade": -2.38
     },
     "INTC": {
-      "trades": 17,
-      "gross_pnl": -11.14,
-      "cost": 9.46,
-      "net_pnl": -20.6,
-      "avg_net_per_trade": -1.21
+      "trades": 18,
+      "gross_pnl": -8.21,
+      "cost": 10.01,
+      "net_pnl": -18.22,
+      "avg_net_per_trade": -1.01
     },
     "AMD": {
       "trades": 17,
