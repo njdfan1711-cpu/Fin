@@ -1,33 +1,33 @@
 {
-  "generated_at": "2026-11-24T15:31:03.083337+00:00",
+  "generated_at": "2026-11-24T16:31:13.618259+00:00",
   "cost_model": "measured median spread per symbol x1.0 (flat 2.0c fallback)",
   "symbols_without_spread_data": [
     "WBD"
   ],
-  "total_trades": 354,
-  "win_count": 147,
+  "total_trades": 355,
+  "win_count": 148,
   "loss_count": 207,
-  "win_rate_pct": 41.5,
-  "avg_net_pnl_per_trade": -2.44,
-  "avg_win": 3.06,
+  "win_rate_pct": 41.7,
+  "avg_net_pnl_per_trade": -2.42,
+  "avg_win": 3.05,
   "avg_loss": -6.34,
-  "total_gross_pnl": -354.34,
-  "total_cost": 508.39,
-  "total_net_pnl": -862.73,
-  "total_net_pnl_flat_cost_model": -1079.28,
+  "total_gross_pnl": -351.6,
+  "total_cost": 509.04,
+  "total_net_pnl": -860.64,
+  "total_net_pnl_flat_cost_model": -1076.72,
   "max_drawdown": -885.99,
   "exit_reason_counts": {
     "stop": 158,
-    "trail_stop": 146,
+    "trail_stop": 147,
     "time_stop": 38
   },
   "by_spread_tier": {
     "tight_le_0.03pct": {
-      "trades": 201,
-      "gross_pnl": -160.46,
-      "cost": 99.53,
-      "net_pnl": -259.99,
-      "avg_net_per_trade": -1.29
+      "trades": 202,
+      "gross_pnl": -157.72,
+      "cost": 100.18,
+      "net_pnl": -257.9,
+      "avg_net_per_trade": -1.28
     },
     "wide_gt_0.03pct": {
       "trades": 152,
@@ -48,11 +48,11 @@
     "enabled": true,
     "max_spread_pct": 0.0525,
     "passing": {
-      "trades": 288,
-      "gross_pnl": -221.84,
-      "cost": 203.37,
-      "net_pnl": -425.21,
-      "avg_net_per_trade": -1.48
+      "trades": 289,
+      "gross_pnl": -219.1,
+      "cost": 204.02,
+      "net_pnl": -423.12,
+      "avg_net_per_trade": -1.46
     },
     "blocked": {
       "trades": 66,
@@ -127,11 +127,11 @@
       "avg_net_per_trade": -1.68
     },
     "AVGO": {
-      "trades": 9,
-      "gross_pnl": -31.55,
-      "cost": 6.19,
-      "net_pnl": -37.74,
-      "avg_net_per_trade": -4.19
+      "trades": 10,
+      "gross_pnl": -28.81,
+      "cost": 6.84,
+      "net_pnl": -35.65,
+      "avg_net_per_trade": -3.56
     },
     "GOOGL": {
       "trades": 10,
