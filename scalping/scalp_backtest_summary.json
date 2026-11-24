@@ -1,33 +1,33 @@
 {
-  "generated_at": "2026-11-24T18:31:16.583197+00:00",
+  "generated_at": "2026-11-24T19:31:08.247416+00:00",
   "cost_model": "measured median spread per symbol x1.0 (flat 2.0c fallback)",
   "symbols_without_spread_data": [
     "WBD"
   ],
-  "total_trades": 365,
+  "total_trades": 366,
   "win_count": 141,
-  "loss_count": 224,
-  "win_rate_pct": 38.6,
+  "loss_count": 225,
+  "win_rate_pct": 38.5,
   "avg_net_pnl_per_trade": -1.6,
   "avg_win": 6.84,
-  "avg_loss": -6.9,
-  "total_gross_pnl": -36.56,
-  "total_cost": 545.78,
-  "total_net_pnl": -582.34,
-  "total_net_pnl_flat_cost_model": -830.8,
+  "avg_loss": -6.88,
+  "total_gross_pnl": -38.17,
+  "total_cost": 546.24,
+  "total_net_pnl": -584.41,
+  "total_net_pnl_flat_cost_model": -833.33,
   "max_drawdown": -664.08,
   "exit_reason_counts": {
     "target": 91,
     "stop": 188,
-    "time_stop": 68
+    "time_stop": 69
   },
   "by_spread_tier": {
     "tight_le_0.03pct": {
-      "trades": 207,
-      "gross_pnl": 33.48,
-      "cost": 103.18,
-      "net_pnl": -69.7,
-      "avg_net_per_trade": -0.34
+      "trades": 208,
+      "gross_pnl": 31.87,
+      "cost": 103.64,
+      "net_pnl": -71.77,
+      "avg_net_per_trade": -0.35
     },
     "wide_gt_0.03pct": {
       "trades": 157,
@@ -48,11 +48,11 @@
     "enabled": true,
     "max_spread_pct": 0.0525,
     "passing": {
-      "trades": 294,
-      "gross_pnl": 35.82,
-      "cost": 207.09,
-      "net_pnl": -171.27,
-      "avg_net_per_trade": -0.58
+      "trades": 295,
+      "gross_pnl": 34.21,
+      "cost": 207.55,
+      "net_pnl": -173.34,
+      "avg_net_per_trade": -0.59
     },
     "blocked": {
       "trades": 71,
@@ -85,11 +85,11 @@
       "avg_net_per_trade": -6.21
     },
     "UBER": {
-      "trades": 23,
-      "gross_pnl": -43.24,
-      "cost": 10.09,
-      "net_pnl": -53.33,
-      "avg_net_per_trade": -2.32
+      "trades": 24,
+      "gross_pnl": -44.85,
+      "cost": 10.55,
+      "net_pnl": -55.4,
+      "avg_net_per_trade": -2.31
     },
     "SNAP": {
       "trades": 13,
