@@ -1,33 +1,33 @@
 {
-  "generated_at": "2026-11-24T16:31:13.618259+00:00",
+  "generated_at": "2026-11-24T17:31:15.792195+00:00",
   "cost_model": "measured median spread per symbol x1.0 (flat 2.0c fallback)",
   "symbols_without_spread_data": [
     "WBD"
   ],
-  "total_trades": 355,
-  "win_count": 148,
+  "total_trades": 356,
+  "win_count": 149,
   "loss_count": 207,
-  "win_rate_pct": 41.7,
-  "avg_net_pnl_per_trade": -2.42,
+  "win_rate_pct": 41.9,
+  "avg_net_pnl_per_trade": -2.41,
   "avg_win": 3.05,
   "avg_loss": -6.34,
-  "total_gross_pnl": -351.6,
-  "total_cost": 509.04,
-  "total_net_pnl": -860.64,
-  "total_net_pnl_flat_cost_model": -1076.72,
+  "total_gross_pnl": -348.48,
+  "total_cost": 509.69,
+  "total_net_pnl": -858.17,
+  "total_net_pnl_flat_cost_model": -1073.78,
   "max_drawdown": -885.99,
   "exit_reason_counts": {
     "stop": 158,
-    "trail_stop": 147,
+    "trail_stop": 148,
     "time_stop": 38
   },
   "by_spread_tier": {
     "tight_le_0.03pct": {
-      "trades": 202,
-      "gross_pnl": -157.72,
-      "cost": 100.18,
-      "net_pnl": -257.9,
-      "avg_net_per_trade": -1.28
+      "trades": 203,
+      "gross_pnl": -154.6,
+      "cost": 100.83,
+      "net_pnl": -255.43,
+      "avg_net_per_trade": -1.26
     },
     "wide_gt_0.03pct": {
       "trades": 152,
@@ -48,11 +48,11 @@
     "enabled": true,
     "max_spread_pct": 0.0525,
     "passing": {
-      "trades": 289,
-      "gross_pnl": -219.1,
-      "cost": 204.02,
-      "net_pnl": -423.12,
-      "avg_net_per_trade": -1.46
+      "trades": 290,
+      "gross_pnl": -215.98,
+      "cost": 204.66,
+      "net_pnl": -420.64,
+      "avg_net_per_trade": -1.45
     },
     "blocked": {
       "trades": 66,
@@ -127,11 +127,11 @@
       "avg_net_per_trade": -1.68
     },
     "AVGO": {
-      "trades": 10,
-      "gross_pnl": -28.81,
-      "cost": 6.84,
-      "net_pnl": -35.65,
-      "avg_net_per_trade": -3.56
+      "trades": 11,
+      "gross_pnl": -25.69,
+      "cost": 7.48,
+      "net_pnl": -33.17,
+      "avg_net_per_trade": -3.02
     },
     "GOOGL": {
       "trades": 10,
