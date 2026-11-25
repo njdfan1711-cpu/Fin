@@ -1,33 +1,33 @@
 {
-  "generated_at": "2026-11-25T14:30:58.774621+00:00",
+  "generated_at": "2026-11-25T15:31:05.102574+00:00",
   "cost_model": "measured median spread per symbol x1.0 (flat 2.0c fallback)",
   "symbols_without_spread_data": [
     "WBD"
   ],
-  "total_trades": 361,
-  "win_count": 151,
+  "total_trades": 362,
+  "win_count": 152,
   "loss_count": 210,
-  "win_rate_pct": 41.8,
-  "avg_net_pnl_per_trade": -2.41,
-  "avg_win": 3.03,
+  "win_rate_pct": 42.0,
+  "avg_net_pnl_per_trade": -2.4,
+  "avg_win": 3.02,
   "avg_loss": -6.32,
-  "total_gross_pnl": -357.79,
-  "total_cost": 512.41,
-  "total_net_pnl": -870.2,
-  "total_net_pnl_flat_cost_model": -1085.67,
+  "total_gross_pnl": -355.09,
+  "total_cost": 512.85,
+  "total_net_pnl": -867.94,
+  "total_net_pnl_flat_cost_model": -1083.19,
   "max_drawdown": -885.99,
   "exit_reason_counts": {
     "stop": 160,
-    "trail_stop": 150,
+    "trail_stop": 151,
     "time_stop": 39
   },
   "by_spread_tier": {
     "tight_le_0.03pct": {
-      "trades": 208,
-      "gross_pnl": -163.91,
-      "cost": 103.55,
-      "net_pnl": -267.46,
-      "avg_net_per_trade": -1.29
+      "trades": 209,
+      "gross_pnl": -161.21,
+      "cost": 103.99,
+      "net_pnl": -265.2,
+      "avg_net_per_trade": -1.27
     },
     "wide_gt_0.03pct": {
       "trades": 152,
@@ -48,11 +48,11 @@
     "enabled": true,
     "max_spread_pct": 0.0525,
     "passing": {
-      "trades": 295,
-      "gross_pnl": -225.29,
-      "cost": 207.39,
-      "net_pnl": -432.68,
-      "avg_net_per_trade": -1.47
+      "trades": 296,
+      "gross_pnl": -222.59,
+      "cost": 207.82,
+      "net_pnl": -430.41,
+      "avg_net_per_trade": -1.45
     },
     "blocked": {
       "trades": 66,
@@ -176,11 +176,11 @@
       "avg_net_per_trade": -3.81
     },
     "AMZN": {
-      "trades": 9,
-      "gross_pnl": -17.38,
-      "cost": 4.07,
-      "net_pnl": -21.45,
-      "avg_net_per_trade": -2.38
+      "trades": 10,
+      "gross_pnl": -14.68,
+      "cost": 4.5,
+      "net_pnl": -19.18,
+      "avg_net_per_trade": -1.92
     },
     "AMD": {
       "trades": 17,
