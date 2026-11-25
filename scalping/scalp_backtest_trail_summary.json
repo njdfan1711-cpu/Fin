@@ -1,33 +1,33 @@
 {
-  "generated_at": "2026-11-24T20:30:58.323783+00:00",
+  "generated_at": "2026-11-25T14:30:58.774621+00:00",
   "cost_model": "measured median spread per symbol x1.0 (flat 2.0c fallback)",
   "symbols_without_spread_data": [
     "WBD"
   ],
-  "total_trades": 360,
+  "total_trades": 361,
   "win_count": 151,
-  "loss_count": 209,
-  "win_rate_pct": 41.9,
-  "avg_net_pnl_per_trade": -2.4,
+  "loss_count": 210,
+  "win_rate_pct": 41.8,
+  "avg_net_pnl_per_trade": -2.41,
   "avg_win": 3.03,
   "avg_loss": -6.32,
-  "total_gross_pnl": -351.88,
-  "total_cost": 511.56,
-  "total_net_pnl": -863.44,
-  "total_net_pnl_flat_cost_model": -1079.66,
+  "total_gross_pnl": -357.79,
+  "total_cost": 512.41,
+  "total_net_pnl": -870.2,
+  "total_net_pnl_flat_cost_model": -1085.67,
   "max_drawdown": -885.99,
   "exit_reason_counts": {
-    "stop": 159,
+    "stop": 160,
     "trail_stop": 150,
     "time_stop": 39
   },
   "by_spread_tier": {
     "tight_le_0.03pct": {
-      "trades": 207,
-      "gross_pnl": -158.0,
-      "cost": 102.7,
-      "net_pnl": -260.7,
-      "avg_net_per_trade": -1.26
+      "trades": 208,
+      "gross_pnl": -163.91,
+      "cost": 103.55,
+      "net_pnl": -267.46,
+      "avg_net_per_trade": -1.29
     },
     "wide_gt_0.03pct": {
       "trades": 152,
@@ -48,11 +48,11 @@
     "enabled": true,
     "max_spread_pct": 0.0525,
     "passing": {
-      "trades": 294,
-      "gross_pnl": -219.38,
-      "cost": 206.53,
-      "net_pnl": -425.91,
-      "avg_net_per_trade": -1.45
+      "trades": 295,
+      "gross_pnl": -225.29,
+      "cost": 207.39,
+      "net_pnl": -432.68,
+      "avg_net_per_trade": -1.47
     },
     "blocked": {
       "trades": 66,
@@ -133,6 +133,13 @@
       "net_pnl": -34.76,
       "avg_net_per_trade": -2.04
     },
+    "META": {
+      "trades": 11,
+      "gross_pnl": -23.38,
+      "cost": 8.75,
+      "net_pnl": -32.13,
+      "avg_net_per_trade": -2.92
+    },
     "AVGO": {
       "trades": 12,
       "gross_pnl": -23.1,
@@ -146,13 +153,6 @@
       "cost": 4.0,
       "net_pnl": -30.11,
       "avg_net_per_trade": -3.01
-    },
-    "META": {
-      "trades": 10,
-      "gross_pnl": -17.47,
-      "cost": 7.89,
-      "net_pnl": -25.36,
-      "avg_net_per_trade": -2.54
     },
     "PATH": {
       "trades": 9,
