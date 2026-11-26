@@ -1,5 +1,5 @@
 # Latest Alerts (1113 qualifying tickers)
-_Run: 2026-11-26_1441 ET_
+_Run: 2026-11-26_1509 ET_
 _Scoring: flag-free names first, then signal count, then strength (minus 0.50 per extension flag); relative tiers_
 _Points: each finding's contribution to its category score -- the strongest counts in full, the next x0.6, then x0.36, and so on. A ticker's strength is the sum of its categories. Context news, cautions and sharp-drop labels are not scored; only extension flags change the ranking (see Score breakdown)._
 
