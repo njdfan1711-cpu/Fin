@@ -1,5 +1,5 @@
 # Latest Alerts (1097 qualifying tickers)
-_Run: 2026-11-27_1612 ET_
+_Run: 2026-11-27_1643 ET_
 _Scoring: flag-free names first, then signal count, then strength (minus 0.50 per extension flag); relative tiers_
 _Points: each finding's contribution to its category score -- the strongest counts in full, the next x0.6, then x0.36, and so on. A ticker's strength is the sum of its categories. Context news, cautions and sharp-drop labels are not scored; only extension flags change the ranking (see Score breakdown)._
 
@@ -43,7 +43,7 @@ _Points: each finding's contribution to its category score -- the strongest coun
 - **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 17.1pts (20d)
 - **Score breakdown**: Fundamentals +1.83 = EPS growth 50.4% YoY {+1.00} ;; Quality checklist passed (D/E 0.28, Current ratio 1.87, ROE 25.8%, Net margin 26.7%) {+0.60} ;; Analyst sentiment improving: 12 buy/strongBuy vs. 10 last month {+0.14} ;; Revenue growth 11.7% YoY {+0.08} || Technical +1.36 = Outperforming S&P 500 by 17.1pts (20d) {+1.00} ;; Price above rising 50/200-day MAs {+0.36}
 - ⚠️ **CAUTION**: Broader market (S&P 500) below its 200-day MA -- breakouts less reliable in this regime
-- **Trade plan**: entry $348.36-$353.88, take-profit $356.63 (+1.6%), stop $334.58, full target $384.20 (~14 sh, ~$232 at risk)
+- **Trade plan**: entry $348.36-$353.88, take-profit $356.63 (+1.6%), stop $334.58, full target $384.19 (~14 sh, ~$232 at risk)
 
 ## 7. Appian Corporation (APPN) -- [STRONG] 2 signals, strength 3.11
 - **Fundamentals**: Revenue growth 22.0% YoY; EPS growth 61.8% YoY
@@ -284,7 +284,7 @@ _Points: each finding's contribution to its category score -- the strongest coun
 - ⚠️ **CAUTION**: Broader market (S&P 500) below its 200-day MA -- breakouts less reliable in this regime
 - ⚠️ **CAUTION**: up +6.0% today (1.4 ATR), +12.4% over ~5 days. The entry zone is built off today's price, so it has moved up with the run -- consider waiting for a pullback toward the prior close ($244.76).
 - **Extension flags**: chase risk (big move today)
-- **Trade plan**: entry $256.85-$262.25, take-profit $264.96 (+2.1%), stop $243.33, full target $292.00 (~19 sh, ~$308 at risk)
+- **Trade plan**: entry $256.85-$262.25, take-profit $264.95 (+2.1%), stop $243.33, full target $291.98 (~19 sh, ~$308 at risk)
 
 ## 41. Kiniksa Pharmaceuticals International, plc - Class A (KNSA) -- [EXTENDED] 2 signals, strength 2.84 (raw 3.34, 1 extension flag) · ↩ Back (was Day 4)
 - **Fundamentals**: Revenue growth 58.2% YoY; EPS growth 192.2% YoY; Quality checklist passed (D/E 0.00, Current ratio 3.79, ROE 17.3%, Net margin 11.6%)
@@ -347,13 +347,13 @@ _Points: each finding's contribution to its category score -- the strongest coun
 - ⚠️ **CAUTION**: Broader market (S&P 500) below its 200-day MA -- breakouts less reliable in this regime
 - ⚠️ **CAUTION**: up +2.9% today (0.7 ATR), +8.8% over ~5 days. The entry zone is built off today's price, so it has moved up with the run -- consider waiting for a pullback toward the prior close ($33.71).
 - **Extension flags**: chase risk (big move today)
-- **Trade plan**: entry $34.32-$35.02, take-profit $35.36 (+2.0%), stop $32.60, full target $38.82 (~144 sh, ~$298 at risk)
+- **Trade plan**: entry $34.32-$35.02, take-profit $35.36 (+2.0%), stop $32.60, full target $38.82 (~144 sh, ~$299 at risk)
 
 ## 48. American Healthcare REIT, Inc. (AHR) -- [EXTENDED] 2 signals, strength 2.46 (raw 2.96, 1 extension flag)
 - **Fundamentals**: Revenue growth 16.4% YoY; EPS growth 157.4% YoY
 - **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 19.2pts (20d); New ALL-TIME high -- no overhead resistance from prior sellers
 - **Score breakdown**: Fundamentals +1.33 = EPS growth 157.4% YoY {+1.00} ;; Revenue growth 16.4% YoY {+0.33} || Technical +1.64 = Outperforming S&P 500 by 19.2pts (20d) {+1.00} ;; New ALL-TIME high -- no overhead resistance from prior sellers {+0.42} ;; Price above rising 50/200-day MAs {+0.22}
-- ⚠️ **CAUTION**: New 52-week high but on light volume (0.3x average) -- unconfirmed breakout; Broader market (S&P 500) below its 200-day MA -- breakouts less reliable in this regime
+- ⚠️ **CAUTION**: New 52-week high but on light volume (0.4x average) -- unconfirmed breakout; Broader market (S&P 500) below its 200-day MA -- breakouts less reliable in this regime
 - ⚠️ **CAUTION**: up +0.1% today (0.1 ATR), +4.7% over ~5 days. The entry zone is built off today's price, so it has moved up with the run -- consider waiting for a pullback toward the prior close ($60.24).
 - **Extension flags**: chase risk (big move today)
 - **Trade plan**: entry $60.00-$60.60, take-profit $60.90 (+1.0%), stop $58.50, full target $63.90 (~82 sh, ~$148 at risk)
@@ -401,13 +401,13 @@ _Points: each finding's contribution to its category score -- the strongest coun
 - ⚠️ **EARNINGS QUALITY**: Net margin -11.2% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 - ⚠️ **CAUTION**: up +1.1% today (0.2 ATR), +16.2% over ~5 days. The entry zone is built off today's price, so it has moved up with the run -- consider waiting for a pullback toward the prior close ($96.03).
 - **Extension flags**: chase risk (big move today)
-- **Trade plan**: entry $95.81-$98.27, take-profit $99.50 (+2.5%), stop $89.66, full target $111.79 (~51 sh, ~$376 at risk)
+- **Trade plan**: entry $95.81-$98.27, take-profit $99.49 (+2.5%), stop $89.69, full target $111.74 (~51 sh, ~$375 at risk)
 
 ## 54. Omnicom Group Inc. (OMC) -- [EXTENDED] 2 signals, strength 2.32 (raw 2.82, 1 extension flag)
 - **Fundamentals**: Revenue growth 46.7% YoY
 - **Technical**: MACD bullish crossover; Price above rising 50/200-day MAs; Outperforming S&P 500 by 19.2pts (20d); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); 52-week high, but still 5.7% below all-time high ($97.80) -- possible overhead resistance
 - **Score breakdown**: Fundamentals +1.00 = Revenue growth 46.7% YoY {+1.00} || Technical +1.82 = Outperforming S&P 500 by 19.2pts (20d) {+1.00} ;; MACD bullish crossover {+0.42} ;; Relative strength line also at a 60-day high (genuine outperformance, not just riding the market) {+0.23} ;; Price above rising 50/200-day MAs {+0.13} ;; 52-week high, but still 5.7% below all-time high ($97.80) -- possible overhead resistance {+0.04}
-- ⚠️ **CAUTION**: New 52-week high but on light volume (0.3x average) -- unconfirmed breakout; Broader market (S&P 500) below its 200-day MA -- breakouts less reliable in this regime
+- ⚠️ **CAUTION**: New 52-week high but on light volume (0.5x average) -- unconfirmed breakout; Broader market (S&P 500) below its 200-day MA -- breakouts less reliable in this regime
 - ⚠️ **CAUTION**: up +1.7% today (0.6 ATR), +7.8% over ~5 days. The entry zone is built off today's price, so it has moved up with the run -- consider waiting for a pullback toward the prior close ($90.70).
 - **Extension flags**: chase risk (big move today)
 - **Trade plan**: entry $91.64-$92.82, take-profit $93.42 (+1.3%), stop $88.67, full target $99.36 (~54 sh, ~$192 at risk)
@@ -465,7 +465,7 @@ _Points: each finding's contribution to its category score -- the strongest coun
 - ⚠️ **CAUTION**: Broader market (S&P 500) below its 200-day MA -- breakouts less reliable in this regime
 - ⚠️ **CAUTION**: up +2.8% today (0.9 ATR), +6.7% over ~5 days. The entry zone is built off today's price, so it has moved up with the run -- consider waiting for a pullback toward the prior close ($52.12).
 - **Extension flags**: chase risk (big move today); already +5.4% since first alert
-- **Trade plan**: entry $53.18-$53.94, take-profit $54.33 (+1.4%), stop $51.26, full target $58.17 (~93 sh, ~$214 at risk)
+- **Trade plan**: entry $53.18-$53.94, take-profit $54.33 (+1.4%), stop $51.26, full target $58.16 (~93 sh, ~$214 at risk)
 
 ## 61. Masco Corporation (MAS) -- [MODERATE] 2 signals, strength 2.72
 - **Fundamentals**: EPS growth 18.2% YoY; Quality checklist passed (Current ratio 1.81, ROE 279.8%, Net margin 12.1%)
@@ -6119,7 +6119,7 @@ _Points: each finding's contribution to its category score -- the strongest coun
 - **Fundamentals**: Revenue growth 16.4% YoY; EPS growth 78.3% YoY
 - **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 28.2pts (20d); New ALL-TIME high -- no overhead resistance from prior sellers
 - **Score breakdown**: Fundamentals +1.33 = EPS growth 78.3% YoY {+1.00} ;; Revenue growth 16.4% YoY {+0.33} || Technical +1.64 = Outperforming S&P 500 by 28.2pts (20d) {+1.00} ;; New ALL-TIME high -- no overhead resistance from prior sellers {+0.42} ;; Price above rising 50/200-day MAs {+0.22}
-- ⚠️ **CAUTION**: RSI overbought (79.0) -- pullback risk, not a buy signal; New 52-week high but on light volume (0.6x average) -- unconfirmed breakout; Broader market (S&P 500) below its 200-day MA -- breakouts less reliable in this regime
+- ⚠️ **CAUTION**: RSI overbought (79.0) -- pullback risk, not a buy signal; New 52-week high but on light volume (0.8x average) -- unconfirmed breakout; Broader market (S&P 500) below its 200-day MA -- breakouts less reliable in this regime
 - **Extension flags**: RSI overbought
 
 ## 973. Atour Lifestyle Holdings Limited - American Depositary Shares (ATAT) -- [EXTENDED] 2 signals, strength 2.46 (raw 2.96, 1 extension flag)
@@ -6173,8 +6173,8 @@ _Points: each finding's contribution to its category score -- the strongest coun
 
 ## 980. Kinetik Holdings Inc. (KNTK) -- [EXTENDED] 2 signals, strength 2.33 (raw 2.83, 1 extension flag)
 - **Fundamentals**: Revenue growth 15.8% YoY; EPS growth 378.5% YoY
-- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 8.2pts (20d); 52-week high confirmed by volume (1.8x average); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); 52-week high, but still 2.5% below all-time high ($61.29) -- possible overhead resistance
-- **Score breakdown**: Fundamentals +1.32 = EPS growth 378.5% YoY {+1.00} ;; Revenue growth 15.8% YoY {+0.32} || Technical +1.51 = 52-week high confirmed by volume (1.8x average) {+0.75} ;; Relative strength line also at a 60-day high (genuine outperformance, not just riding the market) {+0.39} ;; Price above rising 50/200-day MAs {+0.22} ;; Outperforming S&P 500 by 8.2pts (20d) {+0.12} ;; 52-week high, but still 2.5% below all-time high ($61.29) -- possible overhead resistance {+0.04}
+- **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 8.2pts (20d); 52-week high confirmed by volume (1.9x average); Relative strength line also at a 60-day high (genuine outperformance, not just riding the market); 52-week high, but still 2.5% below all-time high ($61.29) -- possible overhead resistance
+- **Score breakdown**: Fundamentals +1.32 = EPS growth 378.5% YoY {+1.00} ;; Revenue growth 15.8% YoY {+0.32} || Technical +1.51 = 52-week high confirmed by volume (1.9x average) {+0.75} ;; Relative strength line also at a 60-day high (genuine outperformance, not just riding the market) {+0.39} ;; Price above rising 50/200-day MAs {+0.22} ;; Outperforming S&P 500 by 8.2pts (20d) {+0.12} ;; 52-week high, but still 2.5% below all-time high ($61.29) -- possible overhead resistance {+0.04}
 - ⚠️ **CAUTION**: RSI overbought (82.9) -- pullback risk, not a buy signal; Broader market (S&P 500) below its 200-day MA -- breakouts less reliable in this regime
 - **Extension flags**: RSI overbought
 
@@ -6441,7 +6441,7 @@ _Points: each finding's contribution to its category score -- the strongest coun
 - **Fundamentals**: Revenue growth 46.9% YoY
 - **Technical**: MACD bullish crossover; Price above rising 50/200-day MAs; Outperforming S&P 500 by 14.2pts (20d); New ALL-TIME high -- no overhead resistance from prior sellers
 - **Score breakdown**: Fundamentals +1.00 = Revenue growth 46.9% YoY {+1.00} || Technical +1.75 = Outperforming S&P 500 by 14.2pts (20d) {+0.95} ;; MACD bullish crossover {+0.42} ;; New ALL-TIME high -- no overhead resistance from prior sellers {+0.25} ;; Price above rising 50/200-day MAs {+0.13}
-- ⚠️ **CAUTION**: RSI overbought (76.6) -- pullback risk, not a buy signal; New 52-week high but on light volume (0.1x average) -- unconfirmed breakout; Extended 33% above 50-day MA -- elevated pullback risk; Broader market (S&P 500) below its 200-day MA -- breakouts less reliable in this regime
+- ⚠️ **CAUTION**: RSI overbought (76.6) -- pullback risk, not a buy signal; New 52-week high but on light volume (0.2x average) -- unconfirmed breakout; Extended 33% above 50-day MA -- elevated pullback risk; Broader market (S&P 500) below its 200-day MA -- breakouts less reliable in this regime
 - ⚠️ **EARNINGS QUALITY**: Net margin -24.6% -- Finnhub's growth figures are non-GAAP and can exclude one-time charges (impairments, write-downs); verify against the actual filing
 - **Extension flags**: extended above 50-day MA; RSI overbought
 
