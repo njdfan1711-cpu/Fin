@@ -1,30 +1,30 @@
 # Random-entry baseline
 
-Generated 2026-11-26T20:31:01+00:00. 29 real signals vs 1000 random draws (same symbols and days, same exits and sizing). Symbols: AAPL, AMD, AMZN, AVGO, BAC, GOOGL, HOOD, INTC, JPM, META, MSFT, MU, NFLX, NVDA, PLTR, QQQ, SMCI, SPY, T, TSLA, UBER, XOM.
+Generated 2026-11-27T14:31:15+00:00. 24 real signals vs 1000 random draws (same symbols and days, same exits and sizing). Symbols: AAPL, AMD, AMZN, AVGO, BAC, GOOGL, HOOD, INTC, JPM, META, MSFT, MU, NFLX, NVDA, PLTR, QQQ, SMCI, SPY, T, TSLA, UBER, XOM.
 
 | | Avg gross / trade | Avg net / trade | Win % | Target hit % |
 |---|---|---|---|---|
-| Real signals | $1.316 | $0.669 | 48.3 | 37.9 |
-| Random: A_same_symbol_day | $-0.018 (5-95%: -2.024 to 2.128) | $-0.663 | 38.6 | 26.5 |
-| Random: B_within_15_min | $2.171 (5-95%: 0.124 to 4.232) | $1.525 | 52.7 | 41.7 |
+| Real signals | $-0.762 | $-1.353 | 33.3 | 25.0 |
+| Random: A_same_symbol_day | $0.052 (5-95%: -2.232 to 2.363) | $-0.539 | 39.6 | 26.5 |
+| Random: B_within_15_min | $1.8 (5-95%: -0.378 to 3.82) | $1.209 | 51.2 | 39.1 |
 
 p-value = share of random draws whose average gross was at least as good as the real signals' (small = the signal beat random timing):
-- A_same_symbol_day: p = 0.148
-- B_within_15_min: p = 0.761
+- A_same_symbol_day: p = 0.707
+- B_within_15_min: p = 0.98
 
 ## Delay sweep (long, same exits): enter N minutes AFTER the signal
 
 | Entry | Trades | Avg gross | Avg net | Win % | Target % | Gross vs signal minute (+/- std err) |
 |---|---|---|---|---|---|---|
-| +0 min | 29 | $1.316 | $0.669 | 48.3 | 37.9 | - |
-| +1 min | 29 | $-1.449 | $-2.097 | 31.0 | 17.2 | -2.765 (+/- 1.094) |
-| +2 min | 29 | $-1.249 | $-1.897 | 31.0 | 17.2 | -2.566 (+/- 1.039) |
-| +3 min | 29 | $-0.965 | $-1.612 | 37.9 | 17.2 | -2.282 (+/- 1.037) |
-| +5 min | 24 | $-1.159 | $-1.771 | 33.3 | 20.8 | -0.997 (+/- 1.599) |
-| +10 min | 23 | $0.883 | $0.282 | 43.5 | 30.4 | +0.795 (+/- 2.039) |
+| +0 min | 24 | $-0.762 | $-1.353 | 33.3 | 25.0 | - |
+| +1 min | 24 | $-1.968 | $-2.559 | 25.0 | 12.5 | -1.206 (+/- 0.848) |
+| +2 min | 24 | $-2.215 | $-2.806 | 25.0 | 12.5 | -1.453 (+/- 0.911) |
+| +3 min | 24 | $-2.102 | $-2.692 | 29.2 | 12.5 | -1.341 (+/- 1.341) |
+| +5 min | 22 | $0.432 | $-0.136 | 45.5 | 27.3 | +1.399 (+/- 1.66) |
+| +10 min | 21 | $-0.302 | $-0.876 | 38.1 | 23.8 | +0.447 (+/- 1.667) |
 
 ## Mirror test (SHORT at the signal minute; diagnostic only, the bot is long-only)
 
-29 trades: avg gross $0.942, avg net $0.294, win 44.8%, target 34.5%.
+24 trades: avg gross $0.271, avg net $-0.32, win 41.7%, target 29.2%.
 
 Read it as: if the real average gross sits inside the random 5-95% range, the entry signal is adding nothing beyond the exit rules. Small sample: this can show 'no edge' far more easily than it can prove one.
