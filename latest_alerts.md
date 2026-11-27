@@ -1,5 +1,5 @@
 # Latest Alerts (1097 qualifying tickers)
-_Run: 2026-11-27_1409 ET_
+_Run: 2026-11-27_1442 ET_
 _Scoring: flag-free names first, then signal count, then strength (minus 0.50 per extension flag); relative tiers_
 _Points: each finding's contribution to its category score -- the strongest counts in full, the next x0.6, then x0.36, and so on. A ticker's strength is the sum of its categories. Context news, cautions and sharp-drop labels are not scored; only extension flags change the ranking (see Score breakdown)._
 
@@ -177,7 +177,7 @@ _Points: each finding's contribution to its category score -- the strongest coun
 - **Technical**: Price above rising 50/200-day MAs; Outperforming S&P 500 by 9.9pts (20d)
 - **Score breakdown**: Fundamentals +1.87 = Revenue growth 36.9% YoY {+1.00} ;; EPS growth 61.2% YoY {+0.60} ;; Quality checklist passed (D/E 0.40, ROE 19.0%, Net margin 28.6%) {+0.27} || Technical +1.02 = Outperforming S&P 500 by 9.9pts (20d) {+0.66} ;; Price above rising 50/200-day MAs {+0.36}
 - ⚠️ **CAUTION**: Broader market (S&P 500) below its 200-day MA -- breakouts less reliable in this regime
-- **Trade plan**: entry $117.73-$120.35, take-profit $121.66 (+2.2%), stop $111.17, full target $134.78 (~42 sh, ~$331 at risk)
+- **Trade plan**: entry $117.73-$120.35, take-profit $121.66 (+2.2%), stop $111.19, full target $134.75 (~42 sh, ~$330 at risk)
 
 ## 26. Tradeweb Markets Inc. (TW) -- [STRONG] 2 signals, strength 2.87
 - **Fundamentals**: Revenue growth 14.4% YoY; EPS growth 45.5% YoY; Quality checklist passed (D/E 0.00, Current ratio 4.12, Net margin 39.8%)
@@ -347,7 +347,7 @@ _Points: each finding's contribution to its category score -- the strongest coun
 - ⚠️ **CAUTION**: Broader market (S&P 500) below its 200-day MA -- breakouts less reliable in this regime
 - ⚠️ **CAUTION**: up +2.9% today (0.7 ATR), +8.8% over ~5 days. The entry zone is built off today's price, so it has moved up with the run -- consider waiting for a pullback toward the prior close ($33.71).
 - **Extension flags**: chase risk (big move today)
-- **Trade plan**: entry $34.32-$35.02, take-profit $35.36 (+2.0%), stop $32.60, full target $38.82 (~144 sh, ~$298 at risk)
+- **Trade plan**: entry $34.32-$35.02, take-profit $35.36 (+2.0%), stop $32.60, full target $38.82 (~144 sh, ~$299 at risk)
 
 ## 48. American Healthcare REIT, Inc. (AHR) -- [EXTENDED] 2 signals, strength 2.46 (raw 2.96, 1 extension flag)
 - **Fundamentals**: Revenue growth 16.4% YoY; EPS growth 157.4% YoY
@@ -6194,8 +6194,8 @@ _Points: each finding's contribution to its category score -- the strongest coun
 
 ## 983. DoubleVerify Holdings, Inc. (DV) -- [EXTENDED] 2 signals, strength 2.29 (raw 2.79, 1 extension flag)
 - **Fundamentals**: EPS growth 51.4% YoY
-- **Technical**: Volume spike (7.9x average); Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.7pts (20d); 52-week high confirmed by volume (7.9x average); 52-week high, but still 71.1% below all-time high ($47.06) -- possible overhead resistance
-- **Score breakdown**: Fundamentals +1.00 = EPS growth 51.4% YoY {+1.00} || Technical +1.79 = Volume spike (7.9x average) {+1.00} ;; 52-week high confirmed by volume (7.9x average) {+0.45} ;; Price above rising 50/200-day MAs {+0.22} ;; Outperforming S&P 500 by 5.7pts (20d) {+0.08} ;; 52-week high, but still 71.1% below all-time high ($47.06) -- possible overhead resistance {+0.04}
+- **Technical**: Volume spike (8.2x average); Price above rising 50/200-day MAs; Outperforming S&P 500 by 5.7pts (20d); 52-week high confirmed by volume (8.2x average); 52-week high, but still 71.1% below all-time high ($47.06) -- possible overhead resistance
+- **Score breakdown**: Fundamentals +1.00 = EPS growth 51.4% YoY {+1.00} || Technical +1.79 = Volume spike (8.2x average) {+1.00} ;; 52-week high confirmed by volume (8.2x average) {+0.45} ;; Price above rising 50/200-day MAs {+0.22} ;; Outperforming S&P 500 by 5.7pts (20d) {+0.08} ;; 52-week high, but still 71.1% below all-time high ($47.06) -- possible overhead resistance {+0.04}
 - ⚠️ **CAUTION**: RSI overbought (80.0) -- pullback risk, not a buy signal; Broader market (S&P 500) below its 200-day MA -- breakouts less reliable in this regime
 - **Extension flags**: RSI overbought
 
